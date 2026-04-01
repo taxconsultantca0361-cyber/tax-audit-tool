@@ -160,8 +160,6 @@
     <div class="nav-tab" onclick="switchTab('duedate')">Due Dates</div>
     <div class="nav-tab" onclick="switchTab('gst')">GST Rates</div>
     <div class="nav-tab" onclick="switchTab('sectionfinder')">Section Finder</div>
-    <div class="nav-tab" onclick="switchTab('interest')">Interest 234</div>
-    <div class="nav-tab" onclick="switchTab('hra')">HRA Calculator</div>
     <div class="nav-tab" onclick="switchTab('depreciation')">Depreciation</div>
     <div class="nav-tab" onclick="switchTab('msme')">MSME Tracker</div>
     <div class="nav-tab" onclick="switchTab('disclaimer')">Disclaimer</div>
@@ -464,87 +462,6 @@
             <button class="filter-btn" onclick="filterSections('tds',this)">TDS/TCS</button>
         </div>
         <div id="sectionResults"></div>
-    </div>
-</div>
-
-<!-- ==================== TAB 10: INTEREST 234 ==================== -->
-<div id="tab-interest" class="tab-content">
-    <div class="card">
-        <h2>Interest Calculator — 234A / 234B / 234C</h2>
-        <div class="checker-form">
-            <div class="form-row">
-                <div class="form-group"><label>Total Tax Liability</label><input type="number" id="intTax" placeholder="e.g. 500000"></div>
-                <div class="form-group"><label>TDS / TCS Deducted</label><input type="number" id="intTDS" placeholder="e.g. 100000"></div>
-            </div>
-            <div class="form-row">
-                <div class="form-group"><label>Total Advance Tax Paid</label><input type="number" id="intAdvTax" placeholder="e.g. 200000"></div>
-                <div class="form-group"><label>Self Assessment Tax Paid</label><input type="number" id="intSAT" placeholder="e.g. 50000"></div>
-            </div>
-            <div class="form-row">
-                <div class="form-group"><label>Return Due Date</label>
-                    <select id="intDue"><option value="2025-07-31">31 Jul 2025 (Non-Audit)</option><option value="2025-10-31">31 Oct 2025 (Audit)</option><option value="2025-11-30">30 Nov 2025 (TP)</option></select>
-                </div>
-                <div class="form-group"><label>Actual Filing Date</label><input type="date" id="intFileDate"></div>
-            </div>
-            <h3>Advance Tax Installments</h3>
-            <div class="form-row">
-                <div class="form-group"><label>By 15 Jun (15%)</label><input type="number" id="adv1" placeholder="0" value="0"></div>
-                <div class="form-group"><label>By 15 Sep (45%)</label><input type="number" id="adv2" placeholder="0" value="0"></div>
-            </div>
-            <div class="form-row">
-                <div class="form-group"><label>By 15 Dec (75%)</label><input type="number" id="adv3" placeholder="0" value="0"></div>
-                <div class="form-group"><label>By 15 Mar (100%)</label><input type="number" id="adv4" placeholder="0" value="0"></div>
-            </div>
-            <div class="btn-row">
-                <button class="btn btn-primary" onclick="calcInterest()">Calculate Interest</button>
-                <button class="btn btn-reset" onclick="resetInterest()">Reset</button>
-            </div>
-        </div>
-        <div id="intResult" class="result-box"></div>
-    </div>
-    <div class="card">
-        <h2>Interest Provisions</h2>
-        <table class="limits-table">
-            <tr><th>Section</th><th>Nature</th><th>Rate</th><th>Period</th></tr>
-            <tr><td><strong>234A</strong></td><td>Late filing</td><td>1%/month</td><td>Due date to filing date</td></tr>
-            <tr><td><strong>234B</strong></td><td>Default in advance tax</td><td>1%/month</td><td>Apr 1 of AY to payment date</td></tr>
-            <tr><td><strong>234C</strong></td><td>Deferment of advance tax</td><td>1%/month x 3 months</td><td>Each quarter shortfall</td></tr>
-        </table>
-    </div>
-</div>
-
-<!-- ==================== TAB 11: HRA ==================== -->
-<div id="tab-hra" class="tab-content">
-    <div class="card">
-        <h2>HRA Exemption Calculator — Section 10(13A)</h2>
-        <div class="checker-form">
-            <div class="form-row">
-                <div class="form-group"><label>Basic Salary (Annual)</label><input type="number" id="hraBasic" placeholder="e.g. 600000"></div>
-                <div class="form-group"><label>DA forming part of salary (Annual)</label><input type="number" id="hraDA" placeholder="e.g. 0" value="0"></div>
-            </div>
-            <div class="form-row">
-                <div class="form-group"><label>HRA Received (Annual)</label><input type="number" id="hraReceived" placeholder="e.g. 240000"></div>
-                <div class="form-group"><label>Rent Paid (Annual)</label><input type="number" id="hraRent" placeholder="e.g. 180000"></div>
-            </div>
-            <div class="form-group"><label>City</label>
-                <select id="hraCity"><option value="metro">Metro (Delhi, Mumbai, Kolkata, Chennai)</option><option value="nonmetro">Non-Metro</option></select>
-            </div>
-            <div class="btn-row">
-                <button class="btn btn-primary" onclick="calcHRA()">Calculate HRA</button>
-                <button class="btn btn-reset" onclick="resetHRA()">Reset</button>
-            </div>
-        </div>
-        <div id="hraResult" class="result-box"></div>
-    </div>
-    <div class="card">
-        <h2>HRA Exemption Formula</h2>
-        <table class="limits-table">
-            <tr><th>#</th><th>Component</th><th>Formula</th></tr>
-            <tr><td>1</td><td>Actual HRA received</td><td>HRA from employer</td></tr>
-            <tr><td>2</td><td>Rent minus 10% salary</td><td>Rent Paid - 10% of (Basic+DA)</td></tr>
-            <tr><td>3</td><td>50%/40% of salary</td><td>50% for Metro / 40% for Non-Metro</td></tr>
-        </table>
-        <p style="margin-top:10px;font-size:0.88rem;color:var(--text-light);">Exemption = Minimum of the above three. Only available under Old Regime.</p>
     </div>
 </div>
 
