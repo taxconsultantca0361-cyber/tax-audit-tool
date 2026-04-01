@@ -427,8 +427,33 @@
 
 <!-- ==================== TAB 9: SECTION FINDER ==================== -->
 <div id="tab-sectionfinder" class="tab-content">
+    <!-- Section Mapping Tool -->
     <div class="card">
-        <h2>Income Tax Section Finder</h2>
+        <h2>Old to New Section Mapping — 1961 to 2025</h2>
+        <p style="color:var(--text-light);margin-bottom:14px;">Enter any section of the old IT Act 1961 to find its corresponding section in the new IT Act 2025.</p>
+        <div class="search-box"><input type="text" id="mappingSearch" placeholder="Enter old section... (e.g. 10, 80C, 194C, 271, 44AB, 139)" oninput="searchMapping()"></div>
+        <div class="filter-row">
+            <button class="filter-btn active" onclick="filterMapping('all',this)">All</button>
+            <button class="filter-btn" onclick="filterMapping('definitions',this)">Definitions</button>
+            <button class="filter-btn" onclick="filterMapping('exemption',this)">Exemptions</button>
+            <button class="filter-btn" onclick="filterMapping('salary',this)">Salary</button>
+            <button class="filter-btn" onclick="filterMapping('house',this)">House Property</button>
+            <button class="filter-btn" onclick="filterMapping('business',this)">Business/Profession</button>
+            <button class="filter-btn" onclick="filterMapping('capital',this)">Capital Gains</button>
+            <button class="filter-btn" onclick="filterMapping('other',this)">Other Sources</button>
+            <button class="filter-btn" onclick="filterMapping('deduction',this)">Deductions</button>
+            <button class="filter-btn" onclick="filterMapping('loss',this)">Set Off/Losses</button>
+            <button class="filter-btn" onclick="filterMapping('tds',this)">TDS/TCS</button>
+            <button class="filter-btn" onclick="filterMapping('return',this)">Returns</button>
+            <button class="filter-btn" onclick="filterMapping('assessment',this)">Assessment</button>
+            <button class="filter-btn" onclick="filterMapping('penalty',this)">Penalty</button>
+            <button class="filter-btn" onclick="filterMapping('appeal',this)">Appeals</button>
+        </div>
+        <div id="mappingResults"></div>
+    </div>
+    <!-- General Section Reference -->
+    <div class="card">
+        <h2>Section Quick Reference</h2>
         <div class="search-box"><input type="text" id="sectionSearch" placeholder="Search section or topic... (e.g. 80C, capital gains, TDS, salary)" oninput="searchSections()"></div>
         <div class="filter-row">
             <button class="filter-btn active" onclick="filterSections('all',this)">All</button>
@@ -802,6 +827,197 @@ var f=sections;if(cat!=='all'){var m={'exemptions':'exemption','deductions':'ded
 if(q)f=f.filter(function(s){return(s.sec+s.title+s.summary+s.cat).toLowerCase().indexOf(q)>=0;});renderSections(f);}
 function filterSections(cat,btn){document.querySelectorAll('#tab-sectionfinder .filter-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');searchSections();}
 renderSections(sections);
+
+// ==============================
+// SECTION MAPPING: OLD 1961 → NEW 2025
+// ==============================
+var sectionMap=[
+// DEFINITIONS
+{old:"2(1A)",new:"2(1)",title:"Agricultural Income",cat:"definitions",note:"Definition unchanged"},
+{old:"2(7)",new:"2(4)",title:"Assessee",cat:"definitions",note:"Simplified definition"},
+{old:"2(9)",new:"2(5)",title:"Assessment Year",cat:"definitions",note:"Same meaning"},
+{old:"2(14)",new:"2(11)",title:"Capital Asset",cat:"definitions",note:"Definition restructured"},
+{old:"2(22)",new:"2(15)",title:"Dividend",cat:"definitions",note:"Consolidated definition"},
+{old:"2(24)",new:"2(16)",title:"Income",cat:"definitions",note:"Inclusive definition retained"},
+{old:"2(31)",new:"2(22)",title:"Person",cat:"definitions",note:"Same categories"},
+{old:"2(34)",new:"2(25)",title:"Previous Year",cat:"definitions",note:"Now called Tax Year in new Act"},
+{old:"2(42A)",new:"2(33)",title:"Short-term Capital Asset",cat:"definitions",note:"Holding period rules revised"},
+{old:"2(45)",new:"2(35)",title:"Total Income",cat:"definitions",note:"Same concept"},
+// RESIDENTIAL STATUS
+{old:"6",new:"7",title:"Residential Status",cat:"definitions",note:"Resident, NR, RNOR criteria consolidated"},
+// EXEMPTIONS (Sec 10)
+{old:"10(1)",new:"11(1)",title:"Agricultural Income Exemption",cat:"exemption",note:"Exempt agricultural income"},
+{old:"10(2)",new:"11(2)",title:"Share from HUF",cat:"exemption",note:"Member's share from HUF exempt"},
+{old:"10(5)",new:"11(3)",title:"Leave Travel Concession",cat:"exemption",note:"LTC exemption retained"},
+{old:"10(10)",new:"11(5)",title:"Gratuity Exemption",cat:"exemption",note:"Limit 25 Lakh (increased from 20L)"},
+{old:"10(10A)",new:"11(6)",title:"Commuted Pension",cat:"exemption",note:"1/3rd or 1/2 exempt as before"},
+{old:"10(10AA)",new:"11(7)",title:"Leave Encashment",cat:"exemption",note:"Limit 25 Lakh"},
+{old:"10(10BC)",new:"11(8)",title:"Compensation — Disaster",cat:"exemption",note:"Unchanged"},
+{old:"10(10C)",new:"11(9)",title:"VRS Compensation",cat:"exemption",note:"Limit 5 Lakh"},
+{old:"10(10D)",new:"11(10)",title:"Life Insurance Proceeds",cat:"exemption",note:"Conditions for exemption tightened"},
+{old:"10(13A)",new:"11(13)",title:"HRA Exemption",cat:"exemption",note:"Formula same — min of 3 conditions"},
+{old:"10(14)",new:"11(14)",title:"Special Allowances",cat:"exemption",note:"Children education, hostel, transport"},
+{old:"10(15)",new:"11(15)",title:"Interest on Specified Savings",cat:"exemption",note:"PPF, Sukanya Samriddhi etc."},
+{old:"10(23C)",new:"11(20)",title:"Educational/Hospital Institution",cat:"exemption",note:"Consolidated with Sec 12"},
+{old:"10(34)",new:"Omitted",title:"Dividend from Domestic Co.",cat:"exemption",note:"Removed — dividends now fully taxable"},
+{old:"10(38)",new:"Omitted",title:"LTCG on Listed Shares",cat:"exemption",note:"Removed — now taxable u/s 112A"},
+// SALARY
+{old:"15",new:"15",title:"Salary — Basis of Charge",cat:"salary",note:"Due or receipt basis, same concept"},
+{old:"16",new:"16",title:"Deductions from Salary",cat:"salary",note:"Standard deduction 75,000 (increased)"},
+{old:"17",new:"17",title:"Perquisites — Salary",cat:"salary",note:"Valuation rules restructured"},
+// HOUSE PROPERTY
+{old:"22",new:"19",title:"House Property — Charge",cat:"house",note:"Annual value basis retained"},
+{old:"23",new:"20",title:"Annual Value Determination",cat:"house",note:"GAV, municipal value, rent received"},
+{old:"24",new:"21",title:"Deductions — House Property",cat:"house",note:"Standard deduction 30%, interest limit 2L for SOP"},
+{old:"27",new:"22",title:"Deemed Owner",cat:"house",note:"Same provisions for deemed ownership"},
+// BUSINESS & PROFESSION
+{old:"28",new:"23",title:"Business Income — Charge",cat:"business",note:"Profits and gains of business/profession"},
+{old:"29",new:"24",title:"Income from Business",cat:"business",note:"How computed"},
+{old:"30",new:"25",title:"Rent, Rates, Repairs",cat:"business",note:"Allowable deductions for premises"},
+{old:"31",new:"26",title:"Repairs & Insurance — Machinery",cat:"business",note:"Revenue expenditure allowed"},
+{old:"32",new:"27",title:"Depreciation",cat:"business",note:"WDV method, same block concept. No goodwill depreciation"},
+{old:"35",new:"30",title:"Scientific Research Expenditure",cat:"business",note:"Deduction for R&D"},
+{old:"36",new:"31",title:"Other Deductions",cat:"business",note:"Insurance, bad debts, family planning"},
+{old:"37",new:"32",title:"General Deduction",cat:"business",note:"Wholly and exclusively for business"},
+{old:"40(a)(ia)",new:"33(a)",title:"TDS Default — Disallowance",cat:"business",note:"30% disallowance for non-deduction"},
+{old:"40A(2)",new:"34(2)",title:"Related Party Payments",cat:"business",note:"Excessive/unreasonable payments to related parties"},
+{old:"40A(3)",new:"34(3)",title:"Cash Payment > 10,000",cat:"business",note:"100% disallowance. Rule 6DD exceptions apply"},
+{old:"43B",new:"36",title:"Deduction on Payment Basis",cat:"business",note:"GST, PF, ESI, bonus, leave encashment, MSME 43B(h)"},
+{old:"44AB",new:"58",title:"Tax Audit",cat:"business",note:"Same limits — 1Cr/10Cr business, 50L profession"},
+{old:"44AD",new:"59",title:"Presumptive — Business",cat:"business",note:"8%/6% of turnover. Limit 2Cr/3Cr"},
+{old:"44ADA",new:"60",title:"Presumptive — Profession",cat:"business",note:"50% of receipts. Limit 50L/75L"},
+{old:"44AE",new:"61",title:"Presumptive — Goods Carriage",cat:"business",note:"Up to 10 vehicles"},
+// CAPITAL GAINS
+{old:"45",new:"67",title:"Capital Gains — Charge",cat:"capital",note:"Transfer of capital asset"},
+{old:"46",new:"68",title:"Capital Gains — Distribution on Liquidation",cat:"capital",note:"Company liquidation"},
+{old:"47",new:"69",title:"Transactions Not Transfer",cat:"capital",note:"Gift, inheritance, partition etc."},
+{old:"48",new:"70",title:"Mode of Computation",cat:"capital",note:"Full value minus cost of acquisition/improvement"},
+{old:"49",new:"71",title:"Cost to Previous Owner",cat:"capital",note:"Cost for gift, inheritance etc."},
+{old:"50C",new:"73",title:"Stamp Duty Value — Land/Building",cat:"capital",note:"Deemed full value consideration"},
+{old:"54",new:"76",title:"Exemption — Residential House",cat:"capital",note:"LTCG on house if reinvested in new house"},
+{old:"54B",new:"77",title:"Exemption — Agricultural Land",cat:"capital",note:"Reinvestment in agri land"},
+{old:"54EC",new:"78",title:"Exemption — Bonds (NHAI/REC)",cat:"capital",note:"Invest in specified bonds, limit 50L"},
+{old:"54F",new:"79",title:"Exemption — Other Assets → House",cat:"capital",note:"Reinvest in residential house"},
+{old:"55",new:"74",title:"Cost of Acquisition",cat:"capital",note:"FMV as on 01-04-2001 as base"},
+{old:"111A",new:"109",title:"STCG on Listed Equity",cat:"capital",note:"15% → 20% in new Act"},
+{old:"112",new:"110",title:"LTCG General",cat:"capital",note:"20% with indexation → 12.5% without indexation"},
+{old:"112A",new:"111",title:"LTCG on Listed Equity/Equity MF",cat:"capital",note:"10% → 12.5% above 1.25L (increased from 1L)"},
+// OTHER SOURCES
+{old:"56",new:"81",title:"Other Sources — Charge",cat:"other",note:"Residual head of income"},
+{old:"56(2)(x)",new:"81(2)",title:"Deemed Income — Gifts/Property",cat:"other",note:"Property received without/inadequate consideration"},
+{old:"57",new:"82",title:"Deductions — Other Sources",cat:"other",note:"Collection charges, interest on borrowed capital"},
+// CLUBBING & SET OFF
+{old:"64",new:"86",title:"Clubbing of Income",cat:"loss",note:"Income of spouse, minor child"},
+{old:"70",new:"90",title:"Set Off — Same Head",cat:"loss",note:"Inter-source set off within same head"},
+{old:"71",new:"91",title:"Set Off — Different Heads",cat:"loss",note:"Inter-head set off"},
+{old:"72",new:"92",title:"Carry Forward — Business Loss",cat:"loss",note:"8 years carry forward"},
+{old:"73",new:"93",title:"Speculation Loss",cat:"loss",note:"Set off only against speculation income, 4 years CF"},
+{old:"74",new:"94",title:"Capital Loss Carry Forward",cat:"loss",note:"LTCL against LTCG, STCL against any CG, 8 years"},
+{old:"80",new:"98",title:"Return Required for Carry Forward",cat:"loss",note:"Must file return within due date to carry forward"},
+// DEDUCTIONS (Chapter VI-A)
+{old:"80C",new:"123",title:"Investments (LIC, PPF, ELSS)",cat:"deduction",note:"Limit 1.5 Lakh — only old regime"},
+{old:"80CCC",new:"124",title:"Pension Fund Contribution",cat:"deduction",note:"Within 80C limit of 1.5L"},
+{old:"80CCD(1)",new:"125(1)",title:"NPS — Employee Contribution",cat:"deduction",note:"Within 80C limit"},
+{old:"80CCD(1B)",new:"125(2)",title:"NPS — Additional 50,000",cat:"deduction",note:"Over and above 80C limit"},
+{old:"80CCD(2)",new:"125(3)",title:"NPS — Employer Contribution",cat:"deduction",note:"14% of salary (Govt) / 10% (others). Available in both regimes"},
+{old:"80D",new:"126",title:"Medical Insurance Premium",cat:"deduction",note:"25K self + 25K/50K parents"},
+{old:"80DD",new:"127",title:"Disabled Dependent",cat:"deduction",note:"75K / 1.25L for severe disability"},
+{old:"80DDB",new:"128",title:"Medical Treatment — Specified Diseases",cat:"deduction",note:"40K / 1L for specified diseases"},
+{old:"80E",new:"129",title:"Education Loan Interest",cat:"deduction",note:"No limit, 8 years"},
+{old:"80EEA",new:"Omitted",title:"Home Loan Interest (Affordable)",cat:"deduction",note:"Removed in new Act"},
+{old:"80G",new:"131",title:"Donations",cat:"deduction",note:"50% or 100% deduction to specified funds"},
+{old:"80GG",new:"132",title:"Rent Paid (No HRA)",cat:"deduction",note:"Max 5,000/month"},
+{old:"80GGA",new:"133",title:"Donation for Scientific Research",cat:"deduction",note:"To approved institutions"},
+{old:"80GGC",new:"134",title:"Donation to Political Party",cat:"deduction",note:"Only non-cash donations"},
+{old:"80IA",new:"135",title:"Profit from Infrastructure",cat:"deduction",note:"100% deduction for specified years"},
+{old:"80IAB",new:"136",title:"SEZ Developer",cat:"deduction",note:"Deduction for SEZ units"},
+{old:"80IBA",new:"Omitted",title:"Affordable Housing Project",cat:"deduction",note:"Omitted in new Act"},
+{old:"80JJAA",new:"138",title:"New Employment — 30% Deduction",cat:"deduction",note:"Additional employee cost for 3 years"},
+{old:"80TTA",new:"143",title:"Savings Bank Interest",cat:"deduction",note:"Deduction up to 10,000"},
+{old:"80TTB",new:"144",title:"Senior Citizen — Interest Income",cat:"deduction",note:"Up to 50,000 on deposits"},
+{old:"80U",new:"145",title:"Person with Disability",cat:"deduction",note:"75K / 1.25L"},
+// TDS/TCS
+{old:"192",new:"393(1) Sl.4",title:"TDS — Salary",cat:"tds",note:"Slab rate applicable"},
+{old:"193",new:"393(1) Sl.5(i)",title:"TDS — Interest on Securities",cat:"tds",note:"10%"},
+{old:"194",new:"393(1) Sl.5(ii)",title:"TDS — Dividend",cat:"tds",note:"10%, threshold 5,000"},
+{old:"194A",new:"393(1) Sl.5(iii)",title:"TDS — Interest (Non-Securities)",cat:"tds",note:"10%, threshold consolidated to 10,000"},
+{old:"194B",new:"393(1) Sl.5(iv)",title:"TDS — Lottery/Crossword",cat:"tds",note:"30%, threshold 10,000"},
+{old:"194C",new:"393(1) Sl.6(i)",title:"TDS — Contractor",cat:"tds",note:"1% Ind/HUF, 2% others"},
+{old:"194D",new:"393(1) Sl.1(i)",title:"TDS — Insurance Commission",cat:"tds",note:"5%"},
+{old:"194H",new:"393(1) Sl.1(ii)",title:"TDS — Commission/Brokerage",cat:"tds",note:"2% (was 5%). Threshold 20K (was 15K)"},
+{old:"194I",new:"393(1) Sl.2(ii)",title:"TDS — Rent (Specified Person)",cat:"tds",note:"2% machinery, 10% land/building. Threshold 50K/month"},
+{old:"194IA",new:"393(1) Sl.3(i)",title:"TDS — Immovable Property",cat:"tds",note:"1% above 50L"},
+{old:"194IB",new:"393(1) Sl.2(i)",title:"TDS — Rent (Ind/HUF)",cat:"tds",note:"2% (was 5%)"},
+{old:"194IC",new:"393(1) Sl.3(ii)",title:"TDS — JDA",cat:"tds",note:"10%"},
+{old:"194J",new:"393(1) Sl.6(iii)",title:"TDS — Professional/Technical",cat:"tds",note:"2% tech / 10% professional. Threshold 50K (was 30K)"},
+{old:"194M",new:"393(1) Sl.6(ii)",title:"TDS — Ind/HUF Payer",cat:"tds",note:"2% (was 5%)"},
+{old:"194Q",new:"393(1) Sl.8(ii)",title:"TDS — Goods Purchase",cat:"tds",note:"0.1% excess over 50L"},
+{old:"194R",new:"393(1) Sl.8(iv)",title:"TDS — Perquisite/Benefit",cat:"tds",note:"10% above 20K"},
+{old:"194T",new:"393(3) Sl.7",title:"TDS — Partner Payments (NEW)",cat:"tds",note:"10% on salary/interest/bonus to partners > 20K"},
+{old:"206C",new:"394",title:"TCS — All Provisions",cat:"tds",note:"Consolidated into Sec 394"},
+// RETURNS
+{old:"139(1)",new:"263(1)",title:"Return of Income — Due Date",cat:"return",note:"31 Jul / 31 Oct / 30 Nov as applicable"},
+{old:"139(4)",new:"263(4)",title:"Belated Return",cat:"return",note:"Before end of AY (31 Dec in practice)"},
+{old:"139(5)",new:"263(5)",title:"Revised Return",cat:"return",note:"Before end of AY or completion of assessment"},
+{old:"139(9)",new:"263(9)",title:"Defective Return",cat:"return",note:"15 days to rectify"},
+{old:"140A",new:"264",title:"Self Assessment Tax",cat:"return",note:"Pay before filing return"},
+{old:"142(1)",new:"266",title:"Notice for Return / Info",cat:"return",note:"AO may require return or info"},
+{old:"143(1)",new:"268",title:"Intimation — Processing of Return",cat:"return",note:"CPC intimation with adjustments"},
+{old:"143(2)",new:"269",title:"Scrutiny Assessment Notice",cat:"return",note:"Notice for detailed scrutiny"},
+{old:"143(3)",new:"270",title:"Scrutiny Assessment Order",cat:"return",note:"Assessment after scrutiny"},
+// ASSESSMENT
+{old:"144",new:"271",title:"Best Judgment Assessment",cat:"assessment",note:"When assessee fails to comply"},
+{old:"147",new:"279",title:"Income Escaping Assessment (Reassessment)",cat:"assessment",note:"Revamped — new provisions for reopening"},
+{old:"148",new:"280",title:"Notice for Reassessment",cat:"assessment",note:"Information-based approach"},
+{old:"148A",new:"281",title:"Procedure Before Reassessment",cat:"assessment",note:"Mandatory inquiry before notice"},
+{old:"154",new:"274",title:"Rectification of Mistake",cat:"assessment",note:"Apparent from record, within 4 years"},
+{old:"156",new:"276",title:"Notice of Demand",cat:"assessment",note:"AO issues demand notice"},
+{old:"220",new:"353",title:"When Tax is Payable",cat:"assessment",note:"30 days from service of notice"},
+{old:"234E",new:"389",title:"Late Filing Fee — TDS Return",cat:"assessment",note:"200/day until filing"},
+// PENALTY
+{old:"234A",new:"385(1)",title:"Interest — Late Filing",cat:"penalty",note:"1% per month"},
+{old:"234B",new:"385(2)",title:"Interest — Advance Tax Default",cat:"penalty",note:"1% per month"},
+{old:"234C",new:"385(3)",title:"Interest — Advance Tax Deferment",cat:"penalty",note:"1% x 3 months per quarter"},
+{old:"234F",new:"387",title:"Fee — Late Return Filing",cat:"penalty",note:"5,000 (1,000 if income < 5L)"},
+{old:"270A",new:"398",title:"Penalty — Under-reporting",cat:"penalty",note:"50% of tax. 200% if misreporting"},
+{old:"271(1)(c)",new:"Omitted",title:"Concealment Penalty (Old)",cat:"penalty",note:"Replaced by 270A"},
+{old:"271B",new:"399",title:"Failure to Get Audit",cat:"penalty",note:"0.5% of turnover or 1.5L"},
+{old:"271D",new:"400",title:"Cash Loan/Deposit Received",cat:"penalty",note:"Penalty = amount received in cash > 20K"},
+{old:"271E",new:"401",title:"Cash Loan/Deposit Repaid",cat:"penalty",note:"Penalty = amount repaid in cash > 20K"},
+{old:"271DA",new:"402",title:"Cash Receipt > 2 Lakh",cat:"penalty",note:"269ST violation"},
+{old:"271F",new:"Omitted",title:"Late Return Penalty (Old)",cat:"penalty",note:"Replaced by 234F fee"},
+{old:"273B",new:"405",title:"Reasonable Cause Defence",cat:"penalty",note:"No penalty if reasonable cause proved"},
+{old:"276C",new:"408",title:"Prosecution — Wilful Tax Evasion",cat:"penalty",note:"Rigorous imprisonment 6m-7y"},
+{old:"276CC",new:"409",title:"Prosecution — Non-filing Return",cat:"penalty",note:"If tax evaded > 25L"},
+// APPEALS
+{old:"246A",new:"356",title:"Appeal to CIT(A) / JCIT(A)",cat:"appeal",note:"First appeal — now also to JCIT(Appeals)"},
+{old:"250",new:"359",title:"CIT(A) Procedure",cat:"appeal",note:"Hearing and disposal"},
+{old:"253",new:"361",title:"Appeal to ITAT",cat:"appeal",note:"Second appeal to Income Tax Appellate Tribunal"},
+{old:"260A",new:"365",title:"Appeal to High Court",cat:"appeal",note:"Substantial question of law"},
+{old:"261",new:"366",title:"Appeal to Supreme Court",cat:"appeal",note:"From High Court"},
+{old:"263",new:"367",title:"Revision by PCIT/CIT",cat:"appeal",note:"Erroneous and prejudicial to revenue"},
+{old:"264",new:"368",title:"Revision by CIT — Assessee Application",cat:"appeal",note:"Assessee may apply for revision"}
+];
+
+function renderMapping(list){var c=document.getElementById('mappingResults');
+if(!list.length){c.innerHTML='<p style="text-align:center;color:var(--text-light);padding:20px;">No sections found. Try a different search.</p>';return;}
+c.innerHTML='<table class="limits-table"><thead><tr><th style="width:100px;">Old Section (1961)</th><th style="width:100px;">New Section (2025)</th><th>Description</th><th>Category</th><th>Remarks</th></tr></thead><tbody>'+list.map(function(m){
+var newCol=m.new==='Omitted'?'<span style="color:var(--danger);font-weight:700;">Omitted</span>':'<strong>'+m.new+'</strong>';
+var catColors={definitions:'#2c5364',exemption:'var(--success)',salary:'#0a8c64',house:'#b5651d',business:'var(--primary-mid)',capital:'#8e44ad',other:'#2980b9',deduction:'var(--accent)',loss:'#d35400',tds:'#c0392b',return:'#16a085',assessment:'#7f8c8d',penalty:'var(--danger)',appeal:'#2c3e50'};
+return '<tr><td><strong>'+m.old+'</strong></td><td>'+newCol+'</td><td>'+m.title+'</td><td><span class="tag" style="background:'+catColors[m.cat]+'22;color:'+catColors[m.cat]+';">'+m.cat+'</span></td><td style="font-size:0.82rem;color:var(--text-light);">'+m.note+'</td></tr>';}).join('')+'</tbody></table>';}
+
+function searchMapping(){var q=document.getElementById('mappingSearch').value.toLowerCase();
+var ab=document.querySelector('#tab-sectionfinder .filter-row:first-of-type .filter-btn.active');
+var cat=ab?ab.textContent.toLowerCase():'all';
+var f=sectionMap;
+var catMap={'definitions':'definitions','exemptions':'exemption','salary':'salary','house property':'house','business/profession':'business','capital gains':'capital','other sources':'other','deductions':'deduction','set off/losses':'loss','tds/tcs':'tds','returns':'return','assessment':'assessment','penalty':'penalty','appeals':'appeal'};
+if(cat!=='all')f=f.filter(function(m){return m.cat===(catMap[cat]||cat);});
+if(q)f=f.filter(function(m){return(m.old+' '+m.new+' '+m.title+' '+m.note+' '+m.cat).toLowerCase().indexOf(q)>=0;});
+renderMapping(f);}
+
+function filterMapping(cat,btn){document.querySelectorAll('#tab-sectionfinder .filter-row:first-of-type .filter-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');searchMapping();}
+
+renderMapping(sectionMap);
 
 // ==============================
 // TAB 10: INTEREST 234
