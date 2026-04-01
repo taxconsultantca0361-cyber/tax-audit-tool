@@ -1,1 +1,1917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Audit Tool — Section 44AB | AY 2025-26</title>
+    <style>
+        :root {
+            --primary: #1a5276;
+            --primary-light: #2980b9;
+            --accent: #e67e22;
+            --accent-light: #f39c12;
+            --bg: #f4f6f9;
+            --card: #ffffff;
+            --text: #2c3e50;
+            --text-light: #7f8c8d;
+            --success: #27ae60;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+            --border: #dce1e8;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: var(--accent);
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 14px 24px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-light);
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            user-select: none;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: #f0f4f8;
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 16px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card);
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            padding: 24px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .card h2 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--bg);
+        }
+
+        .card h3 {
+            color: var(--primary-light);
+            font-size: 1.1rem;
+            margin: 16px 0 10px;
+        }
+
+        /* Applicability Checker */
+        .checker-form {
+            display: grid;
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            font-size: 0.92rem;
+            color: var(--text);
+        }
+
+        .form-group select,
+        .form-group input {
+            padding: 12px 14px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+            background: white;
+        }
+
+        .form-group select:focus,
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-light);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(26,82,118,0.3);
+        }
+
+        .btn-reset {
+            background: var(--bg);
+            color: var(--text);
+            border: 2px solid var(--border);
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        /* Result Box */
+        .result-box {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .result-box.applicable {
+            background: #fef5e7;
+            border: 2px solid var(--accent);
+            display: block;
+        }
+
+        .result-box.not-applicable {
+            background: #eafaf1;
+            border: 2px solid var(--success);
+            display: block;
+        }
+
+        .result-box.presumptive {
+            background: #ebf5fb;
+            border: 2px solid var(--primary-light);
+            display: block;
+        }
+
+        .result-icon {
+            font-size: 1.5rem;
+            margin-right: 8px;
+        }
+
+        .result-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .result-detail {
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .result-detail ul {
+            margin: 8px 0 0 20px;
+        }
+
+        /* Search Box */
+        .search-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 14px 18px 14px 46px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            background: white;
+            transition: border-color 0.3s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary-light);
+        }
+
+        .search-box::before {
+            content: '🔍';
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.1rem;
+        }
+
+        /* Clause Items */
+        .clause-item {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: box-shadow 0.3s;
+        }
+
+        .clause-item:hover {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .clause-header {
+            padding: 16px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            user-select: none;
+            transition: background 0.3s;
+        }
+
+        .clause-header:hover {
+            background: #f8f9fb;
+        }
+
+        .clause-number {
+            background: var(--primary);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            margin-right: 12px;
+            white-space: nowrap;
+        }
+
+        .clause-title {
+            flex: 1;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .clause-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            color: var(--text-light);
+        }
+
+        .clause-item.open .clause-arrow {
+            transform: rotate(180deg);
+        }
+
+        .clause-body {
+            display: none;
+            padding: 0 20px 20px;
+            background: #fafbfc;
+            border-top: 1px solid var(--border);
+        }
+
+        .clause-item.open .clause-body {
+            display: block;
+        }
+
+        .clause-section {
+            margin-top: 14px;
+        }
+
+        .clause-section-title {
+            font-weight: 700;
+            font-size: 0.88rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .clause-section p, .clause-section ul {
+            font-size: 0.93rem;
+            color: #444;
+        }
+
+        .clause-section ul {
+            margin-left: 18px;
+        }
+
+        .clause-section li {
+            margin-bottom: 4px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            margin-right: 6px;
+            margin-top: 6px;
+        }
+
+        .tag-high { background: #fdedec; color: var(--danger); }
+        .tag-medium { background: #fef9e7; color: #b7950b; }
+        .tag-low { background: #eafaf1; color: var(--success); }
+        .tag-info { background: #ebf5fb; color: var(--primary-light); }
+
+        /* Tips Section */
+        .tip-card {
+            background: white;
+            border-left: 4px solid var(--accent);
+            padding: 16px 20px;
+            margin-bottom: 14px;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+        }
+
+        .tip-card h4 {
+            color: var(--primary);
+            margin-bottom: 6px;
+            font-size: 1rem;
+        }
+
+        .tip-card p, .tip-card ul {
+            font-size: 0.93rem;
+            color: #555;
+        }
+
+        .tip-card ul {
+            margin-left: 18px;
+            margin-top: 6px;
+        }
+
+        .tip-card li {
+            margin-bottom: 3px;
+        }
+
+        /* Limits Table */
+        .limits-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+            font-size: 0.93rem;
+        }
+
+        .limits-table th {
+            background: var(--primary);
+            color: white;
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .limits-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .limits-table tr:nth-child(even) {
+            background: #f8f9fb;
+        }
+
+        .limits-table tr:hover {
+            background: #eef2f7;
+        }
+
+        /* Category Filter */
+        .filter-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .filter-btn {
+            padding: 6px 16px;
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            background: white;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-light);
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: #ebf5fb;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px 16px;
+            color: var(--text-light);
+            font-size: 0.88rem;
+            border-top: 1px solid var(--border);
+            margin-top: 30px;
+        }
+
+        .footer a {
+            color: var(--primary-light);
+            text-decoration: none;
+        }
+
+        .disclaimer {
+            background: #fef9e7;
+            border: 1px solid #f9e79f;
+            border-radius: 10px;
+            padding: 16px 20px;
+            font-size: 0.9rem;
+            color: #7d6608;
+            margin-top: 20px;
+        }
+
+        /* Stats Row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            padding: 18px;
+            text-align: center;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        /* TDS Table */
+        .tds-table td {
+            font-size: 0.9rem;
+        }
+
+        .tds-row:hover {
+            background: #eef2f7 !important;
+        }
+
+        .tds-detail-row td {
+            padding: 0 !important;
+        }
+
+        .tds-detail-row td > div {
+            padding: 16px 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.4rem; }
+            .nav-tab { padding: 10px 14px; font-size: 0.85rem; }
+            .form-row { grid-template-columns: 1fr; }
+            .container { padding: 14px 10px; }
+            .card { padding: 18px 14px; }
+            .stats-row { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Tax Audit Tool — Section 44AB</h1>
+    <p>Comprehensive Guide to Tax Audit under Income Tax Act</p>
+    <span class="badge">AY 2025-26 (FY 2024-25)</span>
+</div>
+
+<div class="nav-tabs">
+    <div class="nav-tab active" onclick="switchTab('checker')">Applicability Checker</div>
+    <div class="nav-tab" onclick="switchTab('clauses')">Form 3CD Clauses</div>
+    <div class="nav-tab" onclick="switchTab('tips')">Reporting Tips</div>
+    <div class="nav-tab" onclick="switchTab('limits')">Turnover Limits</div>
+    <div class="nav-tab" onclick="switchTab('tds')">TDS/TCS Comparison</div>
+    <div class="nav-tab" onclick="switchTab('disclaimer')">Disclaimer</div>
+</div>
+
+<div class="container">
+
+    <!-- TAB 1: Applicability Checker -->
+    <div id="tab-checker" class="tab-content active">
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-number">1 Cr</div>
+                <div class="stat-label">Business (Non-Digital)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">10 Cr</div>
+                <div class="stat-label">Business (Digital ≥95%)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">50 L</div>
+                <div class="stat-label">Profession Limit</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">41</div>
+                <div class="stat-label">Form 3CD Clauses</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Check Tax Audit Applicability</h2>
+            <div class="checker-form">
+                <div class="form-group">
+                    <label>Type of Assessee</label>
+                    <select id="assesseeType" onchange="handleAssesseeChange()">
+                        <option value="">— Select —</option>
+                        <option value="business">Business</option>
+                        <option value="profession">Profession</option>
+                        <option value="presumptive_business">Business under Presumptive (Sec 44AD)</option>
+                        <option value="presumptive_profession">Profession under Presumptive (Sec 44ADA)</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Gross Turnover / Receipts (₹)</label>
+                        <input type="number" id="turnover" placeholder="e.g. 15000000">
+                    </div>
+                    <div class="form-group">
+                        <label>Profit Declared (₹) <span style="font-weight:400;color:var(--text-light)">(for Presumptive)</span></label>
+                        <input type="number" id="profit" placeholder="e.g. 1200000" disabled id="profitField">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Cash Receipts as % of Total Turnover</label>
+                        <select id="cashPercent">
+                            <option value="less5">Less than 5% (Digital ≥ 95%)</option>
+                            <option value="more5" selected>5% or more</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Assessment Year</label>
+                        <select id="ay">
+                            <option value="2025-26" selected>AY 2025-26 (FY 2024-25)</option>
+                            <option value="2024-25">AY 2024-25 (FY 2023-24)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group" id="incomeGroup" style="display:none;">
+                    <label>Total Income exceeds basic exemption limit?</label>
+                    <select id="incomeExceeds">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+
+                <div class="btn-row">
+                    <button class="btn btn-primary" onclick="checkApplicability()">Check Applicability</button>
+                    <button class="btn btn-reset" onclick="resetChecker()">Reset</button>
+                </div>
+            </div>
+
+            <div id="result" class="result-box"></div>
+        </div>
+
+        <div class="card">
+            <h2>Key Provisions — Section 44AB at a Glance</h2>
+            <table class="limits-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Condition</th>
+                        <th>Audit Required?</th>
+                        <th>Form</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Business</strong> (Cash > 5%)</td>
+                        <td>Turnover &gt; ₹1 Crore</td>
+                        <td>Yes</td>
+                        <td>3CA/3CB + 3CD</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Business</strong> (Digital ≥ 95%)</td>
+                        <td>Turnover &gt; ₹10 Crore</td>
+                        <td>Yes</td>
+                        <td>3CA/3CB + 3CD</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Profession</strong></td>
+                        <td>Receipts &gt; ₹50 Lakh</td>
+                        <td>Yes</td>
+                        <td>3CA/3CB + 3CD</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sec 44AD</strong> (Presumptive)</td>
+                        <td>Profit &lt; 8%/6% &amp; Income &gt; exemption limit</td>
+                        <td>Yes</td>
+                        <td>3CA/3CB + 3CD</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sec 44ADA</strong> (Presumptive)</td>
+                        <td>Profit &lt; 50% &amp; Income &gt; exemption limit</td>
+                        <td>Yes</td>
+                        <td>3CA/3CB + 3CD</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Due Date</strong></td>
+                        <td colspan="3">30th September of the Assessment Year</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Penalty (Sec 271B)</strong></td>
+                        <td colspan="3">0.5% of Turnover or ₹1,50,000 — whichever is less</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- TAB 2: Form 3CD Clauses -->
+    <div id="tab-clauses" class="tab-content">
+        <div class="card">
+            <h2>Form 3CD — Clause-by-Clause Guide</h2>
+            <p style="color:var(--text-light);margin-bottom:16px;">Click on any clause to expand details, reporting guidance, and common observations.</p>
+
+            <div class="search-box">
+                <input type="text" id="clauseSearch" placeholder="Search clauses... (e.g. depreciation, TDS, cash)" oninput="filterClauses()">
+            </div>
+
+            <div class="filter-row">
+                <button class="filter-btn active" onclick="filterCategory('all', this)">All Clauses</button>
+                <button class="filter-btn" onclick="filterCategory('basic', this)">Basic Info</button>
+                <button class="filter-btn" onclick="filterCategory('financial', this)">Financial</button>
+                <button class="filter-btn" onclick="filterCategory('tax', this)">Tax & TDS</button>
+                <button class="filter-btn" onclick="filterCategory('compliance', this)">Compliance</button>
+                <button class="filter-btn" onclick="filterCategory('deductions', this)">Deductions</button>
+            </div>
+
+            <div id="clauseList"></div>
+        </div>
+    </div>
+
+    <!-- TAB 3: Reporting Tips -->
+    <div id="tab-tips" class="tab-content">
+        <div class="card">
+            <h2>Common Reporting Tips & Best Practices</h2>
+
+            <div class="tip-card">
+                <h4>1. Verify Books of Accounts First</h4>
+                <p>Before starting Form 3CD, ensure:</p>
+                <ul>
+                    <li>Trial Balance matches the financial statements</li>
+                    <li>Bank reconciliation is complete for all accounts</li>
+                    <li>All journal entries are properly documented with narrations</li>
+                    <li>Cash book is complete and tallied</li>
+                </ul>
+            </div>
+
+            <div class="tip-card">
+                <h4>2. TDS Compliance (Clause 34)</h4>
+                <p>This is the most scrutinized clause. Check:</p>
+                <ul>
+                    <li>Match TDS deducted with Form 26AS / AIS</li>
+                    <li>Verify timely deposit of TDS — deducted in March must be deposited by 30th April</li>
+                    <li>Report all defaults — short deduction, late deposit, non-deduction</li>
+                    <li>Check TDS on year-end provisions (audit fees, professional fees, rent)</li>
+                    <li>Verify TDS on GST component — TDS is deductible on base amount excluding GST (CBDT Circular 23/2017)</li>
+                </ul>
+            </div>
+
+            <div class="tip-card">
+                <h4>3. Cash Transactions (Clauses 31 & 32)</h4>
+                <p>Critical areas to check:</p>
+                <ul>
+                    <li><strong>Section 269SS/269T:</strong> Loans/deposits accepted/repaid in cash exceeding ₹20,000</li>
+                    <li><strong>Section 43:</strong> Capital expenditure paid in cash exceeding ₹10,000 to a single person in a day</li>
+                    <li><strong>Section 40A(3):</strong> Revenue expenditure in cash exceeding ₹10,000 in a single day</li>
+                    <li>Check for split transactions designed to circumvent cash limits</li>
+                </ul>
+            </div>
+
+            <div class="tip-card">
+                <h4>4. Depreciation (Clause 18)</h4>
+                <p>Common issues to verify:</p>
+                <ul>
+                    <li>Confirm assets put to use — date of put to use determines depreciation rate (full year vs 50%)</li>
+                    <li>Check for assets used less than 180 days — eligible for only 50% depreciation</li>
+                    <li>Verify additional depreciation u/s 32(1)(iia) eligibility — only for manufacturing</li>
+                    <li>Ensure no depreciation claimed on goodwill (post Finance Act 2021)</li>
+                    <li>Check Written Down Value (WDV) opening balance matches last year's closing</li>
+                </ul>
+            </div>
+
+            <div class="tip-card">
+                <h4>5. Section 43B Compliance (Clause 26)</h4>
+                <p>Expenses allowable only on actual payment basis:</p>
+                <ul>
+                    <li>Statutory dues: GST, PF, ESI, tax, duty, cess</li>
+                    <li>Bonus or commission to employees</li>
+                    <li>Interest on loans from public financial institutions / banks</li>
+                    <li>Leave encashment</li>
+                    <li><strong>Important:</strong> Payment must be made before the due date of filing return u/s 139(1)</li>
+                    <li><strong>Note:</strong> MSME payments (Sec 43B(h)) — verify payment within 45/15 days to micro/small enterprises</li>
+                </ul>
+            </div>
+
+            <div class="tip-card">
+                <h4>6. GST Reconciliation (Clause 44)</h4>
+                <p>Reconcile and report:</p>
+                <ul>
+                    <li>Turnover as per GST returns vs books of accounts</li>
+                    <li>Input Tax Credit (ITC) claimed vs available in GSTR-2B</li>
+                    <li>ITC reversed during the year and reasons</li>
+                    <li>Differences in turnover reported in GSTR-1 vs GSTR-3B vs Books</li>
+                </ul>
+            </div>
+
+            <div class="tip-card">
+                <h4>7. Related Party Transactions (Clause 23)</h4>
+                <p>Under Section 40A(2)(b), verify:</p>
+                <ul>
+                    <li>List all payments to related parties (directors, partners, relatives, associated concerns)</li>
+                    <li>Check if payments are at fair market value</li>
+                    <li>Obtain confirmations and supporting documentation</li>
+                    <li>Cross-verify with transfer pricing provisions if applicable</li>
+                </ul>
+            </div>
+
+            <div class="tip-card">
+                <h4>8. Avoid These Common Mistakes</h4>
+                <ul>
+                    <li>Not reporting NIL in applicable clauses — every clause must be addressed</li>
+                    <li>Copy-pasting from previous year without updating figures</li>
+                    <li>Not reconciling Form 26AS with TDS reported in 3CD</li>
+                    <li>Missing Section 269SS/T violations in Clause 31</li>
+                    <li>Not reporting pending litigation in Clause 36</li>
+                    <li>Incorrect UDIN — verify before filing</li>
+                    <li>Not obtaining management representation letter</li>
+                </ul>
+            </div>
+
+            <div class="tip-card">
+                <h4>9. Documentation Checklist</h4>
+                <ul>
+                    <li>Engagement letter signed before commencement of audit</li>
+                    <li>Management Representation Letter obtained</li>
+                    <li>UDIN generated on ICAI portal within 60 days</li>
+                    <li>Working papers maintained as per SA 230</li>
+                    <li>Audit report signed (digitally) and filed before due date</li>
+                    <li>Maintain communication with previous auditor if applicable (SA 510)</li>
+                </ul>
+            </div>
+
+            <div class="tip-card">
+                <h4>10. Key Due Dates to Remember</h4>
+                <ul>
+                    <li><strong>30th September:</strong> Due date for filing Tax Audit Report</li>
+                    <li><strong>31st October:</strong> Due date for ITR where Tax Audit applies (extended if TP applicable)</li>
+                    <li><strong>30th November:</strong> Due date for ITR where Transfer Pricing audit applies</li>
+                    <li><strong>UDIN:</strong> Must be generated within 60 days of signing the report</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 4: Turnover Limits -->
+    <div id="tab-limits" class="tab-content">
+        <div class="card">
+            <h2>Turnover / Receipt Limits — Historical & Current</h2>
+            <table class="limits-table">
+                <thead>
+                    <tr>
+                        <th>Assessment Year</th>
+                        <th>Business Limit</th>
+                        <th>Business (Digital ≥95%)</th>
+                        <th>Profession Limit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>AY 2025-26</td>
+                        <td>₹1 Crore</td>
+                        <td>₹10 Crore</td>
+                        <td>₹50 Lakh</td>
+                    </tr>
+                    <tr>
+                        <td>AY 2024-25</td>
+                        <td>₹1 Crore</td>
+                        <td>₹10 Crore</td>
+                        <td>₹50 Lakh</td>
+                    </tr>
+                    <tr>
+                        <td>AY 2023-24</td>
+                        <td>₹1 Crore</td>
+                        <td>₹10 Crore</td>
+                        <td>₹50 Lakh</td>
+                    </tr>
+                    <tr>
+                        <td>AY 2022-23</td>
+                        <td>₹1 Crore</td>
+                        <td>₹10 Crore</td>
+                        <td>₹50 Lakh</td>
+                    </tr>
+                    <tr>
+                        <td>AY 2021-22</td>
+                        <td>₹1 Crore</td>
+                        <td>₹5 Crore</td>
+                        <td>₹50 Lakh</td>
+                    </tr>
+                    <tr>
+                        <td>AY 2020-21 & Prior</td>
+                        <td>₹1 Crore</td>
+                        <td>N/A</td>
+                        <td>₹50 Lakh</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>Presumptive Taxation — Profit Thresholds</h2>
+            <table class="limits-table">
+                <thead>
+                    <tr>
+                        <th>Section</th>
+                        <th>Applicable To</th>
+                        <th>Turnover Limit</th>
+                        <th>Min Profit %</th>
+                        <th>Audit If Below %</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>44AD</strong></td>
+                        <td>Eligible Business (Resident Individual/HUF/Firm)</td>
+                        <td>≤ ₹3 Crore (if digital ≥95%)<br>≤ ₹2 Crore (otherwise)</td>
+                        <td>6% (Digital) / 8% (Cash)</td>
+                        <td>Yes, if income &gt; exemption limit</td>
+                    </tr>
+                    <tr>
+                        <td><strong>44ADA</strong></td>
+                        <td>Specified Professions (Resident Individual/Firm)</td>
+                        <td>≤ ₹75 Lakh (if digital ≥95%)<br>≤ ₹50 Lakh (otherwise)</td>
+                        <td>50%</td>
+                        <td>Yes, if income &gt; exemption limit</td>
+                    </tr>
+                    <tr>
+                        <td><strong>44AE</strong></td>
+                        <td>Goods Carriage Operators</td>
+                        <td>≤ 10 Vehicles</td>
+                        <td>₹7,500/vehicle/month (heavy) or ₹1,000/ton/month</td>
+                        <td>Yes, if declares lower</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>Penalty for Non-Compliance — Section 271B</h2>
+            <table class="limits-table">
+                <thead>
+                    <tr>
+                        <th>Particulars</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Penalty Amount</strong></td>
+                        <td>0.5% of Total Sales/Turnover/Gross Receipts <strong>OR</strong> ₹1,50,000 — whichever is <strong>less</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Levied By</strong></td>
+                        <td>Assessing Officer</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Reasonable Cause Defence</strong></td>
+                        <td>No penalty if assessee proves there was reasonable cause for failure (Section 273B)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Examples of Reasonable Cause</strong></td>
+                        <td>Natural calamity, resignation of auditor, loss of books by fire/theft, labour problems</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- TAB 5: TDS/TCS Comparison -->
+    <div id="tab-tds" class="tab-content">
+
+        <div class="card">
+            <h2>TDS Rates — Old Act 1961 vs New Act 2025</h2>
+            <p style="color:var(--text-light);margin-bottom:16px;">Side-by-side comparison of TDS provisions</p>
+            <div style="overflow-x:auto;">
+            <table class="limits-table">
+                <thead>
+                    <tr>
+                        <th>Nature of Payment</th>
+                        <th colspan="3" style="text-align:center;background:#7d3c0a;">Old Act 1961</th>
+                        <th colspan="3" style="text-align:center;background:#1a6e3a;">New Act 2025</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th style="background:#b5651d;">Section</th>
+                        <th style="background:#b5651d;">Rate</th>
+                        <th style="background:#b5651d;">Threshold</th>
+                        <th style="background:#217a4b;">Section</th>
+                        <th style="background:#217a4b;">Rate</th>
+                        <th style="background:#217a4b;">Threshold</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Commission / Brokerage</strong></td>
+                        <td>194H</td><td>5%</td><td>₹15,000</td>
+                        <td>393(1) Sl.1(ii)</td><td>2%</td><td>₹20,000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Rent — Ind/HUF (non-audit)</strong></td>
+                        <td>194-IB</td><td>5%</td><td>₹50K/month</td>
+                        <td>393(1) Sl.2(i)</td><td>2%</td><td>₹50K/month</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Rent — Plant/Machinery</strong></td>
+                        <td>194-I</td><td>2%</td><td>₹2.4L/year</td>
+                        <td>393(1) Sl.2(ii)</td><td>2%</td><td>₹50K/month</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Rent — Land/Building</strong></td>
+                        <td>194-I</td><td>10%</td><td>₹2.4L/year</td>
+                        <td>393(1) Sl.2(ii)</td><td>10%</td><td>₹50K/month</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Immovable Property Transfer</strong></td>
+                        <td>194-IA</td><td>1%</td><td>₹50 Lakhs</td>
+                        <td>393(1) Sl.3(i)</td><td>1%</td><td>₹50 Lakhs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Joint Development Agreement</strong></td>
+                        <td>194-IC</td><td>10%</td><td>Nil</td>
+                        <td>393(1) Sl.3(ii)</td><td>10%</td><td>Nil</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Interest (Non-Securities)</strong></td>
+                        <td>194A</td><td>10%</td><td>₹10K–₹50K*</td>
+                        <td>393(1) Sl.5(iii)</td><td>10%</td><td>₹10,000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Contractor — Ind/HUF</strong></td>
+                        <td>194C</td><td>1%</td><td>₹30K/₹1L</td>
+                        <td>393(1) Sl.6(i)</td><td>1%</td><td>₹30K/₹1L</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Contractor — Others</strong></td>
+                        <td>194C</td><td>2%</td><td>₹30K/₹1L</td>
+                        <td>393(1) Sl.6(i)</td><td>2%</td><td>₹30K/₹1L</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Work/Prof Fees — Ind/HUF Payer</strong></td>
+                        <td>194M</td><td>5%</td><td>₹50 Lakhs</td>
+                        <td>393(1) Sl.6(ii)</td><td>2%</td><td>₹50 Lakhs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Technical Services / Royalty</strong></td>
+                        <td>194J</td><td>2%</td><td>₹30,000</td>
+                        <td>393(1) Sl.6(iii)</td><td>2%</td><td>₹50,000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Professional Services / Royalty</strong></td>
+                        <td>194J</td><td>10%</td><td>₹30,000</td>
+                        <td>393(1) Sl.6(iii)</td><td>10%</td><td>₹50,000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Director's Remuneration</strong></td>
+                        <td>194J</td><td>10%</td><td>Nil</td>
+                        <td>393(1) Sl.6(iii)</td><td>10%</td><td>Nil</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Purchase of Goods (High Value)</strong></td>
+                        <td>194Q</td><td>0.1%</td><td>₹50L (excess)</td>
+                        <td>393(1) Sl.8(ii)</td><td>0.1%</td><td>₹50L (excess)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Business Perquisite / Benefit</strong></td>
+                        <td>194R</td><td>10%</td><td>₹20,000</td>
+                        <td>393(1) Sl.8(iv)</td><td>10%</td><td>₹20,000</td>
+                    </tr>
+                    <tr style="background:#fff3e0;">
+                        <td><strong>Firm to Partner (Salary/Interest) ★ NEW</strong></td>
+                        <td colspan="3" style="text-align:center;color:var(--text-light);"><em>Not applicable</em></td>
+                        <td>393(3) Sl.7</td><td>10%</td><td>₹20,000</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+            <p style="font-size:0.82rem;color:var(--text-light);margin-top:10px;">* Under old Act, interest threshold varied: ₹10K (general), ₹40K (banks), ₹50K (senior citizens)</p>
+        </div>
+
+        <div class="card">
+            <h2>TCS Rates — Old Act 1961 vs New Act 2025</h2>
+            <p style="color:var(--text-light);margin-bottom:16px;">Side-by-side comparison of TCS provisions</p>
+            <div style="overflow-x:auto;">
+            <table class="limits-table">
+                <thead>
+                    <tr>
+                        <th>Nature of Collection</th>
+                        <th colspan="3" style="text-align:center;background:#7d3c0a;">Old Act 1961</th>
+                        <th colspan="3" style="text-align:center;background:#1a6e3a;">New Act 2025</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th style="background:#b5651d;">Section</th>
+                        <th style="background:#b5651d;">Rate</th>
+                        <th style="background:#b5651d;">Threshold</th>
+                        <th style="background:#217a4b;">Section</th>
+                        <th style="background:#217a4b;">Rate</th>
+                        <th style="background:#217a4b;">Threshold</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Alcoholic Liquor</strong></td>
+                        <td>206C</td><td>1%</td><td>Nil</td>
+                        <td>394(1) Sl.1</td><td>2%</td><td>Nil</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tendu Leaves</strong></td>
+                        <td>206C</td><td>5%</td><td>Nil</td>
+                        <td>394(1) Sl.2</td><td>2%</td><td>Nil</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Timber / Forest Produce</strong></td>
+                        <td>206C</td><td>2.5%</td><td>Nil</td>
+                        <td>394(1) Sl.3</td><td>2%</td><td>Nil</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Scrap</strong></td>
+                        <td>206C</td><td>1%</td><td>Nil</td>
+                        <td>394(1) Sl.4</td><td>2%</td><td>Nil</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Minerals (Coal/Lignite/Iron Ore)</strong></td>
+                        <td>206C</td><td>1%</td><td>Nil</td>
+                        <td>394(1) Sl.5</td><td>2%</td><td>Nil</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Motor Vehicle (> ₹10L)</strong></td>
+                        <td>206C(1F)</td><td>1%</td><td>₹10 Lakhs</td>
+                        <td>394(1) Sl.6</td><td>1%</td><td>₹10 Lakhs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Overseas Tour Package</strong></td>
+                        <td>206C(1G)</td><td>5%/20%</td><td>₹7L slab</td>
+                        <td>394(1) Sl.8</td><td>2%</td><td>Nil</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Parking/Toll/Mine/Quarry Lease</strong></td>
+                        <td>206C(1C)</td><td>2%</td><td>Nil</td>
+                        <td>394(1) Sl.9</td><td>2%</td><td>Nil</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+
+        <div class="disclaimer" style="margin-bottom:20px;">
+            <p><strong>Credit:</strong> TDS/TCS comparison data referenced from <a href="https://vivektinku.github.io/taxpecharcha/" target="_blank" style="color:#7d6608;font-weight:600;">TaxPeCharcha</a> by CA Vivek Jain, FCA & CA Anil Kumar Agarwala, FCA — incorporating amendments under the new Income Tax Act 2025.</p>
+        </div>
+    </div>
+
+    <!-- TAB 6: Disclaimer -->
+    <div id="tab-disclaimer" class="tab-content">
+        <div class="card">
+            <h2>Disclaimer</h2>
+            <div class="disclaimer">
+                <p><strong>Important:</strong> This tool is designed for informational and educational purposes only. It is intended to assist Chartered Accountants and tax professionals as a quick reference guide.</p>
+                <br>
+                <p>The information provided is based on the Income Tax Act, 1961 and relevant amendments up to AY 2025-26. While every effort has been made to ensure accuracy, users should:</p>
+                <ul style="margin:10px 0 10px 20px;">
+                    <li>Always refer to the original provisions of the Income Tax Act and relevant Rules</li>
+                    <li>Consult the latest CBDT circulars and notifications</li>
+                    <li>Refer to ICAI Guidance Notes on Tax Audit</li>
+                    <li>Exercise professional judgment in all reporting matters</li>
+                    <li>Verify all information independently before relying on it</li>
+                </ul>
+                <br>
+                <p>The creators of this tool shall not be held responsible for any errors, omissions, or any decisions made based on the information provided herein.</p>
+                <br>
+                <p><strong>Always consult a qualified professional for specific tax matters.</strong></p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer">
+    <p>Tax Audit Tool — Section 44AB | For Educational Purposes Only</p>
+    <p style="margin-top:6px;">Built with care for the CA community</p>
+    <p style="margin-top:4px;font-size:0.82rem;">Last updated: March 2026</p>
+</div>
+
+<script>
+// ========================
+// TAB SWITCHING
+// ========================
+function switchTab(tabName) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + tabName).classList.add('active');
+    event.target.classList.add('active');
+}
+
+// ========================
+// APPLICABILITY CHECKER
+// ========================
+function handleAssesseeChange() {
+    const type = document.getElementById('assesseeType').value;
+    const profitField = document.getElementById('profit');
+    const incomeGroup = document.getElementById('incomeGroup');
+
+    if (type === 'presumptive_business' || type === 'presumptive_profession') {
+        profitField.disabled = false;
+        incomeGroup.style.display = 'block';
+    } else {
+        profitField.disabled = true;
+        profitField.value = '';
+        incomeGroup.style.display = 'none';
+    }
+}
+
+function checkApplicability() {
+    const type = document.getElementById('assesseeType').value;
+    const turnover = parseFloat(document.getElementById('turnover').value) || 0;
+    const profit = parseFloat(document.getElementById('profit').value) || 0;
+    const cashPercent = document.getElementById('cashPercent').value;
+    const incomeExceeds = document.getElementById('incomeExceeds').value;
+    const resultDiv = document.getElementById('result');
+
+    if (!type) {
+        resultDiv.className = 'result-box applicable';
+        resultDiv.innerHTML = '<div class="result-title">⚠️ Please select the type of assessee</div>';
+        return;
+    }
+
+    if (turnover === 0) {
+        resultDiv.className = 'result-box applicable';
+        resultDiv.innerHTML = '<div class="result-title">⚠️ Please enter the turnover / receipts amount</div>';
+        return;
+    }
+
+    let applicable = false;
+    let reason = '';
+    let details = '';
+    let resultClass = '';
+
+    if (type === 'business') {
+        const limit = cashPercent === 'less5' ? 100000000 : 10000000; // 10 Cr or 1 Cr
+        const limitText = cashPercent === 'less5' ? '₹10 Crore' : '₹1 Crore';
+
+        if (turnover > limit) {
+            applicable = true;
+            reason = `Your turnover (₹${formatNum(turnover)}) exceeds the limit of ${limitText}.`;
+            details = `<ul>
+                <li>Audit is mandatory under Section 44AB(a)</li>
+                <li>File Form 3CA (if already audited under another law) or Form 3CB + Form 3CD</li>
+                <li>Due date: 30th September of the Assessment Year</li>
+                <li>Penalty for non-compliance: 0.5% of turnover or ₹1,50,000 (whichever is less)</li>
+            </ul>`;
+        } else {
+            reason = `Your turnover (₹${formatNum(turnover)}) is within the limit of ${limitText}.`;
+            details = `<ul>
+                <li>Tax Audit under Section 44AB is NOT required</li>
+                <li>You may still need audit under other laws (Companies Act, etc.)</li>
+                <li>Consider voluntary audit for better compliance</li>
+            </ul>`;
+        }
+    } else if (type === 'profession') {
+        if (turnover > 5000000) {
+            applicable = true;
+            reason = `Your gross receipts (₹${formatNum(turnover)}) exceed ₹50 Lakh.`;
+            details = `<ul>
+                <li>Audit is mandatory under Section 44AB(b)</li>
+                <li>File Form 3CA/3CB + Form 3CD</li>
+                <li>Due date: 30th September of the Assessment Year</li>
+                <li>Penalty for non-compliance: 0.5% of receipts or ₹1,50,000 (whichever is less)</li>
+            </ul>`;
+        } else {
+            reason = `Your gross receipts (₹${formatNum(turnover)}) are within ₹50 Lakh.`;
+            details = `<ul>
+                <li>Tax Audit under Section 44AB is NOT required</li>
+                <li>Consider opting for presumptive taxation under Section 44ADA</li>
+            </ul>`;
+        }
+    } else if (type === 'presumptive_business') {
+        const digitalLimit = cashPercent === 'less5' ? 300000000 : 200000000;
+        const minProfitRate = cashPercent === 'less5' ? 0.06 : 0.08;
+        const rateText = cashPercent === 'less5' ? '6%' : '8%';
+        const minProfit = turnover * minProfitRate;
+
+        if (turnover > digitalLimit) {
+            applicable = true;
+            reason = `Turnover exceeds the limit for Section 44AD. Regular provisions of Section 44AB apply.`;
+            details = `<ul>
+                <li>Section 44AD is not available as turnover exceeds the prescribed limit</li>
+                <li>Tax Audit required under normal provisions of Section 44AB</li>
+            </ul>`;
+        } else if (profit < minProfit && incomeExceeds === 'yes') {
+            applicable = true;
+            reason = `Profit declared (₹${formatNum(profit)}) is less than ${rateText} of turnover (₹${formatNum(minProfit)}) and total income exceeds basic exemption limit.`;
+            details = `<ul>
+                <li>Audit is mandatory under Section 44AB(e)</li>
+                <li>Since you opted out of presumptive taxation by declaring lower profit, books must be maintained and audited</li>
+                <li>Must also maintain books of accounts as per Section 44AA</li>
+                <li>File Form 3CB + Form 3CD</li>
+            </ul>`;
+            resultClass = 'presumptive';
+        } else if (profit < minProfit && incomeExceeds === 'no') {
+            reason = `Profit declared is below ${rateText} but total income does not exceed basic exemption limit.`;
+            details = `<ul>
+                <li>Tax Audit is NOT required as total income is below exemption limit</li>
+                <li>However, books of accounts must be maintained</li>
+            </ul>`;
+        } else {
+            reason = `Profit declared (₹${formatNum(profit)}) is ≥ ${rateText} of turnover (₹${formatNum(minProfit)}).`;
+            details = `<ul>
+                <li>Tax Audit is NOT required under presumptive scheme</li>
+                <li>No requirement to maintain books of accounts under Section 44AD</li>
+                <li>File ITR-4 (Sugam)</li>
+            </ul>`;
+        }
+    } else if (type === 'presumptive_profession') {
+        const profLimit = cashPercent === 'less5' ? 7500000 : 5000000;
+        const minProfit = turnover * 0.5;
+
+        if (turnover > profLimit) {
+            applicable = true;
+            reason = `Gross receipts exceed the limit for Section 44ADA. Regular provisions apply.`;
+            details = `<ul>
+                <li>Section 44ADA is not available</li>
+                <li>Tax Audit required under Section 44AB(b) if receipts exceed ₹50 Lakh</li>
+            </ul>`;
+        } else if (profit < minProfit && incomeExceeds === 'yes') {
+            applicable = true;
+            reason = `Profit declared (₹${formatNum(profit)}) is less than 50% of gross receipts (₹${formatNum(minProfit)}) and income exceeds exemption limit.`;
+            details = `<ul>
+                <li>Audit is mandatory under Section 44AB(d)</li>
+                <li>Books of accounts must be maintained and audited</li>
+                <li>File Form 3CB + Form 3CD</li>
+            </ul>`;
+            resultClass = 'presumptive';
+        } else if (profit < minProfit && incomeExceeds === 'no') {
+            reason = `Profit declared is below 50% but total income does not exceed basic exemption limit.`;
+            details = `<ul>
+                <li>Tax Audit is NOT required</li>
+                <li>However, maintain books of accounts</li>
+            </ul>`;
+        } else {
+            reason = `Profit declared (₹${formatNum(profit)}) is ≥ 50% of receipts (₹${formatNum(minProfit)}).`;
+            details = `<ul>
+                <li>Tax Audit is NOT required under presumptive scheme</li>
+                <li>File ITR-4 (Sugam)</li>
+            </ul>`;
+        }
+    }
+
+    if (resultClass === 'presumptive') {
+        resultDiv.className = 'result-box presumptive';
+        resultDiv.innerHTML = `<div class="result-title">📋 Tax Audit Required (Presumptive Opt-Out)</div>
+            <div class="result-detail"><p>${reason}</p>${details}</div>`;
+    } else if (applicable) {
+        resultDiv.className = 'result-box applicable';
+        resultDiv.innerHTML = `<div class="result-title">⚠️ Tax Audit is APPLICABLE</div>
+            <div class="result-detail"><p>${reason}</p>${details}</div>`;
+    } else {
+        resultDiv.className = 'result-box not-applicable';
+        resultDiv.innerHTML = `<div class="result-title">✅ Tax Audit is NOT Applicable</div>
+            <div class="result-detail"><p>${reason}</p>${details}</div>`;
+    }
+}
+
+function resetChecker() {
+    document.getElementById('assesseeType').value = '';
+    document.getElementById('turnover').value = '';
+    document.getElementById('profit').value = '';
+    document.getElementById('profit').disabled = true;
+    document.getElementById('cashPercent').value = 'more5';
+    document.getElementById('incomeGroup').style.display = 'none';
+    document.getElementById('result').className = 'result-box';
+    document.getElementById('result').innerHTML = '';
+}
+
+function formatNum(n) {
+    return new Intl.NumberFormat('en-IN').format(n);
+}
+
+// ========================
+// FORM 3CD CLAUSES DATA
+// ========================
+const clauses = [
+    {
+        number: "1-4",
+        title: "Basic Information — Name, Address, PAN, Status",
+        category: "basic",
+        risk: "low",
+        description: "Clauses 1 to 4 cover the basic identification details of the assessee including name, address, PAN/Aadhaar, and status (individual, firm, company, etc.).",
+        requirements: "Verify PAN details with PAN card. Ensure address matches records. Confirm legal status and constitution of the entity.",
+        observations: ["Mismatch between PAN name and books", "Incorrect status selected for LLPs vs Partnership Firms", "Address not updated after change of registered office"],
+        keywords: "name address pan status basic individual firm company"
+    },
+    {
+        number: "5",
+        title: "Previous Year & Assessment Year",
+        category: "basic",
+        risk: "low",
+        description: "States the relevant Previous Year (financial year) and corresponding Assessment Year for which the audit is being conducted.",
+        requirements: "Ensure correct year is mentioned. For change in accounting year, report the period covered.",
+        observations: ["Wrong AY mentioned in report", "Period not matching when there is a change in previous year"],
+        keywords: "previous year assessment year period financial year"
+    },
+    {
+        number: "6",
+        title: "Nature of Business or Profession",
+        category: "basic",
+        risk: "low",
+        description: "Report the nature of business/profession and the relevant business/profession code as per ITR instructions.",
+        requirements: "Mention all business activities if multiple. Use correct business code from IT Department's list. Report any change in nature of business during the year.",
+        observations: ["Business code not matching ITR", "Change in business nature not reported", "Multiple businesses not separately disclosed"],
+        keywords: "nature business profession code activity"
+    },
+    {
+        number: "7(a)",
+        title: "Books of Accounts Maintained",
+        category: "basic",
+        risk: "medium",
+        description: "Report whether the assessee maintained books of accounts. If yes, list the books maintained and the address where they are kept.",
+        requirements: "List all books: cash book, ledger, journal, purchase register, sales register, stock register, etc. Mention if computerized. Report address of storage.",
+        observations: ["Incomplete list of books maintained", "Address of books not matching principal place of business", "Stock register not maintained by manufacturing units"],
+        keywords: "books accounts maintained address records ledger"
+    },
+    {
+        number: "7(b)",
+        title: "Presumptive Income Scheme Details",
+        category: "basic",
+        risk: "medium",
+        description: "If the assessee was covered under presumptive taxation (44AD/44ADA/44AE) in any preceding year and has opted out, report the details.",
+        requirements: "Check last 5 previous years for 44AD applicability. Report the year of opt-out and whether books are maintained for the prescribed period.",
+        observations: ["Not checking historical presumptive scheme adoption", "Books not maintained for 5 years after opt-out from 44AD"],
+        keywords: "presumptive 44AD 44ADA 44AE opt out books"
+    },
+    {
+        number: "8",
+        title: "Partner/Member Profit Sharing Ratio",
+        category: "basic",
+        risk: "medium",
+        description: "For firms/AOPs/BOIs, report the names of partners/members and their profit sharing ratios. Also report any changes during the year.",
+        requirements: "Verify partnership deed. Check if any change occurred during the year. Report share of profit, salary, interest, and remuneration details.",
+        observations: ["Partnership deed not updated for changes", "Profit ratio not matching deed terms", "Changes during the year not reported"],
+        keywords: "partner member profit sharing ratio firm AOP deed"
+    },
+    {
+        number: "9(a)",
+        title: "Section 44AB Applicability Clause",
+        category: "compliance",
+        risk: "high",
+        description: "State which specific clause of Section 44AB makes the audit applicable — 44AB(a) for business, 44AB(b) for profession, 44AB(d)/(e) for presumptive opt-out.",
+        requirements: "Correctly identify the applicable clause. Important for determining the correct turnover/receipt limit.",
+        observations: ["Wrong clause cited", "Not identifying presumptive opt-out as the trigger for audit"],
+        keywords: "44AB applicability clause business profession presumptive"
+    },
+    {
+        number: "9(b)",
+        title: "Audit Under Other Law",
+        category: "compliance",
+        risk: "low",
+        description: "Whether the assessee is liable to audit under any other law (e.g., Companies Act 2013, Co-operative Societies Act).",
+        requirements: "If yes, mention the Act and the date of furnishing the audit report. Use Form 3CA if audited under another law, Form 3CB otherwise.",
+        observations: ["Incorrect form used (3CA vs 3CB)", "Company using Form 3CB instead of 3CA"],
+        keywords: "audit other law companies act cooperative form 3CA 3CB"
+    },
+    {
+        number: "10(a)",
+        title: "Method of Accounting",
+        category: "financial",
+        risk: "medium",
+        description: "Report the method of accounting (mercantile/cash) employed in the previous year.",
+        requirements: "Verify consistency with previous years. If changed, report the change and its effect on profit/loss. Companies must follow mercantile system.",
+        observations: ["Mixed method used without proper bifurcation", "Change in method not reported", "Cash system used by a company (not permitted)"],
+        keywords: "method accounting mercantile cash accrual hybrid"
+    },
+    {
+        number: "10(b)",
+        title: "Change in Method of Accounting",
+        category: "financial",
+        risk: "high",
+        description: "If there has been any change in the method of accounting, report the change and its effect on profit or loss.",
+        requirements: "Quantify the impact of the change. Ensure change is bona fide and not for tax avoidance. AO may re-compute income if change is not bona fide.",
+        observations: ["Impact not quantified", "Revenue recognition policy changed without reporting", "Depreciation method changed without disclosure"],
+        keywords: "change method accounting effect profit loss"
+    },
+    {
+        number: "11",
+        title: "Details of Partner Remuneration & Interest",
+        category: "financial",
+        risk: "high",
+        description: "For partnership firms: details of salary, remuneration, interest paid to partners. Check compliance with Section 40(b) limits.",
+        requirements: "Verify against partnership deed. Check Section 40(b) limits — interest max 12% p.a., remuneration within prescribed limits based on book profit. Ensure deed authorizes payments.",
+        observations: ["Remuneration exceeding Section 40(b) limits", "Interest exceeding 12% p.a.", "Payment to partners not authorized by deed", "Book profit computation incorrect for determining limit"],
+        keywords: "partner salary remuneration interest 40b partnership deed"
+    },
+    {
+        number: "12",
+        title: "Section 40(a)(ia) — TDS Default Disallowance",
+        category: "tax",
+        risk: "high",
+        description: "Details of amounts disallowable under Section 40(a)(ia) for non-deduction or non-deposit of TDS/TCS.",
+        requirements: "List all payments where TDS was not deducted or not deposited. 30% of such expenditure is disallowed. Check if TDS deposited before due date of filing return.",
+        observations: ["TDS not deducted on professional fees", "Late deposit of TDS not reported", "Year-end provisions without TDS deduction"],
+        keywords: "TDS default disallowance 40(a) non deduction deposit"
+    },
+    {
+        number: "13",
+        title: "Capital Expenditure on Scientific Research (35)",
+        category: "deductions",
+        risk: "medium",
+        description: "Amounts debited to P&L as capital expenditure on scientific research or eligible for deduction under Section 35.",
+        requirements: "Verify nature of expenditure. Check approval of research facility. Ensure eligibility under relevant sub-section of Sec 35.",
+        observations: ["Expenditure claimed without approved facility", "Revenue vs capital expenditure misclassification"],
+        keywords: "scientific research capital expenditure section 35"
+    },
+    {
+        number: "14",
+        title: "Section 32AC/32AD — Investment Allowance",
+        category: "deductions",
+        risk: "medium",
+        description: "Details of deduction claimed under investment-linked sections (now largely phased out but relevant for older claims).",
+        requirements: "Verify conditions of the relevant section. Check if asset installed and used. Report any withdrawal of deduction for non-compliance.",
+        observations: ["Asset not actually put to use", "Conditions not met but deduction claimed"],
+        keywords: "investment allowance 32AC 32AD deduction plant machinery"
+    },
+    {
+        number: "15-16",
+        title: "Amounts Inadmissible under Sections 36 & 37",
+        category: "financial",
+        risk: "high",
+        description: "Clause 15 covers inadmissible amounts u/s 36 (insurance, bad debts, etc.) and Clause 16 covers inadmissible amounts u/s 37 (general deductions) and amounts debited to P&L that are capital/personal in nature.",
+        requirements: "Review all expenses for admissibility. Identify capital expenditure charged to revenue. Check personal expenses of proprietor/partners. Verify Section 37(1) — expenditure must be wholly and exclusively for business.",
+        observations: ["Personal expenses of proprietor not disallowed", "Capital expenditure booked as revenue", "CSR expenditure not separately identified", "Penalty/fine for law violation not disallowed"],
+        keywords: "inadmissible section 36 37 capital personal expenditure disallowance"
+    },
+    {
+        number: "17",
+        title: "Amounts Debited to P&L — Rates or Taxes",
+        category: "financial",
+        risk: "medium",
+        description: "Any amount debited to P&L as rates, taxes, cess, or charges that are not allowable as business expenditure.",
+        requirements: "Identify income tax, wealth tax (if any), and other non-deductible levies debited to P&L. GST input credit reversed should be examined.",
+        observations: ["Income tax debited to P&L not reported here", "Penalty on late GST filing not identified"],
+        keywords: "rates taxes cess charges income tax wealth tax GST penalty"
+    },
+    {
+        number: "18",
+        title: "Depreciation — Detailed Schedule",
+        category: "financial",
+        risk: "high",
+        description: "Complete depreciation schedule including WDV brought forward, additions, deletions, depreciation rate, and WDV carried forward. Also covers additional depreciation u/s 32(1)(iia).",
+        requirements: "Verify opening WDV with last year's return. Check rates as per IT Act. Identify assets used < 180 days (50% depreciation). Verify additional depreciation eligibility. No depreciation on goodwill.",
+        observations: ["Opening WDV not matching previous year", "Wrong depreciation rate applied", "Additional depreciation claimed for non-manufacturing", "Depreciation on goodwill claimed", "Assets not put to use but depreciation claimed", "50% rule for < 180 days not applied"],
+        keywords: "depreciation WDV written down value additional 32 rate schedule asset"
+    },
+    {
+        number: "19",
+        title: "Amounts Admissible under Sections 33AB, 33ABA",
+        category: "deductions",
+        risk: "low",
+        description: "Deductions for tea/coffee/rubber development account (33AB) or site restoration fund (33ABA).",
+        requirements: "Verify deposits made to specified accounts. Check compliance with conditions.",
+        observations: ["Rarely applicable — mostly for plantation and petroleum companies"],
+        keywords: "tea coffee rubber development site restoration 33AB 33ABA"
+    },
+    {
+        number: "20",
+        title: "Deduction under Section 33AC",
+        category: "deductions",
+        risk: "low",
+        description: "Reserve for shipping business (now largely phased out).",
+        requirements: "Check if assessee is engaged in shipping business. Verify conditions.",
+        observations: ["Section largely obsolete"],
+        keywords: "shipping reserve 33AC"
+    },
+    {
+        number: "21",
+        title: "Chapter VI-A & Chapter III Deductions",
+        category: "deductions",
+        risk: "high",
+        description: "Details of deductions claimed under Chapter VI-A (80C, 80D, 80G, 80IA, 80IB, etc.) and amounts exempt under Chapter III. Also amounts falling within proviso to Section 10(1).",
+        requirements: "Verify eligibility for each deduction. Check documentation and proofs. Ensure compliance with conditions and sub-limits. Report amounts with section-wise breakup.",
+        observations: ["Deduction claimed without meeting conditions", "Exceeding sub-limits", "No documentary evidence maintained", "Incorrect computation of eligible profit for 80IA/80IB"],
+        keywords: "chapter VI-A deduction 80C 80D 80G 80IA 80IB exemption"
+    },
+    {
+        number: "22",
+        title: "Deemed Income Provisions",
+        category: "tax",
+        risk: "high",
+        description: "Details of deemed profits chargeable to tax — Section 33AB/33ABA/33AC withdrawal, Section 41 (recovery), Section 32(1)(iii) (balancing charge).",
+        requirements: "Check for any recovery against expenses allowed in earlier years. Verify sale of depreciated assets for balancing charge. Report cessation of trading liability u/s 41(1).",
+        observations: ["Old liabilities not written back", "Recovery of bad debts not reported", "Balancing charge on asset sale missed"],
+        keywords: "deemed income profit 41 recovery balancing charge cessation liability"
+    },
+    {
+        number: "23",
+        title: "Related Party Payments — Section 40A(2)(b)",
+        category: "compliance",
+        risk: "high",
+        description: "Payments made to persons specified under Section 40A(2)(b) — directors, partners, relatives, associated enterprises — where payment is considered excessive or unreasonable.",
+        requirements: "List all related party transactions. Compare with fair market value. Report excessive or unreasonable payments. Cross-reference with transfer pricing if applicable.",
+        observations: ["Related party list incomplete", "No fair value comparison done", "Excessive rent paid to director/partner", "Salary to relatives without justification"],
+        keywords: "related party 40A(2)(b) director partner relative associated enterprise excessive"
+    },
+    {
+        number: "24",
+        title: "Deemed Income u/s 56(2) — Gifts & Property",
+        category: "tax",
+        risk: "medium",
+        description: "Amounts deemed as income under Section 56(2) — receipt of property/money without or inadequate consideration.",
+        requirements: "Check if any property received below fair value. Verify applicability of Section 56(2)(x). Report amounts taxable as income from other sources.",
+        observations: ["Shares issued at premium to related parties not examined", "Immovable property below stamp duty value not reported"],
+        keywords: "deemed income 56(2) gift property shares inadequate consideration"
+    },
+    {
+        number: "25",
+        title: "Amount of Interest Inadmissible u/s 23 of MSMED Act",
+        category: "compliance",
+        risk: "high",
+        description: "Interest payable to Micro and Small Enterprises under MSMED Act, 2006 that is not allowable as deduction.",
+        requirements: "Verify MSME registration of vendors. Check payment terms (15/45 days). Report interest liability. Cross-check with Section 43B(h) for disallowance of the principal amount itself.",
+        observations: ["MSME vendor status not verified", "Payment beyond 45 days not identified", "Section 43B(h) disallowance not computed"],
+        keywords: "MSME MSMED interest micro small enterprise 43B(h) payment"
+    },
+    {
+        number: "26",
+        title: "Section 43B — Allowed on Payment Basis",
+        category: "compliance",
+        risk: "high",
+        description: "Amounts debited to P&L that are allowable only on actual payment — statutory dues (GST, PF, ESI), bonus/commission, interest to banks/FIs, leave encashment.",
+        requirements: "For each category, report: amount debited, amount paid before due date of return, amount unpaid. Cross-verify with challans and bank statements.",
+        observations: ["PF/ESI deposited late — check due date vs payment date", "Leave encashment provision not verified for actual payment", "GST liability shown in 3B but not paid", "Bonus provision without actual payment before return due date"],
+        keywords: "43B payment basis statutory dues PF ESI GST bonus leave encashment interest"
+    },
+    {
+        number: "27(a)",
+        title: "Section 40(a)(ia) — TDS on Specified Payments",
+        category: "tax",
+        risk: "high",
+        description: "Amount of expenditure disallowed due to non-compliance with TDS provisions — failure to deduct or deposit TDS.",
+        requirements: "Comprehensive review of all payments subject to TDS. Check deduction, deposit, and return filing. 30% disallowance for non-compliance.",
+        observations: ["TDS not deducted on rent, professional fees, or contract payments", "Late deposit resulting in disallowance", "TDS returns not filed"],
+        keywords: "TDS disallowance 40(a)(ia) deduction deposit non-compliance"
+    },
+    {
+        number: "27(b)",
+        title: "Section 40(a)(ib) — Equalisation Levy",
+        category: "tax",
+        risk: "medium",
+        description: "Disallowance for non-deduction of Equalisation Levy on payments to non-residents for specified services.",
+        requirements: "Check payments for online advertising and digital services to non-residents. Verify if equalisation levy was deducted at 6%/2%.",
+        observations: ["Payments to Google/Facebook/Amazon for ads not checked", "Equalisation levy not deducted on digital service payments"],
+        keywords: "equalisation levy non-resident digital advertising 40(a)(ib)"
+    },
+    {
+        number: "28",
+        title: "Loans, Deposits & Advances — Interest Charged",
+        category: "financial",
+        risk: "medium",
+        description: "Details of any amount borrowed on hundi or any amount due on a hundi. Also covers loans, deposits, and advances made/received.",
+        requirements: "Report amounts and interest. Verify Section 69D implications for hundi borrowings.",
+        observations: ["Hundi transactions not identified", "Interest-free loans to related parties not flagged"],
+        keywords: "loans deposits advances hundi borrowing interest"
+    },
+    {
+        number: "29",
+        title: "Section 269SS — Cash Loans/Deposits Received",
+        category: "compliance",
+        risk: "high",
+        description: "Whether any loan/deposit/specified advance was received otherwise than by account payee cheque/draft/ECS, in excess of ₹20,000.",
+        requirements: "Scan cash book and ledger for cash receipts of loans/deposits exceeding ₹20,000. Check journal entries too. Section 271D penalty: equal to the amount received.",
+        observations: ["Cash received from partners exceeding ₹20,000", "Advances received in cash not identified", "Journal entries masking cash transactions"],
+        keywords: "269SS cash loan deposit received 20000 penalty 271D"
+    },
+    {
+        number: "30",
+        title: "Section 269T — Cash Loan/Deposit Repayment",
+        category: "compliance",
+        risk: "high",
+        description: "Whether any loan/deposit/specified advance was repaid otherwise than by account payee cheque/draft/ECS, in excess of ₹20,000.",
+        requirements: "Scan cash book for cash repayments of loans/deposits exceeding ₹20,000. Section 271E penalty: equal to the amount repaid.",
+        observations: ["Cash repayment to directors/partners", "Capital account cash payments exceeding ₹20,000"],
+        keywords: "269T cash repayment loan deposit 20000 penalty 271E"
+    },
+    {
+        number: "31(a-c)",
+        title: "Section 269SS/269T — Summary of Violations",
+        category: "compliance",
+        risk: "high",
+        description: "Summary reporting of all violations under Section 269SS (cash receipts) and Section 269T (cash repayments) for loans, deposits, and specified advances.",
+        requirements: "Consolidate all transactions identified in Clauses 29 and 30. Categorize by section and report total amounts. Include details of each transaction.",
+        observations: ["Incomplete reporting of violations", "Not checking current account transactions with related parties"],
+        keywords: "269SS 269T violation summary cash loan deposit"
+    },
+    {
+        number: "31(d)",
+        title: "Section 269ST — Cash Receipt Exceeding ₹2 Lakh",
+        category: "compliance",
+        risk: "high",
+        description: "Whether any amount exceeding ₹2 Lakh was received in cash in aggregate from a person in a day, or in respect of a single transaction, or in respect of one event/occasion.",
+        requirements: "Scan all cash receipts. Check aggregate receipts from single person in a day. Section 271DA penalty applies.",
+        observations: ["Split cash receipts from same person not aggregated", "Cash sales exceeding ₹2 Lakh not reported"],
+        keywords: "269ST cash receipt 2 lakh penalty 271DA aggregate"
+    },
+    {
+        number: "32",
+        title: "Section 40A(3) — Cash Payments Exceeding ₹10,000",
+        category: "compliance",
+        risk: "high",
+        description: "Any payment exceeding ₹10,000 made otherwise than by account payee cheque/draft/ECS to a single person in a single day. 100% disallowance of such expense.",
+        requirements: "Scan cash book for all payments > ₹10,000. Check for exceptions under Rule 6DD (e.g., payment to RBI, government, village without bank). Report total disallowable amount.",
+        observations: ["Cash payments to transporters — check if covered by Rule 6DD exception (₹35,000 limit for transport)", "Split payments on consecutive days to avoid limit", "Petty cash payments aggregating > ₹10,000 to same party"],
+        keywords: "40A(3) cash payment 10000 disallowance Rule 6DD"
+    },
+    {
+        number: "33",
+        title: "Payment of Dividend — DDT",
+        category: "tax",
+        risk: "low",
+        description: "Details of payment of dividend and whether tax has been paid under Section 115-O (DDT). Note: DDT abolished from AY 2021-22 onwards.",
+        requirements: "For AY 2020-21 and prior, check DDT payment. For AY 2021-22 onwards, dividends are taxable in the hands of shareholders — check TDS u/s 194.",
+        observations: ["DDT provisions largely historical now", "Check TDS on dividends u/s 194 for current years"],
+        keywords: "dividend DDT 115-O 194 distribution tax"
+    },
+    {
+        number: "34",
+        title: "TDS/TCS Compliance — Complete Details",
+        category: "tax",
+        risk: "high",
+        description: "THE MOST CRITICAL CLAUSE. Complete details of TDS/TCS — tax deductible/collectible, tax deducted/collected, deposited, shortfall, interest, and late filing details.",
+        requirements: "Comprehensive verification: match with Form 26AS/AIS, verify rates, check timely deposit, identify defaults. Report section-wise details. Check TDS on all applicable payments including year-end provisions.",
+        observations: [
+            "TDS not deducted on audit fees provision",
+            "Short deduction due to wrong rate",
+            "Late deposit — interest u/s 201(1A) not paid",
+            "Mismatch between 26AS and books",
+            "TDS on GST component — should be on base amount only",
+            "TDS on rent to multiple landlords — aggregation issue",
+            "194Q vs 206C(1H) — buyer vs seller TDS/TCS conflict"
+        ],
+        keywords: "TDS TCS 26AS deduction collection deposit shortfall interest compliance 194 195 196"
+    },
+    {
+        number: "35",
+        title: "Quantitative Details — Trading Goods",
+        category: "financial",
+        risk: "medium",
+        description: "Quantitative details of principal items of goods traded — opening stock, purchases, sales, closing stock with quantities and values.",
+        requirements: "Match quantities with stock register. Verify valuation method. Check for abnormal wastage or shortage. Reconcile with GST returns.",
+        observations: ["Stock register not maintained", "Abnormal wastage not explained", "Valuation method not consistent", "Physical stock count not conducted"],
+        keywords: "quantitative details trading goods stock opening closing purchase sales"
+    },
+    {
+        number: "36",
+        title: "Quantitative Details — Raw Material & Finished Goods",
+        category: "financial",
+        risk: "medium",
+        description: "For manufacturers: quantitative details of principal items of raw materials, finished goods, and by-products — opening, consumption, production, sales, closing.",
+        requirements: "Verify production records. Check input-output ratio. Reconcile raw material consumption with production. Verify yield percentages.",
+        observations: ["Input-output ratio abnormal", "By-products not accounted", "Wastage higher than industry norms"],
+        keywords: "raw material finished goods manufacturing production consumption by-product"
+    },
+    {
+        number: "37",
+        title: "Pending Litigation — Demand of Tax",
+        category: "compliance",
+        risk: "medium",
+        description: "Details of demand raised or refund issued during the previous year under any tax law. Also details of appeals pending.",
+        requirements: "List all pending assessments, appeals, and demands. Report amounts involved. Check impact on tax provision.",
+        observations: ["Pending demands not reported", "Appeal details incomplete", "Refund received not disclosed"],
+        keywords: "demand refund appeal litigation pending assessment CIT ITAT"
+    },
+    {
+        number: "38-41",
+        title: "Turnover Reporting, GST & Other Details",
+        category: "financial",
+        risk: "high",
+        description: "Clause 38: Turnover breakup. Clause 39: Cost Audit (if applicable). Clause 40: Accounting Standards compliance. Clause 41: Details not covered in other clauses.",
+        requirements: "Cl.38: Reconcile turnover with GST returns. Cl.40: Report deviations from Accounting Standards. Cl.41: Report receipt exceeding ₹5 lakh for unregistered entity, and any other material information.",
+        observations: [
+            "Turnover mismatch between books and GSTR-1/3B",
+            "Accounting standard deviations not reported",
+            "GST reconciliation differences unexplained",
+            "ITC reversed during the year not identified"
+        ],
+        keywords: "turnover GST reconciliation accounting standards cost audit GSTR"
+    },
+    {
+        number: "44",
+        title: "GST Reconciliation — Expenditure & Input Tax Credit",
+        category: "compliance",
+        risk: "high",
+        description: "Break-up of total expenditure of entities registered/not registered under GST. Details of ITC availed, reversed, and ineligible credit.",
+        requirements: "Reconcile with GSTR-3B and GSTR-2B. Report ITC differences. Identify ineligible ITC (blocked credit u/s 17(5)). Report expenditure bifurcation between GST-registered and unregistered suppliers.",
+        observations: [
+            "ITC availed in books exceeding GSTR-2B",
+            "Blocked credit claimed in error",
+            "Ineligible ITC not reversed",
+            "Expenditure breakup between registered/unregistered not done"
+        ],
+        keywords: "GST ITC input tax credit reconciliation GSTR-2B GSTR-3B expenditure registered unregistered"
+    }
+];
+
+// ========================
+// RENDER CLAUSES
+// ========================
+function renderClauses(filteredClauses) {
+    const container = document.getElementById('clauseList');
+    if (filteredClauses.length === 0) {
+        container.innerHTML = '<p style="text-align:center;color:var(--text-light);padding:30px;">No clauses match your search.</p>';
+        return;
+    }
+
+    container.innerHTML = filteredClauses.map((c, idx) => {
+        const riskTag = c.risk === 'high' ? '<span class="tag tag-high">High Risk</span>' :
+                        c.risk === 'medium' ? '<span class="tag tag-medium">Medium Risk</span>' :
+                        '<span class="tag tag-low">Low Risk</span>';
+        const catTag = `<span class="tag tag-info">${c.category.charAt(0).toUpperCase() + c.category.slice(1)}</span>`;
+
+        return `
+        <div class="clause-item" data-category="${c.category}">
+            <div class="clause-header" onclick="toggleClause(this)">
+                <div style="display:flex;align-items:center;flex:1;">
+                    <span class="clause-number">Cl. ${c.number}</span>
+                    <span class="clause-title">${c.title}</span>
+                </div>
+                <span class="clause-arrow">▼</span>
+            </div>
+            <div class="clause-body">
+                <div class="clause-section">
+                    ${riskTag} ${catTag}
+                </div>
+                <div class="clause-section">
+                    <div class="clause-section-title">Description</div>
+                    <p>${c.description}</p>
+                </div>
+                <div class="clause-section">
+                    <div class="clause-section-title">What to Verify / Report</div>
+                    <p>${c.requirements}</p>
+                </div>
+                <div class="clause-section">
+                    <div class="clause-section-title">Common Observations</div>
+                    <ul>${c.observations.map(o => `<li>${o}</li>`).join('')}</ul>
+                </div>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function toggleClause(el) {
+    el.parentElement.classList.toggle('open');
+}
+
+function filterClauses() {
+    const query = document.getElementById('clauseSearch').value.toLowerCase();
+    const activeFilter = document.querySelector('.filter-btn.active');
+    const category = activeFilter ? activeFilter.textContent.toLowerCase().replace('all clauses', 'all') : 'all';
+
+    let filtered = clauses;
+
+    if (category !== 'all') {
+        filtered = filtered.filter(c => c.category === category);
+    }
+
+    if (query) {
+        filtered = filtered.filter(c =>
+            c.title.toLowerCase().includes(query) ||
+            c.description.toLowerCase().includes(query) ||
+            c.keywords.toLowerCase().includes(query) ||
+            c.number.includes(query)
+        );
+    }
+
+    renderClauses(filtered);
+}
+
+function filterCategory(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const query = document.getElementById('clauseSearch').value.toLowerCase();
+    let filtered = clauses;
+
+    if (cat !== 'all') {
+        filtered = filtered.filter(c => c.category === cat);
+    }
+
+    if (query) {
+        filtered = filtered.filter(c =>
+            c.title.toLowerCase().includes(query) ||
+            c.description.toLowerCase().includes(query) ||
+            c.keywords.toLowerCase().includes(query) ||
+            c.number.includes(query)
+        );
+    }
+
+    renderClauses(filtered);
+}
+
+// Initial render
+renderClauses(clauses);
+</script>
+
+</body>
+</html>
