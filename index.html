@@ -333,19 +333,30 @@
 <!-- ==================== TAB 5: GST RATES ==================== -->
 <div id="tab-gst" class="tab-content">
     <div class="card">
-        <h2>GST Rate Finder</h2>
-        <div class="search-box"><input type="text" id="gstSearch" placeholder="Search item or HSN/SAC... (e.g. rice, cement, 9954, restaurant)" oninput="searchGST()"></div>
+        <h2>GST Rate & HSN Finder</h2>
+        <p style="color:var(--text-light);margin-bottom:10px;">Search 150+ items by name, HSN/SAC code, or rate. Includes Non-GST products (Petrol, Diesel, ATF, Liquor, etc.).</p>
+        <div class="search-box"><input type="text" id="gstSearch" placeholder="Search item, HSN/SAC, or rate... (e.g. diesel, petrol, 2710, cement, 9954)" oninput="searchGST()"></div>
+        <div class="filter-row" id="gstFilterRow">
+            <button class="filter-btn active" onclick="filterGST('all',this)">All</button>
+            <button class="filter-btn" onclick="filterGST('Exempt',this)">0% Exempt</button>
+            <button class="filter-btn" onclick="filterGST('5% Basic',this)">5%</button>
+            <button class="filter-btn" onclick="filterGST('12% Standard',this)">12%</button>
+            <button class="filter-btn" onclick="filterGST('18% Standard+',this)">18%</button>
+            <button class="filter-btn" onclick="filterGST('28% Luxury',this)">28%</button>
+            <button class="filter-btn" style="background:#8e44ad;" onclick="filterGST('Non-GST',this)">Non-GST</button>
+        </div>
         <div id="gstResults"></div>
     </div>
     <div class="card">
         <h2>GST Rate Summary</h2>
         <table class="limits-table">
             <tr><th>Rate</th><th>Category</th><th>Examples</th></tr>
-            <tr><td><strong>0%</strong></td><td>Essential</td><td>Fresh milk, fruits, vegetables, bread, salt, education, health</td></tr>
-            <tr><td><strong>5%</strong></td><td>Basic</td><td>Packaged food, sugar, tea, coal, transport, economy air</td></tr>
-            <tr><td><strong>12%</strong></td><td>Standard</td><td>Butter, ghee, mobiles, business air, construction</td></tr>
-            <tr><td><strong>18%</strong></td><td>Most Goods/Services</td><td>Soap, computers, restaurant (AC), IT services, professional fees</td></tr>
-            <tr><td><strong>28%</strong></td><td>Luxury/Demerit</td><td>Cars, cement, ACs, aerated drinks, tobacco, 5-star hotels</td></tr>
+            <tr><td><strong>0%</strong></td><td>Essential / Exempt</td><td>Fresh milk, fruits, vegetables, bread, salt, eggs, meat, education, healthcare</td></tr>
+            <tr><td><strong>5%</strong></td><td>Basic Necessities</td><td>Sugar, tea, coal, LPG, branded food, fabric, footwear ≤₹1000, restaurant, GTA</td></tr>
+            <tr><td><strong>12%</strong></td><td>Standard</td><td>Butter, ghee, mobiles, medicines, processed food, business air, construction (affordable)</td></tr>
+            <tr><td><strong>18%</strong></td><td>Most Goods & Services</td><td>Soap, computers, steel, IT services, legal/CA fees, insurance, telecom, hotel ₹1001-7500</td></tr>
+            <tr><td><strong>28%</strong></td><td>Luxury / Demerit</td><td>Cars, cement, ACs, aerated drinks, tobacco, 5-star hotels >₹7500, gambling</td></tr>
+            <tr style="background:#f3e8ff;"><td><strong style="color:#8e44ad;">Non-GST</strong></td><td>Outside GST</td><td>Petrol (MS), Diesel (HSD), ATF, Natural Gas, Crude Oil, Liquor, Electricity — Subject to State VAT / Central Excise</td></tr>
         </table>
     </div>
 </div>
@@ -714,8 +725,41 @@
 <!-- ==================== AS APPLICABILITY (NCE) ==================== -->
 <div id="tab-asapply" class="tab-content">
     <div class="card">
-        <h2>Accounting Standards — Applicability for Non-Company Entities (NCE)</h2>
-        <p style="color:var(--text-light);margin-bottom:14px;">As per ICAI Announcement (effective for periods commencing on or after 1st April 2024). Applicable from FY 2024-25 onwards.</p>
+        <h2>AS Applicability Checker — Non-Company Entities (NCE)</h2>
+        <p style="color:var(--text-light);margin-bottom:14px;">As per ICAI Announcement (effective from FY 2024-25). Enter entity details to check MSME or Large classification and applicable AS exemptions.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div class="form-group"><label>Are equity/debt instruments listed or in process of listing?</label>
+                <select id="asListed"><option value="no">No — Not Listed</option><option value="yes">Yes — Listed / In Process</option></select></div>
+            <div class="form-group"><label>Is the entity a Bank / Financial Institution / Insurance Co.?</label>
+                <select id="asBFI"><option value="no">No</option><option value="yes">Yes</option></select></div>
+            <div class="form-group"><label>Turnover (Rs. in Crore)</label>
+                <input type="number" id="asTurnover" placeholder="e.g. 120" step="0.01"></div>
+            <div class="form-group"><label>Borrowings (Rs. in Crore)</label>
+                <input type="number" id="asBorrowing" placeholder="e.g. 30" step="0.01"></div>
+            <div class="form-group"><label>Is the entity a Holding / Subsidiary of a Non-MSME entity?</label>
+                <select id="asHolding"><option value="no">No</option><option value="yes">Yes</option></select></div>
+            <div class="form-group"><label>Has entity met all MSME criteria for 2 consecutive years?</label>
+                <select id="as2Year"><option value="yes">Yes / First Year (benefit of doubt)</option><option value="no">No — Met criteria only this year</option></select></div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:10px;">
+            <button class="btn" onclick="checkASClassification()">Check Classification</button>
+            <button class="btn" style="background:var(--primary-mid);" onclick="resetASChecker()">Reset</button>
+        </div>
+        <div id="asClassResult" class="result-box" style="margin-top:16px;"></div>
+    </div>
+    <div class="card" id="asExemptionCard" style="display:none;">
+        <h2>AS Exemptions / Relaxations Available for MSMEs</h2>
+        <p style="color:var(--text-light);margin-bottom:10px;">The following AS have exemptions or partial relaxations for MSME entities. All other AS require full compliance.</p>
+        <div class="filter-row">
+            <button class="filter-btn active" onclick="filterASResult('all',this)">All Relevant AS</button>
+            <button class="filter-btn" onclick="filterASResult('exempt',this)">Fully Exempt</button>
+            <button class="filter-btn" onclick="filterASResult('partial',this)">Partial Relaxation</button>
+            <button class="filter-btn" onclick="filterASResult('conditional',this)">Conditional</button>
+        </div>
+        <div id="asTableContainer"></div>
+    </div>
+    <div class="card" id="asFullListCard" style="display:none;">
+        <h2>Complete AS Compliance Table</h2>
         <div class="filter-row">
             <button class="filter-btn active" onclick="filterAS('all',this)">All AS</button>
             <button class="filter-btn" onclick="filterAS('full',this)">Full Compliance</button>
@@ -723,10 +767,10 @@
             <button class="filter-btn" onclick="filterAS('partial',this)">Partial Relaxation</button>
             <button class="filter-btn" onclick="filterAS('conditional',this)">Conditional</button>
         </div>
-        <div id="asTableContainer"></div>
+        <div id="asFullTableContainer"></div>
     </div>
     <div class="card">
-        <h2>Classification of Non-Company Entities</h2>
+        <h2>Classification Criteria — Non-Company Entities</h2>
         <table class="limits-table">
             <tr><th>Category</th><th>Criteria</th></tr>
             <tr><td><strong>MSME Entity</strong><br><span class="tag tag-low">Exemptions Available</span></td><td>Non-company entity satisfying <strong>ALL</strong> of the following:<br>
@@ -793,32 +837,34 @@ var clauses=[
 {number:"5",title:"Previous Year & Assessment Year",category:"basic",risk:"low",description:"Relevant PY and AY.",requirements:"Ensure correct year.",observations:["Wrong AY mentioned"],keywords:"previous year assessment year"},
 {number:"6",title:"Nature of Business / Profession",category:"basic",risk:"low",description:"Business code and activities.",requirements:"Use correct IT business code.",observations:["Code not matching ITR"],keywords:"nature business profession code"},
 {number:"7(a)",title:"Books of Accounts Maintained",category:"basic",risk:"medium",description:"List of books and address.",requirements:"List all books: cash book, ledger, journal, stock register.",observations:["Incomplete list","Stock register missing"],keywords:"books accounts maintained"},
-{number:"7(b)",title:"Presumptive Scheme History",category:"basic",risk:"medium",description:"44AD/ADA opt-out details.",requirements:"Check last 5 years.",observations:["Historical adoption not checked"],keywords:"presumptive 44AD 44ADA opt out"},
-{number:"8",title:"Partner Profit Sharing Ratio",category:"basic",risk:"medium",description:"Partner names, ratios, changes.",requirements:"Verify partnership deed.",observations:["Deed not updated"],keywords:"partner profit sharing ratio"},
+{number:"7(b)",title:"Presumptive Scheme History",category:"basic",risk:"medium",description:"44AD/ADA/AE opt-out details.",requirements:"Check last 5 years. Now includes Sec 44BBC (cruise ship NR).",observations:["Historical adoption not checked"],keywords:"presumptive 44AD 44ADA 44BBC opt out"},
+{number:"8",title:"Partner Profit Sharing & Tax Regime Option",category:"basic",risk:"medium",description:"Partner names, ratios, changes. Clause 8a: whether opted for 115BA/BAA/BAB/BAC/BAD/BAE.",requirements:"Verify partnership deed. Check tax regime option.",observations:["Deed not updated","115BAE not reported"],keywords:"partner profit sharing ratio 115BAE"},
 {number:"9",title:"Applicability Clause & Other Audit",category:"compliance",risk:"high",description:"Which clause of 44AB applies.",requirements:"Cite correct clause.",observations:["Wrong clause cited"],keywords:"44AB applicability audit"},
 {number:"10",title:"Method of Accounting",category:"financial",risk:"medium",description:"Mercantile or cash method.",requirements:"Check consistency. Companies must use mercantile.",observations:["Cash system by company"],keywords:"method accounting mercantile cash"},
 {number:"11",title:"Partner Remuneration & Interest",category:"financial",risk:"high",description:"Sec 40(b) compliance.",requirements:"Verify deed. Interest max 12%. Remuneration within limits.",observations:["Exceeding 40(b) limits"],keywords:"partner salary remuneration interest 40b"},
-{number:"12",title:"TDS Default Disallowance — 40(a)(ia)",category:"tax",risk:"high",description:"Non-deduction/deposit of TDS.",requirements:"30% disallowance for non-compliance.",observations:["TDS not deducted on professional fees"],keywords:"TDS default disallowance 40a"},
-{number:"13-14",title:"Scientific Research & Investment Allowance",category:"deductions",risk:"medium",description:"Sec 35 and Sec 32AC/AD.",requirements:"Verify facility approval.",observations:["Expenditure misclassified"],keywords:"scientific research investment allowance 35"},
-{number:"15-16",title:"Inadmissible Amounts — Sec 36 & 37",category:"financial",risk:"high",description:"Capital, personal, disallowed expenses.",requirements:"Review all expenses.",observations:["Personal expenses not disallowed","CSR not identified"],keywords:"inadmissible 36 37 capital personal"},
+{number:"12",title:"Presumptive Income — 44AD to 44BBC",category:"tax",risk:"high",description:"Presumptive income u/s 44AD, 44ADA, 44AE, 44AF, 44B to 44BBC.",requirements:"Now includes Sec 44BBC (cruise ship operations by NR) per Notification 23/2025.",observations:["44BBC not reported for NR cruise operators"],keywords:"presumptive 44AD 44ADA 44BBC cruise"},
+{number:"13-14",title:"Scientific Research & Capital Expenditure",category:"deductions",risk:"medium",description:"Sec 35 deductions. Sec 32AC/32AD removed from AY 2025-26.",requirements:"Verify facility approval. Note: Sec 32AC, 32AD removed per Notification 23/2025.",observations:["Expenditure misclassified"],keywords:"scientific research 35 35ABA spectrum"},
+{number:"15-16",title:"Inadmissible Amounts — Sec 36 & 37",category:"financial",risk:"high",description:"Capital, personal, disallowed expenses.",requirements:"Review all expenses. Sec 37(1) Expl 3 — settlement expenditure (new sub-clause iv from AY 2025-26).",observations:["Personal expenses not disallowed","CSR not identified","Settlement expenditure not checked"],keywords:"inadmissible 36 37 capital personal settlement"},
 {number:"17",title:"Rates, Taxes & Cess",category:"financial",risk:"medium",description:"Non-deductible levies.",requirements:"Income tax debited to P&L.",observations:["IT not reported here"],keywords:"rates taxes cess income tax"},
-{number:"18",title:"Depreciation Schedule",category:"financial",risk:"high",description:"Complete WDV schedule.",requirements:"Verify opening WDV, rates, 180-day rule.",observations:["Wrong rate","No depreciation on goodwill","50% rule not applied"],keywords:"depreciation WDV schedule asset"},
-{number:"19-20",title:"Tea/Coffee/Rubber & Shipping",category:"deductions",risk:"low",description:"Sec 33AB, 33ABA, 33AC.",requirements:"Rarely applicable.",observations:["Mostly for plantation companies"],keywords:"tea coffee rubber shipping"},
-{number:"21",title:"Chapter VI-A Deductions",category:"deductions",risk:"high",description:"80C, 80D, 80G, 80IA, 80IB etc.",requirements:"Verify eligibility and proofs.",observations:["No documentary evidence"],keywords:"chapter VIA deduction 80C 80D 80G"},
-{number:"22",title:"Deemed Income — Sec 41, Balancing Charge",category:"tax",risk:"high",description:"Recovery, cessation of liability.",requirements:"Check old liabilities and asset sales.",observations:["Old liabilities not written back"],keywords:"deemed income recovery 41 balancing"},
+{number:"18",title:"Depreciation Schedule",category:"financial",risk:"high",description:"Complete WDV schedule.",requirements:"Verify opening WDV, rates, 180-day rule. No goodwill depreciation.",observations:["Wrong rate","No depreciation on goodwill","50% rule not applied"],keywords:"depreciation WDV schedule asset"},
+{number:"19",title:"Deductions — 33AB, 33ABA, 35ABA, 35ABB, 35D, 35DD, 35DDA, 35E",category:"deductions",risk:"medium",description:"Amounts admissible. Sec 32AC, 32AD removed from AY 2025-26.",requirements:"Verify amounts. 35ABA (spectrum), 35ABB (telecom licence) now included.",observations:["Spectrum/telecom costs not reported"],keywords:"33AB 35ABA spectrum telecom 35D 35DD preliminary"},
+{number:"20",title:"Chapter VI-A Deductions",category:"deductions",risk:"high",description:"80C, 80D, 80G, 80IA, 80IB, 80JJAA etc.",requirements:"Verify eligibility and proofs for each deduction claimed.",observations:["No documentary evidence","80G receipts missing"],keywords:"chapter VIA deduction 80C 80D 80G 80JJAA"},
+{number:"21",title:"Inadmissible under Sec 37(1) Expl + 40(a)(ia)",category:"tax",risk:"high",description:"Amounts debited to P&L disallowed. Now includes settlement expenditure (new sub-clause iv).",requirements:"Review all TDS defaults (30% disallowance). Check settlement expenditure under notified laws.",observations:["TDS not deducted on professional fees","Settlement costs not examined"],keywords:"TDS default disallowance 40a settlement"},
+{number:"22",title:"MSME Payments — MSMED Act (Enhanced)",category:"compliance",risk:"high",description:"Interest to Micro/Small enterprises. Enhanced reporting per Notification 23/2025.",requirements:"Verify MSME Udyam status. Report interest inadmissible u/s 23 MSMED Act. Check 43B(h).",observations:["Vendor Udyam status not verified","Interest not computed"],keywords:"MSME MSMED interest 43B(h) Udyam"},
 {number:"23",title:"Related Party — Sec 40A(2)(b)",category:"compliance",risk:"high",description:"Payments to directors, relatives.",requirements:"Compare with fair market value.",observations:["Excessive rent to director"],keywords:"related party 40A(2)(b) director"},
-{number:"24",title:"Deemed Income — Sec 56(2)",category:"tax",risk:"medium",description:"Gifts and property below FMV.",requirements:"Check Sec 56(2)(x).",observations:["Shares at premium not examined"],keywords:"deemed income 56(2) gift property"},
-{number:"25",title:"MSME Interest — MSMED Act",category:"compliance",risk:"high",description:"Interest to Micro/Small enterprises.",requirements:"Verify MSME status. Check 43B(h).",observations:["Vendor status not verified"],keywords:"MSME MSMED interest 43B(h)"},
-{number:"26",title:"Section 43B — Payment Basis",category:"compliance",risk:"high",description:"GST, PF, ESI, bonus, leave encashment.",requirements:"Verify actual payment before return due date.",observations:["PF/ESI deposited late"],keywords:"43B payment PF ESI GST bonus"},
-{number:"27",title:"TDS Disallowance & Equalisation Levy",category:"tax",risk:"high",description:"40(a)(ia) and 40(a)(ib).",requirements:"Review all TDS-applicable payments.",observations:["Google/Facebook ads without equalisation levy"],keywords:"TDS disallowance equalisation levy"},
-{number:"28-30",title:"Loans, Deposits — Sec 269SS/269T",category:"compliance",risk:"high",description:"Cash loans/deposits > 20,000.",requirements:"Scan cash book for violations.",observations:["Cash from partners > 20,000"],keywords:"269SS 269T cash loan deposit 20000"},
-{number:"31",title:"Cash Violations Summary",category:"compliance",risk:"high",description:"269SS/T and 269ST (> 2 Lakh cash).",requirements:"Consolidate all cash violations.",observations:["Split cash receipts not aggregated"],keywords:"269ST cash 2 lakh violation"},
-{number:"32",title:"Sec 40A(3) — Cash > 10,000",category:"compliance",risk:"high",description:"100% disallowance of cash expenses > 10K.",requirements:"Scan cash book. Check Rule 6DD exceptions.",observations:["Transporters — 35K exception"],keywords:"40A(3) cash payment 10000"},
-{number:"33",title:"Dividend — DDT",category:"tax",risk:"low",description:"DDT abolished from AY 2021-22.",requirements:"Check TDS u/s 194 on dividends.",observations:["Historical provision"],keywords:"dividend DDT 194"},
-{number:"34",title:"TDS/TCS Compliance — CRITICAL",category:"tax",risk:"high",description:"Most scrutinized clause. Complete TDS/TCS details.",requirements:"Match 26AS/AIS. Verify rates, deposits, defaults.",observations:["Short deduction","Late deposit","26AS mismatch","TDS on GST component"],keywords:"TDS TCS 26AS compliance 194 195"},
+{number:"24",title:"Deemed Income — Sec 56(2)",category:"tax",risk:"medium",description:"Gifts and property below FMV. Sec 56(2)(viib) disclosure omitted from AY 2025-26.",requirements:"Check Sec 56(2)(x). Note: 56(2)(viib) reporting removed per Notification 23/2025.",observations:["Shares at premium not examined"],keywords:"deemed income 56(2) gift property"},
+{number:"25",title:"Deemed Income — Sec 41, Balancing Charge",category:"tax",risk:"high",description:"Recovery, cessation of liability.",requirements:"Check old liabilities and asset sales.",observations:["Old liabilities not written back"],keywords:"deemed income recovery 41 balancing"},
+{number:"26",title:"Section 43B — Payment Basis",category:"compliance",risk:"high",description:"GST, PF, ESI, bonus, leave encashment, MSME.",requirements:"Verify actual payment before return due date. 43B(h) for Micro/Small enterprises.",observations:["PF/ESI deposited late","MSME payment beyond 45 days"],keywords:"43B payment PF ESI GST bonus MSME"},
+{number:"27",title:"TDS Disallowance & Equalisation Levy",category:"tax",risk:"high",description:"40(a)(ia) and 40(a)(ib).",requirements:"Review all TDS-applicable payments. Check equalisation levy on digital ads.",observations:["Google/Facebook ads without equalisation levy"],keywords:"TDS disallowance equalisation levy"},
+{number:"30",title:"Sec 269SS/269T — Cash Loans/Deposits",category:"compliance",risk:"high",description:"Cash loans/deposits > 20,000. Note: Old Clauses 28 & 29 omitted from AY 2025-26 per Notification 23/2025.",requirements:"Scan cash book for violations. Report each transaction separately.",observations:["Cash from partners > 20,000"],keywords:"269SS 269T cash loan deposit 20000"},
+{number:"31",title:"Loan/Deposit Transactions — Enhanced (AY 2025-26)",category:"compliance",risk:"high",description:"Itemized reporting with transaction codes. Major enhancement per Notification 23/2025.",requirements:"Report each loan/deposit taken/accepted/repaid with mandatory transaction codes from new dropdown. Include 269ST (cash receipt > 2L).",observations:["Transaction codes not used","Split cash receipts not aggregated"],keywords:"269ST cash 2 lakh loan deposit transaction code"},
+{number:"32",title:"Sec 40A(3) — Cash > 10,000",category:"compliance",risk:"high",description:"100% disallowance of cash expenses > 10K.",requirements:"Scan cash book. Check Rule 6DD exceptions (transporters 35K).",observations:["Transporters — 35K exception not applied"],keywords:"40A(3) cash payment 10000"},
+{number:"33",title:"Dividend — TDS u/s 194",category:"tax",risk:"low",description:"DDT abolished. Dividends fully taxable. TDS u/s 194.",requirements:"Verify TDS deducted on dividends paid/received.",observations:["TDS on dividend not checked"],keywords:"dividend 194 TDS"},
+{number:"34",title:"TDS/TCS Compliance — CRITICAL",category:"tax",risk:"high",description:"Most scrutinized clause. Complete TDS/TCS details.",requirements:"Match 26AS/AIS. Verify rates, deposits, defaults. Check 194T (firm to partner — new).",observations:["Short deduction","Late deposit","26AS mismatch","194T not applied"],keywords:"TDS TCS 26AS compliance 194 195 194T"},
 {number:"35-36",title:"Quantitative Details — Stock/Raw Material",category:"financial",risk:"medium",description:"Opening, purchase, sales, closing quantities.",requirements:"Match stock register. Check wastage.",observations:["Stock register not maintained"],keywords:"quantitative stock raw material finished goods"},
+{number:"36B",title:"Share Buyback Disclosure (NEW — AY 2025-26)",category:"tax",risk:"high",description:"New clause per Notification 23/2025. Buyback u/s 2(22)(f).",requirements:"Report whether assessee received any amount under buyback, amount received, cost of acquisition of shares bought back.",observations:["Buyback amount not disclosed","Cost of acquisition not verified"],keywords:"buyback 2(22)(f) shares 36B new"},
 {number:"37",title:"Pending Litigation & Demands",category:"compliance",risk:"medium",description:"Tax demands raised, refunds, appeals.",requirements:"List all pending assessments.",observations:["Pending demands not reported"],keywords:"demand refund appeal litigation"},
-{number:"38-41",title:"Turnover, Cost Audit, Accounting Standards",category:"financial",risk:"high",description:"GST reconciliation, AS compliance.",requirements:"Reconcile turnover with GSTR-1/3B.",observations:["Turnover mismatch","ITC differences"],keywords:"turnover GST reconciliation accounting standards"},
+{number:"38-41",title:"Turnover, Cost Audit, Accounting Standards",category:"financial",risk:"high",description:"Turnover reconciliation, cost audit, AS compliance.",requirements:"Reconcile turnover with GSTR-1/3B.",observations:["Turnover mismatch","ITC differences"],keywords:"turnover GST reconciliation accounting standards cost audit"},
 {number:"44",title:"GST Reconciliation — ITC",category:"compliance",risk:"high",description:"ITC availed, reversed, ineligible.",requirements:"Reconcile with GSTR-2B. Blocked credit u/s 17(5).",observations:["ITC exceeding GSTR-2B","Blocked credit claimed"],keywords:"GST ITC input tax credit GSTR-2B"}
 ];
 function renderClauses(list){var c=document.getElementById('clauseList');if(!list.length){c.innerHTML='<p style="text-align:center;color:var(--text-light);padding:20px;">No clauses found.</p>';return;}
@@ -894,17 +940,28 @@ renderDueDates(dueDates);
 // TAB 5: GST RATES
 // ==============================
 var gstItems=[
-{item:"Fresh Milk",hsn:"0401",rate:"0%",cat:"Exempt"},{item:"Fresh Fruits & Vegetables",hsn:"07-08",rate:"0%",cat:"Exempt"},{item:"Bread",hsn:"1905",rate:"0%",cat:"Exempt"},{item:"Salt",hsn:"2501",rate:"0%",cat:"Exempt"},{item:"Education Services",hsn:"9992",rate:"0%",cat:"Exempt"},{item:"Healthcare Services",hsn:"9993",rate:"0%",cat:"Exempt"},{item:"Rice / Wheat (unbranded loose)",hsn:"1006",rate:"0%",cat:"Exempt"},
-{item:"Sugar",hsn:"1701",rate:"5%",cat:"Basic"},{item:"Tea",hsn:"0902",rate:"5%",cat:"Basic"},{item:"Coffee",hsn:"0901",rate:"5%",cat:"Basic"},{item:"Coal",hsn:"2701",rate:"5%",cat:"Basic"},{item:"Packaged Food Items",hsn:"Various",rate:"5%",cat:"Basic"},{item:"Economy Air Tickets",hsn:"9964",rate:"5%",cat:"Basic"},{item:"Goods Transport (GTA)",hsn:"9965",rate:"5%",cat:"Basic"},{item:"Fertilizers",hsn:"3102",rate:"5%",cat:"Basic"},{item:"Newspaper",hsn:"4902",rate:"5%",cat:"Basic"},
-{item:"Butter / Ghee",hsn:"0405",rate:"12%",cat:"Standard"},{item:"Mobile Phones",hsn:"8517",rate:"12%",cat:"Standard"},{item:"Sewing Machines",hsn:"8452",rate:"12%",cat:"Standard"},{item:"Construction Services (Affordable)",hsn:"9954",rate:"12%",cat:"Standard"},{item:"Business Class Air",hsn:"9964",rate:"12%",cat:"Standard"},{item:"Printing Services",hsn:"9989",rate:"12%",cat:"Standard"},
-{item:"Soap / Detergent",hsn:"3401",rate:"18%",cat:"Standard+"},{item:"Toothpaste",hsn:"3306",rate:"18%",cat:"Standard+"},{item:"Computers / Laptops",hsn:"8471",rate:"18%",cat:"Standard+"},{item:"Iron & Steel",hsn:"72",rate:"18%",cat:"Standard+"},{item:"Restaurant (AC / Non-AC)",hsn:"9963",rate:"5%",cat:"Standard+"},{item:"IT / Software Services",hsn:"9983",rate:"18%",cat:"Standard+"},{item:"Professional / Consulting",hsn:"9983",rate:"18%",cat:"Standard+"},{item:"Telecom Services",hsn:"9984",rate:"18%",cat:"Standard+"},{item:"Banking / Financial",hsn:"9971",rate:"18%",cat:"Standard+"},{item:"Insurance",hsn:"9971",rate:"18%",cat:"Standard+"},{item:"Paints",hsn:"3208",rate:"18%",cat:"Standard+"},{item:"Electrical Machinery",hsn:"85",rate:"18%",cat:"Standard+"},{item:"Construction (Non-affordable)",hsn:"9954",rate:"18%",cat:"Standard+"},
-{item:"Cement",hsn:"2523",rate:"28%",cat:"Luxury"},{item:"Cars / Motor Vehicles",hsn:"8703",rate:"28%",cat:"Luxury"},{item:"Air Conditioners",hsn:"8415",rate:"28%",cat:"Luxury"},{item:"Aerated Drinks",hsn:"2202",rate:"28%",cat:"Luxury"},{item:"Tobacco / Cigarettes",hsn:"2402",rate:"28%",cat:"Luxury"},{item:"5-Star Hotels (>7500/night)",hsn:"9963",rate:"28%",cat:"Luxury"},{item:"Gambling / Betting",hsn:"9996",rate:"28%",cat:"Luxury"},{item:"Washing Machines",hsn:"8450",rate:"28%",cat:"Luxury"}
+// === EXEMPT (0%) ===
+{item:"Fresh Milk",hsn:"0401",rate:"0%",cat:"Exempt"},{item:"Curd / Lassi / Buttermilk (unbranded)",hsn:"0403",rate:"0%",cat:"Exempt"},{item:"Fresh Fruits",hsn:"0803-0810",rate:"0%",cat:"Exempt"},{item:"Fresh Vegetables",hsn:"0701-0714",rate:"0%",cat:"Exempt"},{item:"Bread (unbranded)",hsn:"1905",rate:"0%",cat:"Exempt"},{item:"Salt",hsn:"2501",rate:"0%",cat:"Exempt"},{item:"Rice (unbranded loose)",hsn:"1006",rate:"0%",cat:"Exempt"},{item:"Wheat / Meslin (unbranded loose)",hsn:"1001",rate:"0%",cat:"Exempt"},{item:"Pulses / Dal (unbranded loose)",hsn:"0713",rate:"0%",cat:"Exempt"},{item:"Cereals (unbranded)",hsn:"1001-1008",rate:"0%",cat:"Exempt"},{item:"Jaggery / Gur",hsn:"1701",rate:"0%",cat:"Exempt"},{item:"Fresh Meat / Fish",hsn:"0201-0307",rate:"0%",cat:"Exempt"},{item:"Eggs",hsn:"0407",rate:"0%",cat:"Exempt"},{item:"Honey (natural)",hsn:"0409",rate:"0%",cat:"Exempt"},{item:"Live Animals",hsn:"0101-0106",rate:"0%",cat:"Exempt"},{item:"Bangles (non-precious)",hsn:"7117",rate:"0%",cat:"Exempt"},{item:"Kumkum / Bindi / Sindoor",hsn:"3304",rate:"0%",cat:"Exempt"},{item:"Stamp Papers / Court Stamps",hsn:"4907",rate:"0%",cat:"Exempt"},{item:"Judicial Papers",hsn:"4907",rate:"0%",cat:"Exempt"},{item:"Education Services",hsn:"9992",rate:"0%",cat:"Exempt"},{item:"Healthcare Services",hsn:"9993",rate:"0%",cat:"Exempt"},{item:"Agricultural Services",hsn:"9986",rate:"0%",cat:"Exempt"},{item:"Public Transport (non-AC bus)",hsn:"9964",rate:"0%",cat:"Exempt"},{item:"Blood / Blood Products",hsn:"3002",rate:"0%",cat:"Exempt"},{item:"Contraceptives",hsn:"4014",rate:"0%",cat:"Exempt"},{item:"Sanitary Napkins",hsn:"9619",rate:"0%",cat:"Exempt"},
+// === 5% ===
+{item:"Sugar",hsn:"1701",rate:"5%",cat:"5% Basic"},{item:"Tea",hsn:"0902",rate:"5%",cat:"5% Basic"},{item:"Coffee (not instant)",hsn:"0901",rate:"5%",cat:"5% Basic"},{item:"Coal / Lignite",hsn:"2701",rate:"5%",cat:"5% Basic"},{item:"LPG for household",hsn:"2711",rate:"5%",cat:"5% Basic"},{item:"Kerosene (PDS)",hsn:"2710",rate:"5%",cat:"5% Basic"},{item:"Fertilizers",hsn:"3102-3105",rate:"5%",cat:"5% Basic"},{item:"Newspaper / Periodicals",hsn:"4902",rate:"5%",cat:"5% Basic"},{item:"Branded Packaged Cereals",hsn:"1001-1008",rate:"5%",cat:"5% Basic"},{item:"Branded Namkeen / Snacks",hsn:"2106",rate:"5%",cat:"5% Basic"},{item:"Spices (packed branded)",hsn:"0904-0910",rate:"5%",cat:"5% Basic"},{item:"Edible Oil (packed branded)",hsn:"1507-1518",rate:"5%",cat:"5% Basic"},{item:"Skimmed Milk Powder",hsn:"0402",rate:"5%",cat:"5% Basic"},{item:"Fabric (cotton, silk, wool)",hsn:"5007-5212",rate:"5%",cat:"5% Basic"},{item:"Footwear (≤ ₹1000)",hsn:"6401-6405",rate:"5%",cat:"5% Basic"},{item:"Apparel (≤ ₹1000)",hsn:"6101-6117",rate:"5%",cat:"5% Basic"},{item:"Handloom Products",hsn:"5801-5811",rate:"5%",cat:"5% Basic"},{item:"Life-saving Drugs",hsn:"3003-3004",rate:"5%",cat:"5% Basic"},{item:"Economy Air Tickets",hsn:"9964",rate:"5%",cat:"5% Basic"},{item:"Rail Tickets (sleeper)",hsn:"9964",rate:"5%",cat:"5% Basic"},{item:"Goods Transport (GTA)",hsn:"9965",rate:"5%",cat:"5% Basic"},{item:"Cab Aggregator (Ola/Uber)",hsn:"9964",rate:"5%",cat:"5% Basic"},{item:"Restaurant (all — no ITC)",hsn:"9963",rate:"5%",cat:"5% Basic"},{item:"Tour Operator Services",hsn:"9985",rate:"5%",cat:"5% Basic"},{item:"Fly Ash Bricks / Blocks",hsn:"6815",rate:"5%",cat:"5% Basic"},{item:"Renewable Energy Devices",hsn:"8419",rate:"5%",cat:"5% Basic"},
+// === 12% ===
+{item:"Butter / Ghee",hsn:"0405",rate:"12%",cat:"12% Standard"},{item:"Cheese / Paneer (branded)",hsn:"0406",rate:"12%",cat:"12% Standard"},{item:"Dry Fruits (packed)",hsn:"0801-0802",rate:"12%",cat:"12% Standard"},{item:"Fruit Juices (packed)",hsn:"2009",rate:"12%",cat:"12% Standard"},{item:"Sewing Machines",hsn:"8452",rate:"12%",cat:"12% Standard"},{item:"Mobile Phones",hsn:"8517",rate:"12%",cat:"12% Standard"},{item:"Umbrella",hsn:"6601",rate:"12%",cat:"12% Standard"},{item:"Suitcase / Bags",hsn:"4202",rate:"12%",cat:"12% Standard"},{item:"Exercise Books / Notebooks",hsn:"4820",rate:"12%",cat:"12% Standard"},{item:"Toys / Games",hsn:"9503",rate:"12%",cat:"12% Standard"},{item:"Playing Cards / Puzzles",hsn:"9504",rate:"12%",cat:"12% Standard"},{item:"Kitchen Gas Stoves",hsn:"7321",rate:"12%",cat:"12% Standard"},{item:"Apparel (> ₹1000)",hsn:"6101-6117",rate:"12%",cat:"12% Standard"},{item:"Footwear (> ₹1000)",hsn:"6401-6405",rate:"12%",cat:"12% Standard"},{item:"Construction (Affordable Housing)",hsn:"9954",rate:"12%",cat:"12% Standard"},{item:"Business Class Air",hsn:"9964",rate:"12%",cat:"12% Standard"},{item:"Printing Services",hsn:"9989",rate:"12%",cat:"12% Standard"},{item:"Works Contract (Govt)",hsn:"9954",rate:"12%",cat:"12% Standard"},{item:"Medicines / Pharma",hsn:"3003-3004",rate:"12%",cat:"12% Standard"},{item:"Processed Food (frozen/canned)",hsn:"1601-1605",rate:"12%",cat:"12% Standard"},{item:"Diagnostic Kits / Reagents",hsn:"3822",rate:"12%",cat:"12% Standard"},
+// === 18% ===
+{item:"Soap / Detergent",hsn:"3401",rate:"18%",cat:"18% Standard+"},{item:"Toothpaste",hsn:"3306",rate:"18%",cat:"18% Standard+"},{item:"Shampoo / Hair Oil",hsn:"3305",rate:"18%",cat:"18% Standard+"},{item:"Cosmetics / Beauty",hsn:"3304",rate:"18%",cat:"18% Standard+"},{item:"Computers / Laptops",hsn:"8471",rate:"18%",cat:"18% Standard+"},{item:"Printers / Monitors",hsn:"8443/8528",rate:"18%",cat:"18% Standard+"},{item:"Iron & Steel",hsn:"7206-7229",rate:"18%",cat:"18% Standard+"},{item:"Aluminium Products",hsn:"7601-7616",rate:"18%",cat:"18% Standard+"},{item:"Copper Products",hsn:"7401-7419",rate:"18%",cat:"18% Standard+"},{item:"Plastic Products",hsn:"3916-3926",rate:"18%",cat:"18% Standard+"},{item:"Rubber Products",hsn:"4001-4017",rate:"18%",cat:"18% Standard+"},{item:"Paper / Stationery",hsn:"4801-4823",rate:"18%",cat:"18% Standard+"},{item:"Furniture",hsn:"9401-9404",rate:"18%",cat:"18% Standard+"},{item:"Mattress",hsn:"9404",rate:"18%",cat:"18% Standard+"},{item:"Fans / Coolers",hsn:"8414",rate:"18%",cat:"18% Standard+"},{item:"Refrigerator",hsn:"8418",rate:"18%",cat:"18% Standard+"},{item:"Electrical Machinery",hsn:"8501-8548",rate:"18%",cat:"18% Standard+"},{item:"Paints / Varnishes",hsn:"3208-3214",rate:"18%",cat:"18% Standard+"},{item:"Tyres / Tubes",hsn:"4011-4013",rate:"18%",cat:"18% Standard+"},{item:"Batteries",hsn:"8506-8507",rate:"18%",cat:"18% Standard+"},{item:"CCTV / Cameras",hsn:"8525",rate:"18%",cat:"18% Standard+"},{item:"Speakers / Headphones",hsn:"8518",rate:"18%",cat:"18% Standard+"},{item:"IT / Software Services",hsn:"9983",rate:"18%",cat:"18% Standard+"},{item:"Professional / Consulting",hsn:"9983",rate:"18%",cat:"18% Standard+"},{item:"Legal / Accounting Services",hsn:"9982",rate:"18%",cat:"18% Standard+"},{item:"Telecom Services",hsn:"9984",rate:"18%",cat:"18% Standard+"},{item:"Banking / Financial Services",hsn:"9971",rate:"18%",cat:"18% Standard+"},{item:"Insurance (Life/Non-Life)",hsn:"9971",rate:"18%",cat:"18% Standard+"},{item:"Renting of Immovable Property",hsn:"9972",rate:"18%",cat:"18% Standard+"},{item:"Construction (Non-affordable)",hsn:"9954",rate:"18%",cat:"18% Standard+"},{item:"Works Contract (Private)",hsn:"9954",rate:"18%",cat:"18% Standard+"},{item:"Manpower Supply / Security",hsn:"9985",rate:"18%",cat:"18% Standard+"},{item:"Advertising Services",hsn:"9983",rate:"18%",cat:"18% Standard+"},{item:"Courier / Postal Services",hsn:"9968",rate:"18%",cat:"18% Standard+"},{item:"Hotel (₹1001-₹7500/night)",hsn:"9963",rate:"18%",cat:"18% Standard+"},{item:"Gym / Fitness Services",hsn:"9996",rate:"18%",cat:"18% Standard+"},{item:"Event Management",hsn:"9985",rate:"18%",cat:"18% Standard+"},{item:"Photography / Videography",hsn:"9989",rate:"18%",cat:"18% Standard+"},
+// === 28% ===
+{item:"Cement",hsn:"2523",rate:"28%",cat:"28% Luxury"},{item:"Cars / Motor Vehicles",hsn:"8703",rate:"28%",cat:"28% Luxury"},{item:"Motorcycles (>350cc)",hsn:"8711",rate:"28%",cat:"28% Luxury"},{item:"Air Conditioners",hsn:"8415",rate:"28%",cat:"28% Luxury"},{item:"Aerated / Carbonated Drinks",hsn:"2202",rate:"28%",cat:"28% Luxury"},{item:"Tobacco / Cigarettes",hsn:"2402",rate:"28%",cat:"28% Luxury"},{item:"Pan Masala / Gutkha",hsn:"2106",rate:"28%",cat:"28% Luxury"},{item:"5-Star Hotels (>₹7500/night)",hsn:"9963",rate:"28%",cat:"28% Luxury"},{item:"Gambling / Betting / Casino",hsn:"9996",rate:"28%",cat:"28% Luxury"},{item:"Washing Machines",hsn:"8450",rate:"28%",cat:"28% Luxury"},{item:"Dishwashers",hsn:"8422",rate:"28%",cat:"28% Luxury"},{item:"TVs (>32 inch)",hsn:"8528",rate:"28%",cat:"28% Luxury"},{item:"Yachts / Aircraft (Private)",hsn:"8903/8802",rate:"28%",cat:"28% Luxury"},{item:"Fireworks / Crackers",hsn:"3604",rate:"28%",cat:"28% Luxury"},{item:"Perfumes / Deodorants",hsn:"3303",rate:"28%",cat:"28% Luxury"},{item:"Sunscreen / Makeup",hsn:"3304",rate:"28%",cat:"28% Luxury"},{item:"Marble / Granite (polished)",hsn:"6802",rate:"28%",cat:"28% Luxury"},
+// === NON-GST (Outside GST — State VAT/Excise) ===
+{item:"Petrol / Motor Spirit (MS)",hsn:"2710.1210",rate:"Non-GST",cat:"Non-GST"},{item:"High Speed Diesel (HSD)",hsn:"2710.1930",rate:"Non-GST",cat:"Non-GST"},{item:"Aviation Turbine Fuel (ATF)",hsn:"2710.1920",rate:"Non-GST",cat:"Non-GST"},{item:"Natural Gas",hsn:"2711.1100",rate:"Non-GST",cat:"Non-GST"},{item:"Crude Oil / Petroleum Crude",hsn:"2709",rate:"Non-GST",cat:"Non-GST"},{item:"Liquor for Human Consumption",hsn:"2208",rate:"Non-GST",cat:"Non-GST"},{item:"Electricity",hsn:"2716",rate:"Non-GST",cat:"Non-GST"}
 ];
+var activeGSTFilter='all';
 function searchGST(){var q=document.getElementById('gstSearch').value.toLowerCase(),c=document.getElementById('gstResults');
-var f=q?gstItems.filter(function(g){return (g.item+g.hsn+g.rate+g.cat).toLowerCase().indexOf(q)>=0;}):gstItems;
-c.innerHTML=f.map(function(g){var color=g.rate==='0%'?'var(--success)':g.rate==='5%'?'#0a8c64':g.rate==='12%'?'var(--primary-light)':g.rate==='18%'?'#b5651d':'var(--danger)';
-return '<div class="gst-item"><div class="gst-rate" style="color:'+color+'">'+g.rate+'</div><div class="gst-info"><strong>'+g.item+'</strong><p>HSN/SAC: '+g.hsn+' | '+g.cat+'</p></div></div>';}).join('');
-if(!f.length)c.innerHTML='<p style="text-align:center;color:var(--text-light);padding:20px;">No items found.</p>';}
+var f=gstItems;if(activeGSTFilter!=='all')f=f.filter(function(g){return g.cat===activeGSTFilter;});
+if(q)f=f.filter(function(g){return (g.item+g.hsn+g.rate+g.cat).toLowerCase().indexOf(q)>=0;});
+c.innerHTML=f.map(function(g){var color=g.rate==='0%'?'var(--success)':g.rate==='5%'?'#0a8c64':g.rate==='12%'?'var(--primary-light)':g.rate==='18%'?'#b5651d':g.rate==='Non-GST'?'#8e44ad':'var(--danger)';
+var note=g.rate==='Non-GST'?'<span style="color:#8e44ad;font-size:0.78rem;font-weight:600;"> — Outside GST | State VAT / Central Excise applicable</span>':'';
+return '<div class="gst-item"><div class="gst-rate" style="color:'+color+'">'+g.rate+'</div><div class="gst-info"><strong>'+g.item+'</strong>'+note+'<p>HSN/SAC: '+g.hsn+' | '+g.cat+'</p></div></div>';}).join('');
+if(!f.length)c.innerHTML='<p style="text-align:center;color:var(--text-light);padding:20px;">No items found. Try a different keyword or HSN code.</p>';}
+function filterGST(cat,btn){document.querySelectorAll('#gstFilterRow .filter-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');activeGSTFilter=cat;searchGST();}
 searchGST();
 
 // ==============================
@@ -1528,13 +1585,53 @@ var asData=[
 {no:"AS 28",name:"Impairment of Assets",msme:"partial",detail:"Relaxation: May estimate 'value in use' without present value technique. Specific disclosure relaxations allowed (e.g., paras 121(c)(ii), 121(d), 123)."},
 {no:"AS 29",name:"Provisions, Contingent Liabilities and Contingent Assets",msme:"partial",detail:"Relaxation: May omit disclosure paragraphs 66 and 67."}
 ];
-function renderAS(list){var c=document.getElementById('asTableContainer');
-var tags={full:'<span class="tag tag-low">Full Compliance</span>',exempt:'<span class="tag tag-high">Not Applicable</span>',partial:'<span class="tag tag-medium">Partial Relaxation</span>',conditional:'<span class="tag tag-info">Conditional</span>'};
+var asTags={full:'<span class="tag tag-low">Full Compliance</span>',exempt:'<span class="tag tag-high">Not Applicable</span>',partial:'<span class="tag tag-medium">Partial Relaxation</span>',conditional:'<span class="tag tag-info">Conditional</span>'};
+function renderASTable(list,containerId){var c=document.getElementById(containerId);
 c.innerHTML='<table class="limits-table"><thead><tr><th style="width:60px;">AS No.</th><th>Standard</th><th style="width:130px;">MSME Status</th><th>Details for MSMEs</th></tr></thead><tbody>'+list.map(function(a){
 var bg=a.msme==='exempt'?'#fde8e8':a.msme==='partial'?'#fef9e7':a.msme==='conditional'?'#eaf2f8':'';
-return '<tr'+(bg?' style="background:'+bg+'"':'')+'><td><strong>'+a.no+'</strong></td><td>'+a.name+'</td><td>'+tags[a.msme]+'</td><td style="font-size:0.85rem;">'+a.detail+'</td></tr>';}).join('')+'</tbody></table>';}
-function filterAS(cat,btn){document.querySelectorAll('#tab-asapply .filter-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');renderAS(cat==='all'?asData:asData.filter(function(a){return a.msme===cat;}));}
-renderAS(asData);
+return '<tr'+(bg?' style="background:'+bg+'"':'')+'><td><strong>'+a.no+'</strong></td><td>'+a.name+'</td><td>'+asTags[a.msme]+'</td><td style="font-size:0.85rem;">'+a.detail+'</td></tr>';}).join('')+'</tbody></table>';}
+function filterAS(cat,btn){document.querySelectorAll('#asFullListCard .filter-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');renderASTable(cat==='all'?asData:asData.filter(function(a){return a.msme===cat;}),'asFullTableContainer');}
+function filterASResult(cat,btn){document.querySelectorAll('#asExemptionCard .filter-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');var rel=asData.filter(function(a){return a.msme!=='full';});if(cat!=='all')rel=rel.filter(function(a){return a.msme===cat;});renderASTable(rel,'asTableContainer');}
+function checkASClassification(){
+var listed=document.getElementById('asListed').value==='yes';
+var bfi=document.getElementById('asBFI').value==='yes';
+var turnover=parseFloat(document.getElementById('asTurnover').value)||0;
+var borrowing=parseFloat(document.getElementById('asBorrowing').value)||0;
+var holding=document.getElementById('asHolding').value==='yes';
+var twoYear=document.getElementById('as2Year').value==='yes';
+var r=document.getElementById('asClassResult');
+var reasons=[];
+if(listed)reasons.push('Equity/debt instruments are listed or in process of listing');
+if(bfi)reasons.push('Entity is a Bank / Financial Institution / Insurance Company');
+if(turnover>250)reasons.push('Turnover (₹'+turnover+' Cr) exceeds ₹250 Crore');
+if(borrowing>50)reasons.push('Borrowings (₹'+borrowing+' Cr) exceed ₹50 Crore');
+if(holding)reasons.push('Entity is a Holding/Subsidiary of a Non-MSME entity');
+var isMSME=reasons.length===0;
+if(isMSME&&!twoYear){
+r.className='result-box applicable';
+r.innerHTML='<div class="result-title">⏳ Potentially MSME — But 2-Year Rule Applies</div><div class="result-detail"><p>The entity meets all MSME criteria <strong>this year</strong>, but has not yet met them for <strong>two consecutive years</strong>.</p><p style="margin-top:8px;">As per ICAI rules, MSME exemptions are available only after meeting all criteria for two consecutive accounting periods. The entity must comply as a <strong>Large Entity</strong> until the 2-year condition is satisfied.</p><p style="margin-top:8px;"><strong>Action:</strong> Continue with full AS compliance this year. Track status for next year.</p></div>';
+document.getElementById('asExemptionCard').style.display='none';
+document.getElementById('asFullListCard').style.display='block';
+renderASTable(asData,'asFullTableContainer');
+}else if(isMSME){
+var exemptCount=asData.filter(function(a){return a.msme==='exempt';}).length;
+var partialCount=asData.filter(function(a){return a.msme==='partial';}).length;
+var condCount=asData.filter(function(a){return a.msme==='conditional';}).length;
+r.className='result-box presumptive';
+r.innerHTML='<div class="result-title">✅ MSME Entity — Exemptions Available</div><div class="result-detail"><p>The entity qualifies as an <strong>MSME (Micro, Small & Medium Entity)</strong> under ICAI classification.</p><table class="limits-table" style="margin-top:10px;"><tr><td>Fully Exempt AS</td><td><strong>'+exemptCount+'</strong> standards (not applicable at all)</td></tr><tr><td>Partial Relaxation</td><td><strong>'+partialCount+'</strong> standards (specific para exemptions)</td></tr><tr><td>Conditional</td><td><strong>'+condCount+'</strong> standards (apply only if relevant transactions exist)</td></tr></table><p style="margin-top:10px;"><strong>Note:</strong> Entity must disclose in financial statements that MSME exemptions have been availed.</p></div>';
+document.getElementById('asExemptionCard').style.display='block';
+document.getElementById('asFullListCard').style.display='block';
+var relAS=asData.filter(function(a){return a.msme!=='full';});
+renderASTable(relAS,'asTableContainer');
+renderASTable(asData,'asFullTableContainer');
+}else{
+r.className='result-box not-applicable';
+r.innerHTML='<div class="result-title">❌ Large Entity — Full Compliance Required</div><div class="result-detail"><p>The entity does <strong>NOT</strong> qualify as MSME. Reasons:</p><ul style="margin:8px 0 0 20px;">'+reasons.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul><p style="margin-top:10px;"><strong>All 27 Accounting Standards must be complied with fully.</strong> No exemptions or relaxations are available.</p></div>';
+document.getElementById('asExemptionCard').style.display='none';
+document.getElementById('asFullListCard').style.display='block';
+renderASTable(asData,'asFullTableContainer');
+}}
+function resetASChecker(){document.getElementById('asListed').value='no';document.getElementById('asBFI').value='no';document.getElementById('asTurnover').value='';document.getElementById('asBorrowing').value='';document.getElementById('asHolding').value='no';document.getElementById('as2Year').value='yes';document.getElementById('asClassResult').className='result-box';document.getElementById('asClassResult').innerHTML='';document.getElementById('asExemptionCard').style.display='none';document.getElementById('asFullListCard').style.display='none';}
 </script>
 </body>
 </html>
