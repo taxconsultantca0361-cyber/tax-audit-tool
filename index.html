@@ -161,7 +161,6 @@
     <div class="nav-tab active" onclick="switchTab('clauses')">Form 3CD</div>
     <div class="nav-tab" onclick="switchTab('tds')">TDS/TCS</div>
     <div class="nav-tab" onclick="switchTab('itcalc')">IT Calculator</div>
-    <div class="nav-tab" onclick="switchTab('duedate')">Compliance Calendar</div>
     <div class="nav-tab" onclick="switchTab('gst')">GST Rates</div>
     <div class="nav-tab" onclick="switchTab('sectionfinder')">Section Finder</div>
     <div class="nav-tab" onclick="switchTab('depreciation')">Depreciation IT</div>
@@ -171,6 +170,7 @@
     <div class="nav-tab" onclick="switchTab('caro')">CARO 2020</div>
     <div class="nav-tab" onclick="switchTab('auditcheck')">Audit Checklist</div>
     <div class="nav-tab" onclick="switchTab('asapply')">AS Applicability</div>
+    <div class="nav-tab" onclick="switchTab('noticereply')">Notice Reply</div>
     <div class="nav-tab" onclick="switchTab('disclaimer')">Disclaimer</div>
 </div>
 
@@ -295,38 +295,6 @@
                 <tr><td>Above 24,00,000</td><td>30%</td></tr></table>
             </div>
         </div>
-    </div>
-</div>
-
-<!-- ==================== TAB 4: COMPLIANCE CALENDAR ==================== -->
-<div id="tab-duedate" class="tab-content">
-    <div class="card">
-        <h2>Compliance Calendar — FY 2026-27 (AY 2027-28)</h2>
-        <p style="color:var(--text-light);margin-bottom:10px;font-size:0.88rem;">Filter by type or month to see what's due.</p>
-        <div class="filter-row">
-            <button class="filter-btn active" onclick="filterDueDates('all',this)">All</button>
-            <button class="filter-btn" onclick="filterDueDates('itr',this)">ITR</button>
-            <button class="filter-btn" onclick="filterDueDates('tds',this)">TDS/TCS</button>
-            <button class="filter-btn" onclick="filterDueDates('gst',this)">GST</button>
-            <button class="filter-btn" onclick="filterDueDates('advance',this)">Advance Tax</button>
-        </div>
-        <div class="filter-row" id="monthFilterRow">
-            <button class="filter-btn active" onclick="filterDueMonth('all',this)">All Months</button>
-            <button class="filter-btn" onclick="filterDueMonth('Apr',this)">Apr</button>
-            <button class="filter-btn" onclick="filterDueMonth('May',this)">May</button>
-            <button class="filter-btn" onclick="filterDueMonth('Jun',this)">Jun</button>
-            <button class="filter-btn" onclick="filterDueMonth('Jul',this)">Jul</button>
-            <button class="filter-btn" onclick="filterDueMonth('Aug',this)">Aug</button>
-            <button class="filter-btn" onclick="filterDueMonth('Sep',this)">Sep</button>
-            <button class="filter-btn" onclick="filterDueMonth('Oct',this)">Oct</button>
-            <button class="filter-btn" onclick="filterDueMonth('Nov',this)">Nov</button>
-            <button class="filter-btn" onclick="filterDueMonth('Dec',this)">Dec</button>
-            <button class="filter-btn" onclick="filterDueMonth('Jan',this)">Jan</button>
-            <button class="filter-btn" onclick="filterDueMonth('Feb',this)">Feb</button>
-            <button class="filter-btn" onclick="filterDueMonth('Mar',this)">Mar</button>
-            <button class="filter-btn" onclick="filterDueMonth('Monthly',this)">Recurring</button>
-        </div>
-        <div id="dueDateList"></div>
     </div>
 </div>
 
@@ -796,6 +764,73 @@
     </div>
 </div>
 
+<!-- ==================== NOTICE REPLY DRAFTS ==================== -->
+<div id="tab-noticereply" class="tab-content">
+    <div class="card">
+        <h2>Income Tax Notice — Reply Draft Generator</h2>
+        <p style="color:var(--text-light);margin-bottom:14px;">Select the notice type, fill in details, and generate a professional reply draft. Copy or print the output.</p>
+        <div class="form-group"><label>Select Notice Type</label>
+            <select id="nrType" onchange="showNRFields()">
+                <option value="">— Select Notice Section —</option>
+                <option value="139_9">Sec 139(9) — Defective Return</option>
+                <option value="142_1">Sec 142(1) — Inquiry / Information Request</option>
+                <option value="143_1">Sec 143(1) — Intimation (Mismatch)</option>
+                <option value="143_2">Sec 143(2) — Scrutiny Assessment</option>
+                <option value="148">Sec 148 / 148A — Reopening of Assessment</option>
+                <option value="154">Sec 154 — Rectification</option>
+                <option value="156">Sec 156 — Demand Notice</option>
+                <option value="245">Sec 245 — Adjustment of Refund against Demand</option>
+                <option value="270A">Sec 270A / 271(1)(c) — Penalty Proceedings</option>
+                <option value="adjournment">Adjournment Request (Any Notice)</option>
+            </select>
+        </div>
+        <div id="nrCommonFields" style="display:none;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+                <div class="form-group"><label>Assessee Name</label><input type="text" id="nrName" placeholder="e.g. M/s ABC Traders or Mr. Rajesh Kumar"></div>
+                <div class="form-group"><label>PAN</label><input type="text" id="nrPAN" placeholder="e.g. ABCDE1234F" maxlength="10" style="text-transform:uppercase;"></div>
+                <div class="form-group"><label>Assessment Year</label><input type="text" id="nrAY" placeholder="e.g. 2025-26"></div>
+                <div class="form-group"><label>Ward / Circle</label><input type="text" id="nrWard" placeholder="e.g. Ward 5(1), Circle 3"></div>
+                <div class="form-group"><label>Notice Date</label><input type="date" id="nrNoticeDate"></div>
+                <div class="form-group"><label>DIN / Notice Reference No.</label><input type="text" id="nrDIN" placeholder="e.g. ITBA/AST/S/142(1)/2025-26/10XXXXX"></div>
+                <div class="form-group"><label>City of AO</label><input type="text" id="nrCity" placeholder="e.g. Mumbai / Delhi / Jaipur"></div>
+                <div class="form-group"><label>Reply Date</label><input type="date" id="nrReplyDate"></div>
+            </div>
+            <div id="nrSpecificFields"></div>
+            <div class="form-group"><label>Tone of Reply</label>
+                <select id="nrTone">
+                    <option value="compliance">Compliance (submitting information)</option>
+                    <option value="objection">Objection (contesting the notice)</option>
+                </select>
+            </div>
+            <div style="display:flex;gap:10px;margin-top:10px;">
+                <button class="btn" onclick="generateNR()">Generate Draft</button>
+                <button class="btn" style="background:var(--primary-mid);" onclick="copyNR()">Copy to Clipboard</button>
+                <button class="btn" style="background:#b5651d;" onclick="printNR()">Print Draft</button>
+                <button class="btn" style="background:#636e72;" onclick="resetNR()">Reset</button>
+            </div>
+        </div>
+    </div>
+    <div class="card" id="nrOutputCard" style="display:none;">
+        <h2>Generated Reply Draft</h2>
+        <div id="nrOutput" style="white-space:pre-wrap;font-family:'Segoe UI',sans-serif;font-size:0.92rem;line-height:1.7;background:#fff;color:#222;padding:24px;border:1px solid #ddd;border-radius:8px;"></div>
+    </div>
+    <div class="card">
+        <h2>Notice Reply — Quick Reference</h2>
+        <table class="limits-table">
+            <tr><th>Section</th><th>Notice Type</th><th>Reply Deadline</th><th>Key Points</th></tr>
+            <tr><td><strong>139(9)</strong></td><td>Defective Return</td><td>15 days from notice</td><td>Rectify defect or explain why return is correct</td></tr>
+            <tr><td><strong>142(1)</strong></td><td>Inquiry</td><td>As specified</td><td>Submit info/docs; non-compliance → 271(1)(b) penalty</td></tr>
+            <tr><td><strong>143(1)</strong></td><td>Intimation</td><td>30 days (rectification u/s 154)</td><td>Check TDS/TCS mismatch, disallowances, arithmetic errors</td></tr>
+            <tr><td><strong>143(2)</strong></td><td>Scrutiny</td><td>As specified</td><td>Full books + evidence; ensure within limitation period</td></tr>
+            <tr><td><strong>148/148A</strong></td><td>Reopening</td><td>30 days (148A objection)</td><td>Check 3/10 year limit; challenge "reason to believe"</td></tr>
+            <tr><td><strong>154</strong></td><td>Rectification</td><td>30 days</td><td>Only "mistake apparent from record" — no debatable issues</td></tr>
+            <tr><td><strong>156</strong></td><td>Demand</td><td>30 days</td><td>Pay or file appeal u/s 246A within 30 days</td></tr>
+            <tr><td><strong>245</strong></td><td>Refund Adjustment</td><td>30 days</td><td>AO must give prior intimation; object if demand itself disputed</td></tr>
+            <tr><td><strong>270A</strong></td><td>Penalty</td><td>As specified</td><td>Show "reasonable cause" u/s 273B; distinguish mis-reporting vs under-reporting</td></tr>
+        </table>
+    </div>
+</div>
+
 <!-- ==================== DISCLAIMER ==================== -->
 <div id="tab-disclaimer" class="tab-content">
     <div class="card">
@@ -891,50 +926,6 @@ r.className='result-box presumptive';
 r.innerHTML='<div class="result-title">'+better+' saves you '+fmt(saving)+' more</div><div class="result-detail"><table class="limits-table" style="margin-top:10px;"><tr><th></th><th>Old Regime</th><th>New Regime</th></tr><tr><td>Gross Income</td><td>'+fmt(gross)+'</td><td>'+fmt(gross)+'</td></tr><tr><td>Std Deduction</td><td>'+fmt(std)+'</td><td>'+fmt(std)+'</td></tr><tr><td>Ch VI-A Deductions</td><td>'+fmt(ded)+'</td><td>N/A</td></tr><tr><td>Taxable Income</td><td><strong>'+fmt(oldIncome)+'</strong></td><td><strong>'+fmt(newIncome)+'</strong></td></tr><tr><td>Tax</td><td>'+fmt(Math.round(oldTax))+'</td><td>'+fmt(Math.round(newTax))+'</td></tr><tr><td>Cess (4%)</td><td>'+fmt(Math.round(oldCess))+'</td><td>'+fmt(Math.round(newCess))+'</td></tr><tr style="background:#e8f8f5;"><td><strong>Total Tax</strong></td><td><strong>'+fmt(oldTotal)+'</strong></td><td><strong>'+fmt(newTotal)+'</strong></td></tr></table></div>';}
 function resetIT(){['itGross','itDeductions'].forEach(function(id){document.getElementById(id).value='';});document.getElementById('itResult').className='result-box';}
 
-// ==============================
-// TAB 4: COMPLIANCE CALENDAR FY 2026-27
-// ==============================
-var dueDates=[
-{date:"07 Apr 2026",desc:"TDS/TCS deposit for March 2026 (FY 2025-26)",cat:"tds",mon:"Apr"},
-{date:"14 Apr 2026",desc:"TDS Certificate (Form 16B/16C/16D) — Q4 FY 2025-26",cat:"tds",mon:"Apr"},
-{date:"30 Apr 2026",desc:"TDS deposit for March 2026 (Govt — challan)",cat:"tds",mon:"Apr"},
-{date:"15 May 2026",desc:"TDS Return — Q4 FY 2025-26 (Jan-Mar)",cat:"tds",mon:"May"},
-{date:"31 May 2026",desc:"Form 16 — TDS Certificate to Employees (FY 2025-26)",cat:"tds",mon:"May"},
-{date:"15 Jun 2026",desc:"Advance Tax — 1st Installment (15%) FY 2026-27",cat:"advance",mon:"Jun"},
-{date:"07 Jul 2026",desc:"TDS/TCS deposit for June 2026",cat:"tds",mon:"Jul"},
-{date:"15 Jul 2026",desc:"TDS Return — Q1 (Apr-Jun 2026)",cat:"tds",mon:"Jul"},
-{date:"31 Jul 2026",desc:"ITR filing — Non-audit cases (AY 2027-28)",cat:"itr",mon:"Jul"},
-{date:"07 Aug 2026",desc:"TDS/TCS deposit for July 2026",cat:"tds",mon:"Aug"},
-{date:"15 Sep 2026",desc:"Advance Tax — 2nd Installment (45%) FY 2026-27",cat:"advance",mon:"Sep"},
-{date:"30 Sep 2026",desc:"Tax Audit Report — Form 3CA/3CB + 3CD (AY 2027-28)",cat:"itr",mon:"Sep"},
-{date:"07 Oct 2026",desc:"TDS/TCS deposit for September 2026",cat:"tds",mon:"Oct"},
-{date:"15 Oct 2026",desc:"TDS Return — Q2 (Jul-Sep 2026)",cat:"tds",mon:"Oct"},
-{date:"31 Oct 2026",desc:"ITR filing — Audit cases (AY 2027-28)",cat:"itr",mon:"Oct"},
-{date:"15 Nov 2026",desc:"GSTR-9 Annual Return (FY 2025-26)",cat:"gst",mon:"Nov"},
-{date:"30 Nov 2026",desc:"ITR filing — Transfer Pricing cases (AY 2027-28)",cat:"itr",mon:"Nov"},
-{date:"15 Dec 2026",desc:"Advance Tax — 3rd Installment (75%) FY 2026-27",cat:"advance",mon:"Dec"},
-{date:"31 Dec 2026",desc:"GSTR-9C Reconciliation (FY 2025-26, Turnover >5Cr)",cat:"gst",mon:"Dec"},
-{date:"07 Jan 2027",desc:"TDS/TCS deposit for December 2026",cat:"tds",mon:"Jan"},
-{date:"15 Jan 2027",desc:"TDS Return — Q3 (Oct-Dec 2026)",cat:"tds",mon:"Jan"},
-{date:"15 Feb 2027",desc:"Updated Return (ITR-U) — Last date for AY 2024-25",cat:"itr",mon:"Feb"},
-{date:"15 Mar 2027",desc:"Advance Tax — 4th Installment (100%) FY 2026-27",cat:"advance",mon:"Mar"},
-{date:"15 Mar 2027",desc:"Last date to avoid interest u/s 234C",cat:"advance",mon:"Mar"},
-{date:"31 Mar 2027",desc:"Last date for belated/revised return (AY 2026-27)",cat:"itr",mon:"Mar"},
-{date:"11th Monthly",desc:"GSTR-1 (Outward supplies) — Monthly filers",cat:"gst",mon:"Monthly"},
-{date:"13th Monthly",desc:"GSTR-1 IFF (QRMP — M1, M2)",cat:"gst",mon:"Monthly"},
-{date:"20th Monthly",desc:"GSTR-3B (Monthly filers)",cat:"gst",mon:"Monthly"},
-{date:"22/24 Quarterly",desc:"GSTR-3B (QRMP scheme)",cat:"gst",mon:"Monthly"},
-{date:"07th Monthly",desc:"TDS/TCS deposit (all months except March)",cat:"tds",mon:"Monthly"}
-];
-var activeCatFilter='all',activeMonFilter='all';
-function renderDueDates(list){var c=document.getElementById('dueDateList');
-var colors={itr:'#0a8c64',tds:'#b5651d',gst:'#2c5364',advance:'#d63031'};
-if(!list.length){c.innerHTML='<p style="text-align:center;color:var(--text-light);padding:20px;">No compliance items for this selection.</p>';return;}
-c.innerHTML=list.map(function(d){return '<div class="due-item"><div class="due-date" style="background:'+colors[d.cat]+'">'+d.date+'</div><div class="due-info"><strong>'+d.desc+'</strong><p>'+d.cat.toUpperCase()+'</p></div></div>';}).join('');}
-function applyDueFilters(){var f=dueDates;if(activeCatFilter!=='all')f=f.filter(function(d){return d.cat===activeCatFilter;});if(activeMonFilter!=='all')f=f.filter(function(d){return d.mon===activeMonFilter;});renderDueDates(f);}
-function filterDueDates(cat,btn){document.querySelectorAll('#tab-duedate .filter-row:first-of-type .filter-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');activeCatFilter=cat;applyDueFilters();}
-function filterDueMonth(mon,btn){document.querySelectorAll('#monthFilterRow .filter-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');activeMonFilter=mon;applyDueFilters();}
-renderDueDates(dueDates);
 
 // ==============================
 // TAB 5: GST RATES
@@ -1632,6 +1623,142 @@ document.getElementById('asFullListCard').style.display='block';
 renderASTable(asData,'asFullTableContainer');
 }}
 function resetASChecker(){document.getElementById('asListed').value='no';document.getElementById('asBFI').value='no';document.getElementById('asTurnover').value='';document.getElementById('asBorrowing').value='';document.getElementById('asHolding').value='no';document.getElementById('as2Year').value='yes';document.getElementById('asClassResult').className='result-box';document.getElementById('asClassResult').innerHTML='';document.getElementById('asExemptionCard').style.display='none';document.getElementById('asFullListCard').style.display='none';}
+
+// ==============================
+// NOTICE REPLY DRAFT GENERATOR
+// ==============================
+var nrSpecificConfig={
+'139_9':{label:'Sec 139(9) — Defective Return',fields:'<div class="form-group"><label>Nature of Defect (as mentioned in notice)</label><textarea id="nrDefect" rows="3" placeholder="e.g. ITR filed without payment of self-assessment tax / Mismatch in Schedule TDS"></textarea></div><div class="form-group"><label>Your Explanation / Action Taken</label><textarea id="nrExplain" rows="3" placeholder="e.g. The defect has been rectified by filing revised computation / Self-assessment tax has now been paid vide Challan No. ___"></textarea></div>'},
+'142_1':{label:'Sec 142(1) — Inquiry',fields:'<div class="form-group"><label>Information / Documents Requested</label><textarea id="nrInfoReq" rows="3" placeholder="e.g. Bank statements, Cash book, Sales register for FY 2024-25"></textarea></div><div class="form-group"><label>Documents Being Submitted / Explanation</label><textarea id="nrDocsSubmit" rows="3" placeholder="e.g. Bank statements of SBI A/c No. XXXX for the period Apr 2024 to Mar 2025 enclosed"></textarea></div>'},
+'143_1':{label:'Sec 143(1) — Intimation',fields:'<div class="form-group"><label>Mismatch / Adjustment Amount (Rs.)</label><input type="text" id="nrMismatchAmt" placeholder="e.g. 45,000"></div><div class="form-group"><label>Nature of Adjustment</label><textarea id="nrAdjNature" rows="2" placeholder="e.g. TDS credit of Rs. 45,000 not allowed / Deduction u/s 80C disallowed"></textarea></div><div class="form-group"><label>Reason Why Adjustment is Incorrect</label><textarea id="nrAdjReason" rows="3" placeholder="e.g. TDS credit is reflected in Form 26AS and AIS. The mismatch is due to..."></textarea></div>'},
+'143_2':{label:'Sec 143(2) — Scrutiny',fields:'<div class="form-group"><label>Issues / Queries Raised by AO</label><textarea id="nrScrutinyIssues" rows="3" placeholder="e.g. Justify claim of deduction u/s 80IA / Explain source of cash deposit of Rs. 10 Lakh"></textarea></div><div class="form-group"><label>Your Submissions / Evidence</label><textarea id="nrScrutinyReply" rows="3" placeholder="e.g. The deduction is claimed as per the conditions laid down in Sec 80IA. Documentary evidence enclosed..."></textarea></div>'},
+'148':{label:'Sec 148/148A — Reopening',fields:'<div class="form-group"><label>Original Return Filed? (Date & Income)</label><input type="text" id="nrOrigReturn" placeholder="e.g. Yes, filed on 31.07.2023 declaring income of Rs. 8,50,000"></div><div class="form-group"><label>Reason to Believe (as stated in notice)</label><textarea id="nrReason148" rows="2" placeholder="e.g. Cash deposit during demonetization / Mismatch in property transaction"></textarea></div><div class="form-group"><label>Your Objection / Compliance</label><textarea id="nrReply148" rows="3" placeholder="e.g. The cash deposit of Rs. 5 Lakh was from accumulated savings and agricultural income as evidenced by..."></textarea></div>'},
+'154':{label:'Sec 154 — Rectification',fields:'<div class="form-group"><label>Mistake Apparent from Record (as per notice)</label><textarea id="nrMistake154" rows="2" placeholder="e.g. Exemption u/s 10(10D) not allowed on maturity proceeds of LIC policy"></textarea></div><div class="form-group"><label>Your Response / Correct Position</label><textarea id="nrReply154" rows="3" placeholder="e.g. The exemption u/s 10(10D) is correctly claimed as the policy premium does not exceed 10% of sum assured..."></textarea></div>'},
+'156':{label:'Sec 156 — Demand Notice',fields:'<div class="form-group"><label>Demand Amount (Rs.)</label><input type="text" id="nrDemandAmt" placeholder="e.g. 1,25,000"></div><div class="form-group"><label>Grounds of Objection / Payment Details</label><textarea id="nrDemandReply" rows="3" placeholder="e.g. The demand is not correct as TDS credit was not given / Demand has been paid vide Challan dated..."></textarea></div>'},
+'245':{label:'Sec 245 — Refund Adjustment',fields:'<div class="form-group"><label>Refund Amount Being Adjusted (Rs.)</label><input type="text" id="nrRefundAmt" placeholder="e.g. 75,000"></div><div class="form-group"><label>Demand Against Which Adjusted (AY & Amount)</label><input type="text" id="nrAgainstDemand" placeholder="e.g. Demand of Rs. 1,20,000 for AY 2022-23"></div><div class="form-group"><label>Your Objection</label><textarea id="nrReply245" rows="3" placeholder="e.g. The underlying demand for AY 2022-23 is itself under appeal before CIT(A). Adjustment without disposing appeal is unjustified..."></textarea></div>'},
+'270A':{label:'Sec 270A / 271(1)(c) — Penalty',fields:'<div class="form-group"><label>Penalty Section & Amount (Rs.)</label><input type="text" id="nrPenaltyAmt" placeholder="e.g. Sec 270A — Rs. 2,50,000 (50% of under-reported income)"></div><div class="form-group"><label>Nature of Alleged Default</label><textarea id="nrPenaltyNature" rows="2" placeholder="e.g. Under-reporting of income due to disallowance of claim u/s 80G"></textarea></div><div class="form-group"><label>Your Defence / Reasonable Cause</label><textarea id="nrPenaltyDefence" rows="3" placeholder="e.g. The claim was made in good faith based on valid donation receipts. There was a bona fide belief..."></textarea></div>'},
+'adjournment':{label:'Adjournment Request',fields:'<div class="form-group"><label>Original Hearing / Compliance Date</label><input type="date" id="nrHearingDate"></div><div class="form-group"><label>Reason for Adjournment</label><textarea id="nrAdjReason2" rows="3" placeholder="e.g. The authorized representative is engaged before ITAT on the said date / Key documents are awaited from the bank"></textarea></div><div class="form-group"><label>Proposed New Date (if any)</label><input type="text" id="nrNewDate" placeholder="e.g. Any date after 15.03.2026"></div>'}
+};
+
+function showNRFields(){
+var t=document.getElementById('nrType').value;
+var common=document.getElementById('nrCommonFields');
+var spec=document.getElementById('nrSpecificFields');
+if(!t){common.style.display='none';return;}
+common.style.display='block';
+spec.innerHTML=nrSpecificConfig[t]?nrSpecificConfig[t].fields:'';
+}
+
+function gv(id){var el=document.getElementById(id);return el?el.value.trim():'';}
+function fmtDate(d){if(!d)return '__.__.____';var p=d.split('-');return p[2]+'.'+p[1]+'.'+p[0];}
+
+function generateNR(){
+var type=gv('nrType'),name=gv('nrName')||'[Assessee Name]',pan=gv('nrPAN').toUpperCase()||'[PAN]',ay=gv('nrAY')||'[AY]',ward=gv('nrWard')||'[Ward/Circle]',city=gv('nrCity')||'[City]',nDate=fmtDate(gv('nrNoticeDate')),din=gv('nrDIN')||'[DIN/Ref No.]',rDate=fmtDate(gv('nrReplyDate')),tone=gv('nrTone');
+if(!type){alert('Please select a notice type.');return;}
+var sec=nrSpecificConfig[type].label;
+var header='To,\nThe Income Tax Officer,\n'+ward+',\n'+city+'\n\nSub: Reply to Notice u/s '+sec+' — PAN: '+pan+' — AY: '+ay+'\nRef: '+din+', dated '+nDate+'\n\nRespected Sir/Madam,\n\nWith reference to the above-mentioned notice, the following is respectfully submitted for your kind consideration:\n\n';
+var body='',footer='\n\nIt is therefore most respectfully prayed that the submissions made herein may kindly be considered and the matter may be disposed of accordingly.\n\nThanking you,\n\nYours faithfully,\nFor '+name+'\n\n\n___________________________\nAuthorized Signatory / AR\nDate: '+rDate+'\nPlace: '+city+'\nPAN: '+pan;
+
+if(type==='139_9'){
+var defect=gv('nrDefect')||'[Nature of defect]';
+var explain=gv('nrExplain')||'[Explanation / action taken]';
+if(tone==='compliance'){
+body='1. The notice u/s 139(9) has been duly received and the contents have been noted.\n\n2. Nature of defect as mentioned in the notice:\n   "'+defect+'"\n\n3. In compliance with the notice, the following action has been taken:\n   '+explain+'\n\n4. The defect in the return of income has been rectified and the revised/corrected return is being submitted herewith / has been uploaded on the e-filing portal.\n\n5. It is submitted that the return may kindly be treated as valid and processed accordingly.';
+}else{
+body='1. The notice u/s 139(9) has been duly received and the contents have been noted.\n\n2. The alleged defect as mentioned in the notice is:\n   "'+defect+'"\n\n3. It is respectfully submitted that the return as originally filed is correct and does not suffer from any defect, for the following reasons:\n   '+explain+'\n\n4. The return was filed in accordance with the provisions of the Income Tax Act and the applicable Rules. The alleged defect does not fall within the scope of Sec 139(9).\n\n5. Reliance is placed on the following:\n   - Explanation to Sec 139(9)\n   - CBDT Circular as applicable\n\n6. It is therefore prayed that the return may be accepted as valid without any modification.';
+}}
+else if(type==='142_1'){
+var infoReq=gv('nrInfoReq')||'[Information requested]';
+var docs=gv('nrDocsSubmit')||'[Documents being submitted]';
+if(tone==='compliance'){
+body='1. The notice u/s 142(1) has been duly received and the contents have been noted.\n\n2. The information / documents requested in the notice:\n   "'+infoReq+'"\n\n3. In compliance with the above, the following documents / information are being submitted herewith:\n   '+docs+'\n\n4. It is submitted that all the information called for has been duly furnished. In case any further information is required, the same shall be submitted promptly upon being informed.';
+}else{
+body='1. The notice u/s 142(1) has been duly received.\n\n2. Information requested:\n   "'+infoReq+'"\n\n3. It is respectfully submitted that:\n   '+docs+'\n\n4. Without prejudice to the above, it is submitted that the information called for is not relevant to the assessment proceedings for AY '+ay+' and/or is beyond the scope of Sec 142(1).\n\n5. The assessee reserves the right to furnish additional submissions as may be required.';
+}}
+else if(type==='143_1'){
+var amt=gv('nrMismatchAmt')||'[Amount]';
+var nature=gv('nrAdjNature')||'[Nature of adjustment]';
+var reason=gv('nrAdjReason')||'[Reason]';
+body='1. The intimation u/s 143(1) dated '+nDate+' has been received and the contents have been noted.\n\n2. As per the intimation, an adjustment of Rs. '+amt+' has been made on account of:\n   "'+nature+'"\n\n3. It is respectfully submitted that the said adjustment is not correct for the following reasons:\n   '+reason+'\n\n4. In view of the above, it is prayed that a rectification u/s 154 may kindly be carried out and the return may be processed as per the original return of income filed.\n\n5. The following documentary evidence is enclosed in support:\n   (a) Copy of Form 26AS / AIS\n   (b) Copy of relevant computation / proof\n   (c) Copy of original return filed\n\n6. If the department is not inclined to accept the above submissions, an opportunity of being heard may kindly be granted before passing any adverse order.';
+}
+else if(type==='143_2'){
+var issues=gv('nrScrutinyIssues')||'[Issues raised]';
+var reply=gv('nrScrutinyReply')||'[Submissions]';
+if(tone==='compliance'){
+body='1. The notice u/s 143(2) has been duly received. The assessee is committed to full cooperation in the assessment proceedings.\n\n2. The issues raised / queries made by your goodself:\n   "'+issues+'"\n\n3. In compliance, the following submissions are made:\n   '+reply+'\n\n4. The following documents are enclosed for your perusal:\n   (a) Audited financial statements for the relevant year\n   (b) Books of accounts / ledger extracts as relevant\n   (c) Documentary evidence in support of the claims made\n   (d) Bank statements as applicable\n\n5. It is submitted that the return of income as filed is correct and complete. The assessee shall provide any further information that may be called for.';
+}else{
+body='1. The notice u/s 143(2) has been received. Before proceeding, the following preliminary objections are raised:\n\n2. Issues raised by the AO:\n   "'+issues+'"\n\n3. Submissions and objections:\n   '+reply+'\n\n4. It is respectfully submitted that the additions/disallowances proposed, if any, are not warranted by law for the following reasons:\n   (a) The claims are fully supported by documentary evidence\n   (b) The provisions of law have been duly complied with\n   (c) Reliance is placed on the following judicial precedents: [Cite relevant case laws]\n\n5. The assessee reserves the right to make further submissions and produce additional evidence as may be required.\n\n6. An opportunity of personal hearing may kindly be granted before passing any assessment order.';
+}}
+else if(type==='148'){
+var orig=gv('nrOrigReturn')||'[Original return details]';
+var reason148=gv('nrReason148')||'[Reason to believe]';
+var reply148=gv('nrReply148')||'[Objection/compliance]';
+if(tone==='compliance'){
+body='1. The notice u/s 148 / order u/s 148A(d) has been duly received.\n\n2. Original return details: '+orig+'\n\n3. As stated in the notice, the reason for reopening:\n   "'+reason148+'"\n\n4. In response, the following is submitted:\n   '+reply148+'\n\n5. The return of income filed originally is correct and the income has been fully disclosed. The necessary documents/evidence are enclosed herewith.\n\n6. The assessee shall cooperate fully in the reassessment proceedings.';
+}else{
+body='1. The notice u/s 148 / order u/s 148A(d) has been received.\n\n2. Original return details: '+orig+'\n\n3. Reasons recorded for reopening:\n   "'+reason148+'"\n\n4. OBJECTIONS to the reopening of assessment:\n\n   (a) The reopening is based on mere change of opinion which is not permissible in law. Reliance: CIT vs Kelvinator of India Ltd. (2010) 320 ITR 561 (SC).\n\n   (b) '+reply148+'\n\n   (c) The conditions precedent for invoking Sec 147/148 are not satisfied as there is no tangible material to form "reason to believe" that income has escaped assessment.\n\n   (d) The notice is beyond the time limit prescribed under the amended provisions (3 years / 10 years as applicable).\n\n5. It is prayed that the objections may be disposed of by passing a speaking order before proceeding further, as held in GKN Driveshafts (India) Ltd. vs ITO (2003) 259 ITR 19 (SC).\n\n6. The assessee reserves all rights to challenge the reopening proceedings.';
+}}
+else if(type==='154'){
+var mistake=gv('nrMistake154')||'[Mistake as per notice]';
+var reply154=gv('nrReply154')||'[Correct position]';
+body='1. The notice / order u/s 154 has been received and the contents have been noted.\n\n2. The mistake apparent from record as mentioned:\n   "'+mistake+'"\n\n3. It is submitted in response:\n   '+reply154+'\n\n4. The said matter does not constitute a "mistake apparent from the record" within the meaning of Sec 154, as it involves a debatable issue requiring interpretation of law. Reliance is placed on:\n   - T.S. Balaram, ITO vs Volkart Bros. (1971) 82 ITR 50 (SC)\n\n5. It is prayed that the proposed rectification may not be carried out / the rectification order may be revised.';
+}
+else if(type==='156'){
+var demandAmt=gv('nrDemandAmt')||'[Amount]';
+var demandReply=gv('nrDemandReply')||'[Grounds/payment details]';
+if(tone==='compliance'){
+body='1. The notice of demand u/s 156 for Rs. '+demandAmt+' for AY '+ay+' has been received.\n\n2. In compliance with the said demand:\n   '+demandReply+'\n\n3. It is submitted that the demand has been duly complied with and the same may be updated in the records.';
+}else{
+body='1. The notice of demand u/s 156 for Rs. '+demandAmt+' for AY '+ay+' has been received.\n\n2. The demand is not correct and is liable to be revised for the following reasons:\n   '+demandReply+'\n\n3. Without prejudice, the assessee is filing an appeal u/s 246A before CIT(A) against the assessment order giving rise to this demand.\n\n4. An application for stay of demand is being filed separately. It is prayed that recovery proceedings may be kept in abeyance pending disposal of the appeal, as per CBDT Instruction No. 1914 dated 21.03.1996 and Office Memorandum F.No. 404/72/93-ITCC dated 29.02.2016.\n\n5. The demand may kindly be rectified / revised in view of the submissions made above.';
+}}
+else if(type==='245'){
+var refund=gv('nrRefundAmt')||'[Amount]';
+var against=gv('nrAgainstDemand')||'[Demand details]';
+var reply245=gv('nrReply245')||'[Objection]';
+body='1. The intimation u/s 245 proposing adjustment of refund of Rs. '+refund+' against '+against+' has been received.\n\n2. OBJECTION to the proposed adjustment:\n   '+reply245+'\n\n3. It is submitted that:\n   (a) As per Sec 245, the AO is required to give an intimation of the proposed adjustment and the assessee\'s response must be considered before making any adjustment.\n   (b) The underlying demand is disputed and is pending in appeal. Adjusting refund against a disputed demand is contrary to natural justice.\n   (c) Reliance is placed on: CIT vs Tata Chemicals Ltd. — Hon\'ble Bombay HC\n\n4. It is prayed that the refund of Rs. '+refund+' may kindly be issued without any adjustment and the demand may be kept in abeyance pending disposal of the appeal.';
+}
+else if(type==='270A'){
+var penaltyAmt=gv('nrPenaltyAmt')||'[Amount/Section]';
+var penaltyNature=gv('nrPenaltyNature')||'[Nature of default]';
+var defence=gv('nrPenaltyDefence')||'[Defence]';
+body='1. The show cause notice for penalty u/s '+penaltyAmt+' has been received.\n\n2. The alleged default:\n   "'+penaltyNature+'"\n\n3. It is respectfully submitted that no penalty is leviable for the following reasons:\n\n   (a) '+defence+'\n\n   (b) The disclosure was made in good faith and was based on a bona fide interpretation of law. There was no intention to conceal income or furnish inaccurate particulars.\n\n   (c) In terms of Sec 270A, penalty is leviable only in cases of "under-reporting" or "mis-reporting" of income. The present case does not fall in either category as the assessee has furnished all material facts.\n\n   (d) The assessee has "reasonable cause" within the meaning of Sec 273B for the alleged failure, if any.\n\n   (e) Reliance is placed on:\n      - CIT vs Reliance Petroproducts Pvt. Ltd. (2010) 322 ITR 158 (SC)\n      - Price Waterhouse Coopers vs CIT (2012) 348 ITR 306 (SC)\n      - Hindustan Steel Ltd. vs State of Orissa (1972) 83 ITR 26 (SC)\n\n4. It is prayed that the penalty proceedings may be dropped and the show cause notice may be discharged.';
+}
+else if(type==='adjournment'){
+var hearDate=fmtDate(gv('nrHearingDate'));
+var adjReason=gv('nrAdjReason2')||'[Reason]';
+var newDate=gv('nrNewDate')||'any convenient date';
+header='To,\nThe Income Tax Officer,\n'+ward+',\n'+city+'\n\nSub: Request for Adjournment — PAN: '+pan+' — AY: '+ay+'\nRef: '+din+', dated '+nDate+'\n\nRespected Sir/Madam,\n\n';
+body='1. Reference is invited to the above notice fixing the date of hearing / compliance on '+hearDate+'.\n\n2. It is respectfully submitted that the assessee / authorized representative is unable to attend / comply on the said date due to the following reason:\n   "'+adjReason+'"\n\n3. This is the first / second request for adjournment and is being made in good faith and not for the purpose of delay.\n\n4. It is requested that the hearing may kindly be adjourned to '+newDate+'.\n\n5. The assessee undertakes to comply fully on the adjourned date without further request for adjournment.';
+footer='\n\nThanking you,\n\nYours faithfully,\nFor '+name+'\n\n\n___________________________\nAuthorized Signatory / AR\nDate: '+rDate+'\nPlace: '+city+'\nPAN: '+pan;
+}
+
+var draft=header+body+footer;
+document.getElementById('nrOutput').textContent=draft;
+document.getElementById('nrOutputCard').style.display='block';
+document.getElementById('nrOutputCard').scrollIntoView({behavior:'smooth'});
+}
+
+function copyNR(){
+var text=document.getElementById('nrOutput').textContent;
+if(!text){alert('Generate a draft first.');return;}
+if(navigator.clipboard){navigator.clipboard.writeText(text).then(function(){alert('Draft copied to clipboard!');});}
+else{var ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);alert('Draft copied to clipboard!');}
+}
+function printNR(){
+var text=document.getElementById('nrOutput').innerHTML;
+if(!text){alert('Generate a draft first.');return;}
+var w=window.open('','_blank');
+w.document.write('<html><head><title>Notice Reply Draft</title><style>body{font-family:Georgia,serif;font-size:13pt;line-height:1.8;padding:40px 60px;color:#222;white-space:pre-wrap;}@media print{body{padding:20px 40px;}}</style></head><body>'+document.getElementById('nrOutput').textContent.replace(/\n/g,'<br>')+'</body></html>');
+w.document.close();w.print();
+}
+function resetNR(){
+document.getElementById('nrType').value='';
+document.getElementById('nrCommonFields').style.display='none';
+document.getElementById('nrSpecificFields').innerHTML='';
+document.getElementById('nrOutputCard').style.display='none';
+['nrName','nrPAN','nrAY','nrWard','nrDIN','nrCity'].forEach(function(id){document.getElementById(id).value='';});
+['nrNoticeDate','nrReplyDate'].forEach(function(id){document.getElementById(id).value='';});
+}
 </script>
 </body>
 </html>
