@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaxSuite — Complete CA Toolkit</title>
+    <title>Ready Reckoner — Complete CA Toolkit</title>
     <style>
         :root {
             --primary: #0f2027;
@@ -153,7 +153,7 @@
 <body>
 
 <div class="header">
-    <h1>Tax<span>Suite</span></h1>
+    <h1>Ready<span>Reckoner</span></h1>
     <p>Complete CA Toolkit — IT Calculator | GST | TDS/TCS | Section Mapping | Compliance & More</p>
 </div>
 
@@ -167,10 +167,10 @@
     <div class="nav-tab" onclick="switchTab('depreciation')">Depreciation IT</div>
     <div class="nav-tab" onclick="switchTab('depco')">Depreciation Co. Act</div>
     <div class="nav-tab" onclick="switchTab('msme')">MSME Tracker</div>
-    <div class="nav-tab" onclick="switchTab('vat')">VAT (Fuel)</div>
     <div class="nav-tab" onclick="switchTab('notice')">IT Notice Dates</div>
     <div class="nav-tab" onclick="switchTab('caro')">CARO 2020</div>
     <div class="nav-tab" onclick="switchTab('auditcheck')">Audit Checklist</div>
+    <div class="nav-tab" onclick="switchTab('asapply')">AS Applicability</div>
     <div class="nav-tab" onclick="switchTab('disclaimer')">Disclaimer</div>
 </div>
 
@@ -302,12 +302,29 @@
 <div id="tab-duedate" class="tab-content">
     <div class="card">
         <h2>Compliance Calendar — FY 2026-27 (AY 2027-28)</h2>
+        <p style="color:var(--text-light);margin-bottom:10px;font-size:0.88rem;">Filter by type or month to see what's due.</p>
         <div class="filter-row">
             <button class="filter-btn active" onclick="filterDueDates('all',this)">All</button>
             <button class="filter-btn" onclick="filterDueDates('itr',this)">ITR</button>
             <button class="filter-btn" onclick="filterDueDates('tds',this)">TDS/TCS</button>
             <button class="filter-btn" onclick="filterDueDates('gst',this)">GST</button>
             <button class="filter-btn" onclick="filterDueDates('advance',this)">Advance Tax</button>
+        </div>
+        <div class="filter-row" id="monthFilterRow">
+            <button class="filter-btn active" onclick="filterDueMonth('all',this)">All Months</button>
+            <button class="filter-btn" onclick="filterDueMonth('Apr',this)">Apr</button>
+            <button class="filter-btn" onclick="filterDueMonth('May',this)">May</button>
+            <button class="filter-btn" onclick="filterDueMonth('Jun',this)">Jun</button>
+            <button class="filter-btn" onclick="filterDueMonth('Jul',this)">Jul</button>
+            <button class="filter-btn" onclick="filterDueMonth('Aug',this)">Aug</button>
+            <button class="filter-btn" onclick="filterDueMonth('Sep',this)">Sep</button>
+            <button class="filter-btn" onclick="filterDueMonth('Oct',this)">Oct</button>
+            <button class="filter-btn" onclick="filterDueMonth('Nov',this)">Nov</button>
+            <button class="filter-btn" onclick="filterDueMonth('Dec',this)">Dec</button>
+            <button class="filter-btn" onclick="filterDueMonth('Jan',this)">Jan</button>
+            <button class="filter-btn" onclick="filterDueMonth('Feb',this)">Feb</button>
+            <button class="filter-btn" onclick="filterDueMonth('Mar',this)">Mar</button>
+            <button class="filter-btn" onclick="filterDueMonth('Monthly',this)">Recurring</button>
         </div>
         <div id="dueDateList"></div>
     </div>
@@ -533,56 +550,7 @@
     </div>
 </div>
 
-<!-- ==================== TAB 10: VAT FUEL ==================== -->
-<div id="tab-vat" class="tab-content">
-    <div class="card">
-        <h2>VAT on Petroleum Products — HSD & MS (State-wise)</h2>
-        <p style="color:var(--text-light);margin-bottom:14px;">VAT/Sales Tax rates on High Speed Diesel (HSD) and Motor Spirit (Petrol/MS) for North-East and AP states. Petroleum products are outside GST.</p>
-        <div class="checker-form">
-            <div class="form-row">
-                <div class="form-group"><label>Select State</label>
-                    <select id="vatState" onchange="calcVAT()">
-                        <option value="">-- Select State --</option>
-                        <option value="assam">Assam</option>
-                        <option value="meghalaya">Meghalaya</option>
-                        <option value="ap">Andhra Pradesh</option>
-                        <option value="manipur">Manipur</option>
-                        <option value="mizoram">Mizoram</option>
-                    </select>
-                </div>
-                <div class="form-group"><label>Product</label>
-                    <select id="vatProduct" onchange="calcVAT()">
-                        <option value="ms">Petrol (MS)</option>
-                        <option value="hsd">Diesel (HSD)</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group"><label>Base Price (per litre, Rs.)</label><input type="number" id="vatBase" placeholder="e.g. 57.00" oninput="calcVAT()"></div>
-                <div class="form-group"><label>Quantity (litres)</label><input type="number" id="vatQty" placeholder="e.g. 1000" value="1" oninput="calcVAT()"></div>
-            </div>
-        </div>
-        <div id="vatResult" class="result-box"></div>
-    </div>
-    <div class="card">
-        <h2>State-wise VAT Rates on Petroleum (Applicable Rates)</h2>
-        <div style="overflow-x:auto;">
-        <table class="limits-table">
-            <tr><th>State</th><th>Petrol (MS) VAT</th><th>Diesel (HSD) VAT</th><th>Notes</th></tr>
-            <tr><td><strong>Assam</strong></td><td>32.66% ad valorem</td><td>21.74% ad valorem</td><td>+ Rs.1 Road Cess on Petrol</td></tr>
-            <tr><td><strong>Meghalaya</strong></td><td>31.00% ad valorem</td><td>22.50% ad valorem</td><td></td></tr>
-            <tr><td><strong>Andhra Pradesh</strong></td><td>31% + Rs.4/L VAT + Rs.1/L Road Cess</td><td>22.25% + Rs.4/L VAT + Rs.1/L Cess</td><td>Ad valorem + specific duty</td></tr>
-            <tr><td><strong>Manipur</strong></td><td>36.50% ad valorem</td><td>22.50% ad valorem</td><td></td></tr>
-            <tr><td><strong>Mizoram</strong></td><td>25.00% ad valorem</td><td>14.50% ad valorem</td><td></td></tr>
-        </table>
-        </div>
-        <div class="disclaimer" style="margin-top:14px;">
-            <p><strong>Note:</strong> Petroleum products (Crude Oil, Natural Gas, MS, HSD, ATF) are outside the purview of GST. VAT rates are subject to change by State Governments. Additional cess/surcharges may apply. Central Excise Duty is levied separately by the Union Government. Rates shown are indicative and should be verified from latest state notifications.</p>
-        </div>
-    </div>
-</div>
-
-<!-- ==================== TAB 11: IT NOTICE DATES ==================== -->
+<!-- ==================== TAB 10: IT NOTICE DATES ==================== -->
 <div id="tab-notice" class="tab-content">
     <div class="card">
         <h2>Income Tax Notice — Last Date Calculator</h2>
@@ -614,7 +582,10 @@
                     </select>
                 </div>
             </div>
-            <div class="form-group"><label>Date of Assessment Order (for Sec 154/263, optional)</label><input type="date" id="noticeOrderDate"></div>
+            <div class="form-row">
+                <div class="form-group"><label>Date of Filing IT Return</label><input type="date" id="noticeFileDate"></div>
+                <div class="form-group"><label>Date of Assessment Order (for Sec 154/263)</label><input type="date" id="noticeOrderDate"></div>
+            </div>
             <div class="btn-row">
                 <button class="btn btn-primary" onclick="calcNotice()">Calculate Last Date</button>
                 <button class="btn btn-reset" onclick="resetNotice()">Reset</button>
@@ -740,12 +711,53 @@
     </div>
 </div>
 
-<!-- ==================== TAB 14: DISCLAIMER ==================== -->
+<!-- ==================== AS APPLICABILITY (NCE) ==================== -->
+<div id="tab-asapply" class="tab-content">
+    <div class="card">
+        <h2>Accounting Standards — Applicability for Non-Company Entities (NCE)</h2>
+        <p style="color:var(--text-light);margin-bottom:14px;">As per ICAI Announcement (effective for periods commencing on or after 1st April 2024). Applicable from FY 2024-25 onwards.</p>
+        <div class="filter-row">
+            <button class="filter-btn active" onclick="filterAS('all',this)">All AS</button>
+            <button class="filter-btn" onclick="filterAS('full',this)">Full Compliance</button>
+            <button class="filter-btn" onclick="filterAS('exempt',this)">Not Applicable (MSME)</button>
+            <button class="filter-btn" onclick="filterAS('partial',this)">Partial Relaxation</button>
+            <button class="filter-btn" onclick="filterAS('conditional',this)">Conditional</button>
+        </div>
+        <div id="asTableContainer"></div>
+    </div>
+    <div class="card">
+        <h2>Classification of Non-Company Entities</h2>
+        <table class="limits-table">
+            <tr><th>Category</th><th>Criteria</th></tr>
+            <tr><td><strong>MSME Entity</strong><br><span class="tag tag-low">Exemptions Available</span></td><td>Non-company entity satisfying <strong>ALL</strong> of the following:<br>
+                (i) Equity/debt instruments not listed or not in process of listing<br>
+                (ii) Not a bank, financial institution, or insurance company<br>
+                (iii) Turnover ≤ Rs. 250 Crore<br>
+                (iv) Borrowings ≤ Rs. 50 Crore<br>
+                (v) Not a holding or subsidiary of another entity that is not an MSME</td></tr>
+            <tr><td><strong>Large Entity</strong><br><span class="tag tag-high">Full Compliance</span></td><td>Non-company entities that do <strong>NOT</strong> qualify as MSMEs. Must comply fully with all Accounting Standards.</td></tr>
+        </table>
+        <div class="disclaimer" style="margin-top:14px;">
+            <p><strong>Key Notes:</strong></p>
+            <ul style="margin:8px 0 0 20px;font-size:0.88rem;">
+                <li>Entities become eligible for MSME exemptions after meeting criteria for <strong>two consecutive years</strong>.</li>
+                <li>MSMEs availing exemptions must <strong>disclose this fact</strong> in financial statements.</li>
+                <li>Changes in MSME status must be disclosed in notes; prior period figures need not be revised.</li>
+                <li>MSMEs can opt out of specific exemptions but must disclose standards they comply with.</li>
+                <li>Old terms updated: SME → MSME; Level II-IV → MSME; Level I → Large Entity.</li>
+                <li>Not applicable to entities following Ind AS.</li>
+                <li>Supersedes March 2021 ICAI Announcement on classification criteria.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== DISCLAIMER ==================== -->
 <div id="tab-disclaimer" class="tab-content">
     <div class="card">
         <h2>Disclaimer</h2>
         <div class="disclaimer">
-            <p><strong>Important:</strong> TaxSuite is for informational and educational purposes only. It assists Chartered Accountants and tax professionals as a quick reference guide.</p><br>
+            <p><strong>Important:</strong> Ready Reckoner is for informational and educational purposes only. It assists Chartered Accountants and tax professionals as a quick reference guide.</p><br>
             <p>Information is based on the Income Tax Act, 1961, Income Tax Bill 2025, Companies Act 2013, and applicable amendments. Users should:</p>
             <ul style="margin:10px 0 10px 20px;">
                 <li>Refer to original provisions of the Act and Rules</li>
@@ -762,7 +774,7 @@
 </div><!-- end container -->
 
 <div class="footer">
-    <p><strong>TaxSuite</strong> — Complete CA Toolkit | For Educational Purposes Only</p>
+    <p><strong>Ready Reckoner</strong> — Complete CA Toolkit | For Educational Purposes Only</p>
     <p style="margin-top:4px;">Built with care for the CA community</p>
 </div>
 
@@ -837,37 +849,45 @@ function resetIT(){['itGross','itDeductions'].forEach(function(id){document.getE
 // TAB 4: COMPLIANCE CALENDAR FY 2026-27
 // ==============================
 var dueDates=[
-{date:"07 Apr 2026",desc:"TDS/TCS deposit for March 2026 (FY 2025-26)",cat:"tds"},
-{date:"30 Apr 2026",desc:"TDS deposit for March 2026 (Govt — challan)",cat:"tds"},
-{date:"15 May 2026",desc:"TDS Return — Q4 FY 2025-26 (Jan-Mar)",cat:"tds"},
-{date:"15 Jun 2026",desc:"Advance Tax — 1st Installment (15%) FY 2026-27",cat:"advance"},
-{date:"07 Jul 2026",desc:"TDS/TCS deposit for June 2026",cat:"tds"},
-{date:"15 Jul 2026",desc:"TDS Return — Q1 (Apr-Jun 2026)",cat:"tds"},
-{date:"31 Jul 2026",desc:"ITR filing — Non-audit cases (AY 2027-28)",cat:"itr"},
-{date:"15 Sep 2026",desc:"Advance Tax — 2nd Installment (45%) FY 2026-27",cat:"advance"},
-{date:"30 Sep 2026",desc:"Tax Audit Report — Form 3CA/3CB + 3CD (AY 2027-28)",cat:"itr"},
-{date:"07 Oct 2026",desc:"TDS/TCS deposit for September 2026",cat:"tds"},
-{date:"15 Oct 2026",desc:"TDS Return — Q2 (Jul-Sep 2026)",cat:"tds"},
-{date:"31 Oct 2026",desc:"ITR filing — Audit cases (AY 2027-28)",cat:"itr"},
-{date:"15 Nov 2026",desc:"GSTR-9 Annual Return (FY 2025-26)",cat:"gst"},
-{date:"30 Nov 2026",desc:"ITR filing — Transfer Pricing cases (AY 2027-28)",cat:"itr"},
-{date:"15 Dec 2026",desc:"Advance Tax — 3rd Installment (75%) FY 2026-27",cat:"advance"},
-{date:"31 Dec 2026",desc:"GSTR-9C Reconciliation (FY 2025-26, Turnover >5Cr)",cat:"gst"},
-{date:"07 Jan 2027",desc:"TDS/TCS deposit for December 2026",cat:"tds"},
-{date:"15 Jan 2027",desc:"TDS Return — Q3 (Oct-Dec 2026)",cat:"tds"},
-{date:"15 Mar 2027",desc:"Advance Tax — 4th Installment (100%) FY 2026-27",cat:"advance"},
-{date:"15 Mar 2027",desc:"Last date to avoid interest u/s 234C",cat:"advance"},
-{date:"31 Mar 2027",desc:"Last date for belated/revised return (AY 2026-27)",cat:"itr"},
-{date:"11th Monthly",desc:"GSTR-1 (Outward supplies) — Monthly filers",cat:"gst"},
-{date:"13th Monthly",desc:"GSTR-1 IFF (QRMP — M1, M2)",cat:"gst"},
-{date:"20th Monthly",desc:"GSTR-3B (Monthly filers)",cat:"gst"},
-{date:"22/24 Quarterly",desc:"GSTR-3B (QRMP scheme)",cat:"gst"},
-{date:"07th Monthly",desc:"TDS/TCS deposit (all months except March)",cat:"tds"}
+{date:"07 Apr 2026",desc:"TDS/TCS deposit for March 2026 (FY 2025-26)",cat:"tds",mon:"Apr"},
+{date:"14 Apr 2026",desc:"TDS Certificate (Form 16B/16C/16D) — Q4 FY 2025-26",cat:"tds",mon:"Apr"},
+{date:"30 Apr 2026",desc:"TDS deposit for March 2026 (Govt — challan)",cat:"tds",mon:"Apr"},
+{date:"15 May 2026",desc:"TDS Return — Q4 FY 2025-26 (Jan-Mar)",cat:"tds",mon:"May"},
+{date:"31 May 2026",desc:"Form 16 — TDS Certificate to Employees (FY 2025-26)",cat:"tds",mon:"May"},
+{date:"15 Jun 2026",desc:"Advance Tax — 1st Installment (15%) FY 2026-27",cat:"advance",mon:"Jun"},
+{date:"07 Jul 2026",desc:"TDS/TCS deposit for June 2026",cat:"tds",mon:"Jul"},
+{date:"15 Jul 2026",desc:"TDS Return — Q1 (Apr-Jun 2026)",cat:"tds",mon:"Jul"},
+{date:"31 Jul 2026",desc:"ITR filing — Non-audit cases (AY 2027-28)",cat:"itr",mon:"Jul"},
+{date:"07 Aug 2026",desc:"TDS/TCS deposit for July 2026",cat:"tds",mon:"Aug"},
+{date:"15 Sep 2026",desc:"Advance Tax — 2nd Installment (45%) FY 2026-27",cat:"advance",mon:"Sep"},
+{date:"30 Sep 2026",desc:"Tax Audit Report — Form 3CA/3CB + 3CD (AY 2027-28)",cat:"itr",mon:"Sep"},
+{date:"07 Oct 2026",desc:"TDS/TCS deposit for September 2026",cat:"tds",mon:"Oct"},
+{date:"15 Oct 2026",desc:"TDS Return — Q2 (Jul-Sep 2026)",cat:"tds",mon:"Oct"},
+{date:"31 Oct 2026",desc:"ITR filing — Audit cases (AY 2027-28)",cat:"itr",mon:"Oct"},
+{date:"15 Nov 2026",desc:"GSTR-9 Annual Return (FY 2025-26)",cat:"gst",mon:"Nov"},
+{date:"30 Nov 2026",desc:"ITR filing — Transfer Pricing cases (AY 2027-28)",cat:"itr",mon:"Nov"},
+{date:"15 Dec 2026",desc:"Advance Tax — 3rd Installment (75%) FY 2026-27",cat:"advance",mon:"Dec"},
+{date:"31 Dec 2026",desc:"GSTR-9C Reconciliation (FY 2025-26, Turnover >5Cr)",cat:"gst",mon:"Dec"},
+{date:"07 Jan 2027",desc:"TDS/TCS deposit for December 2026",cat:"tds",mon:"Jan"},
+{date:"15 Jan 2027",desc:"TDS Return — Q3 (Oct-Dec 2026)",cat:"tds",mon:"Jan"},
+{date:"15 Feb 2027",desc:"Updated Return (ITR-U) — Last date for AY 2024-25",cat:"itr",mon:"Feb"},
+{date:"15 Mar 2027",desc:"Advance Tax — 4th Installment (100%) FY 2026-27",cat:"advance",mon:"Mar"},
+{date:"15 Mar 2027",desc:"Last date to avoid interest u/s 234C",cat:"advance",mon:"Mar"},
+{date:"31 Mar 2027",desc:"Last date for belated/revised return (AY 2026-27)",cat:"itr",mon:"Mar"},
+{date:"11th Monthly",desc:"GSTR-1 (Outward supplies) — Monthly filers",cat:"gst",mon:"Monthly"},
+{date:"13th Monthly",desc:"GSTR-1 IFF (QRMP — M1, M2)",cat:"gst",mon:"Monthly"},
+{date:"20th Monthly",desc:"GSTR-3B (Monthly filers)",cat:"gst",mon:"Monthly"},
+{date:"22/24 Quarterly",desc:"GSTR-3B (QRMP scheme)",cat:"gst",mon:"Monthly"},
+{date:"07th Monthly",desc:"TDS/TCS deposit (all months except March)",cat:"tds",mon:"Monthly"}
 ];
+var activeCatFilter='all',activeMonFilter='all';
 function renderDueDates(list){var c=document.getElementById('dueDateList');
 var colors={itr:'#0a8c64',tds:'#b5651d',gst:'#2c5364',advance:'#d63031'};
+if(!list.length){c.innerHTML='<p style="text-align:center;color:var(--text-light);padding:20px;">No compliance items for this selection.</p>';return;}
 c.innerHTML=list.map(function(d){return '<div class="due-item"><div class="due-date" style="background:'+colors[d.cat]+'">'+d.date+'</div><div class="due-info"><strong>'+d.desc+'</strong><p>'+d.cat.toUpperCase()+'</p></div></div>';}).join('');}
-function filterDueDates(cat,btn){document.querySelectorAll('#tab-duedate .filter-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');renderDueDates(cat==='all'?dueDates:dueDates.filter(function(d){return d.cat===cat;}));}
+function applyDueFilters(){var f=dueDates;if(activeCatFilter!=='all')f=f.filter(function(d){return d.cat===activeCatFilter;});if(activeMonFilter!=='all')f=f.filter(function(d){return d.mon===activeMonFilter;});renderDueDates(f);}
+function filterDueDates(cat,btn){document.querySelectorAll('#tab-duedate .filter-row:first-of-type .filter-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');activeCatFilter=cat;applyDueFilters();}
+function filterDueMonth(mon,btn){document.querySelectorAll('#monthFilterRow .filter-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');activeMonFilter=mon;applyDueFilters();}
 renderDueDates(dueDates);
 
 // ==============================
@@ -1356,34 +1376,17 @@ r.innerHTML='<div class="result-title">'+(compliant?'COMPLIANT — Payment withi
 function resetMSME(){document.getElementById('msmeInvDate').value='';document.getElementById('msmePayDate').value='';document.getElementById('msmeAmt').value='';document.getElementById('msmeResult').className='result-box';}
 
 // ==============================
-// TAB 10: VAT FUEL CALCULATOR
+// TAB 10: IT NOTICE LAST DATE
 // ==============================
-function calcVAT(){var state=document.getElementById('vatState').value,product=document.getElementById('vatProduct').value,base=parseFloat(document.getElementById('vatBase').value)||0,qty=parseFloat(document.getElementById('vatQty').value)||1,r=document.getElementById('vatResult');
-if(!state||!base){if(state&&!base){r.className='result-box applicable';r.innerHTML='<div class="result-title">Enter base price per litre</div>';}return;}
-var rates={assam:{ms:{pct:32.66,fixed:1,label:'32.66% + Rs.1 Road Cess'},hsd:{pct:21.74,fixed:0,label:'21.74%'}},meghalaya:{ms:{pct:31.00,fixed:0,label:'31.00%'},hsd:{pct:22.50,fixed:0,label:'22.50%'}},ap:{ms:{pct:31,fixed:5,label:'31% + Rs.4 VAT + Rs.1 Cess'},hsd:{pct:22.25,fixed:5,label:'22.25% + Rs.4 VAT + Rs.1 Cess'}},manipur:{ms:{pct:36.50,fixed:0,label:'36.50%'},hsd:{pct:22.50,fixed:0,label:'22.50%'}},mizoram:{ms:{pct:25.00,fixed:0,label:'25.00%'},hsd:{pct:14.50,fixed:0,label:'14.50%'}}};
-var rt=rates[state][product];
-var vatPerLitre=Math.round((base*rt.pct/100+rt.fixed)*100)/100;
-var pricePerLitre=Math.round((base+vatPerLitre)*100)/100;
-var totalBase=Math.round(base*qty*100)/100;
-var totalVAT=Math.round(vatPerLitre*qty*100)/100;
-var totalPrice=Math.round(pricePerLitre*qty*100)/100;
-var stateNames={assam:'Assam',meghalaya:'Meghalaya',ap:'Andhra Pradesh',manipur:'Manipur',mizoram:'Mizoram'};
-r.className='result-box presumptive';
-r.innerHTML='<div class="result-title">'+stateNames[state]+' — '+(product==='ms'?'Petrol (MS)':'Diesel (HSD)')+'</div><div class="result-detail"><table class="limits-table" style="margin-top:10px;"><tr><th>Particulars</th><th>Per Litre</th><th>Total ('+qty+' L)</th></tr><tr><td>Base Price</td><td>Rs. '+base.toFixed(2)+'</td><td>Rs. '+fmt(totalBase)+'</td></tr><tr><td>VAT/Tax ('+rt.label+')</td><td>Rs. '+vatPerLitre.toFixed(2)+'</td><td>Rs. '+fmt(totalVAT)+'</td></tr><tr style="background:#e8f8f5;"><td><strong>Total Price</strong></td><td><strong>Rs. '+pricePerLitre.toFixed(2)+'</strong></td><td><strong>Rs. '+fmt(totalPrice)+'</strong></td></tr></table><p style="margin-top:10px;font-size:0.82rem;color:var(--text-light);">Note: Central Excise Duty and Dealer Commission are separate. Final pump price may differ. Rates are indicative — verify from latest state notification.</p></div>';}
-
-// ==============================
-// TAB 11: IT NOTICE LAST DATE
-// ==============================
-function calcNotice(){var type=document.getElementById('noticeType').value,ay=document.getElementById('noticeAY').value,orderDate=document.getElementById('noticeOrderDate').value,r=document.getElementById('noticeResult');
+function calcNotice(){var type=document.getElementById('noticeType').value,ay=document.getElementById('noticeAY').value,orderDate=document.getElementById('noticeOrderDate').value,fileDate=document.getElementById('noticeFileDate').value,r=document.getElementById('noticeResult');
 if(!type){r.className='result-box';r.style.display='none';return;}
 var ayStart=parseInt(ay.split('-')[0]);var ayEnd=ayStart+1;
-var lastDate='',section='',explanation='',details='';
+var lastDate='',section='',explanation='',details='',fileDateInfo='';
+if(fileDate){var fd=new Date(fileDate);var filingFY=fd.getMonth()>=3?fd.getFullYear():fd.getFullYear()-1;fileDateInfo='Return filed on '+fd.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})+' (FY '+filingFY+'-'+(filingFY+1)+'). ';}
 switch(type){
 case '143_2':
 section='Section 143(2)';explanation='Scrutiny Notice';
-var fyEnd=ayEnd;
-lastDate='30 September '+fyEnd;
-details='Notice must be served within 6 months from the end of the FY in which return is filed (for timely filed returns). For AY '+ay+', if return filed by due date, last date = 30 Sep '+(ayStart+1)+'. If return filed after due date but within AY, last date = 12 months from end of FY of filing.';
+if(fileDate){var fd2=new Date(fileDate);var filingFYEnd=fd2.getMonth()>=3?fd2.getFullYear()+1:fd2.getFullYear();var sixMo=new Date(filingFYEnd,8,30);var twelveMo=new Date(filingFYEnd+1,2,31);var dueDate=new Date(ayStart,6,31);if(fd2<=dueDate){lastDate=sixMo.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});details=fileDateInfo+'Return filed within due date (31 Jul '+ayStart+'). Notice must be served within 6 months from end of FY in which return filed = 30 Sep '+filingFYEnd+'.';}else{lastDate=twelveMo.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});details=fileDateInfo+'Return filed AFTER due date. Notice must be served within 12 months from end of FY in which return filed = 31 Mar '+(filingFYEnd+1)+'.';}}else{lastDate='30 Sep '+(ayStart+1)+' (if filed by due date)';details='Enter the Date of Filing for accurate calculation. If filed by due date: 6 months from end of FY of filing. If filed late: 12 months from end of FY of filing.';}
 break;
 case '148':case '149_3yr':
 section='Section 148/149(1)(a)';explanation='Reassessment — Within 3 Years';
@@ -1412,8 +1415,8 @@ details='Penalty for not getting books audited u/s 44AB. Amount = 0.5% of turnov
 break;
 }
 r.className='result-box presumptive';
-r.innerHTML='<div class="result-title">'+section+' — '+explanation+'</div><div class="result-detail"><table class="limits-table" style="margin-top:10px;"><tr><th>Particulars</th><th>Details</th></tr><tr><td>Assessment Year</td><td><strong>'+ay+'</strong></td></tr><tr style="background:#e8f8f5;"><td><strong>Last Date for Notice</strong></td><td><strong>'+lastDate+'</strong></td></tr></table><p style="margin-top:10px;font-size:0.88rem;">'+details+'</p></div>';}
-function resetNotice(){document.getElementById('noticeType').value='';document.getElementById('noticeOrderDate').value='';document.getElementById('noticeResult').className='result-box';document.getElementById('noticeResult').style.display='none';}
+r.innerHTML='<div class="result-title">'+section+' — '+explanation+'</div><div class="result-detail"><table class="limits-table" style="margin-top:10px;"><tr><th>Particulars</th><th>Details</th></tr><tr><td>Assessment Year</td><td><strong>'+ay+'</strong></td></tr>'+(fileDate?'<tr><td>Date of Filing</td><td><strong>'+new Date(fileDate).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})+'</strong></td></tr>':'')+'<tr style="background:#e8f8f5;"><td><strong>Last Date for Notice</strong></td><td><strong>'+lastDate+'</strong></td></tr></table><p style="margin-top:10px;font-size:0.88rem;">'+details+'</p></div>';}
+function resetNotice(){document.getElementById('noticeType').value='';document.getElementById('noticeOrderDate').value='';document.getElementById('noticeFileDate').value='';document.getElementById('noticeResult').className='result-box';document.getElementById('noticeResult').style.display='none';}
 
 // ==============================
 // TAB 12: CARO 2020
@@ -1483,15 +1486,55 @@ var checklistItems=[
 ];
 function renderChecklist(cat){var c=document.getElementById('checklistContainer');
 var items=cat==='all'?checklistItems:checklistItems.filter(function(i){return i.cat===cat;});
-var saved=JSON.parse(localStorage.getItem('taxsuite_checklist')||'{}');
+var saved=JSON.parse(localStorage.getItem('rr_checklist')||'{}');
 c.innerHTML=items.map(function(item,idx){var key='cl_'+checklistItems.indexOf(item);var checked=saved[key]?'checked':'';
 return '<div class="checklist-item '+checked+'" onclick="toggleCheck(this,\''+key+'\')"><div class="cl-box"></div><div class="cl-text">'+item.text+'</div></div>';}).join('');
 updateProgress();}
-function toggleCheck(el,key){el.classList.toggle('checked');var saved=JSON.parse(localStorage.getItem('taxsuite_checklist')||'{}');saved[key]=el.classList.contains('checked');localStorage.setItem('taxsuite_checklist',JSON.stringify(saved));updateProgress();}
-function updateProgress(){var saved=JSON.parse(localStorage.getItem('taxsuite_checklist')||'{}');var done=Object.values(saved).filter(Boolean).length;document.getElementById('checklistProgress').textContent=done+' / '+checklistItems.length+' completed';}
+function toggleCheck(el,key){el.classList.toggle('checked');var saved=JSON.parse(localStorage.getItem('rr_checklist')||'{}');saved[key]=el.classList.contains('checked');localStorage.setItem('rr_checklist',JSON.stringify(saved));updateProgress();}
+function updateProgress(){var saved=JSON.parse(localStorage.getItem('rr_checklist')||'{}');var done=Object.values(saved).filter(Boolean).length;document.getElementById('checklistProgress').textContent=done+' / '+checklistItems.length+' completed';}
 function filterChecklist(cat,btn){document.querySelectorAll('#tab-auditcheck .filter-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');renderChecklist(cat);}
-function resetChecklist(){localStorage.removeItem('taxsuite_checklist');renderChecklist('all');}
+function resetChecklist(){localStorage.removeItem('rr_checklist');renderChecklist('all');}
 renderChecklist('all');
+
+// ==============================
+// AS APPLICABILITY (NCE)
+// ==============================
+var asData=[
+{no:"AS 1",name:"Disclosure of Accounting Policies",msme:"full",detail:"Full compliance required."},
+{no:"AS 2",name:"Valuation of Inventories",msme:"full",detail:"Full compliance required."},
+{no:"AS 3",name:"Cash Flow Statements",msme:"exempt",detail:"Not applicable entirely for MSMEs."},
+{no:"AS 4",name:"Contingencies and Events After Balance Sheet Date",msme:"full",detail:"Full compliance required."},
+{no:"AS 5",name:"Net Profit or Loss, Prior Period Items, Changes in Accounting Policies",msme:"full",detail:"Full compliance required."},
+{no:"AS 7",name:"Construction Contracts",msme:"full",detail:"Full compliance required."},
+{no:"AS 9",name:"Revenue Recognition",msme:"full",detail:"Full compliance required."},
+{no:"AS 10",name:"Property, Plant and Equipment",msme:"partial",detail:"Relaxation: May omit paragraph 87 (encouraged disclosures)."},
+{no:"AS 11",name:"Effects of Changes in Foreign Exchange Rates",msme:"partial",detail:"Relaxation: May omit paragraph 44 (encouraged disclosures)."},
+{no:"AS 12",name:"Accounting for Government Grants",msme:"full",detail:"Full compliance required."},
+{no:"AS 13",name:"Accounting for Investments",msme:"full",detail:"Full compliance required."},
+{no:"AS 14",name:"Accounting for Amalgamations",msme:"conditional",detail:"Generally not applicable unless relevant transactions exist. Apply only if amalgamation occurs."},
+{no:"AS 15",name:"Employee Benefits",msme:"partial",detail:"Relaxation: May omit specific paragraphs on non-vesting compensated absences, discounting liabilities, defined benefit plans, and other long-term benefits. Alternative rational methods allowed for certain calculations."},
+{no:"AS 16",name:"Borrowing Costs",msme:"full",detail:"Full compliance required."},
+{no:"AS 17",name:"Segment Reporting",msme:"exempt",detail:"Not applicable entirely for MSMEs."},
+{no:"AS 18",name:"Related Party Disclosures",msme:"partial",detail:"Not applicable if Turnover ≤ Rs.50 Crore, Borrowings ≤ Rs.10 Crore, and not a holding/subsidiary of another MSME. Otherwise full compliance."},
+{no:"AS 19",name:"Leases",msme:"partial",detail:"Relaxation: May omit specific disclosure requirements (e.g., paras 22, 25, 37, 38, 46)."},
+{no:"AS 20",name:"Earnings Per Share",msme:"exempt",detail:"Not applicable entirely for MSMEs."},
+{no:"AS 21",name:"Consolidated Financial Statements",msme:"conditional",detail:"Applicable only if the entity opts or is required to prepare consolidated financial statements."},
+{no:"AS 22",name:"Accounting for Taxes on Income",msme:"partial",detail:"Relaxation: Required to comply only with current tax provisions. Transitional adjustments for deferred taxes allowed."},
+{no:"AS 23",name:"Accounting for Investments in Associates",msme:"conditional",detail:"Applicable only if the entity opts or is required to prepare consolidated financial statements."},
+{no:"AS 24",name:"Discontinuing Operations",msme:"exempt",detail:"Not applicable entirely for MSMEs."},
+{no:"AS 25",name:"Interim Financial Reporting",msme:"conditional",detail:"Applicable only if the entity opts or is required to prepare interim financial statements."},
+{no:"AS 26",name:"Intangible Assets",msme:"partial",detail:"Relaxation: May omit specific disclosure paragraphs (e.g., paras 90(d)(iii), 90(d)(iv), 98)."},
+{no:"AS 27",name:"Financial Reporting of Interests in Joint Ventures",msme:"conditional",detail:"Generally not applicable unless relevant transactions (jointly controlled operations/assets) exist."},
+{no:"AS 28",name:"Impairment of Assets",msme:"partial",detail:"Relaxation: May estimate 'value in use' without present value technique. Specific disclosure relaxations allowed (e.g., paras 121(c)(ii), 121(d), 123)."},
+{no:"AS 29",name:"Provisions, Contingent Liabilities and Contingent Assets",msme:"partial",detail:"Relaxation: May omit disclosure paragraphs 66 and 67."}
+];
+function renderAS(list){var c=document.getElementById('asTableContainer');
+var tags={full:'<span class="tag tag-low">Full Compliance</span>',exempt:'<span class="tag tag-high">Not Applicable</span>',partial:'<span class="tag tag-medium">Partial Relaxation</span>',conditional:'<span class="tag tag-info">Conditional</span>'};
+c.innerHTML='<table class="limits-table"><thead><tr><th style="width:60px;">AS No.</th><th>Standard</th><th style="width:130px;">MSME Status</th><th>Details for MSMEs</th></tr></thead><tbody>'+list.map(function(a){
+var bg=a.msme==='exempt'?'#fde8e8':a.msme==='partial'?'#fef9e7':a.msme==='conditional'?'#eaf2f8':'';
+return '<tr'+(bg?' style="background:'+bg+'"':'')+'><td><strong>'+a.no+'</strong></td><td>'+a.name+'</td><td>'+tags[a.msme]+'</td><td style="font-size:0.85rem;">'+a.detail+'</td></tr>';}).join('')+'</tbody></table>';}
+function filterAS(cat,btn){document.querySelectorAll('#tab-asapply .filter-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');renderAS(cat==='all'?asData:asData.filter(function(a){return a.msme===cat;}));}
+renderAS(asData);
 </script>
 </body>
 </html>
