@@ -152,9 +152,13 @@
             .stats-row { grid-template-columns:1fr 1fr; }
         }
     </style>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 </head>
 <body>
 
+<div style="background:#fff3cd;color:#856404;padding:8px 16px;text-align:center;font-size:0.82rem;border-bottom:1px solid #ffc107;">
+    <strong>Disclaimer:</strong> Ready Reckoner is for informational & educational purposes only. Always verify from official sources and exercise professional judgment. <a href="#" onclick="switchTab('disclaimer');return false;" style="color:#856404;text-decoration:underline;">Read full disclaimer</a>
+</div>
 <div class="header">
     <h1>Ready<span>Reckoner</span></h1>
     <p>Complete CA Toolkit — IT Calculator | GST | TDS/TCS | Section Mapping | Compliance & More</p>
@@ -176,6 +180,12 @@
     <div class="nav-tab" onclick="switchTab('capgain')">Capital Gains</div>
     <div class="nav-tab" onclick="switchTab('intpenalty')">Interest 234A/B/C</div>
     <div class="nav-tab" onclick="switchTab('impact')">Impact Analyzer</div>
+    <div class="nav-tab" onclick="switchTab('ratios')">Ratio Analysis</div>
+    <div class="nav-tab" onclick="switchTab('tbcompare')">TB Compare</div>
+    <div class="nav-tab" onclick="switchTab('smartsearch')">Smart Search</div>
+    <div class="nav-tab" onclick="switchTab('templates')">CA Templates</div>
+    <div class="nav-tab" onclick="switchTab('noticereply')">Notice Reply AI</div>
+    <div class="nav-tab" onclick="switchTab('calendar')">Compliance Calendar</div>
     <div class="nav-tab" onclick="switchTab('disclaimer')">Disclaimer</div>
 </div>
 
@@ -975,6 +985,162 @@
             <tr><td>Set Off / Carry Forward</td><td>Section 70-80</td><td>Sec 99-122</td></tr>
             <tr><td>Tax Regime</td><td>115BAC (optional new regime)</td><td><strong>New Regime default</strong>; old regime opt-in</td></tr>
         </table>
+    </div>
+</div>
+
+<!-- ==================== RATIO ANALYSIS ==================== -->
+<div id="tab-ratios" class="tab-content">
+    <div class="card">
+        <h2>Financial Ratio Analysis — Upload Trial Balance</h2>
+        <p style="color:var(--text-light);margin-bottom:6px;">Upload your Trial Balance (Excel) and get all key financial ratios automatically.</p>
+        <p style="color:var(--text-light);margin-bottom:14px;font-size:0.82rem;">Expected format: Column A = Ledger Name, Column B = Debit Balance, Column C = Credit Balance. Categorize ledgers as per Schedule III. Source: <a href="https://www.mca.gov.in" target="_blank" style="color:var(--accent);">mca.gov.in</a> — Schedule III, Companies Act 2013</p>
+        <div class="form-group"><label>Upload Trial Balance (.xlsx / .xls / .csv)</label>
+            <input type="file" id="ratioFile" accept=".xlsx,.xls,.csv" onchange="parseRatioTB()" style="padding:8px;"></div>
+        <div id="ratioMapping" style="display:none;margin-top:14px;">
+            <h3 style="color:var(--accent);margin-bottom:10px;">Step 2: Map Key Figures (auto-detected or enter manually)</h3>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+                <div class="form-group"><label>Total Revenue / Sales</label><input type="number" id="rSales" placeholder="0"></div>
+                <div class="form-group"><label>Cost of Goods Sold (COGS)</label><input type="number" id="rCOGS" placeholder="0"></div>
+                <div class="form-group"><label>Net Profit (PAT)</label><input type="number" id="rPAT" placeholder="0"></div>
+                <div class="form-group"><label>EBITDA</label><input type="number" id="rEBITDA" placeholder="0"></div>
+                <div class="form-group"><label>Total Current Assets</label><input type="number" id="rCA" placeholder="0"></div>
+                <div class="form-group"><label>Total Current Liabilities</label><input type="number" id="rCL" placeholder="0"></div>
+                <div class="form-group"><label>Inventory / Stock</label><input type="number" id="rStock" placeholder="0"></div>
+                <div class="form-group"><label>Trade Receivables (Debtors)</label><input type="number" id="rDebtors" placeholder="0"></div>
+                <div class="form-group"><label>Trade Payables (Creditors)</label><input type="number" id="rCreditors" placeholder="0"></div>
+                <div class="form-group"><label>Total Assets</label><input type="number" id="rTotalAssets" placeholder="0"></div>
+                <div class="form-group"><label>Total Equity (Shareholders' Funds)</label><input type="number" id="rEquity" placeholder="0"></div>
+                <div class="form-group"><label>Total Debt / Borrowings</label><input type="number" id="rDebt" placeholder="0"></div>
+                <div class="form-group"><label>Interest / Finance Cost</label><input type="number" id="rInterest" placeholder="0"></div>
+                <div class="form-group"><label>Cash & Bank Balance</label><input type="number" id="rCash" placeholder="0"></div>
+                <div class="form-group"><label>Purchases</label><input type="number" id="rPurchases" placeholder="0"></div>
+            </div>
+            <button class="btn" onclick="calcRatios()" style="margin-top:10px;">Calculate All Ratios</button>
+        </div>
+        <div id="ratioResult" style="margin-top:16px;"></div>
+    </div>
+</div>
+
+<!-- ==================== TB COMPARISON ==================== -->
+<div id="tab-tbcompare" class="tab-content">
+    <div class="card">
+        <h2>Trial Balance Comparison — Two Year Analysis</h2>
+        <p style="color:var(--text-light);margin-bottom:6px;">Upload two trial balances to get automatic variance analysis.</p>
+        <p style="color:var(--text-light);margin-bottom:14px;font-size:0.82rem;">Expected format: Column A = Ledger/Account Name, Column B = Debit, Column C = Credit. Both files should have similar ledger names.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div class="form-group"><label>FY 2024-25 Trial Balance (Previous Year)</label>
+                <input type="file" id="tbFile1" accept=".xlsx,.xls,.csv" style="padding:8px;"></div>
+            <div class="form-group"><label>FY 2025-26 Trial Balance (Current Year)</label>
+                <input type="file" id="tbFile2" accept=".xlsx,.xls,.csv" style="padding:8px;"></div>
+        </div>
+        <button class="btn" onclick="compareTB()" style="margin-top:10px;">Compare Trial Balances</button>
+        <div id="tbResult" style="margin-top:16px;"></div>
+    </div>
+</div>
+
+<!-- ==================== SMART SEARCH ==================== -->
+<div id="tab-smartsearch" class="tab-content">
+    <div class="card">
+        <h2>Smart Search — Cross-Reference Guide</h2>
+        <p style="color:var(--text-light);margin-bottom:6px;">Search any topic and get its impact across IT Act, Companies Act, GST, Form 3CD, and compliance requirements.</p>
+        <p style="color:var(--text-light);margin-bottom:14px;font-size:0.82rem;">Type a keyword like "cash payment", "ESIC", "TDS", "depreciation", "MSME" etc. to see all related provisions, reporting requirements, and practical implications.</p>
+        <div class="search-box"><input type="text" id="smartQ" placeholder="Type any topic... (e.g. cash payment above 10000, ESIC, TDS on rent, MSME payment, depreciation)" oninput="smartSearch()"></div>
+        <div id="smartResults"></div>
+    </div>
+</div>
+
+<!-- ==================== CA TEMPLATES ==================== -->
+<div id="tab-templates" class="tab-content">
+    <div class="card">
+        <h2>CA Practice Templates</h2>
+        <p style="color:var(--text-light);margin-bottom:14px;">Ready-to-use templates for day-to-day CA practice. Click to view, then copy or print.</p>
+        <div class="filter-row" id="tplFilterRow">
+            <button class="filter-btn active" onclick="showTemplate('mrl',this)">MRL Letter</button>
+            <button class="filter-btn" onclick="showTemplate('noc',this)">NOC from CA</button>
+            <button class="filter-btn" onclick="showTemplate('poa',this)">Power of Attorney</button>
+            <button class="filter-btn" onclick="showTemplate('engagement',this)">Engagement Letter</button>
+            <button class="filter-btn" onclick="showTemplate('cert',this)">Net Worth Certificate</button>
+            <button class="filter-btn" onclick="showTemplate('rep',this)">Representation Letter</button>
+        </div>
+        <div id="tplOutput" style="white-space:pre-wrap;font-family:'Segoe UI',sans-serif;font-size:0.9rem;line-height:1.7;background:#fff;color:#222;padding:24px;border:1px solid #ddd;border-radius:8px;margin-top:14px;"></div>
+        <div style="display:flex;gap:10px;margin-top:10px;">
+            <button class="btn" onclick="copyTemplate()">Copy to Clipboard</button>
+            <button class="btn" style="background:#b5651d;" onclick="printTemplate()">Print</button>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== NOTICE REPLY AI ==================== -->
+<div id="tab-noticereply" class="tab-content">
+    <div class="card">
+        <h2>Smart Notice Reply Generator</h2>
+        <p style="color:var(--text-light);margin-bottom:6px;">Select notice type, provide case details, and get an intelligent draft reply.</p>
+        <p style="color:var(--text-light);margin-bottom:14px;font-size:0.82rem;">Template-based intelligent drafting with section references and case law citations. For professional use — always review before submission.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div class="form-group"><label>Notice Section</label>
+                <select id="nrType2" onchange="showNR2Fields()">
+                    <option value="">— Select —</option>
+                    <option value="139_9">139(9) — Defective Return</option>
+                    <option value="142_1">142(1) — Inquiry / Info Request</option>
+                    <option value="143_1">143(1) — Intimation (Mismatch)</option>
+                    <option value="143_2">143(2) — Scrutiny</option>
+                    <option value="148">148/148A — Reopening</option>
+                    <option value="154">154 — Rectification</option>
+                    <option value="156">156 — Demand Notice</option>
+                    <option value="245">245 — Refund Adjustment</option>
+                    <option value="270A">270A — Penalty</option>
+                </select></div>
+            <div class="form-group"><label>Assessee Name</label><input type="text" id="nr2Name" placeholder="M/s ABC Traders"></div>
+            <div class="form-group"><label>PAN</label><input type="text" id="nr2PAN" placeholder="ABCDE1234F" style="text-transform:uppercase;"></div>
+            <div class="form-group"><label>Assessment Year</label><input type="text" id="nr2AY" placeholder="2025-26"></div>
+            <div class="form-group"><label>Notice Date</label><input type="date" id="nr2Date"></div>
+            <div class="form-group"><label>DIN / Ref No.</label><input type="text" id="nr2DIN" placeholder="DIN number"></div>
+            <div class="form-group"><label>Ward / Circle / City</label><input type="text" id="nr2Ward" placeholder="Ward 5(1), Mumbai"></div>
+            <div class="form-group"><label>Reply Tone</label>
+                <select id="nr2Tone"><option value="compliance">Compliance</option><option value="objection">Objection</option></select></div>
+        </div>
+        <div class="form-group" style="margin-top:10px;"><label>Brief Case History & Key Facts</label>
+            <textarea id="nr2History" rows="4" placeholder="E.g.: Assessee is a trader in electronics. Return filed on 31.07.2024. Notice received claiming mismatch of Rs 45,000 in TDS credit. TDS was correctly reflected in 26AS. The mismatch is due to employer PAN change..."></textarea></div>
+        <div class="form-group"><label>Specific Issue / Query in Notice</label>
+            <textarea id="nr2Issue" rows="3" placeholder="E.g.: TDS credit of Rs 45,000 not allowed / Explain cash deposit of Rs 5 Lakh / Justify deduction u/s 80G"></textarea></div>
+        <div style="display:flex;gap:10px;margin-top:10px;">
+            <button class="btn" onclick="generateNR2()">Generate Reply Draft</button>
+            <button class="btn" style="background:var(--primary-mid);" onclick="copyNR2()">Copy</button>
+            <button class="btn" style="background:#b5651d;" onclick="printNR2()">Print</button>
+        </div>
+        <div id="nr2Output" style="display:none;white-space:pre-wrap;font-family:'Segoe UI',sans-serif;font-size:0.9rem;line-height:1.7;background:#fff;color:#222;padding:24px;border:1px solid #ddd;border-radius:8px;margin-top:14px;"></div>
+    </div>
+</div>
+
+<!-- ==================== COMPLIANCE CALENDAR ==================== -->
+<div id="tab-calendar" class="tab-content">
+    <div class="card">
+        <h2>📅 Compliance Calendar — FY 2025-26 / Tax Year 2026-27</h2>
+        <p class="source-ref" style="color:var(--text-light);font-size:0.78rem;margin-bottom:10px;">Source: Income Tax Act 2025 (Sec 263, Rule 47), CBDT Notifications, Companies Act 2013, GST Act | incometaxindia.gov.in, cbic-gst.gov.in, mca.gov.in</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
+            <button class="filter-btn active" onclick="filterDueDates('all',this)">All</button>
+            <button class="filter-btn" onclick="filterDueDates('it',this)">Income Tax</button>
+            <button class="filter-btn" onclick="filterDueDates('gst',this)">GST</button>
+            <button class="filter-btn" onclick="filterDueDates('tds',this)">TDS/TCS</button>
+            <button class="filter-btn" onclick="filterDueDates('roc',this)">ROC / MCA</button>
+            <button class="filter-btn" onclick="filterDueDates('audit',this)">Audit</button>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;">
+            <button class="filter-btn" onclick="filterDueMonth('all',this)" style="background:#0f2027;color:white;">All Months</button>
+            <button class="filter-btn" onclick="filterDueMonth('04',this)">Apr</button>
+            <button class="filter-btn" onclick="filterDueMonth('05',this)">May</button>
+            <button class="filter-btn" onclick="filterDueMonth('06',this)">Jun</button>
+            <button class="filter-btn" onclick="filterDueMonth('07',this)">Jul</button>
+            <button class="filter-btn" onclick="filterDueMonth('08',this)">Aug</button>
+            <button class="filter-btn" onclick="filterDueMonth('09',this)">Sep</button>
+            <button class="filter-btn" onclick="filterDueMonth('10',this)">Oct</button>
+            <button class="filter-btn" onclick="filterDueMonth('11',this)">Nov</button>
+            <button class="filter-btn" onclick="filterDueMonth('12',this)">Dec</button>
+            <button class="filter-btn" onclick="filterDueMonth('01',this)">Jan</button>
+            <button class="filter-btn" onclick="filterDueMonth('02',this)">Feb</button>
+            <button class="filter-btn" onclick="filterDueMonth('03',this)">Mar</button>
+        </div>
+        <div id="calendarResults"></div>
     </div>
 </div>
 
@@ -2024,6 +2190,433 @@ html+='</tbody></table></div>';
 r.className='result-box presumptive';
 r.innerHTML=html;
 }
+
+// ==============================
+// RATIO ANALYSIS
+// ==============================
+function parseRatioTB(){
+var file=document.getElementById('ratioFile').files[0];
+if(!file)return;
+var reader=new FileReader();
+reader.onload=function(e){
+var data=new Uint8Array(e.target.result);
+var wb=XLSX.read(data,{type:'array'});
+var ws=wb.Sheets[wb.SheetNames[0]];
+var json=XLSX.utils.sheet_to_json(ws,{header:1});
+// Try auto-detect common ledger names
+var sales=0,cogs=0,pat=0,ca_=0,cl_=0,stock=0,debtors=0,creditors=0,totalAssets=0,equity=0,debt=0,interest=0,cash=0,purchases=0,ebitda=0;
+json.forEach(function(row){
+if(!row[0])return;
+var name=String(row[0]).toLowerCase();
+var dr=parseFloat(row[1])||0,cr=parseFloat(row[2])||0;
+var net=dr-cr;
+if(name.match(/sales|revenue|turnover|income from operations/))sales+=Math.abs(net);
+if(name.match(/cost of goods|cogs|cost of material|opening stock|closing stock/)){if(name.match(/closing/))cogs-=Math.abs(net);else cogs+=Math.abs(net);}
+if(name.match(/purchase/))purchases+=Math.abs(net);
+if(name.match(/net profit|profit after|pat|surplus/))pat+=Math.abs(net);
+if(name.match(/stock|inventor/))stock+=Math.abs(net);
+if(name.match(/debtor|receivable|sundry debtor/))debtors+=dr;
+if(name.match(/creditor|payable|sundry creditor/))creditors+=cr;
+if(name.match(/cash|bank/))cash+=dr;
+if(name.match(/loan|borrowing|term loan|overdraft|od/))debt+=cr;
+if(name.match(/interest|finance cost/))interest+=Math.abs(net);
+if(name.match(/capital|reserve|surplus|equity|partner.*capital/))equity+=cr;
+});
+document.getElementById('rSales').value=Math.round(sales)||'';
+document.getElementById('rCOGS').value=Math.round(cogs)||'';
+document.getElementById('rPAT').value=Math.round(pat)||'';
+document.getElementById('rStock').value=Math.round(stock)||'';
+document.getElementById('rDebtors').value=Math.round(debtors)||'';
+document.getElementById('rCreditors').value=Math.round(creditors)||'';
+document.getElementById('rCash').value=Math.round(cash)||'';
+document.getElementById('rDebt').value=Math.round(debt)||'';
+document.getElementById('rInterest').value=Math.round(interest)||'';
+document.getElementById('rEquity').value=Math.round(equity)||'';
+document.getElementById('rPurchases').value=Math.round(purchases)||'';
+document.getElementById('ratioMapping').style.display='block';
+};
+reader.readAsArrayBuffer(file);
+}
+function calcRatios(){
+var s=parseFloat(document.getElementById('rSales').value)||0;
+var cogs=parseFloat(document.getElementById('rCOGS').value)||0;
+var pat=parseFloat(document.getElementById('rPAT').value)||0;
+var ebitda=parseFloat(document.getElementById('rEBITDA').value)||0;
+var ca_=parseFloat(document.getElementById('rCA').value)||0;
+var cl_=parseFloat(document.getElementById('rCL').value)||0;
+var stock=parseFloat(document.getElementById('rStock').value)||0;
+var debtors=parseFloat(document.getElementById('rDebtors').value)||0;
+var creditors=parseFloat(document.getElementById('rCreditors').value)||0;
+var ta=parseFloat(document.getElementById('rTotalAssets').value)||0;
+var eq=parseFloat(document.getElementById('rEquity').value)||0;
+var debt=parseFloat(document.getElementById('rDebt').value)||0;
+var interest=parseFloat(document.getElementById('rInterest').value)||0;
+var cash=parseFloat(document.getElementById('rCash').value)||0;
+var purchases=parseFloat(document.getElementById('rPurchases').value)||0;
+var r=document.getElementById('ratioResult');
+var rows='';
+function addR(cat,name,val,ideal,remark){
+var v=isFinite(val)?val.toFixed(2):'N/A';
+var color=remark.match(/Good|Healthy|Strong/)?'var(--success)':remark.match(/Concern|Weak|High Risk/)?'var(--danger)':'#b5651d';
+rows+='<tr><td style="font-size:0.8rem;">'+cat+'</td><td><strong>'+name+'</strong></td><td style="text-align:right;font-size:1.05rem;"><strong>'+v+'</strong></td><td style="font-size:0.82rem;">'+ideal+'</td><td style="font-size:0.82rem;color:'+color+'">'+remark+'</td></tr>';
+}
+// Liquidity
+var cr_=cl_?ca_/cl_:0;addR('Liquidity','Current Ratio',cr_,'>1.5:1',cr_>=1.5?'Good — Healthy liquidity':cr_>=1?'Acceptable':'Concern — Below 1');
+var qr=(ca_-stock)/Math.max(cl_,1);addR('Liquidity','Quick Ratio (Acid Test)',qr,'>1:1',qr>=1?'Good — Can meet short-term obligations':'Concern — Dependent on stock liquidation');
+var cashR=cash/Math.max(cl_,1);addR('Liquidity','Cash Ratio',cashR,'>0.2',cashR>=0.2?'Healthy cash position':'Weak — Low immediate liquidity');
+// Profitability
+var gp=s?(s-cogs)/s*100:0;addR('Profitability','Gross Profit Margin',gp,'>25%',gp>=25?'Good':'Low margin — review pricing/COGS');
+var np=s?pat/s*100:0;addR('Profitability','Net Profit Margin',np,'>10%',np>=10?'Strong':'Concern — Low net profitability');
+var ebitdaM=s&&ebitda?ebitda/s*100:0;if(ebitda)addR('Profitability','EBITDA Margin',ebitdaM,'>15%',ebitdaM>=15?'Good operating efficiency':'Below average');
+var roe=eq?pat/eq*100:0;addR('Profitability','Return on Equity (ROE)',roe,'>15%',roe>=15?'Strong returns to shareholders':'Below expectations');
+var roa=ta?pat/ta*100:0;addR('Profitability','Return on Assets (ROA)',roa,'>5%',roa>=5?'Good asset utilization':'Underperforming assets');
+// Leverage
+var de=eq?debt/eq:0;addR('Leverage','Debt-Equity Ratio',de,'<2:1',de<=2?'Acceptable leverage':'High Risk — Over-leveraged');
+var icr=interest?ebitda/interest:0;if(interest)addR('Leverage','Interest Coverage (DSCR)',icr,'>3x',icr>=3?'Healthy — Can service debt':'Concern — Debt servicing risk');
+var dta=ta?debt/ta*100:0;addR('Leverage','Debt to Total Assets',dta/100,'<0.5',dta<=50?'Good':'High Risk');
+// Efficiency
+var itr=stock?s/stock:0;addR('Efficiency','Inventory Turnover',itr,'>6x',itr>=6?'Good stock movement':'Slow-moving inventory');
+var dtr=debtors?s/debtors:0;addR('Efficiency','Debtor Turnover',dtr,'>8x',dtr>=8?'Good collection':'Slow receivables — review credit policy');
+var dbtDays=dtr?365/dtr:0;addR('Efficiency','Debtor Days',dbtDays,'<45 days',dbtDays<=45?'Healthy collection period':'Concern — High debtor days');
+var ctr=creditors&&purchases?purchases/creditors:0;addR('Efficiency','Creditor Turnover',ctr,'>6x',ctr?'Monitor payment cycle':'N/A');
+var credDays=ctr?365/ctr:0;if(ctr)addR('Efficiency','Creditor Days',credDays,'30-60 days',credDays<=60?'Within norms':'Review — MSME 43B(h) risk if >45 days');
+var atr=ta?s/ta:0;addR('Efficiency','Asset Turnover',atr,'>1x',atr>=1?'Good asset utilization':'Low');
+r.innerHTML='<table class="limits-table"><thead><tr><th>Category</th><th>Ratio</th><th>Value</th><th>Ideal</th><th>Remark</th></tr></thead><tbody>'+rows+'</tbody></table>';
+}
+
+// ==============================
+// TRIAL BALANCE COMPARISON
+// ==============================
+function readTBFile(fileInput,cb){
+var file=fileInput.files[0];if(!file){cb(null);return;}
+var reader=new FileReader();
+reader.onload=function(e){
+var data=new Uint8Array(e.target.result);
+var wb=XLSX.read(data,{type:'array'});
+var ws=wb.Sheets[wb.SheetNames[0]];
+var json=XLSX.utils.sheet_to_json(ws,{header:1});
+var result={};
+json.forEach(function(row){
+if(!row[0]||typeof row[0]!=='string')return;
+var name=row[0].trim();
+var dr=parseFloat(row[1])||0,cr=parseFloat(row[2])||0;
+result[name]={dr:dr,cr:cr,net:dr-cr};
+});
+cb(result);
+};
+reader.readAsArrayBuffer(file);
+}
+function compareTB(){
+var f1=document.getElementById('tbFile1'),f2=document.getElementById('tbFile2');
+if(!f1.files[0]||!f2.files[0]){alert('Please upload both trial balances.');return;}
+readTBFile(f1,function(tb1){
+readTBFile(f2,function(tb2){
+if(!tb1||!tb2){alert('Error reading files.');return;}
+var allKeys={};
+Object.keys(tb1).forEach(function(k){allKeys[k]=true;});
+Object.keys(tb2).forEach(function(k){allKeys[k]=true;});
+var rows='';var sortedKeys=Object.keys(allKeys).sort();
+sortedKeys.forEach(function(k){
+var old=tb1[k]||{dr:0,cr:0,net:0};
+var cur=tb2[k]||{dr:0,cr:0,net:0};
+var diff=cur.net-old.net;
+var pct=old.net?((diff/Math.abs(old.net))*100).toFixed(1):'New';
+var flag=Math.abs(diff)>0&&(pct==='New'||Math.abs(parseFloat(pct))>25)?'style="background:#fef9e7;"':'';
+var diffColor=diff>0?'color:var(--success)':diff<0?'color:var(--danger)':'';
+rows+='<tr '+flag+'><td>'+k+'</td><td style="text-align:right;">'+fmt(old.dr)+'</td><td style="text-align:right;">'+fmt(old.cr)+'</td><td style="text-align:right;">'+fmt(cur.dr)+'</td><td style="text-align:right;">'+fmt(cur.cr)+'</td><td style="text-align:right;'+diffColor+'"><strong>'+fmt(diff)+'</strong></td><td style="text-align:right;">'+(pct==='New'?'<span class="tag tag-info">NEW</span>':pct+'%')+'</td></tr>';
+});
+document.getElementById('tbResult').innerHTML='<table class="limits-table"><thead><tr><th>Ledger</th><th colspan="2" style="text-align:center;background:#b5651d;color:#fff;">FY 2024-25 (PY)</th><th colspan="2" style="text-align:center;background:#0a8c64;color:#fff;">FY 2025-26 (CY)</th><th>Variance</th><th>%</th></tr><tr><th></th><th>Dr</th><th>Cr</th><th>Dr</th><th>Cr</th><th></th><th></th></tr></thead><tbody>'+rows+'</tbody></table><p style="margin-top:10px;font-size:0.82rem;color:var(--text-light);">Rows highlighted in yellow indicate variance >25% or new ledgers. Total ledgers compared: '+sortedKeys.length+'</p>';
+});
+});
+}
+
+// ==============================
+// SMART SEARCH (Cross-reference)
+// ==============================
+var smartDB=[
+{q:"cash payment above 10000 10k 40a",topic:"Cash Payment > Rs 10,000",impacts:[
+{area:"Income Tax",detail:"100% disallowance u/s 40A(3). Exception: transporters Rs 35,000 (Rule 6DD). New Act: equivalent provision in Chapter V."},
+{area:"Form 3CD",detail:"Report in <strong>Clause 32</strong> (Form 3CD) / Clause 31-33 (Form 26). Each payment to be listed separately."},
+{area:"Tax Audit",detail:"Auditor must scan entire cash book and flag all payments >10K. Common audit observation."},
+{area:"Penalty",detail:"No separate penalty — but disallowance increases taxable income and tax liability."},
+{area:"Practical Tip",detail:"Check Rule 6DD exceptions: medical emergency, villages without banks, agriculture. Transporters can pay up to Rs 35,000 in cash."}
+]},
+{q:"cash receipt 2 lakh 269st cash received",topic:"Cash Receipt > Rs 2 Lakh — Sec 269ST",impacts:[
+{area:"Income Tax",detail:"Penalty u/s 271DA = 100% of amount received. Sec 269ST prohibits cash receipt >2L from a person in a day / single transaction / related to one event."},
+{area:"Form 3CD",detail:"Report in <strong>Clause 31</strong> (Enhanced AY 2025-26). Transaction codes required."},
+{area:"GST",detail:"No direct GST impact, but large cash transactions may trigger scrutiny."},
+{area:"Practical Tip",detail:"Watch for split transactions designed to evade the limit. Aggregate per person per day."}
+]},
+{q:"esic esi employee state insurance",topic:"ESIC / ESI Contribution",impacts:[
+{area:"Income Tax",detail:"Deductible u/s 36(1)(va) only if deposited before employee's contribution due date. Employer's share: u/s 43B."},
+{area:"Form 3CD",detail:"Report in <strong>Clause 26</strong> (Sec 43B items) if deposited late. Also check Clause 20 (deductions)."},
+{area:"Section 43B",detail:"Must be PAID before return filing due date to claim deduction. Late deposit = disallowance."},
+{area:"Employee Contribution",detail:"If employee's share deducted but not deposited by ESI due date → permanent disallowance u/s 36(1)(va) per Supreme Court in Checkmate Services."},
+{area:"Penalty",detail:"ESI Act penalties + IT disallowance. Interest u/s 234B/C may apply on additional tax."},
+{area:"Practical Tip",detail:"ESI applicable if wages ≤ Rs 21,000/month. Employer: 3.25%, Employee: 0.75%. Due by 15th of next month."}
+]},
+{q:"pf provident fund epf employer employee",topic:"Provident Fund (PF/EPF)",impacts:[
+{area:"Income Tax",detail:"Employer's contribution deductible u/s 36(1)(iv). Employee's share: u/s 36(1)(va) — must deposit by PF due date (15th of next month)."},
+{area:"Form 3CD",detail:"Report in <strong>Clause 26</strong> (Sec 43B). Late deposits to be specifically reported with dates."},
+{area:"Supreme Court",detail:"Checkmate Services Pvt Ltd (2022) — Employee's contribution NOT covered by 43B grace period. Must deposit by statutory due date."},
+{area:"Practical Tip",detail:"PF due by 15th of next month. Annual return by 25th April. Employer 12% (3.67% EPF + 8.33% EPS), Employee 12%."}
+]},
+{q:"tds rent 194i 194ib",topic:"TDS on Rent",impacts:[
+{area:"Income Tax — 194I",detail:"TDS @ 2% (plant/machinery/equipment) or 10% (land/building/furniture). Threshold: Rs 2,40,000 p.a."},
+{area:"Income Tax — 194IB",detail:"For individuals/HUF not liable to audit: TDS @ 5% if rent > Rs 50,000/month. Deduct in last month of FY."},
+{area:"Form 3CD",detail:"Report in <strong>Clause 34</strong> (TDS compliance). Non-deduction → 30% disallowance u/s 40(a)(ia)."},
+{area:"New Act 2025",detail:"Sec 194I → Sec 406 (approx). Rates expected to remain same."},
+{area:"GST",detail:"GST @ 18% on commercial rent (RCM if from unregistered landlord to registered tenant). Residential rent by registered person: 18% under RCM."},
+{area:"Practical Tip",detail:"If landlord is NR: TDS u/s 195 (not 194I). DTAA rates may apply. Obtain TRC + Form 10F."}
+]},
+{q:"msme payment 43b micro small enterprise vendor",topic:"MSME Payment — Sec 43B(h)",impacts:[
+{area:"Income Tax",detail:"Payment to Micro/Small enterprises must be within agreed time (max 45 days, or 15 days if no agreement). Otherwise DISALLOWED u/s 43B(h)."},
+{area:"Form 3CD",detail:"Report in <strong>Clause 22</strong> (Enhanced) — Udyam verification, interest u/s 23 MSMED Act. Also Clause 26 (43B items)."},
+{area:"MSMED Act",detail:"Interest @ 3x bank rate (compound monthly) payable on delayed payment. Not deductible."},
+{area:"Companies Act",detail:"MSME dues to be reported in financial statements under Schedule III. Interest on delayed payment to be disclosed."},
+{area:"Practical Tip",detail:"Verify ALL vendors on Udyam portal. Get declarations. Track payment days. 45-day clock starts from acceptance of goods/services."}
+]},
+{q:"depreciation asset fixed capitalized",topic:"Depreciation — IT & Companies Act",impacts:[
+{area:"Income Tax",detail:"WDV method per Appendix I-A. Rates: Building 10%, Furniture 10%, P&M 15%, Computers 40%, Vehicles 15%. 50% if used <180 days."},
+{area:"Companies Act",detail:"SLM or WDV per Schedule II (useful life based). Component accounting applicable."},
+{area:"Form 3CD",detail:"Report in <strong>Clause 18</strong> — Complete WDV schedule with additions, deletions, rate applied."},
+{area:"Key Difference",detail:"IT depreciation ≠ Book depreciation. Deferred tax (AS 22) arises from timing difference."},
+{area:"Practical Tip",detail:"No depreciation on goodwill (IT). Intangible assets: 25% WDV (IT). Keep separate depreciation charts for IT and Co Act."}
+]},
+{q:"gst input tax credit itc blocked 17",topic:"GST Input Tax Credit (ITC)",impacts:[
+{area:"GST Act",detail:"ITC available u/s 16. Must be reflected in GSTR-2B. Blocked credit u/s 17(5): motor vehicles, food/beverages, health/fitness, personal use."},
+{area:"Form 3CD",detail:"Report in <strong>Clause 44</strong> — ITC availed, reversed, ineligible. GST reconciliation with GSTR-3B."},
+{area:"Income Tax",detail:"If ITC not claimed/reversed → becomes part of cost (capitalize or expense). Impacts P&L."},
+{area:"Practical Tip",detail:"Reconcile ITC monthly with GSTR-2B. Reverse ineligible ITC before annual return. Keep documentation for all reversals."}
+]},
+{q:"loan deposit cash 269ss 269t 20000",topic:"Cash Loans/Deposits > Rs 20,000",impacts:[
+{area:"Income Tax",detail:"Sec 269SS: Cannot accept loan/deposit in cash >Rs 20,000. Sec 269T: Cannot repay in cash >Rs 20,000. Penalty: 100% of amount."},
+{area:"Form 3CD",detail:"Report in <strong>Clause 30-31</strong>. Enhanced transaction-level reporting with codes from AY 2025-26."},
+{area:"Practical Tip",detail:"Applies to loans AND deposits. Partners' capital contributions are covered. Use banking channels."}
+]},
+{q:"tds professional 194j 194c contractor",topic:"TDS on Professional/Contractor Fees",impacts:[
+{area:"Income Tax — 194J",detail:"TDS @ 10% on professional/technical fees. Threshold: Rs 30,000 p.a. Includes CA fees, legal, consultancy, royalty."},
+{area:"Income Tax — 194C",detail:"TDS @ 1% (individual/HUF) or 2% (others) on contractor payments. Threshold: Rs 30,000 single / Rs 1,00,000 aggregate."},
+{area:"Form 3CD",detail:"Report in <strong>Clause 34</strong> (TDS). Non-deduction → 30% disallowance u/s 40(a)(ia)."},
+{area:"Practical Tip",detail:"Distinguish between 194J (professional services) and 194C (works contract). CA/lawyer fees = 194J. Building contractor = 194C. Software development = depends on nature."}
+]},
+{q:"salary tds 192 employee",topic:"TDS on Salary — Sec 192",impacts:[
+{area:"Income Tax",detail:"Employer deducts TDS on estimated annual salary. Consider declarations (rent HRA, 80C, 80D). New regime default from FY 2024-25."},
+{area:"Form 16",detail:"Issue by 15 June. Part A (TDS summary) + Part B (detailed computation)."},
+{area:"Form 3CD",detail:"Verify TDS on salary in <strong>Clause 34</strong>. Check 26AS/AIS match."},
+{area:"Practical Tip",detail:"If employee opts for old regime, get written declaration. Employer can consider HRA, LTA, 80C etc. for TDS computation."}
+]}
+];
+function smartSearch(){
+var q=document.getElementById('smartQ').value.toLowerCase().trim();
+var r=document.getElementById('smartResults');
+if(!q||q.length<3){r.innerHTML='<p style="text-align:center;color:var(--text-light);padding:20px;">Type at least 3 characters to search...</p>';return;}
+var matches=smartDB.filter(function(item){
+var keywords=item.q.split(' ');
+return keywords.some(function(k){return q.indexOf(k)>=0||k.indexOf(q)>=0;});
+});
+if(!matches.length){r.innerHTML='<p style="text-align:center;color:var(--text-light);padding:20px;">No matches found. Try keywords like: cash, TDS, MSME, depreciation, ESI, PF, rent, salary, loan, ITC</p>';return;}
+r.innerHTML=matches.map(function(m){
+return '<div class="card" style="margin-bottom:12px;"><h3 style="color:var(--accent);margin-bottom:10px;">'+m.topic+'</h3><table class="limits-table"><thead><tr><th style="width:120px;">Area</th><th>Impact / Requirement</th></tr></thead><tbody>'+m.impacts.map(function(i){return '<tr><td><strong>'+i.area+'</strong></td><td style="font-size:0.85rem;">'+i.detail+'</td></tr>';}).join('')+'</tbody></table></div>';
+}).join('');
+}
+
+// ==============================
+// CA TEMPLATES
+// ==============================
+var caTemplates={
+mrl:"MANAGEMENT REPRESENTATION LETTER\n\n\nDate: ___________\n\nTo,\nM/s _____________\nChartered Accountants\n[Address]\n\nDear Sir/Madam,\n\nSub: Management Representation Letter for the Audit of Financial Statements for the year ended 31st March, 20___\n\nIn connection with your audit of the financial statements of [Company/Firm Name] for the year ended 31st March, 20___, we confirm, to the best of our knowledge and belief, the following representations:\n\n1. We acknowledge our responsibility for the preparation and fair presentation of the financial statements in accordance with the applicable financial reporting framework.\n\n2. We have provided you with:\n   (a) Access to all information of which we are aware that is relevant to the preparation of the financial statements;\n   (b) Additional information that you have requested from us for the purpose of the audit;\n   (c) Unrestricted access to persons within the entity from whom you determined it necessary to obtain audit evidence.\n\n3. All transactions have been recorded in the accounting records and are reflected in the financial statements.\n\n4. We have disclosed to you the results of our assessment of the risk that the financial statements may be materially misstated as a result of fraud.\n\n5. We have disclosed to you all known instances of non-compliance or suspected non-compliance with laws and regulations whose effects should be considered when preparing financial statements.\n\n6. We have disclosed to you all known actual or possible litigation and claims whose effects should be considered when preparing the financial statements.\n\n7. We confirm that:\n   (a) The company/firm has complied with all aspects of contractual agreements;\n   (b) There are no material liabilities or contingent liabilities not disclosed;\n   (c) All related party transactions have been properly disclosed;\n   (d) There are no plans or intentions that may materially affect the carrying value or classification of assets and liabilities.\n\n8. The company/firm has satisfactory title to all assets and there are no liens or encumbrances on the assets except as disclosed.\n\n9. We confirm the completeness of the information provided regarding the identification of related parties.\n\n\nFor [Company/Firm Name]\n\n\n___________________________\nName:\nDesignation: Director / Partner / Proprietor\nDIN/PAN:\nDate:\nPlace:",
+
+noc:"NO OBJECTION CERTIFICATE FROM PREVIOUS AUDITOR\n\n\nDate: ___________\n\nTo,\nM/s _____________\nChartered Accountants\n[Address]\n\nDear Sir/Madam,\n\nSub: No Objection Certificate — Change of Auditor\n\nRef: Your letter dated _______ regarding proposed appointment as Statutory Auditor / Tax Auditor of M/s ________________ for the Financial Year 20___-___.\n\nIn response to the above, we would like to inform you that:\n\n1. We have no objection to your appointment as Statutory Auditor / Tax Auditor of the above-mentioned entity.\n\n2. The reasons for change of auditor, as communicated to us, are: _______________________\n\n3. We confirm that:\n   (a) There are no professional or other reasons why you should not accept the appointment;\n   (b) All fees due to us have been paid / are outstanding as follows: _______________;\n   (c) We are not aware of any matter which would preclude your acceptance of the appointment.\n\n4. [Optional] The following matters may be of relevance to you:\n   _______________________________________________\n\nThis certificate is issued in accordance with the provisions of the Chartered Accountants Act, 1949 and the Code of Ethics issued by ICAI.\n\n\nYours faithfully,\n\nFor M/s _______________\nChartered Accountants\nFRN: _______________\n\n\n___________________________\nCA _______________\nMembership No.: ___________\nUDIN: _______________",
+
+poa:"POWER OF ATTORNEY FOR APPEARING BEFORE INCOME TAX AUTHORITIES\n\n\nKNOW ALL MEN BY THESE PRESENTS:\n\nI/We, _______________ [Name of Assessee], PAN: _______________, residing at / having registered office at _______________,\n\nDO HEREBY APPOINT AND AUTHORIZE\n\nCA _______________, Membership No. _______________, M/s _______________, Chartered Accountants, FRN: _______________, having office at _______________,\n\nas my/our lawful attorney and authorized representative to:\n\n1. Appear before the Income Tax Officer / Commissioner of Income Tax / Appellate Authority / ITAT and any other Income Tax Authority on my/our behalf;\n\n2. Sign, verify, and file Income Tax Returns, forms, applications, appeals, and any other documents;\n\n3. Receive notices, orders, communications, and refund cheques/payments;\n\n4. Represent and make submissions in assessment proceedings, appeal proceedings, penalty proceedings, and any other proceedings under the Income Tax Act;\n\n5. Inspect and obtain copies of records, orders, and documents;\n\n6. File applications for rectification, revision, or stay of demand;\n\n7. Do all acts, deeds, and things as may be necessary in connection with the above.\n\nThis Power of Attorney shall remain in force for the Assessment Year(s): _______________\n\nIN WITNESS WHEREOF, I/We have executed this Power of Attorney on this ___ day of _______________, 20___.\n\n\n___________________________\nName: _______________\nPAN: _______________\nDesignation: _______________\nDate: _______________\nPlace: _______________\n\n\nWITNESSES:\n1. Name: _______________ Signature: _______________\n2. Name: _______________ Signature: _______________",
+
+engagement:"ENGAGEMENT LETTER FOR STATUTORY / TAX AUDIT\n\n\nDate: ___________\n\nTo,\nThe Board of Directors / Partners / Proprietor\n[Company/Firm Name]\n[Address]\n\nDear Sir/Madam,\n\nSub: Engagement for Audit of Financial Statements / Tax Audit for FY 20___-___\n\nWe are pleased to confirm our acceptance and understanding of the terms of this audit engagement.\n\n1. SCOPE OF AUDIT:\n   (a) Statutory Audit of Financial Statements as per Companies Act, 2013 / applicable law;\n   (b) Tax Audit under Section 44AB of the Income Tax Act, 1961 (Form 3CA/3CB + 3CD);\n   (c) [Any other specific scope]\n\n2. RESPONSIBILITIES OF MANAGEMENT:\n   (a) Preparation and fair presentation of financial statements;\n   (b) Internal controls relevant to preparation of financial statements;\n   (c) Providing us access to all information, records, and personnel;\n   (d) Providing written representations as required.\n\n3. RESPONSIBILITIES OF AUDITOR:\n   (a) Express opinion on financial statements in accordance with Standards on Auditing;\n   (b) Conduct audit in accordance with SAs issued by ICAI;\n   (c) Communicate matters of governance interest.\n\n4. FEES:\n   The audit fee for the above engagement shall be Rs. _______________ plus GST @ 18% and out-of-pocket expenses, payable as follows: _______________\n\n5. TIMELINE:\n   (a) Books to be made available by: _______________\n   (b) Draft report by: _______________\n   (c) Final report by: _______________\n\n6. LIMITATION OF LIABILITY:\n   Our liability is limited to the audit fees charged for this engagement.\n\nPlease sign and return the attached copy of this letter to indicate your acknowledgment.\n\n\nYours faithfully,\n\nFor M/s _______________\nChartered Accountants\nFRN: _______________\n\n___________________________\nCA _______________\nPartner\nM.No.: _______________\nUDIN: _______________\n\n\nACKNOWLEDGED AND AGREED:\n\nFor [Company/Firm Name]\n___________________________\nName:\nDesignation:\nDate:",
+
+cert:"NET WORTH CERTIFICATE\n\n\nDate: ___________\n\nTo WHOMSOEVER IT MAY CONCERN\n\nCERTIFICATE OF NET WORTH\n\nThis is to certify that I/we have examined the books of accounts and records of:\n\nName: _______________\nPAN: _______________\nAddress: _______________\n\nBased on the Balance Sheet as on 31st March, 20___ (audited / unaudited), the Net Worth is computed as follows:\n\n---------------------------------------------------\nParticulars                          Amount (Rs.)\n---------------------------------------------------\nA. ASSETS:\n   (i)   Immovable Property           ___________\n   (ii)  Fixed Deposits / Investments  ___________\n   (iii) Bank Balances                 ___________\n   (iv)  Vehicles                      ___________\n   (v)   Jewellery & Ornaments         ___________\n   (vi)  Other Assets                  ___________\n   TOTAL ASSETS (A)                    ___________\n\nB. LIABILITIES:\n   (i)   Loans (Secured)               ___________\n   (ii)  Loans (Unsecured)             ___________\n   (iii) Other Liabilities             ___________\n   TOTAL LIABILITIES (B)              ___________\n\nNET WORTH (A - B)                     Rs. ___________\n(Rupees _______________ Only)\n---------------------------------------------------\n\nThis certificate is issued based on the books of accounts and information provided to us. It is issued at the request of the above-named person for the purpose of _______________.\n\n\nFor M/s _______________\nChartered Accountants\nFRN: _______________\n\n___________________________\nCA _______________\nM.No.: _______________\nUDIN: _______________",
+
+rep:"REPRESENTATION LETTER / UNDERTAKING BY CLIENT\n\n\nDate: ___________\n\nTo,\nM/s _____________\nChartered Accountants\n[Address]\n\nDear Sir/Madam,\n\nSub: Undertaking / Representation for preparation and filing of Income Tax Return for AY 20___-___\n\nI/We, _______________ (PAN: _______________), hereby represent and undertake as follows:\n\n1. All the information, documents, and records provided by me/us for the preparation and filing of Income Tax Return are true, complete, and correct to the best of my/our knowledge and belief.\n\n2. I/We have disclosed all sources of income including:\n   (a) Salary / Business / Professional income;\n   (b) Capital gains from sale of property, shares, mutual funds;\n   (c) Interest income from all bank accounts and deposits;\n   (d) Rental income from all properties;\n   (e) Any other income including foreign income / crypto assets.\n\n3. I/We have provided complete details of all bank accounts (including dormant accounts).\n\n4. I/We have disclosed all foreign assets and income, if any, for Schedule FA.\n\n5. All deductions claimed are supported by valid receipts/proofs which are in my/our possession.\n\n6. I/We understand that the Chartered Accountant is relying on the information provided by me/us and is not independently verifying the accuracy of the same.\n\n7. I/We shall be solely responsible for any consequences arising from incorrect or incomplete information.\n\n8. I/We have verified the AIS/TIS and confirm no discrepancies exist / the following discrepancies exist: _______________\n\n\n___________________________\nName: _______________\nPAN: _______________\nDate: _______________\nPlace: _______________"
+};
+function showTemplate(key,btn){document.querySelectorAll('#tplFilterRow .filter-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');document.getElementById('tplOutput').textContent=caTemplates[key]||'';}
+function copyTemplate(){var t=document.getElementById('tplOutput').textContent;if(!t)return;if(navigator.clipboard)navigator.clipboard.writeText(t).then(function(){alert('Copied!');});else{var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);alert('Copied!');}}
+function printTemplate(){var t=document.getElementById('tplOutput').textContent;if(!t)return;var w=window.open('','_blank');w.document.write('<html><head><title>CA Template</title><style>body{font-family:Georgia,serif;font-size:12pt;line-height:1.8;padding:40px 60px;color:#222;white-space:pre-wrap;}</style></head><body>'+t.replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</body></html>');w.document.close();w.print();}
+showTemplate('mrl',document.querySelector('#tplFilterRow .filter-btn'));
+
+// ==============================
+// SMART NOTICE REPLY GENERATOR
+// ==============================
+var nr2Config={
+'139_9':{sec:'139(9)',title:'Defective Return',deadline:'15 days',caseLaw:'CIT vs Keshav Industries (Delhi HC) — defect must be within scope of 139(9)'},
+'142_1':{sec:'142(1)',title:'Inquiry / Information Request',deadline:'As specified',caseLaw:'CIT vs A. Raman & Co. (SC) — assessee must cooperate but AO cannot fish for information'},
+'143_1':{sec:'143(1)',title:'Intimation (Mismatch)',deadline:'30 days for rectification',caseLaw:'CIT vs Gujarat Electricity Board (SC) — adjustments only for prima facie errors'},
+'143_2':{sec:'143(2)',title:'Scrutiny Assessment',deadline:'As specified',caseLaw:'ACIT vs Hotel Blue Moon (SC) — notice must be served within time limit'},
+'148':{sec:'148/148A',title:'Reopening',deadline:'30 days for 148A objection',caseLaw:'CIT vs Kelvinator of India (SC) — mere change of opinion not permissible; GKN Driveshafts (SC) — AO must dispose objections first'},
+'154':{sec:'154',title:'Rectification',deadline:'30 days',caseLaw:'T.S. Balaram vs Volkart Bros (SC) — only mistake apparent from record, not debatable issues'},
+'156':{sec:'156',title:'Demand Notice',deadline:'30 days',caseLaw:'CBDT Instruction 1914 — stay of demand if appeal filed'},
+'245':{sec:'245',title:'Refund Adjustment',deadline:'30 days',caseLaw:'CIT vs Tata Chemicals (Bombay HC) — prior intimation mandatory'},
+'270A':{sec:'270A',title:'Penalty — Under-reporting',deadline:'As specified',caseLaw:'CIT vs Reliance Petroproducts (SC) — mere disallowance is not concealment; Hindustan Steel vs State of Orissa (SC) — penalty not automatic'}
+};
+function showNR2Fields(){var t=document.getElementById('nrType2').value;if(t)document.getElementById('nr2History').focus();}
+function generateNR2(){
+var type=document.getElementById('nrType2').value;
+if(!type){alert('Select notice type');return;}
+var cfg=nr2Config[type];
+var name=document.getElementById('nr2Name').value||'[Assessee Name]';
+var pan=document.getElementById('nr2PAN').value.toUpperCase()||'[PAN]';
+var ay=document.getElementById('nr2AY').value||'[AY]';
+var nDate=document.getElementById('nr2Date').value||'[Date]';
+var din=document.getElementById('nr2DIN').value||'[DIN]';
+var ward=document.getElementById('nr2Ward').value||'[Ward, City]';
+var tone=document.getElementById('nr2Tone').value;
+var history=document.getElementById('nr2History').value||'';
+var issue=document.getElementById('nr2Issue').value||'[Issue as per notice]';
+
+var draft='To,\nThe Income Tax Officer,\n'+ward+'\n\nSub: Reply to Notice u/s '+cfg.sec+' — '+cfg.title+'\n     PAN: '+pan+' | AY: '+ay+'\nRef: '+din+', dated '+nDate+'\n\nRespected Sir/Madam,\n\n';
+draft+='With reference to the above-mentioned notice, the following is respectfully submitted for your kind consideration:\n\n';
+draft+='1. BACKGROUND:\n   '+name+' (PAN: '+pan+') has received the captioned notice for AY '+ay+'.\n';
+if(history)draft+='   '+history.replace(/\n/g,'\n   ')+'\n';
+draft+='\n2. ISSUE RAISED IN NOTICE:\n   "'+issue+'"\n\n';
+
+if(tone==='compliance'){
+draft+='3. COMPLIANCE / SUBMISSIONS:\n\n';
+draft+='   In compliance with the notice, the following information/documents are being submitted:\n\n';
+draft+='   (a) [List documents / information being furnished]\n';
+draft+='   (b) [Supporting evidence / computation]\n';
+draft+='   (c) [Bank statements / Form 26AS / AIS as relevant]\n\n';
+draft+='4. It is submitted that the return of income as filed is correct and complete. ';
+draft+='All income has been duly disclosed and all claims are supported by documentary evidence.\n\n';
+draft+='5. The assessee shall provide any further information that may be called for.\n';
+}else{
+draft+='3. OBJECTIONS / SUBMISSIONS:\n\n';
+draft+='   It is respectfully submitted that the notice / proposed action is not correct in law for the following reasons:\n\n';
+draft+='   (a) [State primary objection with factual basis]\n\n';
+draft+='   (b) [State legal basis — cite relevant section]\n\n';
+draft+='   (c) The following judicial precedents support the assessee\'s position:\n';
+draft+='       - '+cfg.caseLaw+'\n';
+draft+='       - [Add other relevant case laws]\n\n';
+draft+='4. Without prejudice to the above, the assessee reserves the right to make further submissions and produce additional evidence.\n\n';
+draft+='5. An opportunity of personal hearing may kindly be granted before passing any adverse order, in accordance with principles of natural justice.\n';
+}
+draft+='\nIt is therefore most respectfully prayed that the submissions made herein may kindly be considered.\n\n';
+draft+='Thanking you,\n\nYours faithfully,\nFor '+name+'\n\n\n___________________________\nAuthorized Signatory / AR\nDate: __________\nPlace: __________\nPAN: '+pan;
+
+document.getElementById('nr2Output').style.display='block';
+document.getElementById('nr2Output').textContent=draft;
+}
+function copyNR2(){var t=document.getElementById('nr2Output').textContent;if(!t)return;if(navigator.clipboard)navigator.clipboard.writeText(t).then(function(){alert('Copied!');});}
+function printNR2(){var t=document.getElementById('nr2Output').textContent;if(!t)return;var w=window.open('','_blank');w.document.write('<html><head><title>Notice Reply</title><style>body{font-family:Georgia,serif;font-size:12pt;line-height:1.8;padding:40px 60px;color:#222;white-space:pre-wrap;}</style></head><body>'+t.replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</body></html>');w.document.close();w.print();}
+
+// ==============================
+// COMPLIANCE CALENDAR
+// ==============================
+var dueDates=[
+// === INCOME TAX ===
+{date:"2025-06-15",title:"Advance Tax — 1st Instalment (15%)",cat:"it",detail:"Min 15% of estimated tax liability. Sec 207-211, IT Act 1961 / Sec 160-162, IT Act 2025."},
+{date:"2025-07-07",title:"TDS/TCS Payment — June",cat:"tds",detail:"Deposit TDS/TCS deducted in June. Sec 200(1)."},
+{date:"2025-07-15",title:"TDS Certificate — Form 16A (Q1)",cat:"tds",detail:"Issue Form 16A for TDS deducted in Apr-Jun. Within 15 days from due date of TDS return."},
+{date:"2025-07-31",title:"ITR Filing — Non-Audit Cases",cat:"it",detail:"Due date for filing ITR for individuals, HUFs, firms (non-audit). Sec 139(1). AY 2025-26 / Tax Year 2025-26."},
+{date:"2025-07-31",title:"TDS Return — Q1 (Apr-Jun)",cat:"tds",detail:"File 24Q, 26Q, 27Q for Q1. Sec 200(3), Rule 31A."},
+{date:"2025-08-07",title:"TDS/TCS Payment — July",cat:"tds",detail:"Deposit TDS/TCS deducted in July."},
+{date:"2025-09-07",title:"TDS/TCS Payment — August",cat:"tds",detail:"Deposit TDS/TCS deducted in August."},
+{date:"2025-09-15",title:"Advance Tax — 2nd Instalment (45%)",cat:"it",detail:"Cumulative 45% of estimated tax. Sec 207-211."},
+{date:"2025-09-30",title:"Tax Audit Report — Sec 44AB",cat:"audit",detail:"Due date for filing tax audit report in Form 3CD (AY 2025-26). Sec 44AB."},
+{date:"2025-10-07",title:"TDS/TCS Payment — September",cat:"tds",detail:"Deposit TDS/TCS deducted in September."},
+{date:"2025-10-15",title:"TDS Certificate — Form 16A (Q2)",cat:"tds",detail:"Issue Form 16A for TDS deducted in Jul-Sep."},
+{date:"2025-10-31",title:"ITR Filing — Audit Cases",cat:"it",detail:"Due date for filing ITR for assessees requiring tax audit u/s 44AB. AY 2025-26."},
+{date:"2025-10-31",title:"TDS Return — Q2 (Jul-Sep)",cat:"tds",detail:"File 24Q, 26Q, 27Q for Q2."},
+{date:"2025-10-31",title:"Audit Report — Form 29B (MAT)",cat:"audit",detail:"Report of income computed under MAT provisions. Sec 115JB."},
+{date:"2025-11-07",title:"TDS/TCS Payment — October",cat:"tds",detail:"Deposit TDS/TCS deducted in October."},
+{date:"2025-11-30",title:"ITR — Transfer Pricing Cases",cat:"it",detail:"Due date for assessee having international/specified domestic transactions. Sec 92E."},
+{date:"2025-11-30",title:"TP Audit Report — Form 3CEB",cat:"audit",detail:"Transfer Pricing audit report. Due one month before ITR due date for TP cases."},
+{date:"2025-12-07",title:"TDS/TCS Payment — November",cat:"tds",detail:"Deposit TDS/TCS deducted in November."},
+{date:"2025-12-15",title:"Advance Tax — 3rd Instalment (75%)",cat:"it",detail:"Cumulative 75% of estimated tax. Sec 207-211."},
+{date:"2025-12-31",title:"Belated / Revised Return",cat:"it",detail:"Last date for filing belated (Sec 139(4)) or revised (Sec 139(5)) return for AY 2024-25."},
+{date:"2026-01-07",title:"TDS/TCS Payment — December",cat:"tds",detail:"Deposit TDS/TCS deducted in December."},
+{date:"2026-01-15",title:"TDS Certificate — Form 16A (Q3)",cat:"tds",detail:"Issue Form 16A for TDS deducted in Oct-Dec."},
+{date:"2026-01-31",title:"TDS Return — Q3 (Oct-Dec)",cat:"tds",detail:"File 24Q, 26Q, 27Q for Q3."},
+{date:"2026-02-07",title:"TDS/TCS Payment — January",cat:"tds",detail:"Deposit TDS/TCS deducted in January."},
+{date:"2026-03-07",title:"TDS/TCS Payment — February",cat:"tds",detail:"Deposit TDS/TCS deducted in February."},
+{date:"2026-03-15",title:"Advance Tax — 4th Instalment (100%)",cat:"it",detail:"Full 100% of estimated tax. Last instalment. Sec 207-211."},
+{date:"2026-03-31",title:"Last Date — Tax Saving Investments",cat:"it",detail:"Deadline for Sec 80C/80D/80G etc. investments for FY 2025-26."},
+{date:"2026-03-31",title:"Updated Return (ITR-U) — AY 2023-24",cat:"it",detail:"Last date for filing Updated Return u/s 139(8A) for AY 2023-24 (within 36 months from end of AY)."},
+// === GST ===
+{date:"2025-04-11",title:"GSTR-1 — March (Monthly Filers)",cat:"gst",detail:"Outward supply statement for March. Sec 37, CGST Act."},
+{date:"2025-04-13",title:"GSTR-1 — Q4 Jan-Mar (QRMP)",cat:"gst",detail:"Quarterly GSTR-1 for QRMP taxpayers."},
+{date:"2025-04-20",title:"GSTR-3B — March (Monthly Filers)",cat:"gst",detail:"Summary return with tax payment for March. Sec 39."},
+{date:"2025-04-22",title:"GSTR-3B — Q4 Jan-Mar (QRMP Cat A)",cat:"gst",detail:"Quarterly GSTR-3B for QRMP states Cat A."},
+{date:"2025-04-24",title:"GSTR-3B — Q4 Jan-Mar (QRMP Cat B)",cat:"gst",detail:"Quarterly GSTR-3B for QRMP states Cat B."},
+{date:"2025-05-11",title:"GSTR-1 — April",cat:"gst",detail:"Outward supply statement for April."},
+{date:"2025-05-20",title:"GSTR-3B — April",cat:"gst",detail:"Summary return with tax payment for April."},
+{date:"2025-06-11",title:"GSTR-1 — May",cat:"gst",detail:"Outward supply statement for May."},
+{date:"2025-06-20",title:"GSTR-3B — May",cat:"gst",detail:"Summary return with tax payment for May."},
+{date:"2025-07-11",title:"GSTR-1 — June",cat:"gst",detail:"Outward supply statement for June."},
+{date:"2025-07-13",title:"GSTR-1 — Q1 Apr-Jun (QRMP)",cat:"gst",detail:"Quarterly GSTR-1 for QRMP taxpayers."},
+{date:"2025-07-20",title:"GSTR-3B — June",cat:"gst",detail:"Summary return with tax payment for June."},
+{date:"2025-07-22",title:"GSTR-3B — Q1 Apr-Jun (QRMP Cat A)",cat:"gst",detail:"Quarterly GSTR-3B for QRMP states Cat A."},
+{date:"2025-07-24",title:"GSTR-3B — Q1 Apr-Jun (QRMP Cat B)",cat:"gst",detail:"Quarterly GSTR-3B for QRMP states Cat B."},
+{date:"2025-09-30",title:"GSTR-9 — Annual Return (FY 2024-25)",cat:"gst",detail:"Annual return for regular taxpayers. Turnover >2 Cr mandatory. Sec 44."},
+{date:"2025-09-30",title:"GSTR-9C — Reconciliation Statement",cat:"gst",detail:"Self-certified reconciliation. Turnover >5 Cr. Sec 44(2). FY 2024-25."},
+{date:"2025-12-31",title:"GSTR-9 — Annual Return (Extended)",cat:"gst",detail:"If extended by CBIC for FY 2024-25."},
+// === ROC / MCA ===
+{date:"2025-05-30",title:"DPT-3 — Return of Deposits",cat:"roc",detail:"Annual return of deposits/outstanding loans. Rule 16A, Companies (Acceptance of Deposits) Rules."},
+{date:"2025-09-29",title:"DIR-3 KYC — Director KYC",cat:"roc",detail:"Annual KYC for all directors with DIN. Rule 12A, Companies (Appointment of Directors) Rules."},
+{date:"2025-10-29",title:"AGM — Annual General Meeting",cat:"roc",detail:"Within 6 months from end of FY (for March year-end). Sec 96, Companies Act 2013."},
+{date:"2025-10-29",title:"AOC-4 — Financial Statements",cat:"roc",detail:"File within 30 days of AGM. Sec 137."},
+{date:"2025-11-28",title:"MGT-7 — Annual Return",cat:"roc",detail:"File within 60 days of AGM. Sec 92(4)."},
+{date:"2025-11-15",title:"ADT-1 — Auditor Appointment",cat:"roc",detail:"Intimation of auditor appointment within 15 days of AGM. Sec 139(1)."},
+{date:"2025-04-30",title:"MSME-1 — Half Yearly Return",cat:"roc",detail:"Return of outstanding payments to MSMEs exceeding 45 days (Oct-Mar). Sec 405."},
+{date:"2025-10-31",title:"MSME-1 — Half Yearly Return (H2)",cat:"roc",detail:"Return of outstanding payments to MSMEs exceeding 45 days (Apr-Sep). Sec 405."},
+// === AUDIT ===
+{date:"2025-09-30",title:"Company Audit Report — Statutory",cat:"audit",detail:"Statutory audit of companies (before AGM). Sec 139, Companies Act 2013."},
+{date:"2025-09-30",title:"Form 3CD — Tax Audit Report",cat:"audit",detail:"Tax Audit report filing for AY 2025-26. Sec 44AB. CBDT Notification 23/2025."},
+{date:"2025-10-31",title:"Form 3CEB — TP Audit (if applicable)",cat:"audit",detail:"Transfer Pricing audit report for international/domestic specified transactions."},
+{date:"2025-11-30",title:"Cost Audit Report — Cos. (Cost Records)",cat:"audit",detail:"If applicable under Companies (Cost Records and Audit) Rules. Within 180 days from FY end."},
+];
+
+var activeDueCat='all';
+var activeDueMonth='all';
+
+function renderDueDates(){
+var container=document.getElementById('calendarResults');
+var today=new Date().toISOString().slice(0,10);
+var filtered=dueDates.filter(function(d){
+if(activeDueCat!=='all'&&d.cat!==activeDueCat)return false;
+if(activeDueMonth!=='all'&&d.date.slice(5,7)!==activeDueMonth)return false;
+return true;
+});
+filtered.sort(function(a,b){return a.date.localeCompare(b.date);});
+if(!filtered.length){container.innerHTML='<p style="color:var(--text-light);padding:20px;">No due dates found for the selected filter.</p>';return;}
+
+var catColors={it:'#2F5496',gst:'#00b894',tds:'#e17055',roc:'#6c5ce7',audit:'#fdcb6e'};
+var catLabels={it:'Income Tax',gst:'GST',tds:'TDS/TCS',roc:'ROC/MCA',audit:'Audit'};
+var html='<table class="info-table"><thead><tr><th>Due Date</th><th>Category</th><th>Obligation</th><th>Details</th><th>Status</th></tr></thead><tbody>';
+filtered.forEach(function(d){
+var isPast=d.date<today;
+var isUpcoming=!isPast&&d.date<=new Date(new Date(today).getTime()+15*86400000).toISOString().slice(0,10);
+var status=isPast?'<span style="color:#e74c3c;font-weight:700;">⏰ Past Due</span>':isUpcoming?'<span style="color:#e67e22;font-weight:700;">⚡ Upcoming</span>':'<span style="color:#27ae60;">✓ Scheduled</span>';
+var dateObj=new Date(d.date+'T00:00:00');
+var dateStr=dateObj.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});
+var catBadge='<span style="background:'+catColors[d.cat]+';color:white;padding:2px 8px;border-radius:10px;font-size:0.72rem;">'+catLabels[d.cat]+'</span>';
+var rowBg=isPast?'background:rgba(231,76,60,0.06);':'';
+html+='<tr style="'+rowBg+'"><td><strong>'+dateStr+'</strong></td><td>'+catBadge+'</td><td>'+d.title+'</td><td style="font-size:0.82rem;color:#555;">'+d.detail+'</td><td>'+status+'</td></tr>';
+});
+html+='</tbody></table>';
+container.innerHTML=html;
+}
+
+function filterDueDates(cat,btn){
+activeDueCat=cat;
+applyDueFilters(btn);
+}
+function filterDueMonth(m,btn){
+activeDueMonth=m;
+applyDueFilters(btn);
+}
+function applyDueFilters(btn){
+if(btn){btn.parentElement.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');}
+renderDueDates();
+}
+renderDueDates();
 
 </script>
 </body>
