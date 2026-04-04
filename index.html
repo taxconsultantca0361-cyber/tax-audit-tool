@@ -170,17 +170,31 @@
     <div class="nav-tab" onclick="switchTab('caro')">CARO 2020</div>
     <div class="nav-tab" onclick="switchTab('auditcheck')">Audit Checklist</div>
     <div class="nav-tab" onclick="switchTab('asapply')">AS Applicability</div>
-    <div class="nav-tab" onclick="switchTab('noticereply')">Notice Reply</div>
+    <div class="nav-tab" onclick="switchTab('capgain')">Capital Gains</div>
+    <div class="nav-tab" onclick="switchTab('intpenalty')">Interest 234A/B/C</div>
+    <div class="nav-tab" onclick="switchTab('impact')">Impact Analyzer</div>
     <div class="nav-tab" onclick="switchTab('disclaimer')">Disclaimer</div>
 </div>
 
 <div class="container">
 
-<!-- ==================== TAB 1: FORM 3CD ==================== -->
+<!-- ==================== TAB 1: FORM 3CD / FORM 26 ==================== -->
 <div id="tab-clauses" class="tab-content active">
     <div class="card">
-        <h2>Form 3CD — Clause-by-Clause Guide</h2>
-        <p style="color:var(--text-light);margin-bottom:14px;">Click any clause to expand details and common observations.</p>
+        <div class="filter-row" id="fyToggleRow" style="margin-bottom:12px;">
+            <button class="filter-btn active" onclick="switchFYGuide('2526',this)" style="font-size:0.85rem;padding:8px 18px;">FY 2025-26 — Form 3CD</button>
+            <button class="filter-btn" onclick="switchFYGuide('2627',this)" style="font-size:0.85rem;padding:8px 18px;">FY 2026-27 — Form No. 26 (New Act)</button>
+        </div>
+        <div id="fyGuide2526">
+            <h2>Form 3CD — Clause-by-Clause Guide (FY 2025-26 / AY 2026-27)</h2>
+            <p style="color:var(--text-light);margin-bottom:6px;">Updated as per <strong>CBDT Notification No. 23/2025</strong> (Income-tax 8th Amendment Rules, 2025), dated 28.03.2025. Under IT Act 1961.</p>
+            <p style="color:var(--text-light);margin-bottom:14px;font-size:0.82rem;">Source: <a href="https://incometaxindia.gov.in" target="_blank" style="color:var(--accent);">incometaxindia.gov.in</a> | Tax Audit u/s 44AB | Forms 3CA/3CB + 3CD</p>
+        </div>
+        <div id="fyGuide2627" style="display:none;">
+            <h2>Form No. 26 — Tax Audit Report (Tax Year 2026-27 onwards)</h2>
+            <p style="color:var(--text-light);margin-bottom:6px;">Under <strong>Section 63 of Income Tax Act, 2025</strong> read with <strong>Rule 47, Income-tax Rules 2026</strong>. Replaces Forms 3CA, 3CB & 3CD.</p>
+            <p style="color:var(--text-light);margin-bottom:14px;font-size:0.82rem;">Source: <a href="https://incometaxindia.gov.in" target="_blank" style="color:var(--accent);">incometaxindia.gov.in</a> | <a href="https://egazette.gov.in" target="_blank" style="color:var(--accent);">egazette.gov.in</a> — IT Act 2025 (Act No. 14 of 2025) | Consolidated form with Parts A-D, 53 clauses, trigger-based schedules</p>
+        </div>
         <div class="search-box"><input type="text" id="clauseSearch" placeholder="Search clauses... (e.g. depreciation, TDS, cash)" oninput="filterClauses()"></div>
         <div class="filter-row">
             <button class="filter-btn active" onclick="filterCategory('all',this)">All</button>
@@ -198,6 +212,7 @@
 <div id="tab-tds" class="tab-content">
     <div class="card">
         <h2>TDS Rates — Old Act 1961 vs New Act 2025</h2>
+        <p style="color:var(--text-light);margin-bottom:10px;font-size:0.82rem;">Updated as per <strong>Finance Act 2025</strong> and <strong>Income Tax Act 2025</strong> (effective 01.04.2026). Source: <a href="https://incometaxindia.gov.in" target="_blank" style="color:var(--accent);">incometaxindia.gov.in</a> | CBDT Circular No. 04/2025 (TDS Chart)</p>
         <div style="overflow-x:auto;">
         <table class="limits-table">
             <thead>
@@ -260,7 +275,8 @@
 <!-- ==================== TAB 3: IT CALCULATOR ==================== -->
 <div id="tab-itcalc" class="tab-content">
     <div class="card">
-        <h2>Income Tax Calculator — Old vs New Regime</h2>
+        <h2>Income Tax Calculator — Old vs New Regime (FY 2026-27)</h2>
+        <p style="color:var(--text-light);margin-bottom:10px;font-size:0.82rem;">New Regime slabs as per <strong>Finance Act 2025</strong> (Sec 115BAC). Old Regime unchanged. Std Deduction: Rs 75,000. Rebate u/s 87A: No tax up to Rs 12L (New). Source: <a href="https://incometaxindia.gov.in" target="_blank" style="color:var(--accent);">incometaxindia.gov.in</a></p>
         <div class="checker-form">
             <div class="form-row">
                 <div class="form-group"><label>Gross Total Income</label><input type="number" id="itGross" placeholder="e.g. 1500000"></div>
@@ -339,7 +355,8 @@
 <div id="tab-sectionfinder" class="tab-content">
     <div class="card">
         <h2>IT Act 1961 vs IT Act 2025 — Section Mapping</h2>
-        <p style="color:var(--text-light);margin-bottom:14px;">Comprehensive section-wise mapping based on the Income Tax Bill 2025. Enter any section of the old IT Act 1961 to find its corresponding new section.</p>
+        <p style="color:var(--text-light);margin-bottom:6px;">Comprehensive section-wise mapping. New Act effective 01.04.2026.</p>
+        <p style="color:var(--text-light);margin-bottom:14px;font-size:0.82rem;">Source: <a href="https://incometaxindia.gov.in" target="_blank" style="color:var(--accent);">incometaxindia.gov.in</a> — Official Section Mapping Tool | <a href="https://egazette.gov.in" target="_blank" style="color:var(--accent);">egazette.gov.in</a> — Income Tax Act 2025 (Act No. 14 of 2025)</p>
         <div class="search-box"><input type="text" id="mappingSearch" placeholder="Enter old section... (e.g. 10, 80C, 194C, 271, 44AB, 139)" oninput="searchMapping()"></div>
         <div class="filter-row" id="mappingFilterRow">
             <button class="filter-btn active" onclick="filterMapping('all',this)">All</button>
@@ -367,6 +384,7 @@
 <div id="tab-depreciation" class="tab-content">
     <div class="card">
         <h2>Depreciation Calculator (Income Tax)</h2>
+        <p style="color:var(--text-light);margin-bottom:10px;font-size:0.82rem;">Rates as per <strong>Rule 5, Appendix I-A of IT Rules</strong>. WDV method. 50% rule for assets used &lt;180 days. Source: <a href="https://incometaxindia.gov.in" target="_blank" style="color:var(--accent);">incometaxindia.gov.in</a> | Updated till AY 2026-27</p>
         <div class="checker-form">
             <div class="form-row">
                 <div class="form-group"><label>Asset Category</label>
@@ -423,6 +441,7 @@
 <div id="tab-depco" class="tab-content">
     <div class="card">
         <h2>Depreciation Calculator — Companies Act 2013 (Schedule II)</h2>
+        <p style="color:var(--text-light);margin-bottom:10px;font-size:0.82rem;">Useful life as per <strong>Schedule II of Companies Act 2013</strong> (SLM/WDV). Source: <a href="https://www.mca.gov.in" target="_blank" style="color:var(--accent);">mca.gov.in</a> | As amended by Companies (Accounts) Amendment Rules, 2023</p>
         <p style="color:var(--text-light);margin-bottom:14px;">Straight Line Method (SLM) as per Schedule II of Companies Act, 2013.</p>
         <div class="checker-form">
             <div class="form-row">
@@ -488,6 +507,7 @@
 <div id="tab-msme" class="tab-content">
     <div class="card">
         <h2>MSME Payment Tracker — Section 43B(h)</h2>
+        <p style="color:var(--text-light);margin-bottom:10px;font-size:0.82rem;">As per <strong>Sec 43B(h)</strong> inserted by Finance Act 2023 (w.e.f. 01.04.2024). MSME classification per <strong>Notification S.O. 2119(E) dated 26.06.2020</strong>. Source: <a href="https://udyamregistration.gov.in" target="_blank" style="color:var(--accent);">udyamregistration.gov.in</a> | <a href="https://msme.gov.in" target="_blank" style="color:var(--accent);">msme.gov.in</a></p>
         <div class="checker-form">
             <div class="form-row">
                 <div class="form-group"><label>Vendor Category</label>
@@ -539,7 +559,8 @@
 <div id="tab-notice" class="tab-content">
     <div class="card">
         <h2>Income Tax Notice — Last Date Calculator</h2>
-        <p style="color:var(--text-light);margin-bottom:14px;">Calculate the last date by which the department can issue notice under various sections.</p>
+        <p style="color:var(--text-light);margin-bottom:6px;">Calculate the last date by which the department can issue notice under various sections.</p>
+        <p style="color:var(--text-light);margin-bottom:14px;font-size:0.82rem;">Based on <strong>Sections 143, 148, 149, 154, 263 of IT Act 1961</strong> (as amended by Finance Act 2025). Updated till AY 2026-27. Source: <a href="https://incometaxindia.gov.in" target="_blank" style="color:var(--accent);">incometaxindia.gov.in</a> | Under new IT Act 2025: Sec 143(2) → Sec 263, Sec 148 → Sec 279, Sec 154 → Sec 295</p>
         <div class="checker-form">
             <div class="form-row">
                 <div class="form-group"><label>Select Notice Type</label>
@@ -598,7 +619,8 @@
 <div id="tab-caro" class="tab-content">
     <div class="card">
         <h2>CARO 2020 — Applicability Checker</h2>
-        <p style="color:var(--text-light);margin-bottom:14px;">Check whether the Companies (Auditor's Report) Order, 2020 applies to a company.</p>
+        <p style="color:var(--text-light);margin-bottom:6px;">Check whether the Companies (Auditor's Report) Order, 2020 applies to a company.</p>
+        <p style="color:var(--text-light);margin-bottom:14px;font-size:0.82rem;">As per <strong>MCA Notification S.O. 849(E) dated 25.03.2021</strong> — Companies (Auditor's Report) Order, 2020. Applicable from FY 2021-22 onwards. 21 reporting clauses. Source: <a href="https://www.mca.gov.in" target="_blank" style="color:var(--accent);">mca.gov.in</a> | Exemption thresholds: Small Co (₹4Cr/₹40Cr), Private (₹1Cr/₹10Cr/₹1Cr borrowings)</p>
         <div class="checker-form">
             <div class="form-group"><label>Type of Company</label>
                 <select id="caroType" onchange="checkCARO()">
@@ -679,6 +701,7 @@
 <div id="tab-auditcheck" class="tab-content">
     <div class="card">
         <h2>Tax Audit Checklist — Section 44AB</h2>
+        <p style="color:var(--text-light);margin-bottom:10px;font-size:0.82rem;">Checklist aligned with <strong>Form 3CD (AY 2026-27)</strong> per CBDT Notification 23/2025. Saved locally in your browser. Source: <a href="https://www.icai.org" target="_blank" style="color:var(--accent);">icai.org</a> — ICAI Guidance Note on Tax Audit u/s 44AB (Revised 2023)</p>
         <p style="color:var(--text-light);margin-bottom:14px;">Step-by-step checklist for conducting a tax audit. Click items to mark as completed.</p>
         <div class="filter-row">
             <button class="filter-btn active" onclick="filterChecklist('all',this)">All</button>
@@ -700,7 +723,8 @@
 <div id="tab-asapply" class="tab-content">
     <div class="card">
         <h2>AS Applicability Checker — Non-Company Entities (NCE)</h2>
-        <p style="color:var(--text-light);margin-bottom:14px;">As per ICAI Announcement (effective from FY 2024-25). Enter entity details to check MSME or Large classification and applicable AS exemptions.</p>
+        <p style="color:var(--text-light);margin-bottom:6px;">Enter entity details to check MSME or Large classification and applicable AS exemptions.</p>
+        <p style="color:var(--text-light);margin-bottom:14px;font-size:0.82rem;">As per <strong>ICAI Announcement dated 28.03.2024</strong> — "Applicability of Accounting Standards to Non-Company Entities" (supersedes March 2021 Announcement). Effective for periods commencing on or after 01.04.2024 (FY 2024-25 onwards). Source: <a href="https://www.icai.org" target="_blank" style="color:var(--accent);">icai.org</a> — Accounting Standards Board</p>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
             <div class="form-group"><label>Are equity/debt instruments listed or in process of listing?</label>
                 <select id="asListed"><option value="no">No — Not Listed</option><option value="yes">Yes — Listed / In Process</option></select></div>
@@ -770,69 +794,183 @@
     </div>
 </div>
 
-<!-- ==================== NOTICE REPLY DRAFTS ==================== -->
-<div id="tab-noticereply" class="tab-content">
+<!-- ==================== CAPITAL GAINS CALCULATOR ==================== -->
+<div id="tab-capgain" class="tab-content">
     <div class="card">
-        <h2>Income Tax Notice — Reply Draft Generator</h2>
-        <p style="color:var(--text-light);margin-bottom:14px;">Select the notice type, fill in details, and generate a professional reply draft. Copy or print the output.</p>
-        <div class="form-group"><label>Select Notice Type</label>
-            <select id="nrType" onchange="showNRFields()">
-                <option value="">— Select Notice Section —</option>
-                <option value="139_9">Sec 139(9) — Defective Return</option>
-                <option value="142_1">Sec 142(1) — Inquiry / Information Request</option>
-                <option value="143_1">Sec 143(1) — Intimation (Mismatch)</option>
-                <option value="143_2">Sec 143(2) — Scrutiny Assessment</option>
-                <option value="148">Sec 148 / 148A — Reopening of Assessment</option>
-                <option value="154">Sec 154 — Rectification</option>
-                <option value="156">Sec 156 — Demand Notice</option>
-                <option value="245">Sec 245 — Adjustment of Refund against Demand</option>
-                <option value="270A">Sec 270A / 271(1)(c) — Penalty Proceedings</option>
-                <option value="adjournment">Adjournment Request (Any Notice)</option>
-            </select>
+        <h2>Capital Gains Tax Calculator</h2>
+        <p style="color:var(--text-light);margin-bottom:6px;">Calculate LTCG / STCG on shares, mutual funds, property, and other assets.</p>
+        <p style="color:var(--text-light);margin-bottom:14px;font-size:0.82rem;">Rates as per <strong>Finance Act 2024 (w.e.f. 23.07.2024)</strong> & <strong>Finance Act 2025</strong>. LTCG: 12.5% (all assets). STCG listed: 20%. Indexation removed except grandfathered property. CII FY 2025-26: 376 (Notf 70/2025). Source: <a href="https://incometaxindia.gov.in" target="_blank" style="color:var(--accent);">incometaxindia.gov.in</a></p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div class="form-group"><label>Asset Type</label>
+                <select id="cgAsset" onchange="updateCGFields()">
+                    <option value="">— Select Asset —</option>
+                    <option value="listed_eq">Listed Equity Shares</option>
+                    <option value="equity_mf">Equity Mutual Funds (Listed)</option>
+                    <option value="debt_mf">Debt Mutual Funds</option>
+                    <option value="unlisted">Unlisted Shares</option>
+                    <option value="property_old">Property (acquired before 23.07.2024)</option>
+                    <option value="property_new">Property (acquired on/after 23.07.2024)</option>
+                    <option value="gold">Gold / Jewellery</option>
+                    <option value="other">Other Capital Assets</option>
+                </select></div>
+            <div class="form-group"><label>Holding Period</label>
+                <select id="cgHolding">
+                    <option value="short">Short Term</option>
+                    <option value="long">Long Term</option>
+                </select></div>
+            <div class="form-group"><label>Purchase Price (Cost of Acquisition) Rs.</label>
+                <input type="number" id="cgCost" placeholder="e.g. 500000"></div>
+            <div class="form-group"><label>Sale Price (Full Value of Consideration) Rs.</label>
+                <input type="number" id="cgSale" placeholder="e.g. 800000"></div>
+            <div class="form-group"><label>Expenses on Transfer Rs.</label>
+                <input type="number" id="cgExpense" placeholder="Brokerage, stamp duty, etc." value="0"></div>
+            <div class="form-group" id="cgImprovementGrp"><label>Cost of Improvement Rs.</label>
+                <input type="number" id="cgImprovement" placeholder="0" value="0"></div>
+            <div class="form-group" id="cgCIIBuyGrp" style="display:none;"><label>CII of Year of Purchase</label>
+                <input type="number" id="cgCIIBuy" placeholder="e.g. 331 (FY 2022-23)"></div>
+            <div class="form-group" id="cgCIISellGrp" style="display:none;"><label>CII of Year of Sale</label>
+                <input type="number" id="cgCIISell" placeholder="e.g. 376 (FY 2025-26)"></div>
+            <div class="form-group" id="cgFMVGrp" style="display:none;"><label>FMV as on 31.01.2018 / 23.07.2024 (for grandfathering) Rs.</label>
+                <input type="number" id="cgFMV" placeholder="Fair Market Value"></div>
         </div>
-        <div id="nrCommonFields" style="display:none;">
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-                <div class="form-group"><label>Assessee Name</label><input type="text" id="nrName" placeholder="e.g. M/s ABC Traders or Mr. Rajesh Kumar"></div>
-                <div class="form-group"><label>PAN</label><input type="text" id="nrPAN" placeholder="e.g. ABCDE1234F" maxlength="10" style="text-transform:uppercase;"></div>
-                <div class="form-group"><label>Assessment Year</label><input type="text" id="nrAY" placeholder="e.g. 2025-26"></div>
-                <div class="form-group"><label>Ward / Circle</label><input type="text" id="nrWard" placeholder="e.g. Ward 5(1), Circle 3"></div>
-                <div class="form-group"><label>Notice Date</label><input type="date" id="nrNoticeDate"></div>
-                <div class="form-group"><label>DIN / Notice Reference No.</label><input type="text" id="nrDIN" placeholder="e.g. ITBA/AST/S/142(1)/2025-26/10XXXXX"></div>
-                <div class="form-group"><label>City of AO</label><input type="text" id="nrCity" placeholder="e.g. Mumbai / Delhi / Jaipur"></div>
-                <div class="form-group"><label>Reply Date</label><input type="date" id="nrReplyDate"></div>
-            </div>
-            <div id="nrSpecificFields"></div>
-            <div class="form-group"><label>Tone of Reply</label>
-                <select id="nrTone">
-                    <option value="compliance">Compliance (submitting information)</option>
-                    <option value="objection">Objection (contesting the notice)</option>
-                </select>
-            </div>
-            <div style="display:flex;gap:10px;margin-top:10px;">
-                <button class="btn" onclick="generateNR()">Generate Draft</button>
-                <button class="btn" style="background:var(--primary-mid);" onclick="copyNR()">Copy to Clipboard</button>
-                <button class="btn" style="background:#b5651d;" onclick="printNR()">Print Draft</button>
-                <button class="btn" style="background:#636e72;" onclick="resetNR()">Reset</button>
-            </div>
+        <div style="display:flex;gap:10px;margin-top:10px;">
+            <button class="btn" onclick="calcCapGain()">Calculate Capital Gains</button>
+            <button class="btn" style="background:var(--primary-mid);" onclick="resetCG()">Reset</button>
         </div>
-    </div>
-    <div class="card" id="nrOutputCard" style="display:none;">
-        <h2>Generated Reply Draft</h2>
-        <div id="nrOutput" style="white-space:pre-wrap;font-family:'Segoe UI',sans-serif;font-size:0.92rem;line-height:1.7;background:#fff;color:#222;padding:24px;border:1px solid #ddd;border-radius:8px;"></div>
+        <div id="cgResult" class="result-box" style="margin-top:16px;"></div>
     </div>
     <div class="card">
-        <h2>Notice Reply — Quick Reference</h2>
+        <h2>Capital Gains — Rate Card (FY 2026-27)</h2>
         <table class="limits-table">
-            <tr><th>Section</th><th>Notice Type</th><th>Reply Deadline</th><th>Key Points</th></tr>
-            <tr><td><strong>139(9)</strong></td><td>Defective Return</td><td>15 days from notice</td><td>Rectify defect or explain why return is correct</td></tr>
-            <tr><td><strong>142(1)</strong></td><td>Inquiry</td><td>As specified</td><td>Submit info/docs; non-compliance → 271(1)(b) penalty</td></tr>
-            <tr><td><strong>143(1)</strong></td><td>Intimation</td><td>30 days (rectification u/s 154)</td><td>Check TDS/TCS mismatch, disallowances, arithmetic errors</td></tr>
-            <tr><td><strong>143(2)</strong></td><td>Scrutiny</td><td>As specified</td><td>Full books + evidence; ensure within limitation period</td></tr>
-            <tr><td><strong>148/148A</strong></td><td>Reopening</td><td>30 days (148A objection)</td><td>Check 3/10 year limit; challenge "reason to believe"</td></tr>
-            <tr><td><strong>154</strong></td><td>Rectification</td><td>30 days</td><td>Only "mistake apparent from record" — no debatable issues</td></tr>
-            <tr><td><strong>156</strong></td><td>Demand</td><td>30 days</td><td>Pay or file appeal u/s 246A within 30 days</td></tr>
-            <tr><td><strong>245</strong></td><td>Refund Adjustment</td><td>30 days</td><td>AO must give prior intimation; object if demand itself disputed</td></tr>
-            <tr><td><strong>270A</strong></td><td>Penalty</td><td>As specified</td><td>Show "reasonable cause" u/s 273B; distinguish mis-reporting vs under-reporting</td></tr>
+            <tr><th>Asset Type</th><th>Holding for LTCG</th><th>STCG Rate</th><th>LTCG Rate</th><th>Exemption</th></tr>
+            <tr><td>Listed Equity Shares</td><td>&gt; 12 months</td><td>20%</td><td>12.5%</td><td>Rs 1.25 Lakh/year</td></tr>
+            <tr><td>Equity Mutual Funds</td><td>&gt; 12 months</td><td>20%</td><td>12.5%</td><td>Rs 1.25 Lakh/year</td></tr>
+            <tr><td>Debt Mutual Funds</td><td>&gt; 24 months</td><td>Slab rate</td><td>12.5%</td><td>Nil</td></tr>
+            <tr><td>Unlisted Shares</td><td>&gt; 24 months</td><td>Slab rate</td><td>12.5%</td><td>Nil</td></tr>
+            <tr><td>Property / Land</td><td>&gt; 24 months</td><td>Slab rate</td><td>12.5%</td><td>54/54EC/54F available</td></tr>
+            <tr><td>Gold / Jewellery</td><td>&gt; 24 months</td><td>Slab rate</td><td>12.5%</td><td>Nil</td></tr>
+            <tr><td>Other Assets</td><td>&gt; 36 months</td><td>Slab rate</td><td>12.5%</td><td>Nil</td></tr>
+        </table>
+        <div class="disclaimer" style="margin-top:12px;">
+            <p style="font-size:0.82rem;"><strong>Key Changes (w.e.f. 23.07.2024):</strong> Uniform LTCG rate of 12.5% across all assets. STCG on listed equity/MF: 20% (was 15%). Indexation removed for all transfers on/after 23.07.2024. <strong>Exception:</strong> Property acquired before 23.07.2024 — taxpayer can choose lower of (a) 12.5% without indexation or (b) 20% with indexation (grandfathered).</p>
+        </div>
+    </div>
+    <div class="card">
+        <h2>Cost Inflation Index (CII) — Quick Reference</h2>
+        <table class="limits-table">
+            <tr><th>FY</th><th>CII</th><th>FY</th><th>CII</th><th>FY</th><th>CII</th></tr>
+            <tr><td>2001-02</td><td>100</td><td>2010-11</td><td>167</td><td>2019-20</td><td>289</td></tr>
+            <tr><td>2002-03</td><td>105</td><td>2011-12</td><td>184</td><td>2020-21</td><td>301</td></tr>
+            <tr><td>2003-04</td><td>109</td><td>2012-13</td><td>200</td><td>2021-22</td><td>317</td></tr>
+            <tr><td>2004-05</td><td>113</td><td>2013-14</td><td>220</td><td>2022-23</td><td>331</td></tr>
+            <tr><td>2005-06</td><td>117</td><td>2014-15</td><td>240</td><td>2023-24</td><td>348</td></tr>
+            <tr><td>2006-07</td><td>122</td><td>2015-16</td><td>254</td><td>2024-25</td><td>363</td></tr>
+            <tr><td>2007-08</td><td>129</td><td>2016-17</td><td>264</td><td>2025-26</td><td>376</td></tr>
+            <tr><td>2008-09</td><td>137</td><td>2017-18</td><td>272</td><td>2026-27</td><td>—*</td></tr>
+            <tr><td>2009-10</td><td>148</td><td>2018-19</td><td>280</td><td colspan="2" style="font-size:0.8rem;">*Yet to be notified</td></tr>
+        </table>
+    </div>
+</div>
+
+<!-- ==================== INTEREST & PENALTY CALCULATOR ==================== -->
+<div id="tab-intpenalty" class="tab-content">
+    <div class="card">
+        <h2>Interest & Penalty Calculator — Sec 234A / 234B / 234C / 234F</h2>
+        <p style="color:var(--text-light);margin-bottom:6px;">Calculate interest for late filing, short advance tax, and deferment of installments.</p>
+        <p style="color:var(--text-light);margin-bottom:14px;font-size:0.82rem;">As per <strong>Sections 234A, 234B, 234C, 234F of IT Act 1961</strong> (unchanged in Finance Act 2025). Under IT Act 2025: 234A→Sec 423, 234B→Sec 424, 234C→Sec 425. Interest rate: <strong>1% per month (simple)</strong>. Source: <a href="https://incometaxindia.gov.in" target="_blank" style="color:var(--accent);">incometaxindia.gov.in</a></p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div class="form-group"><label>Assessment Year</label>
+                <select id="ipAY"><option value="2027-28">AY 2027-28 (FY 2026-27)</option><option value="2026-27">AY 2026-27 (FY 2025-26)</option><option value="2025-26">AY 2025-26 (FY 2024-25)</option></select></div>
+            <div class="form-group"><label>Total Tax Liability (after TDS/TCS) Rs.</label>
+                <input type="number" id="ipTaxLiab" placeholder="e.g. 250000"></div>
+            <div class="form-group"><label>Advance Tax Paid — by 15 Jun Rs.</label>
+                <input type="number" id="ipAdv1" placeholder="0" value="0"></div>
+            <div class="form-group"><label>Advance Tax Paid — by 15 Sep Rs.</label>
+                <input type="number" id="ipAdv2" placeholder="0" value="0"></div>
+            <div class="form-group"><label>Advance Tax Paid — by 15 Dec Rs.</label>
+                <input type="number" id="ipAdv3" placeholder="0" value="0"></div>
+            <div class="form-group"><label>Advance Tax Paid — by 15 Mar Rs.</label>
+                <input type="number" id="ipAdv4" placeholder="0" value="0"></div>
+            <div class="form-group"><label>TDS / TCS Credit Rs.</label>
+                <input type="number" id="ipTDS" placeholder="0" value="0"></div>
+            <div class="form-group"><label>Self-Assessment Tax Paid Rs.</label>
+                <input type="number" id="ipSAT" placeholder="0" value="0"></div>
+            <div class="form-group"><label>Due Date of Filing</label>
+                <select id="ipDueDate"><option value="jul31">31 Jul (Non-audit)</option><option value="oct31">31 Oct (Audit cases)</option><option value="nov30">30 Nov (TP cases)</option></select></div>
+            <div class="form-group"><label>Actual Date of Filing</label>
+                <input type="date" id="ipFileDate"></div>
+            <div class="form-group"><label>Total Income Rs.</label>
+                <input type="number" id="ipIncome" placeholder="For 234F late fee calculation"></div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:10px;">
+            <button class="btn" onclick="calcInterest()">Calculate Interest & Penalty</button>
+            <button class="btn" style="background:var(--primary-mid);" onclick="resetIP()">Reset</button>
+        </div>
+        <div id="ipResult" class="result-box" style="margin-top:16px;"></div>
+    </div>
+    <div class="card">
+        <h2>Interest Sections — Quick Reference</h2>
+        <table class="limits-table">
+            <tr><th>Section</th><th>Nature</th><th>Rate</th><th>Period</th><th>New Act (2025)</th></tr>
+            <tr><td><strong>234A</strong></td><td>Late filing of return</td><td>1% p.m.</td><td>From due date to actual filing date</td><td>Sec 423</td></tr>
+            <tr><td><strong>234B</strong></td><td>Short payment of advance tax</td><td>1% p.m.</td><td>From 1 Apr of AY to date of assessment</td><td>Sec 424</td></tr>
+            <tr><td><strong>234C</strong></td><td>Deferment of advance tax installments</td><td>1% p.m.</td><td>3 months (Q1-Q3), 1 month (Q4)</td><td>Sec 425</td></tr>
+            <tr><td><strong>234F</strong></td><td>Late filing fee</td><td>Flat fee</td><td>Rs 5,000 (Rs 1,000 if income ≤ Rs 5L)</td><td>Equivalent provision</td></tr>
+        </table>
+        <div class="disclaimer" style="margin-top:10px;">
+            <p style="font-size:0.82rem;"><strong>Advance Tax Installments:</strong> 15 Jun — 15% | 15 Sep — 45% | 15 Dec — 75% | 15 Mar — 100%. Not applicable if tax liability &lt; Rs 10,000 (after TDS). Senior citizens without business income are exempt from advance tax.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== IMPACT ANALYZER ==================== -->
+<div id="tab-impact" class="tab-content">
+    <div class="card">
+        <h2>Impact Analyzer — IT Act 1961 vs IT Act 2025</h2>
+        <p style="color:var(--text-light);margin-bottom:6px;">Input client profile to see what changes under the new Income Tax Act 2025 (effective 01.04.2026).</p>
+        <p style="color:var(--text-light);margin-bottom:14px;font-size:0.82rem;">Based on <strong>The Income Tax Act, 2025 (Act No. 14 of 2025)</strong>, notified in Official Gazette on 29.03.2025. Source: <a href="https://egazette.gov.in" target="_blank" style="color:var(--accent);">egazette.gov.in</a> | <a href="https://incometaxindia.gov.in" target="_blank" style="color:var(--accent);">incometaxindia.gov.in</a></p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div class="form-group"><label>Entity Type</label>
+                <select id="imEntity"><option value="individual">Individual</option><option value="huf">HUF</option><option value="firm">Partnership Firm / LLP</option><option value="company">Company</option><option value="trust">Trust / AOP / BOI</option></select></div>
+            <div class="form-group"><label>Annual Turnover / Gross Receipts (Rs. Cr)</label>
+                <input type="number" id="imTurnover" placeholder="e.g. 5" step="0.01"></div>
+            <div class="form-group"><label>Is Tax Audit Applicable?</label>
+                <select id="imAudit"><option value="yes">Yes</option><option value="no">No</option></select></div>
+            <div class="form-group"><label>Has Capital Gains?</label>
+                <select id="imCapGain"><option value="no">No</option><option value="yes">Yes</option></select></div>
+            <div class="form-group"><label>Has International Transactions / TP?</label>
+                <select id="imTP"><option value="no">No</option><option value="yes">Yes</option></select></div>
+            <div class="form-group"><label>Claims Chapter VI-A Deductions?</label>
+                <select id="imVIA"><option value="no">No</option><option value="yes">Yes — 80C/80D/80G etc.</option></select></div>
+            <div class="form-group"><label>Has TDS Obligations?</label>
+                <select id="imTDS"><option value="yes">Yes</option><option value="no">No</option></select></div>
+            <div class="form-group"><label>Is a Partner in a Firm?</label>
+                <select id="imPartner"><option value="no">No</option><option value="yes">Yes</option></select></div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:10px;">
+            <button class="btn" onclick="analyzeImpact()">Analyze Impact</button>
+            <button class="btn" style="background:var(--primary-mid);" onclick="document.getElementById('imResult').className='result-box';document.getElementById('imResult').innerHTML='';">Reset</button>
+        </div>
+        <div id="imResult" class="result-box" style="margin-top:16px;"></div>
+    </div>
+    <div class="card">
+        <h2>Key Structural Changes — IT Act 2025 at a Glance</h2>
+        <table class="limits-table">
+            <tr><th>Feature</th><th>Old Act (1961)</th><th>New Act (2025)</th></tr>
+            <tr><td>Total Sections</td><td>~298 + multiple sub-sections</td><td>536 Sections (simplified)</td></tr>
+            <tr><td>Terminology</td><td>Previous Year + Assessment Year</td><td><strong>Tax Year</strong> (unified)</td></tr>
+            <tr><td>Tax Audit Form</td><td>Form 3CA/3CB + 3CD</td><td><strong>Form No. 26</strong> (consolidated)</td></tr>
+            <tr><td>Tax Audit Section</td><td>Section 44AB</td><td><strong>Section 63</strong></td></tr>
+            <tr><td>Return Filing</td><td>Section 139</td><td><strong>Section 263</strong></td></tr>
+            <tr><td>TDS Sections</td><td>194, 194A-194T, 195</td><td>Renumbered (Sec 393-421)</td></tr>
+            <tr><td>Advance Tax</td><td>Section 208-211</td><td>Sec 343-346</td></tr>
+            <tr><td>Interest 234A/B/C</td><td>Section 234A, 234B, 234C</td><td><strong>Sec 423, 424, 425</strong></td></tr>
+            <tr><td>Penalty</td><td>Section 270A, 271</td><td>Sec 434-441</td></tr>
+            <tr><td>Capital Gains</td><td>Section 45-55A</td><td>Sec 67-91 (Chapter VIII)</td></tr>
+            <tr><td>Deductions</td><td>Chapter VI-A (80C-80U)</td><td>Chapter VIII (Sec 123-154)</td></tr>
+            <tr><td>Clubbing</td><td>Section 60-65</td><td>Sec 92-98</td></tr>
+            <tr><td>Set Off / Carry Forward</td><td>Section 70-80</td><td>Sec 99-122</td></tr>
+            <tr><td>Tax Regime</td><td>115BAC (optional new regime)</td><td><strong>New Regime default</strong>; old regime opt-in</td></tr>
         </table>
     </div>
 </div>
@@ -912,8 +1050,46 @@ function renderClauses(list){var c=document.getElementById('clauseList');if(!lis
 c.innerHTML=list.map(function(cl){var rt=cl.risk==='high'?'<span class="tag tag-high">High Risk</span>':cl.risk==='medium'?'<span class="tag tag-medium">Medium</span>':'<span class="tag tag-low">Low</span>';
 return '<div class="clause-item" data-cat="'+cl.category+'"><div class="clause-header" onclick="this.parentElement.classList.toggle(\'open\')"><div style="display:flex;align-items:center;flex:1"><span class="clause-number">Cl. '+cl.number+'</span><span class="clause-title">'+cl.title+'</span></div><span class="clause-arrow">&#9660;</span></div><div class="clause-body"><div class="clause-section">'+rt+' <span class="tag tag-info">'+cl.category+'</span></div><div class="clause-section"><div class="clause-section-title">Description</div><p>'+cl.description+'</p></div><div class="clause-section"><div class="clause-section-title">What to Verify</div><p>'+cl.requirements+'</p></div><div class="clause-section"><div class="clause-section-title">Common Observations</div><ul>'+cl.observations.map(function(o){return '<li>'+o+'</li>';}).join('')+'</ul></div></div></div>';}).join('');}
 function filterClauses(){var q=document.getElementById('clauseSearch').value.toLowerCase(),ab=document.querySelector('#tab-clauses .filter-btn.active'),cat=ab?ab.textContent.toLowerCase():'all';var f=clauses;if(cat!=='all')f=f.filter(function(c){return c.category===cat;});if(q)f=f.filter(function(c){return (c.title+c.description+c.keywords+c.number).toLowerCase().indexOf(q)>=0;});renderClauses(f);}
-function filterCategory(cat,btn){document.querySelectorAll('#tab-clauses .filter-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');filterClauses();}
+function filterCategory(cat,btn){document.querySelectorAll('#tab-clauses .filter-row:last-of-type .filter-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');filterClauses();}
 renderClauses(clauses);
+
+// Form 26 — Tax Year 2026-27 onwards (IT Act 2025, Sec 63, Rule 47)
+var form26Clauses=[
+{number:"1-3",title:"Part A — Basic Information",category:"basic",risk:"low",description:"Name, PAN/TAN, address, status, nature of business, Tax Year.",requirements:"Verify PAN, Udyam/CIN, business code. Note: 'Tax Year' replaces PY+AY.",observations:["PAN mismatch","Wrong entity status"],keywords:"name pan address status tax year"},
+{number:"4-5",title:"Audit Applicability & Books of Accounts",category:"basic",risk:"medium",description:"Sec 63 applicability (replaces 44AB). Books maintained, address.",requirements:"Cite correct clause of Sec 63. List all books including digital records.",observations:["Wrong applicability clause","Digital records not listed"],keywords:"sec 63 44AB books accounts audit applicability"},
+{number:"6-7",title:"Presumptive Income & Opt-out History",category:"basic",risk:"medium",description:"Presumptive schemes opted/opted-out. Covers Sec 44AD-44BBC equivalents.",requirements:"Check last 5 years history. Includes cruise ship operations (44BBC equivalent).",observations:["Opt-out history incomplete"],keywords:"presumptive 44AD 44ADA 44BBC opt out"},
+{number:"8-9",title:"Partner Details & Tax Regime Option",category:"basic",risk:"medium",description:"Partner profit sharing, remuneration, interest. Tax regime chosen.",requirements:"Verify partnership deed. Confirm new regime (default) or old regime opt-in.",observations:["Deed not updated","Regime option not declared"],keywords:"partner profit sharing tax regime 115BAC"},
+{number:"10-12",title:"Method of Accounting & Prior Period Items",category:"financial",risk:"medium",description:"Mercantile/cash method. Changes in accounting policy. Prior period adjustments.",requirements:"Companies must use mercantile. Disclose policy changes with impact quantification.",observations:["Undisclosed policy change"],keywords:"accounting method mercantile cash prior period"},
+{number:"13-15",title:"Depreciation Schedule (Enhanced)",category:"financial",risk:"high",description:"Complete WDV schedule with asset-wise breakup. Enhanced digital asset tracking.",requirements:"Verify opening WDV, additions, deletions, rates. 180-day rule. No goodwill depreciation. IT systems audit trail for additions.",observations:["Wrong rate applied","Goodwill depreciation claimed","IT asset trail missing"],keywords:"depreciation WDV schedule asset digital"},
+{number:"16-18",title:"Inadmissible Expenditure — Capital, Personal, Disallowed",category:"financial",risk:"high",description:"Capital expenditure, personal expenses, Sec 37 disallowances. Settlement expenditure.",requirements:"Review all expenses. Check settlement expenditure under notified laws. CSR reporting enhanced.",observations:["Personal expenses not disallowed","Settlement costs not examined","CSR mismatch"],keywords:"inadmissible capital personal settlement CSR 37"},
+{number:"19-21",title:"Deductions & Amounts Admissible",category:"deductions",risk:"medium",description:"All deductions claimed — scientific research, spectrum fees, preliminary expenses.",requirements:"Verify eligibility and documentary evidence for each deduction.",observations:["Missing approvals","Overclaimed amounts"],keywords:"deductions 35 35ABA spectrum preliminary"},
+{number:"22-24",title:"Chapter VIII Deductions (replaces Chapter VI-A)",category:"deductions",risk:"high",description:"New section numbers for 80C-80U equivalents. Only available under old regime.",requirements:"Map each deduction to new Act section. Verify old regime opt-in if claimed.",observations:["Deductions claimed under new regime","Wrong section reference"],keywords:"chapter VIII deductions 80C 80D 80G VI-A"},
+{number:"25-27",title:"MSME Payments — Enhanced Reporting",category:"compliance",risk:"high",description:"Sec 43B(h) equivalent. Udyam verification mandatory. Interest computation.",requirements:"Verify ALL vendor Udyam registrations. Report delayed payments, interest u/s MSMED Act. Transaction-level reporting.",observations:["Vendor Udyam not verified","45-day breach not reported"],keywords:"MSME MSMED 43B(h) Udyam payment"},
+{number:"28-30",title:"Related Party Payments & Deemed Income",category:"compliance",risk:"high",description:"Sec 40A(2)(b) equivalent — related party. Deemed income u/s 56(2) equivalents.",requirements:"Compare with FMV. Report all related party transactions. Gift/property below FMV.",observations:["Excessive rent to director","Shares at premium not examined"],keywords:"related party 40A(2)(b) deemed income 56(2)"},
+{number:"31-33",title:"Cash Transaction Reporting (Enhanced)",category:"compliance",risk:"high",description:"Cash payments >10K (Sec 40A(3) equiv), Cash loans >20K (269SS/T equiv), Cash receipts >2L (269ST equiv).",requirements:"Scan cash book comprehensively. Report each violation with transaction codes. Enhanced digital trail.",observations:["Cash splitting","Transporter exception not applied"],keywords:"cash 40A(3) 269SS 269ST 10000 20000 2 lakh"},
+{number:"34-36",title:"Section 43B Equivalent — Payment Basis",category:"compliance",risk:"high",description:"GST, PF, ESI, bonus, leave encashment, MSME — payment before return due date.",requirements:"Verify actual payment dates. Cross-check with challans. MSME 45-day rule.",observations:["PF/ESI late deposit","MSME payment delayed"],keywords:"43B payment PF ESI GST bonus MSME"},
+{number:"37-41",title:"Deemed Income, Recovery & Cessation",category:"tax",risk:"high",description:"Recovery of bad debts, cessation of liability (Sec 41 equiv), balancing charges.",requirements:"Check old liabilities >3 years. Asset sale profit computations.",observations:["Old liabilities not written back"],keywords:"deemed income recovery cessation 41 balancing"},
+{number:"42-45",title:"Dividend, Interest & Other Income",category:"tax",risk:"medium",description:"Dividend reporting, interest income, TDS on same. Share buyback disclosure.",requirements:"Verify TDS on dividends. Report buyback u/s 2(22)(f) equivalent. Interest reconciliation.",observations:["TDS on dividend not checked","Buyback not disclosed"],keywords:"dividend interest buyback 2(22)(f) TDS"},
+{number:"46-48",title:"Quantitative Details & Stock Reconciliation",category:"financial",risk:"medium",description:"Opening/closing stock, raw material consumption, finished goods. GST reconciliation.",requirements:"Match stock register with books. Reconcile with GSTR-1/3B. Report wastage.",observations:["Stock register not maintained","Turnover mismatch with GST"],keywords:"stock quantitative raw material finished goods GST reconciliation"},
+{number:"49-51",title:"TDS/TCS Compliance — Transaction Level (Major Change)",category:"tax",risk:"high",description:"CRITICAL CHANGE: Transaction-level TDS/TCS reporting (not just summary). Mandatory transaction codes. Schedule TDS/TCS.",requirements:"Match EVERY transaction with 26AS/AIS/TIS. Verify rates, deposits, defaults. Transaction codes mandatory. New Sec 194T equivalent (firm→partner).",observations:["Transaction codes missing","26AS mismatch at transaction level","Short deduction"],keywords:"TDS TCS 26AS AIS transaction code compliance 194T"},
+{number:"52",title:"Pending Litigation & Tax Demands",category:"compliance",risk:"medium",description:"All pending assessments, demands, appeals, refunds.",requirements:"List all pending proceedings with amounts and status.",observations:["Pending demands not reported"],keywords:"demand refund appeal litigation pending"},
+{number:"53",title:"IT Systems Audit & Digital Compliance (NEW)",category:"compliance",risk:"high",description:"NEW in Form 26: IT systems audit trail, digital record integrity, accounting software details.",requirements:"Report accounting software used, version, audit trail status (mandatory from Apr 2023 for companies). Digital signature verification.",observations:["Audit trail not enabled","Software details not reported"],keywords:"IT systems audit trail digital software accounting"}
+];
+var activeFormGuide='2526';
+function switchFYGuide(fy,btn){
+document.querySelectorAll('#fyToggleRow .filter-btn').forEach(function(b){b.classList.remove('active');});
+btn.classList.add('active');
+activeFormGuide=fy;
+document.getElementById('fyGuide2526').style.display=fy==='2526'?'block':'none';
+document.getElementById('fyGuide2627').style.display=fy==='2627'?'block':'none';
+document.getElementById('clauseSearch').value='';
+renderClauses(fy==='2526'?clauses:form26Clauses);
+}
+// Override filterClauses to use active guide
+var origFilterClauses=filterClauses;
+filterClauses=function(){var q=document.getElementById('clauseSearch').value.toLowerCase(),ab=document.querySelector('#tab-clauses .filter-row:last-of-type .filter-btn.active'),cat=ab?ab.textContent.toLowerCase():'all';
+var src=activeFormGuide==='2526'?clauses:form26Clauses;
+var f=src;if(cat!=='all')f=f.filter(function(c){return c.category===cat;});if(q)f=f.filter(function(c){return (c.title+c.description+c.keywords+c.number).toLowerCase().indexOf(q)>=0;});renderClauses(f);};
 
 // ==============================
 // TAB 3: IT CALCULATOR
@@ -1642,140 +1818,210 @@ renderASTable(asData,'asFullTableContainer');
 function resetASChecker(){document.getElementById('asListed').value='no';document.getElementById('asBFI').value='no';document.getElementById('asTurnover').value='';document.getElementById('asBorrowing').value='';document.getElementById('asHolding').value='no';document.getElementById('as2Year').value='yes';document.getElementById('asClassResult').className='result-box';document.getElementById('asClassResult').innerHTML='';document.getElementById('asExemptionCard').style.display='none';document.getElementById('asFullListCard').style.display='none';}
 
 // ==============================
-// NOTICE REPLY DRAFT GENERATOR
+// CAPITAL GAINS CALCULATOR
 // ==============================
-var nrSpecificConfig={
-'139_9':{label:'Sec 139(9) — Defective Return',fields:'<div class="form-group"><label>Nature of Defect (as mentioned in notice)</label><textarea id="nrDefect" rows="3" placeholder="e.g. ITR filed without payment of self-assessment tax / Mismatch in Schedule TDS"></textarea></div><div class="form-group"><label>Your Explanation / Action Taken</label><textarea id="nrExplain" rows="3" placeholder="e.g. The defect has been rectified by filing revised computation / Self-assessment tax has now been paid vide Challan No. ___"></textarea></div>'},
-'142_1':{label:'Sec 142(1) — Inquiry',fields:'<div class="form-group"><label>Information / Documents Requested</label><textarea id="nrInfoReq" rows="3" placeholder="e.g. Bank statements, Cash book, Sales register for FY 2024-25"></textarea></div><div class="form-group"><label>Documents Being Submitted / Explanation</label><textarea id="nrDocsSubmit" rows="3" placeholder="e.g. Bank statements of SBI A/c No. XXXX for the period Apr 2024 to Mar 2025 enclosed"></textarea></div>'},
-'143_1':{label:'Sec 143(1) — Intimation',fields:'<div class="form-group"><label>Mismatch / Adjustment Amount (Rs.)</label><input type="text" id="nrMismatchAmt" placeholder="e.g. 45,000"></div><div class="form-group"><label>Nature of Adjustment</label><textarea id="nrAdjNature" rows="2" placeholder="e.g. TDS credit of Rs. 45,000 not allowed / Deduction u/s 80C disallowed"></textarea></div><div class="form-group"><label>Reason Why Adjustment is Incorrect</label><textarea id="nrAdjReason" rows="3" placeholder="e.g. TDS credit is reflected in Form 26AS and AIS. The mismatch is due to..."></textarea></div>'},
-'143_2':{label:'Sec 143(2) — Scrutiny',fields:'<div class="form-group"><label>Issues / Queries Raised by AO</label><textarea id="nrScrutinyIssues" rows="3" placeholder="e.g. Justify claim of deduction u/s 80IA / Explain source of cash deposit of Rs. 10 Lakh"></textarea></div><div class="form-group"><label>Your Submissions / Evidence</label><textarea id="nrScrutinyReply" rows="3" placeholder="e.g. The deduction is claimed as per the conditions laid down in Sec 80IA. Documentary evidence enclosed..."></textarea></div>'},
-'148':{label:'Sec 148/148A — Reopening',fields:'<div class="form-group"><label>Original Return Filed? (Date & Income)</label><input type="text" id="nrOrigReturn" placeholder="e.g. Yes, filed on 31.07.2023 declaring income of Rs. 8,50,000"></div><div class="form-group"><label>Reason to Believe (as stated in notice)</label><textarea id="nrReason148" rows="2" placeholder="e.g. Cash deposit during demonetization / Mismatch in property transaction"></textarea></div><div class="form-group"><label>Your Objection / Compliance</label><textarea id="nrReply148" rows="3" placeholder="e.g. The cash deposit of Rs. 5 Lakh was from accumulated savings and agricultural income as evidenced by..."></textarea></div>'},
-'154':{label:'Sec 154 — Rectification',fields:'<div class="form-group"><label>Mistake Apparent from Record (as per notice)</label><textarea id="nrMistake154" rows="2" placeholder="e.g. Exemption u/s 10(10D) not allowed on maturity proceeds of LIC policy"></textarea></div><div class="form-group"><label>Your Response / Correct Position</label><textarea id="nrReply154" rows="3" placeholder="e.g. The exemption u/s 10(10D) is correctly claimed as the policy premium does not exceed 10% of sum assured..."></textarea></div>'},
-'156':{label:'Sec 156 — Demand Notice',fields:'<div class="form-group"><label>Demand Amount (Rs.)</label><input type="text" id="nrDemandAmt" placeholder="e.g. 1,25,000"></div><div class="form-group"><label>Grounds of Objection / Payment Details</label><textarea id="nrDemandReply" rows="3" placeholder="e.g. The demand is not correct as TDS credit was not given / Demand has been paid vide Challan dated..."></textarea></div>'},
-'245':{label:'Sec 245 — Refund Adjustment',fields:'<div class="form-group"><label>Refund Amount Being Adjusted (Rs.)</label><input type="text" id="nrRefundAmt" placeholder="e.g. 75,000"></div><div class="form-group"><label>Demand Against Which Adjusted (AY & Amount)</label><input type="text" id="nrAgainstDemand" placeholder="e.g. Demand of Rs. 1,20,000 for AY 2022-23"></div><div class="form-group"><label>Your Objection</label><textarea id="nrReply245" rows="3" placeholder="e.g. The underlying demand for AY 2022-23 is itself under appeal before CIT(A). Adjustment without disposing appeal is unjustified..."></textarea></div>'},
-'270A':{label:'Sec 270A / 271(1)(c) — Penalty',fields:'<div class="form-group"><label>Penalty Section & Amount (Rs.)</label><input type="text" id="nrPenaltyAmt" placeholder="e.g. Sec 270A — Rs. 2,50,000 (50% of under-reported income)"></div><div class="form-group"><label>Nature of Alleged Default</label><textarea id="nrPenaltyNature" rows="2" placeholder="e.g. Under-reporting of income due to disallowance of claim u/s 80G"></textarea></div><div class="form-group"><label>Your Defence / Reasonable Cause</label><textarea id="nrPenaltyDefence" rows="3" placeholder="e.g. The claim was made in good faith based on valid donation receipts. There was a bona fide belief..."></textarea></div>'},
-'adjournment':{label:'Adjournment Request',fields:'<div class="form-group"><label>Original Hearing / Compliance Date</label><input type="date" id="nrHearingDate"></div><div class="form-group"><label>Reason for Adjournment</label><textarea id="nrAdjReason2" rows="3" placeholder="e.g. The authorized representative is engaged before ITAT on the said date / Key documents are awaited from the bank"></textarea></div><div class="form-group"><label>Proposed New Date (if any)</label><input type="text" id="nrNewDate" placeholder="e.g. Any date after 15.03.2026"></div>'}
-};
-
-function showNRFields(){
-var t=document.getElementById('nrType').value;
-var common=document.getElementById('nrCommonFields');
-var spec=document.getElementById('nrSpecificFields');
-if(!t){common.style.display='none';return;}
-common.style.display='block';
-spec.innerHTML=nrSpecificConfig[t]?nrSpecificConfig[t].fields:'';
+function updateCGFields(){
+var a=document.getElementById('cgAsset').value;
+var showCII=a==='property_old';
+var showFMV=a==='listed_eq'||a==='equity_mf'||a==='property_old';
+document.getElementById('cgCIIBuyGrp').style.display=showCII?'block':'none';
+document.getElementById('cgCIISellGrp').style.display=showCII?'block':'none';
+document.getElementById('cgFMVGrp').style.display=showFMV?'block':'none';
+// Auto-set holding period
+var h=document.getElementById('cgHolding');
+if(a==='listed_eq'||a==='equity_mf')h.innerHTML='<option value="short">Short Term (≤12 months)</option><option value="long">Long Term (>12 months)</option>';
+else if(a==='debt_mf'||a==='unlisted'||a==='property_old'||a==='property_new'||a==='gold')h.innerHTML='<option value="short">Short Term (≤24 months)</option><option value="long">Long Term (>24 months)</option>';
+else h.innerHTML='<option value="short">Short Term (≤36 months)</option><option value="long">Long Term (>36 months)</option>';
 }
-
-function gv(id){var el=document.getElementById(id);return el?el.value.trim():'';}
-function fmtDate(d){if(!d)return '__.__.____';var p=d.split('-');return p[2]+'.'+p[1]+'.'+p[0];}
-
-function generateNR(){
-var type=gv('nrType'),name=gv('nrName')||'[Assessee Name]',pan=gv('nrPAN').toUpperCase()||'[PAN]',ay=gv('nrAY')||'[AY]',ward=gv('nrWard')||'[Ward/Circle]',city=gv('nrCity')||'[City]',nDate=fmtDate(gv('nrNoticeDate')),din=gv('nrDIN')||'[DIN/Ref No.]',rDate=fmtDate(gv('nrReplyDate')),tone=gv('nrTone');
-if(!type){alert('Please select a notice type.');return;}
-var sec=nrSpecificConfig[type].label;
-var header='To,\nThe Income Tax Officer,\n'+ward+',\n'+city+'\n\nSub: Reply to Notice u/s '+sec+' — PAN: '+pan+' — AY: '+ay+'\nRef: '+din+', dated '+nDate+'\n\nRespected Sir/Madam,\n\nWith reference to the above-mentioned notice, the following is respectfully submitted for your kind consideration:\n\n';
-var body='',footer='\n\nIt is therefore most respectfully prayed that the submissions made herein may kindly be considered and the matter may be disposed of accordingly.\n\nThanking you,\n\nYours faithfully,\nFor '+name+'\n\n\n___________________________\nAuthorized Signatory / AR\nDate: '+rDate+'\nPlace: '+city+'\nPAN: '+pan;
-
-if(type==='139_9'){
-var defect=gv('nrDefect')||'[Nature of defect]';
-var explain=gv('nrExplain')||'[Explanation / action taken]';
-if(tone==='compliance'){
-body='1. The notice u/s 139(9) has been duly received and the contents have been noted.\n\n2. Nature of defect as mentioned in the notice:\n   "'+defect+'"\n\n3. In compliance with the notice, the following action has been taken:\n   '+explain+'\n\n4. The defect in the return of income has been rectified and the revised/corrected return is being submitted herewith / has been uploaded on the e-filing portal.\n\n5. It is submitted that the return may kindly be treated as valid and processed accordingly.';
+function calcCapGain(){
+var a=document.getElementById('cgAsset').value,h=document.getElementById('cgHolding').value;
+var cost=parseFloat(document.getElementById('cgCost').value)||0;
+var sale=parseFloat(document.getElementById('cgSale').value)||0;
+var exp=parseFloat(document.getElementById('cgExpense').value)||0;
+var imp=parseFloat(document.getElementById('cgImprovement').value)||0;
+var r=document.getElementById('cgResult');
+if(!a){r.className='result-box applicable';r.innerHTML='<div class="result-title">Please select an asset type</div>';return;}
+if(!sale){r.className='result-box applicable';r.innerHTML='<div class="result-title">Please enter sale price</div>';return;}
+var netSale=sale-exp;
+var adjCost=cost+imp;
+var indexedCost=adjCost;
+var gain=0,tax=0,rate='',method='',exemption=0;
+if(h==='long'){
+rate='12.5%';
+if(a==='property_old'){
+// Grandfathered: compare 12.5% without indexation vs 20% with indexation
+var ciiBuy=parseFloat(document.getElementById('cgCIIBuy').value)||100;
+var ciiSell=parseFloat(document.getElementById('cgCIISell').value)||376;
+var fmv=parseFloat(document.getElementById('cgFMV').value)||0;
+indexedCost=Math.round(adjCost*(ciiSell/ciiBuy));
+var gainNoIndex=netSale-adjCost;
+var gainWithIndex=netSale-indexedCost;
+var taxNoIndex=Math.round(Math.max(gainNoIndex,0)*0.125);
+var taxWithIndex=Math.round(Math.max(gainWithIndex,0)*0.20);
+var better=taxNoIndex<=taxWithIndex?'without':'with';
+var chosenTax=Math.min(taxNoIndex,taxWithIndex);
+var chosenGain=better==='without'?gainNoIndex:gainWithIndex;
+r.className='result-box presumptive';
+r.innerHTML='<div class="result-title">LTCG on Property (Grandfathered — Acquired before 23.07.2024)</div><div class="result-detail"><table class="limits-table" style="margin-top:10px;"><tr><th></th><th>Without Indexation</th><th>With Indexation</th></tr><tr><td>Sale Consideration</td><td>'+fmt(netSale)+'</td><td>'+fmt(netSale)+'</td></tr><tr><td>Cost of Acquisition</td><td>'+fmt(adjCost)+'</td><td>'+fmt(indexedCost)+' (indexed)</td></tr><tr><td>Capital Gain</td><td><strong>'+fmt(gainNoIndex)+'</strong></td><td><strong>'+fmt(gainWithIndex)+'</strong></td></tr><tr><td>Tax Rate</td><td>12.5%</td><td>20%</td></tr><tr style="background:#e8f8f5;"><td><strong>Tax Payable</strong></td><td><strong>'+fmt(taxNoIndex)+'</strong></td><td><strong>'+fmt(taxWithIndex)+'</strong></td></tr></table><p style="margin-top:10px;"><strong>Better Option: '+better.charAt(0).toUpperCase()+better.slice(1)+' Indexation — Tax: Rs '+fmt(chosenTax)+'</strong></p><p style="font-size:0.85rem;margin-top:6px;">+ 4% Cess = Rs '+fmt(Math.round(chosenTax*1.04))+' (total). Exemptions u/s 54/54EC/54F may further reduce tax.</p></div>';
+return;
+}
+if(a==='listed_eq'||a==='equity_mf'){
+var fmv2=parseFloat(document.getElementById('cgFMV').value)||0;
+if(fmv2>0)adjCost=Math.max(Math.min(fmv2,netSale),cost);
+exemption=125000;
+}
+gain=netSale-adjCost;
+var taxableGain=Math.max(gain-exemption,0);
+tax=Math.round(taxableGain*0.125);
+method='LTCG @ 12.5%'+(exemption?' (after Rs 1.25L exemption)':'');
 }else{
-body='1. The notice u/s 139(9) has been duly received and the contents have been noted.\n\n2. The alleged defect as mentioned in the notice is:\n   "'+defect+'"\n\n3. It is respectfully submitted that the return as originally filed is correct and does not suffer from any defect, for the following reasons:\n   '+explain+'\n\n4. The return was filed in accordance with the provisions of the Income Tax Act and the applicable Rules. The alleged defect does not fall within the scope of Sec 139(9).\n\n5. Reliance is placed on the following:\n   - Explanation to Sec 139(9)\n   - CBDT Circular as applicable\n\n6. It is therefore prayed that the return may be accepted as valid without any modification.';
-}}
-else if(type==='142_1'){
-var infoReq=gv('nrInfoReq')||'[Information requested]';
-var docs=gv('nrDocsSubmit')||'[Documents being submitted]';
-if(tone==='compliance'){
-body='1. The notice u/s 142(1) has been duly received and the contents have been noted.\n\n2. The information / documents requested in the notice:\n   "'+infoReq+'"\n\n3. In compliance with the above, the following documents / information are being submitted herewith:\n   '+docs+'\n\n4. It is submitted that all the information called for has been duly furnished. In case any further information is required, the same shall be submitted promptly upon being informed.';
-}else{
-body='1. The notice u/s 142(1) has been duly received.\n\n2. Information requested:\n   "'+infoReq+'"\n\n3. It is respectfully submitted that:\n   '+docs+'\n\n4. Without prejudice to the above, it is submitted that the information called for is not relevant to the assessment proceedings for AY '+ay+' and/or is beyond the scope of Sec 142(1).\n\n5. The assessee reserves the right to furnish additional submissions as may be required.';
-}}
-else if(type==='143_1'){
-var amt=gv('nrMismatchAmt')||'[Amount]';
-var nature=gv('nrAdjNature')||'[Nature of adjustment]';
-var reason=gv('nrAdjReason')||'[Reason]';
-body='1. The intimation u/s 143(1) dated '+nDate+' has been received and the contents have been noted.\n\n2. As per the intimation, an adjustment of Rs. '+amt+' has been made on account of:\n   "'+nature+'"\n\n3. It is respectfully submitted that the said adjustment is not correct for the following reasons:\n   '+reason+'\n\n4. In view of the above, it is prayed that a rectification u/s 154 may kindly be carried out and the return may be processed as per the original return of income filed.\n\n5. The following documentary evidence is enclosed in support:\n   (a) Copy of Form 26AS / AIS\n   (b) Copy of relevant computation / proof\n   (c) Copy of original return filed\n\n6. If the department is not inclined to accept the above submissions, an opportunity of being heard may kindly be granted before passing any adverse order.';
+// STCG
+gain=netSale-adjCost;
+if(a==='listed_eq'||a==='equity_mf'){rate='20%';tax=Math.round(Math.max(gain,0)*0.20);method='STCG @ 20% (Sec 111A)';}
+else{rate='Slab Rate';tax=0;method='STCG — Taxable at your slab rate';}
 }
-else if(type==='143_2'){
-var issues=gv('nrScrutinyIssues')||'[Issues raised]';
-var reply=gv('nrScrutinyReply')||'[Submissions]';
-if(tone==='compliance'){
-body='1. The notice u/s 143(2) has been duly received. The assessee is committed to full cooperation in the assessment proceedings.\n\n2. The issues raised / queries made by your goodself:\n   "'+issues+'"\n\n3. In compliance, the following submissions are made:\n   '+reply+'\n\n4. The following documents are enclosed for your perusal:\n   (a) Audited financial statements for the relevant year\n   (b) Books of accounts / ledger extracts as relevant\n   (c) Documentary evidence in support of the claims made\n   (d) Bank statements as applicable\n\n5. It is submitted that the return of income as filed is correct and complete. The assessee shall provide any further information that may be called for.';
-}else{
-body='1. The notice u/s 143(2) has been received. Before proceeding, the following preliminary objections are raised:\n\n2. Issues raised by the AO:\n   "'+issues+'"\n\n3. Submissions and objections:\n   '+reply+'\n\n4. It is respectfully submitted that the additions/disallowances proposed, if any, are not warranted by law for the following reasons:\n   (a) The claims are fully supported by documentary evidence\n   (b) The provisions of law have been duly complied with\n   (c) Reliance is placed on the following judicial precedents: [Cite relevant case laws]\n\n5. The assessee reserves the right to make further submissions and produce additional evidence as may be required.\n\n6. An opportunity of personal hearing may kindly be granted before passing any assessment order.';
-}}
-else if(type==='148'){
-var orig=gv('nrOrigReturn')||'[Original return details]';
-var reason148=gv('nrReason148')||'[Reason to believe]';
-var reply148=gv('nrReply148')||'[Objection/compliance]';
-if(tone==='compliance'){
-body='1. The notice u/s 148 / order u/s 148A(d) has been duly received.\n\n2. Original return details: '+orig+'\n\n3. As stated in the notice, the reason for reopening:\n   "'+reason148+'"\n\n4. In response, the following is submitted:\n   '+reply148+'\n\n5. The return of income filed originally is correct and the income has been fully disclosed. The necessary documents/evidence are enclosed herewith.\n\n6. The assessee shall cooperate fully in the reassessment proceedings.';
-}else{
-body='1. The notice u/s 148 / order u/s 148A(d) has been received.\n\n2. Original return details: '+orig+'\n\n3. Reasons recorded for reopening:\n   "'+reason148+'"\n\n4. OBJECTIONS to the reopening of assessment:\n\n   (a) The reopening is based on mere change of opinion which is not permissible in law. Reliance: CIT vs Kelvinator of India Ltd. (2010) 320 ITR 561 (SC).\n\n   (b) '+reply148+'\n\n   (c) The conditions precedent for invoking Sec 147/148 are not satisfied as there is no tangible material to form "reason to believe" that income has escaped assessment.\n\n   (d) The notice is beyond the time limit prescribed under the amended provisions (3 years / 10 years as applicable).\n\n5. It is prayed that the objections may be disposed of by passing a speaking order before proceeding further, as held in GKN Driveshafts (India) Ltd. vs ITO (2003) 259 ITR 19 (SC).\n\n6. The assessee reserves all rights to challenge the reopening proceedings.';
-}}
-else if(type==='154'){
-var mistake=gv('nrMistake154')||'[Mistake as per notice]';
-var reply154=gv('nrReply154')||'[Correct position]';
-body='1. The notice / order u/s 154 has been received and the contents have been noted.\n\n2. The mistake apparent from record as mentioned:\n   "'+mistake+'"\n\n3. It is submitted in response:\n   '+reply154+'\n\n4. The said matter does not constitute a "mistake apparent from the record" within the meaning of Sec 154, as it involves a debatable issue requiring interpretation of law. Reliance is placed on:\n   - T.S. Balaram, ITO vs Volkart Bros. (1971) 82 ITR 50 (SC)\n\n5. It is prayed that the proposed rectification may not be carried out / the rectification order may be revised.';
+var cess=Math.round(tax*0.04);
+r.className=gain>0?'result-box not-applicable':'result-box presumptive';
+r.innerHTML='<div class="result-title">'+(gain>0?'Capital Gain: Rs '+fmt(gain):'Capital Loss: Rs '+fmt(Math.abs(gain)))+'</div><div class="result-detail"><table class="limits-table" style="margin-top:10px;"><tr><td>Net Sale Consideration</td><td><strong>'+fmt(netSale)+'</strong></td></tr><tr><td>Cost of Acquisition (+ improvement)</td><td>'+fmt(adjCost)+'</td></tr>'+(exemption?'<tr><td>Annual Exemption (Sec 112A)</td><td>(-) '+fmt(exemption)+'</td></tr>':'')+'<tr><td>'+(h==='long'?'Long':'Short')+' Term Capital Gain</td><td><strong>'+fmt(gain)+'</strong></td></tr><tr><td>Tax Rate</td><td>'+method+'</td></tr><tr style="background:#e8f8f5;"><td><strong>Tax on Capital Gain</strong></td><td><strong>Rs '+fmt(tax)+'</strong></td></tr>'+(tax?'<tr><td>+ Cess (4%)</td><td>Rs '+fmt(cess)+'</td></tr><tr><td><strong>Total Tax</strong></td><td><strong>Rs '+fmt(tax+cess)+'</strong></td></tr>':'')+'</table>'+(rate==='Slab Rate'?'<p style="margin-top:8px;font-size:0.85rem;">STCG of Rs '+fmt(gain)+' will be added to your total income and taxed at applicable slab rate.</p>':'')+'</div>';
 }
-else if(type==='156'){
-var demandAmt=gv('nrDemandAmt')||'[Amount]';
-var demandReply=gv('nrDemandReply')||'[Grounds/payment details]';
-if(tone==='compliance'){
-body='1. The notice of demand u/s 156 for Rs. '+demandAmt+' for AY '+ay+' has been received.\n\n2. In compliance with the said demand:\n   '+demandReply+'\n\n3. It is submitted that the demand has been duly complied with and the same may be updated in the records.';
-}else{
-body='1. The notice of demand u/s 156 for Rs. '+demandAmt+' for AY '+ay+' has been received.\n\n2. The demand is not correct and is liable to be revised for the following reasons:\n   '+demandReply+'\n\n3. Without prejudice, the assessee is filing an appeal u/s 246A before CIT(A) against the assessment order giving rise to this demand.\n\n4. An application for stay of demand is being filed separately. It is prayed that recovery proceedings may be kept in abeyance pending disposal of the appeal, as per CBDT Instruction No. 1914 dated 21.03.1996 and Office Memorandum F.No. 404/72/93-ITCC dated 29.02.2016.\n\n5. The demand may kindly be rectified / revised in view of the submissions made above.';
-}}
-else if(type==='245'){
-var refund=gv('nrRefundAmt')||'[Amount]';
-var against=gv('nrAgainstDemand')||'[Demand details]';
-var reply245=gv('nrReply245')||'[Objection]';
-body='1. The intimation u/s 245 proposing adjustment of refund of Rs. '+refund+' against '+against+' has been received.\n\n2. OBJECTION to the proposed adjustment:\n   '+reply245+'\n\n3. It is submitted that:\n   (a) As per Sec 245, the AO is required to give an intimation of the proposed adjustment and the assessee\'s response must be considered before making any adjustment.\n   (b) The underlying demand is disputed and is pending in appeal. Adjusting refund against a disputed demand is contrary to natural justice.\n   (c) Reliance is placed on: CIT vs Tata Chemicals Ltd. — Hon\'ble Bombay HC\n\n4. It is prayed that the refund of Rs. '+refund+' may kindly be issued without any adjustment and the demand may be kept in abeyance pending disposal of the appeal.';
-}
-else if(type==='270A'){
-var penaltyAmt=gv('nrPenaltyAmt')||'[Amount/Section]';
-var penaltyNature=gv('nrPenaltyNature')||'[Nature of default]';
-var defence=gv('nrPenaltyDefence')||'[Defence]';
-body='1. The show cause notice for penalty u/s '+penaltyAmt+' has been received.\n\n2. The alleged default:\n   "'+penaltyNature+'"\n\n3. It is respectfully submitted that no penalty is leviable for the following reasons:\n\n   (a) '+defence+'\n\n   (b) The disclosure was made in good faith and was based on a bona fide interpretation of law. There was no intention to conceal income or furnish inaccurate particulars.\n\n   (c) In terms of Sec 270A, penalty is leviable only in cases of "under-reporting" or "mis-reporting" of income. The present case does not fall in either category as the assessee has furnished all material facts.\n\n   (d) The assessee has "reasonable cause" within the meaning of Sec 273B for the alleged failure, if any.\n\n   (e) Reliance is placed on:\n      - CIT vs Reliance Petroproducts Pvt. Ltd. (2010) 322 ITR 158 (SC)\n      - Price Waterhouse Coopers vs CIT (2012) 348 ITR 306 (SC)\n      - Hindustan Steel Ltd. vs State of Orissa (1972) 83 ITR 26 (SC)\n\n4. It is prayed that the penalty proceedings may be dropped and the show cause notice may be discharged.';
-}
-else if(type==='adjournment'){
-var hearDate=fmtDate(gv('nrHearingDate'));
-var adjReason=gv('nrAdjReason2')||'[Reason]';
-var newDate=gv('nrNewDate')||'any convenient date';
-header='To,\nThe Income Tax Officer,\n'+ward+',\n'+city+'\n\nSub: Request for Adjournment — PAN: '+pan+' — AY: '+ay+'\nRef: '+din+', dated '+nDate+'\n\nRespected Sir/Madam,\n\n';
-body='1. Reference is invited to the above notice fixing the date of hearing / compliance on '+hearDate+'.\n\n2. It is respectfully submitted that the assessee / authorized representative is unable to attend / comply on the said date due to the following reason:\n   "'+adjReason+'"\n\n3. This is the first / second request for adjournment and is being made in good faith and not for the purpose of delay.\n\n4. It is requested that the hearing may kindly be adjourned to '+newDate+'.\n\n5. The assessee undertakes to comply fully on the adjourned date without further request for adjournment.';
-footer='\n\nThanking you,\n\nYours faithfully,\nFor '+name+'\n\n\n___________________________\nAuthorized Signatory / AR\nDate: '+rDate+'\nPlace: '+city+'\nPAN: '+pan;
+function resetCG(){['cgCost','cgSale','cgExpense','cgImprovement','cgCIIBuy','cgCIISell','cgFMV'].forEach(function(id){document.getElementById(id).value='';});document.getElementById('cgAsset').value='';document.getElementById('cgResult').className='result-box';document.getElementById('cgResult').innerHTML='';updateCGFields();}
+
+// ==============================
+// INTEREST & PENALTY CALCULATOR (234A/B/C/F)
+// ==============================
+function calcInterest(){
+var taxLiab=parseFloat(document.getElementById('ipTaxLiab').value)||0;
+var adv1=parseFloat(document.getElementById('ipAdv1').value)||0;
+var adv2=parseFloat(document.getElementById('ipAdv2').value)||0;
+var adv3=parseFloat(document.getElementById('ipAdv3').value)||0;
+var adv4=parseFloat(document.getElementById('ipAdv4').value)||0;
+var tds=parseFloat(document.getElementById('ipTDS').value)||0;
+var sat=parseFloat(document.getElementById('ipSAT').value)||0;
+var income=parseFloat(document.getElementById('ipIncome').value)||0;
+var ay=document.getElementById('ipAY').value;
+var dueSel=document.getElementById('ipDueDate').value;
+var fileDate=document.getElementById('ipFileDate').value;
+var r=document.getElementById('ipResult');
+if(!taxLiab){r.className='result-box applicable';r.innerHTML='<div class="result-title">Please enter tax liability</div>';return;}
+var totalAdvance=adv1+adv2+adv3+adv4;
+var totalPaid=totalAdvance+tds+sat;
+var assessedTax=taxLiab-tds; // Tax payable after TDS = assessed tax for 234B
+var advanceTaxPaid=totalAdvance;
+// Due dates
+var ayStart=parseInt(ay.split('-')[0]);
+var dueMap={jul31:new Date(ayStart,6,31),oct31:new Date(ayStart,9,31),nov30:new Date(ayStart,10,30)};
+var dueDate=dueMap[dueSel];
+var actualDate=fileDate?new Date(fileDate):null;
+
+// === 234C — Deferment of advance tax ===
+var int234C=0;
+if(assessedTax>=10000){
+var req1=Math.round(taxLiab*0.15),req2=Math.round(taxLiab*0.45),req3=Math.round(taxLiab*0.75),req4=taxLiab;
+var cum1=adv1,cum2=adv1+adv2,cum3=adv1+adv2+adv3,cum4=totalAdvance;
+// Q1: shortfall if paid < 15% → 1% * 3 months
+if(cum1<req1)int234C+=Math.round((req1-cum1)*0.01*3);
+// Q2: shortfall if cumulative < 45% → 1% * 3 months
+if(cum2<req2)int234C+=Math.round((req2-cum2)*0.01*3);
+// Q3: shortfall if cumulative < 75% → 1% * 3 months
+if(cum3<req3)int234C+=Math.round((req3-cum3)*0.01*3);
+// Q4: shortfall if cumulative < 100% → 1% * 1 month
+if(cum4<req4)int234C+=Math.round((req4-cum4)*0.01*1);
 }
 
-var draft=header+body+footer;
-document.getElementById('nrOutput').textContent=draft;
-document.getElementById('nrOutputCard').style.display='block';
-document.getElementById('nrOutputCard').scrollIntoView({behavior:'smooth'});
+// === 234B — Short advance tax ===
+var int234B=0;
+if(assessedTax>=10000&&advanceTaxPaid<(assessedTax*0.9)){
+var shortfall=assessedTax-advanceTaxPaid;
+// From 1 Apr of AY to date of filing/assessment
+var startB=new Date(ayStart,3,1); // 1 Apr of AY
+var endB=actualDate||new Date(ayStart,3,1);
+if(endB<startB)endB=startB;
+var monthsB=Math.ceil((endB-startB)/(1000*60*60*24*30))||1;
+if(monthsB<1)monthsB=1;
+int234B=Math.round(shortfall*0.01*monthsB);
 }
 
-function copyNR(){
-var text=document.getElementById('nrOutput').textContent;
-if(!text){alert('Generate a draft first.');return;}
-if(navigator.clipboard){navigator.clipboard.writeText(text).then(function(){alert('Draft copied to clipboard!');});}
-else{var ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);alert('Draft copied to clipboard!');}
+// === 234A — Late filing ===
+var int234A=0;
+if(actualDate&&dueDate&&actualDate>dueDate){
+var unpaidAtDue=Math.max(taxLiab-totalPaid+sat,0); // tax outstanding at due date (before SAT)
+var monthsA=Math.ceil((actualDate-dueDate)/(1000*60*60*24*30))||1;
+if(monthsA<1)monthsA=1;
+int234A=Math.round(unpaidAtDue*0.01*monthsA);
 }
-function printNR(){
-var text=document.getElementById('nrOutput').innerHTML;
-if(!text){alert('Generate a draft first.');return;}
-var w=window.open('','_blank');
-w.document.write('<html><head><title>Notice Reply Draft</title><style>body{font-family:Georgia,serif;font-size:13pt;line-height:1.8;padding:40px 60px;color:#222;white-space:pre-wrap;}@media print{body{padding:20px 40px;}}</style></head><body>'+document.getElementById('nrOutput').textContent.replace(/\n/g,'<br>')+'</body></html>');
-w.document.close();w.print();
+
+// === 234F — Late filing fee ===
+var fee234F=0;
+if(actualDate&&dueDate&&actualDate>dueDate){
+fee234F=income<=500000?1000:5000;
 }
-function resetNR(){
-document.getElementById('nrType').value='';
-document.getElementById('nrCommonFields').style.display='none';
-document.getElementById('nrSpecificFields').innerHTML='';
-document.getElementById('nrOutputCard').style.display='none';
-['nrName','nrPAN','nrAY','nrWard','nrDIN','nrCity'].forEach(function(id){document.getElementById(id).value='';});
-['nrNoticeDate','nrReplyDate'].forEach(function(id){document.getElementById(id).value='';});
+
+var totalInt=int234A+int234B+int234C+fee234F;
+r.className='result-box not-applicable';
+r.innerHTML='<div class="result-title">Total Interest & Penalty: Rs '+fmt(totalInt)+'</div><div class="result-detail"><table class="limits-table" style="margin-top:10px;"><tr><th>Section</th><th>Nature</th><th>Amount</th></tr><tr><td><strong>234C</strong></td><td>Deferment of Advance Tax Installments</td><td><strong>Rs '+fmt(int234C)+'</strong></td></tr><tr><td><strong>234B</strong></td><td>Short Payment of Advance Tax</td><td><strong>Rs '+fmt(int234B)+'</strong></td></tr><tr><td><strong>234A</strong></td><td>Late Filing of Return</td><td><strong>Rs '+fmt(int234A)+'</strong></td></tr><tr><td><strong>234F</strong></td><td>Late Filing Fee</td><td><strong>Rs '+fmt(fee234F)+'</strong></td></tr><tr style="background:#fde8e8;"><td colspan="2"><strong>TOTAL</strong></td><td><strong>Rs '+fmt(totalInt)+'</strong></td></tr></table><div style="margin-top:12px;font-size:0.85rem;"><strong>Summary:</strong><br>Tax Liability: Rs '+fmt(taxLiab)+' | TDS/TCS: Rs '+fmt(tds)+' | Advance Tax: Rs '+fmt(totalAdvance)+' | SAT: Rs '+fmt(sat)+'<br>Assessed Tax (after TDS): Rs '+fmt(assessedTax)+(actualDate&&dueDate?'<br>Due Date: '+dueDate.toLocaleDateString('en-IN')+' | Filed: '+actualDate.toLocaleDateString('en-IN'):'')+'</div></div>';
 }
+function resetIP(){['ipTaxLiab','ipAdv1','ipAdv2','ipAdv3','ipAdv4','ipTDS','ipSAT','ipIncome'].forEach(function(id){document.getElementById(id).value='';});document.getElementById('ipFileDate').value='';document.getElementById('ipResult').className='result-box';document.getElementById('ipResult').innerHTML='';}
+
+// ==============================
+// IMPACT ANALYZER — IT Act 1961 vs 2025
+// ==============================
+function analyzeImpact(){
+var entity=document.getElementById('imEntity').value;
+var turnover=parseFloat(document.getElementById('imTurnover').value)||0;
+var audit=document.getElementById('imAudit').value==='yes';
+var capGain=document.getElementById('imCapGain').value==='yes';
+var tp=document.getElementById('imTP').value==='yes';
+var via=document.getElementById('imVIA').value==='yes';
+var hasTDS=document.getElementById('imTDS').value==='yes';
+var partner=document.getElementById('imPartner').value==='yes';
+var r=document.getElementById('imResult');
+var changes=[];
+// Universal changes
+changes.push({area:'Terminology',old:'Previous Year (PY) + Assessment Year (AY)',new_:'<strong>Tax Year</strong> — single unified concept. FY 2026-27 = Tax Year 2026-27.',impact:'high',action:'Update all documents, letters, and internal references. No more AY/PY distinction.'});
+changes.push({area:'Return Filing',old:'Sec 139 — ITR-1 to ITR-7',new_:'<strong>Sec 263</strong> — Return of Income. New form numbers expected.',impact:'medium',action:'Await CBDT notification for new ITR form numbers under Rules 2026.'});
+changes.push({area:'Default Tax Regime',old:'Old Regime default; 115BAC opt-in for New Regime',new_:'<strong>New Regime is DEFAULT</strong>. Old regime available only on opt-in.',impact:'high',action:'If client benefits from old regime deductions, ensure Form 10-IE equivalent is filed to opt in.'});
+// Entity-specific
+if(audit){
+changes.push({area:'Tax Audit',old:'Form 3CA/3CB + 3CD (Sec 44AB)',new_:'<strong>Form No. 26</strong> under <strong>Sec 63</strong> (Rule 47, IT Rules 2026). Consolidated form with 53 clauses.',impact:'high',action:'Prepare for Form 26 structure — Yes/No trigger-based schedules, expanded IT systems audit, GST linkage reporting.'});
+}
+if(capGain){
+changes.push({area:'Capital Gains',old:'Sec 45-55A, multiple rates, indexation available',new_:'<strong>Chapter VIII (Sec 67-91)</strong>. Uniform LTCG: 12.5%. STCG listed: 20%. No indexation (except grandfathered property).',impact:'high',action:'Review all LTCG computations. Indexation benefit no longer available for new acquisitions. Property bought before 23.07.2024 has grandfathering option.'});
+}
+if(via){
+changes.push({area:'Chapter VI-A Deductions',old:'Sec 80C to 80U — up to Rs 1.5L (80C), 80D, 80G etc.',new_:'<strong>Chapter VIII (Sec 123-154)</strong>. Renumbered but most deductions retained with same limits under old regime.',impact:'medium',action:'Map each claimed deduction to new section number. Deductions only available if client opts for old regime. New regime: only Std Deduction (Rs 75,000) + NPS (employer contribution).'});
+}
+if(hasTDS){
+changes.push({area:'TDS/TCS Sections',old:'Sec 192-206C (30+ sections)',new_:'<strong>Sec 393-421</strong>. Sections renumbered and some consolidated. New Sec 194T (firm→partner) now mapped.',impact:'high',action:'Update TDS software section mapping. Verify all TDS rates under new section numbers. Quarterly return forms will change.'});
+}
+if(partner){
+changes.push({area:'Partnership Taxation',old:'Sec 40(b) — salary/interest limits',new_:'New provisions under Sec 63. <strong>TDS on partner remuneration (194T equivalent)</strong> now embedded in new Act.',impact:'medium',action:'Ensure TDS deducted on partner salary/interest/bonus/commission exceeding Rs 20,000 p.a.'});
+}
+if(tp){
+changes.push({area:'Transfer Pricing',old:'Sec 92-92F, 3CEB report',new_:'Dedicated chapter. Enhanced documentation and reporting requirements.',impact:'medium',action:'Review TP documentation requirements under new Act provisions.'});
+}
+if(entity==='company'){
+changes.push({area:'Company Tax Rate',old:'Sec 115BAA (22%), 115BAB (15%)',new_:'Concessional rates continued under new Act with equivalent provisions.',impact:'low',action:'Verify applicable tax rate option under new section numbers.'});
+}
+if(entity==='trust'){
+changes.push({area:'Trust Taxation',old:'Sec 11-13, Form 10B/10BB',new_:'Dedicated chapter for exempt entities. Enhanced compliance and audit trail requirements.',impact:'medium',action:'Review registration validity and new compliance forms.'});
+}
+// Interest sections
+changes.push({area:'Interest on Defaults',old:'234A, 234B, 234C (1% p.m.)',new_:'<strong>Sec 423, 424, 425</strong>. Same rates (1% p.m.). Calculation method unchanged.',impact:'low',action:'No change in computation — only section numbers change.'});
+changes.push({area:'Penalties',old:'Sec 270A (under-reporting), 271 series',new_:'<strong>Sec 434-441</strong>. Rationalized penalty provisions with clearer classification.',impact:'medium',action:'Review penalty exposure under new provisions. Mis-reporting vs under-reporting distinction continues.'});
+
+var html='<div class="result-title">Impact Analysis — '+entity.charAt(0).toUpperCase()+entity.slice(1)+(turnover?' (Turnover: Rs '+turnover+' Cr)':'')+'</div><div class="result-detail">';
+html+='<p style="margin-bottom:12px;"><strong>'+changes.length+' areas impacted</strong> based on your client profile. New Act effective from 01.04.2026 (Tax Year 2026-27).</p>';
+html+='<table class="limits-table"><thead><tr><th style="width:120px;">Area</th><th>Old Act (1961)</th><th>New Act (2025)</th><th style="width:80px;">Impact</th></tr></thead><tbody>';
+changes.forEach(function(c){
+var tag=c.impact==='high'?'<span class="tag tag-high">High</span>':c.impact==='medium'?'<span class="tag tag-medium">Medium</span>':'<span class="tag tag-low">Low</span>';
+html+='<tr><td><strong>'+c.area+'</strong></td><td style="font-size:0.83rem;">'+c.old+'</td><td style="font-size:0.83rem;">'+c.new_+'</td><td>'+tag+'</td></tr>';
+html+='<tr style="background:#f8f9fa;"><td colspan="4" style="font-size:0.82rem;color:#636e72;padding:6px 12px;"><strong>Action:</strong> '+c.action+'</td></tr>';
+});
+html+='</tbody></table></div>';
+r.className='result-box presumptive';
+r.innerHTML=html;
+}
+
 </script>
 </body>
 </html>
