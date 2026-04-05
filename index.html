@@ -153,6 +153,18 @@
         #backToTop { position:fixed; bottom:20px; right:20px; background:var(--accent); color:white; border-radius:50%; width:44px; height:44px; font-size:20px; display:none; z-index:999; border:none; cursor:pointer; box-shadow:0 3px 10px rgba(0,0,0,0.2); transition:opacity 0.3s; }
         #backToTop:hover { background:var(--primary-mid); }
 
+        /* Fix result detail overflow for all tabs */
+        .result-detail, .result-box, .result-output { overflow-x:auto; -webkit-overflow-scrolling:touch; width:100%; box-sizing:border-box; }
+        .result-detail table, .result-box table, .result-output table { min-width:280px; word-break:break-word; }
+
+        /* Scheme selector cards (Presumptive Tax & ROC) */
+        .scheme-cards { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:20px; }
+        .scheme-card { flex:1; min-width:160px; padding:16px; border-radius:8px; cursor:pointer; text-align:center; font-weight:600; background:#f0f4f8; border:2px solid transparent; transition:all 0.2s; }
+        .scheme-card.active { background:var(--accent); color:white; border-color:var(--accent); }
+
+        /* Warning/alert boxes */
+        .warning-box, .alert-box, .eligibility-warning { width:100%; box-sizing:border-box; padding:12px 14px; font-size:0.9rem; line-height:1.6; border-radius:6px; }
+
         @media(max-width:768px) {
             .header h1 { font-size:1.4rem; }
             .nav-tab { padding:7px 9px; font-size:0.72rem; min-height:36px; display:inline-flex; align-items:center; }
@@ -163,7 +175,19 @@
             input, select, textarea { font-size:16px !important; }
             .search-box input { width:100% !important; box-sizing:border-box; }
             #mappingSearch, #penaltySearch, #gstSearch, #clauseSearch, #rule37bbSearch { width:100% !important; box-sizing:border-box; }
-            [id$="Result"], [id$="result"] { width:100%; box-sizing:border-box; font-size:0.85rem; }
+            [id$="Result"], [id$="result"] { width:100% !important; max-width:100% !important; box-sizing:border-box; overflow-x:auto; }
+            /* Section headings in scheme sections */
+            .scheme-section h3 { font-size:1rem; padding:10px 0; border-bottom:2px solid var(--accent); margin-bottom:14px; }
+            .eligibility-note, .info-box { font-size:0.85rem; padding:10px 12px; }
+            .eligibility-note li, .info-box li { margin-bottom:6px; line-height:1.5; }
+            /* Date inputs */
+            input[type="date"] { width:100%; font-size:16px; padding:10px 8px; box-sizing:border-box; -webkit-appearance:none; appearance:none; }
+            /* ROC compliance table */
+            #tab-roc table { font-size:0.78rem; min-width:600px; }
+            #tab-roc th, #tab-roc td { padding:7px 6px; vertical-align:top; }
+            /* GST registration selects */
+            #gstState, #gstType, #gstNature, #gstExempt, #gstInterstate { width:100%; font-size:15px; padding:10px 8px; }
+            .gst-result-card { width:100%; box-sizing:border-box; padding:16px; font-size:0.9rem; }
         }
 
         /* Small phones */
@@ -178,6 +202,13 @@
             .btn-row { flex-direction:column; }
             .btn-row .btn { width:100%; margin-bottom:8px; }
             .btn { width:100%; }
+            /* Scheme cards stack vertically */
+            .scheme-cards { flex-direction:column; }
+            .scheme-card { min-width:unset; width:100%; }
+            /* ROC table smaller */
+            #tab-roc table { font-size:0.72rem; min-width:560px; }
+            /* Warning boxes */
+            .warning-box, .alert-box, .eligibility-warning { font-size:0.82rem; padding:10px; }
         }
 
         /* Tablets */
