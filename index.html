@@ -223,6 +223,10 @@
     <div class="nav-tab" onclick="switchTab('penalty')">Penalties</div>
     <div class="nav-tab" onclick="switchTab('partnership')">Partnership 40(b)</div>
     <div class="nav-tab" onclick="switchTab('itru')">ITR-U (Updated Return)</div>
+    <div class="nav-tab" onclick="switchTab('presumptive')">Presumptive Tax</div>
+    <div class="nav-tab" onclick="switchTab('gstreg')">GST Registration</div>
+    <div class="nav-tab" onclick="switchTab('refund')">IT Refund & 244A</div>
+    <div class="nav-tab" onclick="switchTab('roc')">ROC Compliance</div>
     <div class="nav-tab" onclick="switchTab('smartsearch')">Smart Search</div>
     <div class="nav-tab" onclick="switchTab('calendar')">Compliance Calendar</div>
     <div class="nav-tab" onclick="switchTab('disclaimer')">Disclaimer</div>
@@ -276,13 +280,20 @@
                 <div style="font-size:1.8rem;">🤝</div><div style="font-weight:700;margin-top:6px;font-size:0.88rem;">Partnership 40(b)</div><div style="font-size:0.72rem;opacity:0.8;margin-top:3px;">Remuneration Calculator</div></div>
             <div onclick="switchTab('itru')" style="cursor:pointer;background:linear-gradient(135deg,#00cec9,#81ecec);color:white;border-radius:12px;padding:22px 14px;transition:transform 0.2s;box-shadow:0 3px 10px rgba(0,0,0,0.12);" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
                 <div style="font-size:1.8rem;">📝</div><div style="font-weight:700;margin-top:6px;font-size:0.88rem;">ITR-U Calculator</div><div style="font-size:0.72rem;opacity:0.8;margin-top:3px;">Updated Return Tax</div></div>
+            <div onclick="switchTab('presumptive')" style="cursor:pointer;background:linear-gradient(135deg,#e17055,#fab1a0);color:white;border-radius:12px;padding:22px 14px;transition:transform 0.2s;box-shadow:0 3px 10px rgba(0,0,0,0.12);" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+                <div style="font-size:1.8rem;">📊</div><div style="font-weight:700;margin-top:6px;font-size:0.88rem;">Presumptive Tax</div><div style="font-size:0.72rem;opacity:0.8;margin-top:3px;">44AD / 44ADA / 44AE</div></div>
+            <div onclick="switchTab('gstreg')" style="cursor:pointer;background:linear-gradient(135deg,#00b894,#55efc4);color:#0f2027;border-radius:12px;padding:22px 14px;transition:transform 0.2s;box-shadow:0 3px 10px rgba(0,0,0,0.12);" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+                <div style="font-size:1.8rem;">🏪</div><div style="font-weight:700;margin-top:6px;font-size:0.88rem;">GST Registration</div><div style="font-size:0.72rem;opacity:0.7;margin-top:3px;">Threshold & Applicability</div></div>
+            <div onclick="switchTab('refund')" style="cursor:pointer;background:linear-gradient(135deg,#0984e3,#74b9ff);color:white;border-radius:12px;padding:22px 14px;transition:transform 0.2s;box-shadow:0 3px 10px rgba(0,0,0,0.12);" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+                <div style="font-size:1.8rem;">💸</div><div style="font-weight:700;margin-top:6px;font-size:0.88rem;">IT Refund & 244A</div><div style="font-size:0.72rem;opacity:0.8;margin-top:3px;">Refund Interest Calculator</div></div>
+            <div onclick="switchTab('roc')" style="cursor:pointer;background:linear-gradient(135deg,#636e72,#2d3436);color:white;border-radius:12px;padding:22px 14px;transition:transform 0.2s;box-shadow:0 3px 10px rgba(0,0,0,0.12);" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+                <div style="font-size:1.8rem;">🏛️</div><div style="font-weight:700;margin-top:6px;font-size:0.88rem;">ROC Compliance</div><div style="font-size:0.72rem;opacity:0.8;margin-top:3px;">Companies & LLP Tracker</div></div>
             <div onclick="switchTab('smartsearch')" style="cursor:pointer;background:linear-gradient(135deg,#0984e3,#74b9ff);color:white;border-radius:12px;padding:22px 14px;transition:transform 0.2s;box-shadow:0 3px 10px rgba(0,0,0,0.12);" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
                 <div style="font-size:1.8rem;">🔎</div><div style="font-weight:700;margin-top:6px;font-size:0.88rem;">Smart Search</div><div style="font-size:0.72rem;opacity:0.8;margin-top:3px;">Cross-Reference Guide</div></div>
             <div onclick="switchTab('calendar')" style="cursor:pointer;background:linear-gradient(135deg,#2d3436,#636e72);color:white;border-radius:12px;padding:22px 14px;transition:transform 0.2s;box-shadow:0 3px 10px rgba(0,0,0,0.12);" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
                 <div style="font-size:1.8rem;">📅</div><div style="font-weight:700;margin-top:6px;font-size:0.88rem;">Compliance Calendar</div><div style="font-size:0.72rem;opacity:0.8;margin-top:3px;">Tax Year 2026-27</div></div>
         </div>
         <p style="color:var(--text-light);font-size:0.82rem;margin-top:20px;">💡 <strong>Tip:</strong> Use the tab bar above to quickly switch between any section. All data sourced from official notifications.</p>
-        <p style="text-align:center;font-size:0.72rem;color:#999;margin-top:20px;padding-top:10px;border-top:1px solid #eee;">Last Updated: April 2026</p>
     </div>
 </div>
 
@@ -1785,6 +1796,378 @@
         </div>
     </div>
     <p style="text-align:center;font-size:0.72rem;color:#999;margin-top:20px;padding-top:10px;border-top:1px solid #eee;">Last Updated: April 2026 | Source: Section 139(8A), Section 140B IT Act 1961, Section 167 IT Act 2025, CBDT Notification No. 48/2022, Finance Act 2022, Finance Act 2025 | Information is indicative — always verify from official sources before advising clients.</p>
+</div>
+
+<!-- ==================== PRESUMPTIVE TAX ==================== -->
+<div id="tab-presumptive" class="tab-content">
+    <div class="card">
+        <h2>Presumptive Tax Calculator — Section 44AD / 44ADA / 44AE</h2>
+        <p style="color:var(--text-light);font-size:0.78rem;margin-bottom:14px;">As per Sections 44AD, 44ADA, 44AE of IT Act 1961 (Equivalent: Section 58, IT Act 2025). Finance Act 2023 (44AD digital limit raised to Rs 3 Cr; 44ADA limit raised to Rs 75 Lakh). Source: incometaxindia.gov.in | Finance Act 2021, 2023 | IT Act 2025 — Section 58.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:18px;">
+            <div onclick="showPresScheme('ad')" id="presCard44AD" style="cursor:pointer;background:linear-gradient(135deg,#0f2027,#2c5364);color:white;border-radius:12px;padding:18px 14px;text-align:center;transition:transform 0.2s;border:3px solid var(--accent);" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
+                <div style="font-size:1.4rem;font-weight:800;">44AD</div><div style="font-size:0.82rem;opacity:0.9;margin-top:4px;">Business (8% / 6%)</div></div>
+            <div onclick="showPresScheme('ada')" id="presCard44ADA" style="cursor:pointer;background:linear-gradient(135deg,#6c5ce7,#a29bfe);color:white;border-radius:12px;padding:18px 14px;text-align:center;transition:transform 0.2s;border:3px solid transparent;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
+                <div style="font-size:1.4rem;font-weight:800;">44ADA</div><div style="font-size:0.82rem;opacity:0.9;margin-top:4px;">Profession (50%)</div></div>
+            <div onclick="showPresScheme('ae')" id="presCard44AE" style="cursor:pointer;background:linear-gradient(135deg,#e17055,#d63031);color:white;border-radius:12px;padding:18px 14px;text-align:center;transition:transform 0.2s;border:3px solid transparent;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
+                <div style="font-size:1.4rem;font-weight:800;">44AE</div><div style="font-size:0.82rem;opacity:0.9;margin-top:4px;">Goods Carriage (per vehicle)</div></div>
+        </div>
+    </div>
+    <!-- 44AD Section -->
+    <div id="pres44AD">
+        <div class="card">
+            <h3 style="color:var(--primary-mid);">Section 44AD — Presumptive Taxation for Business</h3>
+            <p style="color:var(--text-light);font-size:0.78rem;">Source: Section 44AD, IT Act 1961 | Section 58(1), IT Act 2025 | incometaxindia.gov.in</p>
+            <div style="background:#eaf2f8;border-left:4px solid var(--primary-light);border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.88rem;">
+                <strong>Eligibility:</strong> Resident Individual, HUF, or Partnership Firm only (NOT companies, NOT LLPs).<br>
+                <strong>Turnover limit:</strong> Rs 2 Cr (general) OR Rs 3 Cr (if cash receipts ≤5% AND cash payments ≤5% of total).<br>
+                <strong>NOT available</strong> if: agency/commission/brokerage business; or claiming deductions u/s 10A/10AA/80-IA/80-IB etc.
+            </div>
+            <div class="checker-form">
+                <div class="form-row">
+                    <div class="form-group"><label>Total Turnover / Gross Receipts (Rs)</label><input type="number" id="adTurnover" placeholder="e.g. 1500000"></div>
+                    <div class="form-group"><label>Entity Type</label><select id="adEntity"><option value="individual">Individual</option><option value="huf">HUF</option><option value="firm">Partnership Firm</option></select></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Cash Receipts (Rs)</label><input type="number" id="adCashReceipts" placeholder="e.g. 200000"></div>
+                    <div class="form-group"><label>Assessment Year</label><select id="adAY"><option value="2025-26">AY 2025-26</option><option value="2026-27" selected>AY 2026-27</option><option value="2027-28">AY 2027-28</option></select></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Cash Payments (Rs)</label><input type="number" id="adCashPayments" placeholder="e.g. 150000"></div>
+                    <div class="form-group"><label>Opted out of 44AD within last 5 years?</label><select id="adOptOut"><option value="no">No</option><option value="yes">Yes — opted out within last 5 years</option></select></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Actual Net Profit as per books (Rs)</label><input type="number" id="adActualProfit" placeholder="Optional — for comparison"></div>
+                    <div class="form-group"></div>
+                </div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="calc44AD()">Calculate 44AD</button><button class="btn btn-reset" onclick="reset44AD()">Reset</button></div>
+                <div id="adResult" class="result-box"></div>
+            </div>
+        </div>
+    </div>
+    <!-- 44ADA Section -->
+    <div id="pres44ADA" style="display:none;">
+        <div class="card">
+            <h3 style="color:var(--primary-mid);">Section 44ADA — Presumptive Taxation for Professionals</h3>
+            <p style="color:var(--text-light);font-size:0.78rem;">Source: Section 44ADA, IT Act 1961 | Section 58(2), IT Act 2025 | Finance Act 2021 (limit Rs 50L), Finance Act 2023 (limit Rs 75L) | incometaxindia.gov.in</p>
+            <div style="background:#eaf2f8;border-left:4px solid #6c5ce7;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.88rem;">
+                <strong>Eligible Professions (Sec 44AA(1)):</strong> Legal (Advocates) | Medical (Doctors/Surgeons) | Engineering | Architecture | Accountancy (CA, CMA, CS) | Technical Consultancy | Interior Decoration | Film Artists | Authorised Representatives | Information Technology
+            </div>
+            <div class="checker-form">
+                <div class="form-row">
+                    <div class="form-group"><label>Profession Type</label><select id="adaProfession"><option value="legal">Legal</option><option value="medical">Medical</option><option value="engineering">Engineering</option><option value="architecture">Architecture</option><option value="accountancy">Accountancy (CA/CMA/CS)</option><option value="technical">Technical Consultancy</option><option value="interior">Interior Decoration</option><option value="film">Film Artist</option><option value="it">IT Professional</option><option value="other">Other specified profession</option></select></div>
+                    <div class="form-group"><label>Entity Type</label><select id="adaEntity"><option value="individual">Individual (Resident)</option><option value="firm">Partnership Firm of Professionals</option></select></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Gross Receipts (Rs)</label><input type="number" id="adaReceipts" placeholder="e.g. 4500000"></div>
+                    <div class="form-group"><label>Assessment Year</label><select id="adaAY"><option value="2025-26">AY 2025-26</option><option value="2026-27" selected>AY 2026-27</option><option value="2027-28">AY 2027-28</option></select></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Cash Receipts (Rs)</label><input type="number" id="adaCashR" placeholder="e.g. 300000"></div>
+                    <div class="form-group"><label>Previously declared income below 50%?</label><select id="adaOptOut"><option value="no">No</option><option value="yes">Yes</option></select></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Actual Net Profit (Rs)</label><input type="number" id="adaActualProfit" placeholder="Optional — for comparison"></div>
+                    <div class="form-group"></div>
+                </div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="calc44ADA()">Calculate 44ADA</button><button class="btn btn-reset" onclick="reset44ADA()">Reset</button></div>
+                <div id="adaResult" class="result-box"></div>
+            </div>
+        </div>
+    </div>
+    <!-- 44AE Section -->
+    <div id="pres44AE" style="display:none;">
+        <div class="card">
+            <h3 style="color:var(--primary-mid);">Section 44AE — Presumptive Taxation for Goods Carriage</h3>
+            <p style="color:var(--text-light);font-size:0.78rem;">Source: Section 44AE, IT Act 1961 | Section 58(3), IT Act 2025 | Finance Act 2018 (revised rates) | incometaxindia.gov.in</p>
+            <div style="background:#eaf2f8;border-left:4px solid #d63031;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.88rem;">
+                <strong>Eligibility:</strong> Person owning ≤ 10 goods carriages at any time during the year. Available to ALL assessees (Individual, HUF, Firm, Company, LLP). No turnover limit — based purely on number of vehicles.
+            </div>
+            <div class="checker-form">
+                <div class="form-row">
+                    <div class="form-group"><label>Heavy Goods Vehicles (GVW > 12 MT)</label><input type="number" id="aeHeavy" placeholder="e.g. 3"></div>
+                    <div class="form-group"><label>Months in operation during year</label><input type="number" id="aeMonths" placeholder="12" value="12"></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Total Tonnage of Heavy Vehicles (tonnes)</label><input type="number" id="aeTonnage" placeholder="e.g. 45"></div>
+                    <div class="form-group"><label>Assessment Year</label><select id="aeAY"><option value="2025-26">AY 2025-26</option><option value="2026-27" selected>AY 2026-27</option><option value="2027-28">AY 2027-28</option></select></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Other Vehicles (GVW ≤ 12 MT)</label><input type="number" id="aeOther" placeholder="e.g. 2"></div>
+                    <div class="form-group"><label>Actual Net Profit (Rs)</label><input type="number" id="aeActualProfit" placeholder="Optional — for comparison"></div>
+                </div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="calc44AE()">Calculate 44AE</button><button class="btn btn-reset" onclick="reset44AE()">Reset</button></div>
+                <div id="aeResult" class="result-box"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Quick Reference Table -->
+    <div class="card">
+        <h2>Presumptive Schemes — At a Glance</h2>
+        <table class="limits-table">
+            <thead><tr><th>Feature</th><th>44AD (Business)</th><th>44ADA (Profession)</th><th>44AE (Goods Carriage)</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Eligible Persons</strong></td><td>Resident Ind / HUF / Firm</td><td>Resident Ind / Firm (specified professions)</td><td>All — Ind, HUF, Firm, Company, LLP</td></tr>
+                <tr><td><strong>Turnover / Receipt Limit</strong></td><td>Rs 2 Cr (Rs 3 Cr if ≤5% cash)</td><td>Rs 75 Lakh</td><td>No limit (max 10 vehicles)</td></tr>
+                <tr><td><strong>Presumptive Rate</strong></td><td>8% cash / 6% digital</td><td>50% of receipts</td><td>Rs 7,500/vehicle/month (other); Rs 1,000/ton/month (heavy)</td></tr>
+                <tr><td><strong>Advance Tax</strong></td><td>100% by 15 March</td><td>100% by 15 March</td><td>100% by 15 March</td></tr>
+                <tr><td><strong>Opt-out Consequence</strong></td><td>Tax Audit mandatory for next 5 AYs</td><td>No lock-in — can opt out next year</td><td>No opt-out provision</td></tr>
+                <tr><td><strong>Deductions 30–38</strong></td><td>Not allowed separately</td><td>Not allowed separately</td><td>Not allowed separately</td></tr>
+                <tr><td><strong>Depreciation</strong></td><td>Deemed claimed (reduce WDV)</td><td>Deemed claimed (reduce WDV)</td><td>Deemed claimed (reduce WDV)</td></tr>
+                <tr><td><strong>LLP eligible?</strong></td><td>No</td><td>No</td><td>Yes</td></tr>
+                <tr><td><strong>Companies eligible?</strong></td><td>No</td><td>No</td><td>Yes</td></tr>
+                <tr><td><strong>New Act 2025</strong></td><td>Section 58(1)</td><td>Section 58(2)</td><td>Section 58(3)</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card">
+        <div style="background:#fef9e7;border-left:4px solid #f39c12;border-radius:8px;padding:12px 16px;">
+            <h3 style="margin-top:0;color:#b7950b;">Key Notes — Presumptive Taxation</h3>
+            <ul style="margin-left:18px;font-size:0.88rem;color:#555;line-height:1.8;">
+                <li><strong>No books required:</strong> Assessees opting for presumptive taxation are not required to maintain books u/s 44AA or get them audited u/s 44AB — provided income declared ≥ presumptive rate.</li>
+                <li><strong>44AD 5-year lock-in:</strong> If opted out (income declared below 6%/8%), cannot opt for 44AD for next 5 AYs — audit mandatory even if turnover is below limit during this period.</li>
+                <li><strong>44ADA — No lock-in:</strong> Unlike 44AD, professionals can opt in and out of 44ADA year to year freely.</li>
+                <li><strong>44AE — No opt-out:</strong> Cannot declare income below Rs 7,500/vehicle/month (or Rs 1,000/ton for heavy) — no option to declare lower income. If actual income is higher, can declare higher.</li>
+                <li><strong>Partner remuneration:</strong> Partnership firm opting for 44AD cannot claim deduction u/s 40(b) for partner remuneration — presumptive income is the final figure.</li>
+                <li><strong>WDV of assets:</strong> Depreciation is deemed to have been claimed even under presumptive — WDV gets reduced, which matters if the assessee opts out in future years.</li>
+                <li><strong>Section 44BBC — IT Act 2025:</strong> Non-resident cruise ship operators now also covered under a separate presumptive scheme u/s 58 of the new Act.</li>
+                <li><strong>Section 194T (w.e.f. 01.04.2025):</strong> TDS at 10% on partner salary/interest > Rs 20,000 p.a. — applicable even for 44AD firms.</li>
+            </ul>
+        </div>
+    </div>
+    <p style="text-align:center;font-size:0.72rem;color:#999;margin-top:20px;padding-top:10px;border-top:1px solid #eee;">Last Updated: April 2026 | Source: Sections 44AD, 44ADA, 44AE — IT Act 1961 | Section 58 — IT Act 2025 | Finance Act 2021, 2023 | incometaxindia.gov.in | Information is indicative — always verify from official sources before advising clients.</p>
+</div>
+
+<!-- ==================== GST REGISTRATION ==================== -->
+<div id="tab-gstreg" class="tab-content">
+    <div class="card">
+        <h2>GST Registration — Threshold & Applicability Checker</h2>
+        <p style="color:var(--text-light);font-size:0.78rem;margin-bottom:14px;">As per Sections 22, 23, 24, 25 of the CGST Act, 2017 | Notification No. 10/2019-CT dated 07.03.2019 | Notification No. 14/2019-CT. Source: cbic-gst.gov.in | gst.gov.in | CGST Act 2017.</p>
+        <h3 style="color:var(--primary-mid);">Check GST Registration Requirement</h3>
+        <div class="checker-form">
+            <div class="form-row">
+                <div class="form-group"><label>State</label><select id="gstState">
+                    <optgroup label="Normal States (Goods: Rs 40L / Services: Rs 20L)">
+                        <option value="normal">Andhra Pradesh</option><option value="normal">Assam</option><option value="normal">Bihar</option><option value="normal">Chhattisgarh</option><option value="normal">Delhi</option><option value="normal">Goa</option><option value="normal">Gujarat</option><option value="normal">Haryana</option><option value="normal">Jharkhand</option><option value="normal">Karnataka</option><option value="normal">Kerala</option><option value="normal">Madhya Pradesh</option><option value="normal">Maharashtra</option><option value="normal">Odisha</option><option value="normal">Punjab</option><option value="normal">Rajasthan</option><option value="normal">Tamil Nadu</option><option value="normal">Telangana</option><option value="normal">Uttar Pradesh</option><option value="normal">West Bengal</option><option value="normal">Others — Normal State</option>
+                    </optgroup>
+                    <optgroup label="Special Category States (Goods: Rs 20L / Services: Rs 10L)">
+                        <option value="special">Arunachal Pradesh</option><option value="special">Himachal Pradesh</option><option value="special">Jammu & Kashmir</option><option value="special">Ladakh</option><option value="special">Manipur</option><option value="special">Meghalaya</option><option value="special">Mizoram</option><option value="special">Nagaland</option><option value="special">Sikkim</option><option value="special">Tripura</option><option value="special">Uttarakhand</option>
+                    </optgroup>
+                </select></div>
+                <div class="form-group"><label>Type of Supplier</label><select id="gstType">
+                    <option value="regular">Regular supplier (goods/services)</option>
+                    <option value="ecom_seller">Seller exclusively through E-commerce platform</option>
+                    <option value="ecom_operator">E-commerce operator (marketplace)</option>
+                    <option value="casual">Casual taxable person</option>
+                    <option value="nri">Non-Resident taxable person</option>
+                    <option value="isd">Input Service Distributor (ISD)</option>
+                    <option value="tds51">Person liable to deduct TDS u/s 51</option>
+                    <option value="tcs52">Person liable to collect TCS u/s 52</option>
+                    <option value="interstate_goods">Person making inter-state supplies of goods</option>
+                    <option value="oidar">OIDAR service provider from outside India</option>
+                    <option value="exempt_only">Person supplying only exempted goods/services</option>
+                    <option value="agriculturist">Agriculturist (only own agricultural land)</option>
+                </select></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label>Nature of Supply</label><select id="gstNature">
+                    <option value="goods">Goods only</option><option value="services">Services only</option><option value="both">Both goods and services (composite)</option>
+                </select></div>
+                <div class="form-group"><label>Annual Aggregate Turnover (Rs)</label><input type="number" id="gstTurnover" placeholder="e.g. 3500000"></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label>Nature of Goods/Services</label><select id="gstExempt">
+                    <option value="taxable">Taxable supplies</option><option value="exempt">Exempt supplies only</option><option value="mix">Mix of taxable and exempt</option>
+                </select></div>
+                <div class="form-group"><label>Inter-state supply of goods?</label><select id="gstInterstate">
+                    <option value="no">No</option><option value="yes">Yes</option>
+                </select></div>
+            </div>
+            <div class="btn-row"><button class="btn btn-primary" onclick="checkGSTReg()">Check Registration</button><button class="btn btn-reset" onclick="resetGSTReg()">Reset</button></div>
+            <div id="gstRegResult" class="result-box"></div>
+        </div>
+    </div>
+    <div class="card">
+        <h2>GST Registration Thresholds — Quick Reference</h2>
+        <table class="limits-table">
+            <thead><tr><th>State Type</th><th>Nature of Supply</th><th>Threshold</th></tr></thead>
+            <tbody>
+                <tr><td>Normal States</td><td>Goods (exclusive)</td><td><strong>Rs 40 Lakh</strong></td></tr>
+                <tr><td>Normal States</td><td>Services (exclusive)</td><td><strong>Rs 20 Lakh</strong></td></tr>
+                <tr><td>Normal States</td><td>Mixed (goods + services)</td><td><strong>Rs 20 Lakh</strong></td></tr>
+                <tr><td>Special Category States</td><td>Goods (exclusive)</td><td><strong>Rs 20 Lakh</strong></td></tr>
+                <tr><td>Special Category States</td><td>Services / Mixed</td><td><strong>Rs 10 Lakh</strong></td></tr>
+            </tbody>
+        </table>
+        <p style="font-size:0.82rem;color:var(--text-light);margin-top:8px;">Special Category States: Arunachal Pradesh, Meghalaya, Manipur, Mizoram, Nagaland, Tripura, Sikkim, Uttarakhand, Himachal Pradesh, Jammu & Kashmir, Ladakh</p>
+    </div>
+    <div class="card">
+        <h2>Compulsory Registration — Regardless of Turnover (Section 24)</h2>
+        <table class="limits-table">
+            <thead><tr><th>Category</th><th>Section</th></tr></thead>
+            <tbody>
+                <tr><td>Person making inter-state taxable supply of goods</td><td>Sec 24(i)</td></tr>
+                <tr><td>Casual taxable person making taxable supply</td><td>Sec 24(ii)</td></tr>
+                <tr><td>Person required to pay tax under reverse charge (RCM)</td><td>Sec 24(iii)</td></tr>
+                <tr><td>Non-resident taxable person making taxable supply</td><td>Sec 24(v)</td></tr>
+                <tr><td>Person required to deduct TDS u/s 51 (Govt/PSU/local authority)</td><td>Sec 24(vi)</td></tr>
+                <tr><td>Person supplying goods through e-commerce operator</td><td>Sec 24(ix)</td></tr>
+                <tr><td>E-commerce operator required to collect TCS u/s 52</td><td>Sec 24(x)</td></tr>
+                <tr><td>OIDAR service provider from outside India to non-registered persons</td><td>Sec 24(xi)</td></tr>
+                <tr><td>Input Service Distributor (ISD)</td><td>Sec 24(iv)</td></tr>
+                <tr><td>Person supplying through agent OR agent supplying on behalf of principal</td><td>Sec 24(vii)</td></tr>
+            </tbody>
+        </table>
+        <p style="font-size:0.82rem;color:var(--text-light);margin-top:8px;">Note: Persons making only inter-state supply of SERVICES (not goods) are exempt from compulsory registration if turnover is below threshold — per Supreme Court ruling and CBIC clarification.</p>
+    </div>
+    <div class="card">
+        <div style="background:#fef9e7;border-left:4px solid #f39c12;border-radius:8px;padding:12px 16px;">
+            <h3 style="margin-top:0;color:#b7950b;">Key Notes — GST Registration</h3>
+            <ul style="margin-left:18px;font-size:0.88rem;color:#555;line-height:1.8;">
+                <li><strong>Aggregate turnover includes:</strong> Taxable + Exempt + Exports + Inter-state supplies of the same PAN across all states. Does NOT include: GST paid, inward supplies under RCM, value of branch transfers.</li>
+                <li><strong>Registration timeline:</strong> Must apply within 30 days of becoming liable. Casual/NRI taxable persons must register before starting business in India.</li>
+                <li><strong>Inter-state goods — mandatory:</strong> Any person making inter-state taxable supply of GOODS must register regardless of turnover — no threshold exemption.</li>
+                <li><strong>E-commerce sellers:</strong> Sellers on platforms like Amazon, Flipkart, Swiggy, Zomato must compulsorily register — no threshold exemption.</li>
+                <li><strong>Voluntary registration:</strong> Once voluntarily registered, cannot deregister until 1 year has passed (Rule 24, CGST Rules).</li>
+                <li><strong>Composition scheme:</strong> Registered persons with aggregate turnover ≤ Rs 1.5 Cr (goods) / Rs 50 lakh (services) can opt for composition — simplified compliance, no ITC.</li>
+                <li><strong>Amendment w.e.f. 01.01.2023:</strong> Biometric-based Aadhaar authentication made mandatory for new registrations in certain states.</li>
+            </ul>
+        </div>
+    </div>
+    <p style="text-align:center;font-size:0.72rem;color:#999;margin-top:20px;padding-top:10px;border-top:1px solid #eee;">Last Updated: April 2026 | Source: CGST Act, 2017 — Sections 22, 23, 24, 25 | Notification No. 10/2019-CT | Notification No. 14/2019-CT | cbic-gst.gov.in | gst.gov.in | Information is indicative — always verify from official sources before advising clients.</p>
+</div>
+
+<!-- ==================== IT REFUND & 244A ==================== -->
+<div id="tab-refund" class="tab-content">
+    <div class="card">
+        <h2>Income Tax Refund & Interest Calculator — Section 244A</h2>
+        <p style="color:var(--text-light);font-size:0.78rem;margin-bottom:14px;">As per Section 244A of the IT Act 1961 (Equivalent: Section 427, IT Act 2025). CBDT Circular No. 21/2015 dated 10.12.2015. Source: incometaxindia.gov.in | IT Act 1961 — Section 244A | IT Act 2025 — Section 427.</p>
+        <h3 style="color:var(--primary-mid);">Calculate Refund Amount & Section 244A Interest</h3>
+        <div class="checker-form">
+            <div class="form-row">
+                <div class="form-group"><label>Assessment Year</label><select id="rfAY"><option value="2025-26" selected>AY 2025-26</option><option value="2024-25">AY 2024-25</option><option value="2023-24">AY 2023-24</option><option value="2022-23">AY 2022-23</option><option value="2021-22">AY 2021-22</option></select></div>
+                <div class="form-group"><label>Tax Determined on Assessment (Rs)</label><input type="number" id="rfTaxDue" placeholder="e.g. 120000"></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label>Tax Paid — TDS (as per Form 26AS) (Rs)</label><input type="number" id="rfTDS" placeholder="e.g. 150000"></div>
+                <div class="form-group"><label>ITR filed on or before due date?</label><select id="rfTimely"><option value="yes">Yes — filed by due date</option><option value="no">No — filed after due date</option></select></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label>Tax Paid — Advance Tax (Rs)</label><input type="number" id="rfAdvTax" placeholder="e.g. 50000"></div>
+                <div class="form-group"><label>Original Due Date</label><select id="rfDueType"><option value="july">31 July (non-audit)</option><option value="october">31 October (audit cases)</option><option value="november">30 November (TP cases)</option></select></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label>Tax Paid — Self Assessment Tax (Rs)</label><input type="number" id="rfSAT" placeholder="e.g. 0"></div>
+                <div class="form-group"><label>Date of Filing ITR</label><input type="date" id="rfFileDate"></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label>Expected Date of Refund Grant</label><input type="date" id="rfRefundDate" placeholder="Leave blank for today"></div>
+                <div class="form-group"></div>
+            </div>
+            <div class="btn-row"><button class="btn btn-primary" onclick="calcRefund()">Calculate Refund</button><button class="btn btn-reset" onclick="resetRefund()">Reset</button></div>
+            <div id="rfResult" class="result-box"></div>
+        </div>
+    </div>
+    <div class="card">
+        <h2>Section 244A — Interest on Refund: At a Glance</h2>
+        <table class="limits-table">
+            <thead><tr><th>Type of Tax Paid</th><th>When Interest Starts</th><th>When Interest Ends</th><th>Rate</th></tr></thead>
+            <tbody>
+                <tr><td>TDS / Advance Tax — Return filed on time</td><td>1st April of Assessment Year</td><td>Date of grant of refund</td><td>6% p.a. (simple)</td></tr>
+                <tr><td>TDS / Advance Tax — Return filed late</td><td>Date of filing ITR</td><td>Date of grant of refund</td><td>6% p.a. (simple)</td></tr>
+                <tr><td>Self-Assessment Tax</td><td>Date of payment</td><td>Date of grant of refund</td><td>6% p.a. (simple)</td></tr>
+                <tr><td>SAT paid after ITR due date</td><td colspan="2">No interest — not eligible for 244A</td><td>Nil</td></tr>
+            </tbody>
+        </table>
+        <p style="font-size:0.82rem;color:var(--text-light);margin-top:8px;"><strong>No interest if:</strong> Refund ≤ 10% of tax determined | Refund < Rs 100 | Delay caused by assessee</p>
+    </div>
+    <div class="card">
+        <div style="background:#eaf2f8;border-left:4px solid var(--primary-light);border-radius:8px;padding:12px 16px;">
+            <h3 style="margin-top:0;color:var(--primary-mid);">How to Check Refund Status</h3>
+            <ul style="margin-left:18px;font-size:0.88rem;color:#555;line-height:1.8;">
+                <li>Check refund status on: incometaxindia.gov.in > Services > Know Your Refund Status</li>
+                <li>Enter PAN and AY to check status</li>
+                <li>Refunds are issued by CPC Bengaluru via NECS (bank transfer) or cheque</li>
+                <li>Typical processing time: 4 to 6 weeks after ITR processing completes</li>
+                <li>If refund not received within 3 months — raise grievance on Grievance Portal</li>
+                <li>Refund re-issue: If failed (incorrect bank details) — apply under Services > Refund Re-issue</li>
+            </ul>
+        </div>
+    </div>
+    <div class="card">
+        <div style="background:#fef9e7;border-left:4px solid #f39c12;border-radius:8px;padding:12px 16px;">
+            <h3 style="margin-top:0;color:#b7950b;">Key Notes — Section 244A Refund Interest</h3>
+            <ul style="margin-left:18px;font-size:0.88rem;color:#555;line-height:1.8;">
+                <li><strong>Interest is taxable:</strong> Interest u/s 244A is taxable as Income from Other Sources in the year of receipt — must be reported in ITR.</li>
+                <li><strong>10% threshold:</strong> If refund is ≤ 10% of tax determined on assessment, NO interest is payable — even if refund took years.</li>
+                <li><strong>Delayed refund by department:</strong> Assessee can file writ petition before High Court — courts consistently hold that department cannot withhold interest.</li>
+                <li><strong>Section 245 — Refund adjustment:</strong> Department can adjust refund against outstanding demands — prior notice and opportunity to respond required.</li>
+                <li><strong>New IT Act 2025:</strong> Section 244A is now Section 427 of IT Act 2025 — same provisions, same rate, same conditions.</li>
+                <li><strong>Interest on interest:</strong> No provision to claim interest on unpaid interest u/s 244A — only simple interest on principal refund.</li>
+            </ul>
+        </div>
+    </div>
+    <p style="text-align:center;font-size:0.72rem;color:#999;margin-top:20px;padding-top:10px;border-top:1px solid #eee;">Last Updated: April 2026 | Source: IT Act 1961 — Section 244A | IT Act 2025 — Section 427 | CBDT Circular No. 21/2015 | incometaxindia.gov.in | Information is indicative — always verify from official sources before advising clients.</p>
+</div>
+
+<!-- ==================== ROC COMPLIANCE ==================== -->
+<div id="tab-roc" class="tab-content">
+    <div class="card">
+        <h2>ROC / MCA Compliance Tracker — Companies Act 2013 & LLP Act 2008</h2>
+        <p style="color:var(--text-light);font-size:0.78rem;margin-bottom:14px;">As per Companies Act 2013 | LLP Act 2008 | Companies (Accounts) Rules, 2014 | Companies (Management & Administration) Rules, 2014 | MCA General Circular No. 09/2023. Source: mca.gov.in.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:18px;">
+            <div onclick="showROCEntity('pvt')" id="rocCardPvt" style="cursor:pointer;background:linear-gradient(135deg,#0f2027,#2c5364);color:white;border-radius:12px;padding:14px 10px;text-align:center;transition:transform 0.2s;border:3px solid var(--accent);font-size:0.82rem;font-weight:700;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">Private Ltd</div>
+            <div onclick="showROCEntity('pub')" id="rocCardPub" style="cursor:pointer;background:linear-gradient(135deg,#6c5ce7,#a29bfe);color:white;border-radius:12px;padding:14px 10px;text-align:center;transition:transform 0.2s;border:3px solid transparent;font-size:0.82rem;font-weight:700;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">Public Ltd</div>
+            <div onclick="showROCEntity('opc')" id="rocCardOPC" style="cursor:pointer;background:linear-gradient(135deg,#00b894,#55efc4);color:#0f2027;border-radius:12px;padding:14px 10px;text-align:center;transition:transform 0.2s;border:3px solid transparent;font-size:0.82rem;font-weight:700;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">OPC</div>
+            <div onclick="showROCEntity('sec8')" id="rocCardSec8" style="cursor:pointer;background:linear-gradient(135deg,#e17055,#d63031);color:white;border-radius:12px;padding:14px 10px;text-align:center;transition:transform 0.2s;border:3px solid transparent;font-size:0.82rem;font-weight:700;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">Section 8</div>
+            <div onclick="showROCEntity('llp')" id="rocCardLLP" style="cursor:pointer;background:linear-gradient(135deg,#636e72,#2d3436);color:white;border-radius:12px;padding:14px 10px;text-align:center;transition:transform 0.2s;border:3px solid transparent;font-size:0.82rem;font-weight:700;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">LLP</div>
+        </div>
+        <div id="rocTableArea"></div>
+    </div>
+    <div class="card">
+        <h3 style="color:var(--primary-mid);">Late Filing Penalty Estimator</h3>
+        <div class="checker-form">
+            <div class="form-row">
+                <div class="form-group"><label>Form</label><select id="rocForm"><option value="100">AOC-4 / MGT-7 / MGT-7A (Rs 100/day)</option><option value="300">ADT-1 (Rs 300/day, max Rs 12,000)</option><option value="5000">DIR-3 KYC (flat Rs 5,000)</option><option value="500">DPT-3 first default (Rs 5,000 + Rs 500/day)</option><option value="100llp">LLP Form 8 / Form 11 (Rs 100/day)</option></select></div>
+                <div class="form-group"><label>Due Date</label><input type="date" id="rocDueDate"></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label>Actual Filing Date</label><input type="date" id="rocFilingDate"></div>
+                <div class="form-group"></div>
+            </div>
+            <div class="btn-row"><button class="btn btn-primary" onclick="calcROCPenalty()">Calculate Penalty</button><button class="btn btn-reset" onclick="resetROCPenalty()">Reset</button></div>
+            <div id="rocPenResult" class="result-box"></div>
+        </div>
+    </div>
+    <div class="card">
+        <h2>Key Annual ROC Dates — Quick Reference</h2>
+        <table class="limits-table">
+            <thead><tr><th>Date</th><th>Compliance</th></tr></thead>
+            <tbody>
+                <tr><td><strong>30 April</strong></td><td>MSME-1 (Oct-Mar half-year return)</td></tr>
+                <tr><td><strong>30 May</strong></td><td>LLP Annual Return — Form 11</td></tr>
+                <tr><td><strong>30 June</strong></td><td>DPT-3 (deposits return)</td></tr>
+                <tr><td><strong>30 September</strong></td><td>AGM (within 6 months of FY end) + DIR-3 KYC</td></tr>
+                <tr><td><strong>30 October</strong></td><td>AOC-4 (30 days after AGM) + LLP Form 8 + MSME-1 (Apr-Sep)</td></tr>
+                <tr><td><strong>29 November</strong></td><td>MGT-7 / MGT-7A (60 days after AGM)</td></tr>
+            </tbody>
+        </table>
+        <p style="font-size:0.82rem;color:var(--text-light);margin-top:8px;">Note: Where AGM is held before 30 September, AOC-4 and MGT-7 due dates fall earlier — computed from actual AGM date.</p>
+    </div>
+    <div class="card">
+        <div style="background:#fef9e7;border-left:4px solid #f39c12;border-radius:8px;padding:12px 16px;">
+            <h3 style="margin-top:0;color:#b7950b;">Key Notes — ROC Compliance</h3>
+            <ul style="margin-left:18px;font-size:0.88rem;color:#555;line-height:1.8;">
+                <li><strong>DIR-3 KYC is annual for ALL DIN holders:</strong> Every person holding a DIN must file by 30 September. Failure deactivates DIN — reactivation requires Rs 5,000 fee.</li>
+                <li><strong>DPT-3 covers deemed deposits also:</strong> Even if no public deposit accepted, DPT-3 must be filed to report transactions not considered as deposits.</li>
+                <li><strong>MSME-1 is mandatory:</strong> Every company must file half-yearly if payments to MSME vendors are outstanding beyond 45 days. File nil return if no MSME vendors.</li>
+                <li><strong>AGM timeline:</strong> Private companies — within 6 months from FY end (by 30 September). OPCs are exempt from holding AGM.</li>
+                <li><strong>Late additional fee:</strong> MCA charges increasing fee on delays — AOC-4 and MGT-7 penalties have no cap and compound indefinitely.</li>
+                <li><strong>Struck off risk:</strong> Companies failing to file AOC-4 and MGT-7 for 3 consecutive years can be struck off u/s 248 — directors face disqualification u/s 164(2) for 5 years.</li>
+                <li><strong>LLP special note:</strong> No AGM required. Form 8 (accounts) and Form 11 (annual return) are mandatory. Late fee Rs 100/day with no cap.</li>
+            </ul>
+        </div>
+    </div>
+    <p style="text-align:center;font-size:0.72rem;color:#999;margin-top:20px;padding-top:10px;border-top:1px solid #eee;">Last Updated: April 2026 | Source: Companies Act 2013 | LLP Act 2008 | Companies (Accounts) Rules 2014 | Companies (Management & Administration) Rules 2014 | mca.gov.in | Information is indicative — always verify from official sources before advising clients.</p>
 </div>
 
 <!-- ==================== DISCLAIMER ==================== -->
@@ -3763,6 +4146,318 @@ function calcITRU(){
   r.innerHTML=html;
 }
 function resetITRU(){['itruIncome','itruTDS','itruAdvTax','itruDate'].forEach(function(id){document.getElementById(id).value='';});document.getElementById('itruAY').value='25-26';document.getElementById('itruRate').value='30';document.getElementById('itruResult').className='result-box';document.getElementById('itruResult').innerHTML='';}
+
+// ==================== PRESUMPTIVE TAX JS ====================
+function showPresScheme(scheme){
+var sections=['pres44AD','pres44ADA','pres44AE'];
+var cards=['presCard44AD','presCard44ADA','presCard44AE'];
+var map={ad:0,ada:1,ae:2};
+sections.forEach(function(s,i){document.getElementById(s).style.display=i===map[scheme]?'block':'none';});
+cards.forEach(function(c,i){document.getElementById(c).style.borderColor=i===map[scheme]?'var(--accent)':'transparent';});
+}
+function calc44AD(){
+var turnover=parseFloat(document.getElementById('adTurnover').value)||0;
+var cashR=parseFloat(document.getElementById('adCashReceipts').value)||0;
+var cashP=parseFloat(document.getElementById('adCashPayments').value)||0;
+var actual=parseFloat(document.getElementById('adActualProfit').value)||0;
+var optOut=document.getElementById('adOptOut').value;
+var r=document.getElementById('adResult');
+if(turnover<=0){r.className='result-box applicable';r.innerHTML='<div class="result-title">Please enter turnover.</div>';return;}
+var cashRPct=turnover>0?((cashR/turnover)*100):0;
+var cashPPct=turnover>0?((cashP/turnover)*100):0;
+var limit=(cashRPct<=5&&cashPPct<=5)?30000000:20000000;
+var eligible=turnover<=limit;
+var digitalTO=turnover-cashR;
+var presDigital=Math.round(digitalTO*0.06);
+var presCash=Math.round(cashR*0.08);
+var presTotal=presDigital+presCash;
+r.className='result-box presumptive';
+var html='<div class="result-title">Section 44AD — Computation</div><div class="result-detail">';
+html+='<h3 style="margin:10px 0 6px;color:var(--accent);">Step A — Turnover Limit Check</h3>';
+html+='<table class="limits-table"><tr><td>Total turnover</td><td>Rs '+fmt(turnover)+'</td></tr>';
+html+='<tr><td>Cash receipts</td><td>Rs '+fmt(cashR)+' ('+cashRPct.toFixed(1)+'% of total)</td></tr>';
+html+='<tr><td>Cash payments</td><td>Rs '+fmt(cashP)+' ('+cashPPct.toFixed(1)+'% of total)</td></tr>';
+html+='<tr><td>Applicable limit</td><td>Rs '+fmt(limit)+(limit===30000000?' (both cash ≤5%)':' (standard)')+'</td></tr>';
+html+='<tr style="background:'+(eligible?'#e8f8f5':'#fde8e8')+';"><td><strong>Eligibility</strong></td><td><strong>'+(eligible?'Within limit — eligible for 44AD':'Exceeds limit — Tax Audit mandatory u/s 44AB')+'</strong></td></tr></table>';
+if(optOut==='yes'){html+='<div style="margin:12px 0;padding:10px;background:#fde8e8;border:2px solid #d63031;border-radius:8px;font-size:0.88rem;color:#d63031;"><strong>You have opted out of Sec 44AD within the last 5 years.</strong> You are NOT eligible for 44AD for the next 5 Assessment Years. Tax Audit u/s 44AB is mandatory even if turnover is below the limit.</div>';}
+html+='<h3 style="margin:14px 0 6px;color:var(--accent);">Step B — Presumptive Income</h3>';
+html+='<table class="limits-table"><tr><td>Digital/non-cash turnover</td><td>Rs '+fmt(digitalTO)+' x 6% = Rs '+fmt(presDigital)+'</td></tr>';
+html+='<tr><td>Cash turnover</td><td>Rs '+fmt(cashR)+' x 8% = Rs '+fmt(presCash)+'</td></tr>';
+html+='<tr style="background:#e8f8f5;"><td><strong>Total Presumptive Income u/s 44AD</strong></td><td><strong>Rs '+fmt(presTotal)+'</strong></td></tr></table>';
+if(actual>0){
+html+='<h3 style="margin:14px 0 6px;color:var(--accent);">Step C — Actual vs Presumptive</h3>';
+html+='<table class="limits-table"><tr><td>Actual profit</td><td>Rs '+fmt(actual)+'</td></tr>';
+html+='<tr><td>Minimum required (presumptive)</td><td>Rs '+fmt(presTotal)+'</td></tr>';
+html+='<tr style="background:'+(actual>=presTotal?'#e8f8f5':'#fde8e8')+';"><td><strong>Status</strong></td><td><strong>'+(actual>=presTotal?'Actual >= Presumptive — Can opt for 44AD, no audit needed':'Actual < Presumptive — Must declare presumptive OR opt out (audit mandatory for next 5 AYs)')+'</strong></td></tr></table>';
+}
+html+='<h3 style="margin:14px 0 6px;color:var(--accent);">Step D — Notes</h3>';
+html+='<ul style="font-size:0.88rem;margin-left:18px;line-height:1.8;"><li>Advance tax: 100% in single instalment by 15 March (not quarterly)</li><li>No separate deductions u/s 30–38 allowed (deemed included in presumptive income)</li></ul>';
+html+='</div>';r.innerHTML=html;
+}
+function reset44AD(){['adTurnover','adCashReceipts','adCashPayments','adActualProfit'].forEach(function(id){document.getElementById(id).value='';});document.getElementById('adOptOut').value='no';document.getElementById('adResult').className='result-box';document.getElementById('adResult').innerHTML='';}
+
+function calc44ADA(){
+var receipts=parseFloat(document.getElementById('adaReceipts').value)||0;
+var cashR=parseFloat(document.getElementById('adaCashR').value)||0;
+var actual=parseFloat(document.getElementById('adaActualProfit').value)||0;
+var r=document.getElementById('adaResult');
+if(receipts<=0){r.className='result-box applicable';r.innerHTML='<div class="result-title">Please enter gross receipts.</div>';return;}
+var limit=7500000;
+var eligible=receipts<=limit;
+var presIncome=Math.round(receipts*0.5);
+r.className='result-box presumptive';
+var html='<div class="result-title">Section 44ADA — Computation</div><div class="result-detail">';
+html+='<h3 style="margin:10px 0 6px;color:var(--accent);">Step A — Eligibility</h3>';
+html+='<table class="limits-table"><tr><td>Gross receipts</td><td>Rs '+fmt(receipts)+'</td></tr>';
+html+='<tr><td>Applicable limit</td><td>Rs '+fmt(limit)+' (w.e.f. AY 2024-25)</td></tr>';
+html+='<tr style="background:'+(eligible?'#e8f8f5':'#fde8e8')+';"><td><strong>Eligibility</strong></td><td><strong>'+(eligible?'Within Rs 75 lakh — eligible':'Exceeds — Tax Audit mandatory u/s 44AB')+'</strong></td></tr></table>';
+html+='<h3 style="margin:14px 0 6px;color:var(--accent);">Step B — Presumptive Income</h3>';
+html+='<table class="limits-table"><tr><td>Gross receipts</td><td>Rs '+fmt(receipts)+'</td></tr>';
+html+='<tr style="background:#e8f8f5;"><td><strong>Presumptive income @ 50%</strong></td><td><strong>Rs '+fmt(presIncome)+'</strong></td></tr></table>';
+if(actual>0){
+html+='<h3 style="margin:14px 0 6px;color:var(--accent);">Step C — Comparison</h3>';
+html+='<table class="limits-table"><tr><td>Actual profit</td><td>Rs '+fmt(actual)+'</td></tr>';
+html+='<tr><td>Presumptive (50%)</td><td>Rs '+fmt(presIncome)+'</td></tr>';
+html+='<tr style="background:'+(actual>=presIncome?'#e8f8f5':'#fde8e8')+';"><td><strong>Status</strong></td><td><strong>'+(actual>=presIncome?'Actual >= 50% — Eligible for 44ADA, no audit':'Actual < 50% — Must declare 50% OR opt out (audit mandatory). NOTE: Unlike 44AD, no 5-year lock-in for 44ADA.')+'</strong></td></tr></table>';
+}
+html+='<h3 style="margin:14px 0 6px;color:var(--accent);">Step D — Notes</h3>';
+html+='<ul style="font-size:0.88rem;margin-left:18px;line-height:1.8;"><li>Advance tax: 100% single instalment by 15 March</li><li>No deductions u/s 30–38 separately allowable</li></ul></div>';
+r.innerHTML=html;
+}
+function reset44ADA(){['adaReceipts','adaCashR','adaActualProfit'].forEach(function(id){document.getElementById(id).value='';});document.getElementById('adaResult').className='result-box';document.getElementById('adaResult').innerHTML='';}
+
+function calc44AE(){
+var heavy=parseInt(document.getElementById('aeHeavy').value)||0;
+var tonnage=parseFloat(document.getElementById('aeTonnage').value)||0;
+var other=parseInt(document.getElementById('aeOther').value)||0;
+var months=parseInt(document.getElementById('aeMonths').value)||12;
+var actual=parseFloat(document.getElementById('aeActualProfit').value)||0;
+var r=document.getElementById('aeResult');
+var total=heavy+other;
+if(total<=0){r.className='result-box applicable';r.innerHTML='<div class="result-title">Please enter number of vehicles.</div>';return;}
+var eligible=total<=10;
+var heavyIncome=Math.round(tonnage*1000*months);
+var otherIncome=Math.round(other*7500*months);
+var presTotal=heavyIncome+otherIncome;
+r.className='result-box presumptive';
+var html='<div class="result-title">Section 44AE — Computation</div><div class="result-detail">';
+html+='<h3 style="margin:10px 0 6px;color:var(--accent);">Step A — Vehicle Count Check</h3>';
+html+='<table class="limits-table"><tr><td>Total vehicles</td><td>'+total+' (Heavy: '+heavy+' + Other: '+other+')</td></tr>';
+html+='<tr style="background:'+(eligible?'#e8f8f5':'#fde8e8')+';"><td><strong>Eligibility</strong></td><td><strong>'+(eligible?'≤ 10 vehicles — eligible for 44AE':'> 10 vehicles — not eligible, must maintain books')+'</strong></td></tr></table>';
+html+='<h3 style="margin:14px 0 6px;color:var(--accent);">Step B — Presumptive Income</h3>';
+html+='<table class="limits-table"><thead><tr><th>Vehicle Type</th><th>Rate</th></tr></thead>';
+html+='<tr><td>Heavy Goods Vehicle (GVW > 12 MT)</td><td>Rs 1,000 per ton of GVW per month</td></tr>';
+html+='<tr><td>Other Vehicle (GVW ≤ 12 MT)</td><td>Rs 7,500 per vehicle per month</td></tr></table>';
+html+='<table class="limits-table" style="margin-top:10px;"><tr><td>Heavy vehicles</td><td>'+tonnage+' tonnes x Rs 1,000 x '+months+' months = Rs '+fmt(heavyIncome)+'</td></tr>';
+html+='<tr><td>Other vehicles</td><td>'+other+' vehicles x Rs 7,500 x '+months+' months = Rs '+fmt(otherIncome)+'</td></tr>';
+html+='<tr style="background:#e8f8f5;"><td><strong>Total Presumptive Income u/s 44AE</strong></td><td><strong>Rs '+fmt(presTotal)+'</strong></td></tr></table>';
+if(actual>0){
+html+='<h3 style="margin:14px 0 6px;color:var(--accent);">Step C — Comparison</h3>';
+html+='<table class="limits-table"><tr><td>Actual profit</td><td>Rs '+fmt(actual)+'</td></tr>';
+html+='<tr><td>Presumptive income</td><td>Rs '+fmt(presTotal)+'</td></tr>';
+html+='<tr><td colspan="2" style="font-size:0.85rem;color:#666;">Note: Unlike 44AD, there is NO opt-out option for 44AE. Must declare at least the presumptive amount. If actual is higher, declare higher.</td></tr></table>';
+}
+html+='</div>';r.innerHTML=html;
+}
+function reset44AE(){['aeHeavy','aeTonnage','aeOther','aeActualProfit'].forEach(function(id){document.getElementById(id).value='';});document.getElementById('aeMonths').value='12';document.getElementById('aeResult').className='result-box';document.getElementById('aeResult').innerHTML='';}
+
+// ==================== GST REGISTRATION JS ====================
+function checkGSTReg(){
+var state=document.getElementById('gstState').value;
+var type=document.getElementById('gstType').value;
+var nature=document.getElementById('gstNature').value;
+var turnover=parseFloat(document.getElementById('gstTurnover').value)||0;
+var exempt=document.getElementById('gstExempt').value;
+var interstate=document.getElementById('gstInterstate').value;
+var r=document.getElementById('gstRegResult');
+var isSpecial=(state==='special');
+var threshold=0;
+if(nature==='goods')threshold=isSpecial?2000000:4000000;
+else threshold=isSpecial?1000000:2000000;
+var mandatoryTypes=['ecom_seller','ecom_operator','casual','nri','isd','tds51','tcs52','interstate_goods','oidar'];
+var isMandatoryType=mandatoryTypes.indexOf(type)>=0;
+var isMandatoryInterstate=(interstate==='yes');
+var isMandatoryTurnover=(turnover>threshold);
+var isExempt=(type==='agriculturist'||(exempt==='exempt'&&!isMandatoryInterstate&&!isMandatoryType));
+var reason='';
+r.className='result-box presumptive';
+var html='';
+if(isExempt){
+html='<div class="result-title" style="color:#00b894;">EXEMPT FROM REGISTRATION</div><div class="result-detail">';
+html+='<table class="limits-table"><tr><td>Status</td><td style="color:#00b894;font-weight:700;">Exempt from GST registration</td></tr>';
+html+='<tr><td>Section</td><td>Section 23, CGST Act 2017</td></tr>';
+html+='<tr><td>Note</td><td>If you later make any taxable supply or cross the threshold, registration becomes mandatory.</td></tr></table></div>';
+}else if(isMandatoryType||isMandatoryInterstate||isMandatoryTurnover){
+if(isMandatoryType){
+var typeReasons={ecom_seller:'Seller through e-commerce platform — Sec 24(ix)',ecom_operator:'E-commerce operator — Sec 24(x)',casual:'Casual taxable person — Sec 24(ii)',nri:'Non-resident taxable person — Sec 24(v)',isd:'Input Service Distributor — Sec 24(iv)',tds51:'TDS deductor u/s 51 — Sec 24(vi)',tcs52:'TCS collector u/s 52 — Sec 24(x)',interstate_goods:'Inter-state supply of goods — Sec 24(i)',oidar:'OIDAR from outside India — Sec 24(xi)'};
+reason=typeReasons[type]||'Mandatory category';
+}else if(isMandatoryInterstate){reason='Inter-state supply of goods — Sec 24(i)';}
+else{reason='Turnover Rs '+fmt(turnover)+' exceeds threshold Rs '+fmt(threshold)+' — Sec 22';}
+html='<div class="result-title" style="color:#d63031;">MANDATORY REGISTRATION REQUIRED</div><div class="result-detail">';
+html+='<table class="limits-table"><tr><td>Applicable threshold</td><td>Rs '+fmt(threshold)+'</td></tr>';
+html+='<tr><td>Your turnover</td><td>Rs '+fmt(turnover)+'</td></tr>';
+html+='<tr><td>Reason</td><td style="color:#d63031;font-weight:600;">'+reason+'</td></tr>';
+html+='<tr><td>Action required</td><td>Register on GST Portal (gst.gov.in) within 30 days of becoming liable</td></tr></table></div>';
+}else{
+html='<div class="result-title" style="color:#f39c12;">VOLUNTARY REGISTRATION AVAILABLE</div><div class="result-detail">';
+html+='<table class="limits-table"><tr><td>Your turnover</td><td>Rs '+fmt(turnover)+'</td></tr>';
+html+='<tr><td>Threshold</td><td>Rs '+fmt(threshold)+'</td></tr>';
+html+='<tr><td>Status</td><td>Registration is NOT mandatory but you may voluntarily register</td></tr>';
+html+='<tr><td>Benefits</td><td>Can claim ITC, issue tax invoices, do inter-state business freely</td></tr>';
+html+='<tr><td>Section</td><td>Section 25(3), CGST Act 2017</td></tr></table></div>';
+}
+r.innerHTML=html;
+}
+function resetGSTReg(){document.getElementById('gstTurnover').value='';document.getElementById('gstType').value='regular';document.getElementById('gstNature').value='goods';document.getElementById('gstExempt').value='taxable';document.getElementById('gstInterstate').value='no';document.getElementById('gstRegResult').className='result-box';document.getElementById('gstRegResult').innerHTML='';}
+
+// ==================== IT REFUND & 244A JS ====================
+function calcRefund(){
+var tds=parseFloat(document.getElementById('rfTDS').value)||0;
+var advTax=parseFloat(document.getElementById('rfAdvTax').value)||0;
+var sat=parseFloat(document.getElementById('rfSAT').value)||0;
+var taxDue=parseFloat(document.getElementById('rfTaxDue').value)||0;
+var timely=document.getElementById('rfTimely').value;
+var dueType=document.getElementById('rfDueType').value;
+var fileDateStr=document.getElementById('rfFileDate').value;
+var refundDateStr=document.getElementById('rfRefundDate').value;
+var ay=document.getElementById('rfAY').value;
+var r=document.getElementById('rfResult');
+var totalPaid=tds+advTax+sat;
+if(totalPaid<=0&&taxDue<=0){r.className='result-box applicable';r.innerHTML='<div class="result-title">Please enter tax details.</div>';return;}
+var refundAmt=totalPaid-taxDue;
+if(refundAmt<=0){r.className='result-box applicable';r.innerHTML='<div class="result-title" style="color:#d63031;">No Refund Due</div><div class="result-detail">Total tax paid (Rs '+fmt(totalPaid)+') is less than or equal to tax determined (Rs '+fmt(taxDue)+'). You owe Rs '+fmt(Math.abs(refundAmt))+' to the department.</div>';return;}
+var refundTDSAdv=Math.max(0,tds+advTax-taxDue);
+var refundSAT=Math.max(0,refundAmt-refundTDSAdv);
+var ayYear=parseInt(ay.split('-')[0]);
+var aprStart=new Date(ayYear,3,1);
+var dueDate;
+if(dueType==='july')dueDate=new Date(ayYear,6,31);
+else if(dueType==='october')dueDate=new Date(ayYear,9,31);
+else dueDate=new Date(ayYear,10,30);
+var fileDate=fileDateStr?new Date(fileDateStr):new Date();
+var refundDate=refundDateStr?new Date(refundDateStr):new Date();
+var interestStart;
+if(timely==='yes'){interestStart=aprStart;}else{interestStart=fileDate;}
+var diffMs=refundDate.getTime()-interestStart.getTime();
+var months=Math.ceil(diffMs/(1000*60*60*24*30.44));
+if(months<0)months=0;
+var noInterest=(refundAmt<100)||(refundAmt<=(taxDue*0.1));
+var interest244A=0;
+if(!noInterest&&refundTDSAdv>0){interest244A=Math.round(refundTDSAdv*0.005*months);}
+var satInterest=0;
+r.className='result-box presumptive';
+var html='<div class="result-title">Refund & Section 244A Interest Computation</div><div class="result-detail">';
+html+='<h3 style="margin:10px 0 6px;color:var(--accent);">Step A — Refund Amount</h3>';
+html+='<table class="limits-table"><tr><td>TDS</td><td>Rs '+fmt(tds)+'</td></tr>';
+html+='<tr><td>Advance Tax</td><td>Rs '+fmt(advTax)+'</td></tr>';
+html+='<tr><td>Self Assessment Tax</td><td>Rs '+fmt(sat)+'</td></tr>';
+html+='<tr><td><strong>Total Tax Paid</strong></td><td><strong>Rs '+fmt(totalPaid)+'</strong></td></tr>';
+html+='<tr><td>Tax Determined on Assessment</td><td>Rs '+fmt(taxDue)+'</td></tr>';
+html+='<tr style="background:#e8f8f5;"><td><strong>Refund Due</strong></td><td><strong>Rs '+fmt(refundAmt)+'</strong></td></tr>';
+if(noInterest){html+='<tr style="background:#fef9e7;"><td colspan="2"><strong>No interest u/s 244A payable</strong> — Refund '+(refundAmt<100?'is less than Rs 100':'is ≤ 10% of tax determined')+'</td></tr>';}
+html+='</table>';
+if(!noInterest){
+html+='<h3 style="margin:14px 0 6px;color:var(--accent);">Step B — Section 244A Interest</h3>';
+html+='<table class="limits-table"><tr><td>Refund out of TDS + Advance Tax</td><td>Rs '+fmt(refundTDSAdv)+'</td></tr>';
+html+='<tr><td>Interest period</td><td>'+interestStart.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})+' to '+refundDate.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})+'</td></tr>';
+html+='<tr><td>Months</td><td>'+months+'</td></tr>';
+html+='<tr style="background:#e8f8f5;"><td><strong>Interest @ 6% p.a. (0.5%/month)</strong></td><td><strong>Rs '+fmt(interest244A)+'</strong></td></tr></table>';
+}
+html+='<h3 style="margin:14px 0 6px;color:var(--accent);">Total</h3>';
+html+='<table class="limits-table"><tr style="background:#dfe6e9;font-weight:700;font-size:1.05rem;"><td>Total Refund + Interest</td><td>Rs '+fmt(refundAmt+interest244A)+'</td></tr></table>';
+html+='<p style="margin-top:10px;font-size:0.82rem;color:#666;">Interest u/s 244A is taxable as Income from Other Sources in the year of receipt.</p></div>';
+r.innerHTML=html;
+}
+function resetRefund(){['rfTDS','rfAdvTax','rfSAT','rfTaxDue','rfFileDate','rfRefundDate'].forEach(function(id){document.getElementById(id).value='';});document.getElementById('rfTimely').value='yes';document.getElementById('rfResult').className='result-box';document.getElementById('rfResult').innerHTML='';}
+
+// ==================== ROC COMPLIANCE JS ====================
+var rocData={
+pvt:[
+{form:'INC-20A',purpose:'Commencement of Business Declaration (one-time)',due:'Within 180 days of incorporation',penalty:'Rs 50,000 on company; Rs 1,000/day on officers — max Rs 1,00,000'},
+{form:'ADT-1',purpose:'Intimation of Auditor Appointment',due:'Within 15 days of AGM',penalty:'Rs 300/day — max Rs 12,000 (Sec 450)'},
+{form:'AOC-4',purpose:'Filing of Financial Statements (BS, P&L, Board Report)',due:'Within 30 days of AGM',penalty:'Rs 100/day per document — no cap'},
+{form:'AOC-4 CFS',purpose:'Filing of Consolidated Financial Statements',due:'Within 30 days of AGM',penalty:'Rs 100/day'},
+{form:'MGT-7',purpose:'Annual Return',due:'Within 60 days of AGM',penalty:'Rs 100/day — no cap'},
+{form:'DIR-3 KYC',purpose:'Annual KYC of all Directors holding DIN',due:'30 September every year',penalty:'Rs 5,000 flat fee (DIN deactivated)'},
+{form:'DPT-3',purpose:'Return of Deposits & Non-Deposit Transactions',due:'30 June every year',penalty:'Rs 5,000 first default; Rs 500/day continuing'},
+{form:'MSME-1',purpose:'Half-yearly return — MSME outstanding payments',due:'30 Apr (Oct-Mar) / 31 Oct (Apr-Sep)',penalty:'Rs 25,000 to Rs 3,00,000'},
+{form:'BEN-2',purpose:'Return of Significant Beneficial Ownership',due:'Within 30 days of receiving BEN-1',penalty:'Rs 1,000/day — max Rs 2,00,000'},
+{form:'MGT-14',purpose:'Filing of Board/Shareholders Resolutions',due:'Within 30 days of resolution',penalty:'Rs 500/day — max Rs 5,00,000'},
+{form:'PAS-3',purpose:'Return of Allotment of Shares',due:'Within 30 days of allotment',penalty:'Rs 1,000/day — max Rs 25,00,000'},
+{form:'SH-7',purpose:'Notice of Alteration in Share Capital',due:'Within 30 days of resolution',penalty:'Rs 500/day — max Rs 5,00,000'},
+{form:'CHG-1',purpose:'Creation / Modification of Charge',due:'Within 30 days of creation',penalty:'Higher fees — late additional fee'}
+],
+pub:[
+{form:'ADT-1',purpose:'Intimation of Auditor Appointment',due:'Within 15 days of AGM',penalty:'Rs 300/day'},
+{form:'AOC-4',purpose:'Financial Statements',due:'Within 30 days of AGM',penalty:'Rs 100/day — no cap'},
+{form:'AOC-4 CFS',purpose:'Consolidated Financial Statements',due:'Within 30 days of AGM',penalty:'Rs 100/day'},
+{form:'MGT-7',purpose:'Annual Return',due:'Within 60 days of AGM',penalty:'Rs 100/day — no cap'},
+{form:'DIR-3 KYC',purpose:'Annual KYC — all Directors',due:'30 September',penalty:'Rs 5,000 flat'},
+{form:'DPT-3',purpose:'Return of Deposits',due:'30 June',penalty:'Rs 5,000 + Rs 500/day'},
+{form:'MSME-1',purpose:'MSME outstanding payments',due:'30 Apr / 31 Oct',penalty:'Rs 25,000 to Rs 3,00,000'},
+{form:'MGT-14',purpose:'Resolutions filing',due:'Within 30 days',penalty:'Rs 500/day'},
+{form:'PAS-3',purpose:'Return of Allotment',due:'Within 30 days',penalty:'Rs 1,000/day'},
+{form:'CSR-2',purpose:'Annual CSR Report (if applicable)',due:'31 March following FY',penalty:'Rs 50,000 to Rs 5,00,000'}
+],
+opc:[
+{form:'INC-20A',purpose:'Commencement of Business',due:'Within 180 days',penalty:'Rs 50,000 + Rs 1,000/day'},
+{form:'ADT-1',purpose:'Auditor Appointment',due:'Within 15 days of AGM',penalty:'Rs 300/day'},
+{form:'AOC-4',purpose:'Financial Statements',due:'Within 180 days of FY end (special OPC provision)',penalty:'Rs 100/day'},
+{form:'MGT-7A',purpose:'Annual Return',due:'Within 60 days of AGM',penalty:'Rs 100/day'},
+{form:'DIR-3 KYC',purpose:'Director KYC',due:'30 September',penalty:'Rs 5,000 flat'},
+{form:'DPT-3',purpose:'Deposits Return',due:'30 June',penalty:'Rs 5,000 + Rs 500/day'}
+],
+sec8:[
+{form:'ADT-1',purpose:'Auditor Appointment',due:'Within 15 days of AGM',penalty:'Rs 300/day'},
+{form:'AOC-4',purpose:'Financial Statements',due:'Within 30 days of AGM',penalty:'Rs 100/day'},
+{form:'MGT-7',purpose:'Annual Return',due:'Within 60 days of AGM',penalty:'Rs 100/day'},
+{form:'DIR-3 KYC',purpose:'Director KYC',due:'30 September',penalty:'Rs 5,000 flat'},
+{form:'DPT-3',purpose:'Deposits Return',due:'30 June',penalty:'Rs 5,000 + Rs 500/day'},
+{form:'CSR-1',purpose:'CSR Registration (if applicable)',due:'Before undertaking CSR activity',penalty:'Rs 50,000 to Rs 5,00,000'},
+{form:'CSR-2',purpose:'Annual CSR Report',due:'31 March following FY',penalty:'Rs 50,000 to Rs 5,00,000'},
+{form:'10A/10AB',purpose:'Trust registration renewal (80G/12A/12AB)',due:'As per ITAT order',penalty:'Loss of exemption'}
+],
+llp:[
+{form:'Form 11',purpose:'Annual Return of LLP',due:'30 May every year',penalty:'Rs 100/day — no cap'},
+{form:'Form 8',purpose:'Statement of Account and Solvency',due:'30 October every year',penalty:'Rs 100/day — no cap'},
+{form:'DIR-3 KYC',purpose:'KYC of Designated Partners',due:'30 September',penalty:'Rs 5,000 flat'},
+{form:'MSME-1',purpose:'MSME outstanding payments',due:'30 Apr / 31 Oct',penalty:'Rs 25,000 to Rs 3,00,000'},
+{form:'Form 3',purpose:'LLP Agreement (one-time)',due:'Within 30 days of incorporation',penalty:'Rs 100/day'},
+{form:'Form 4',purpose:'Change in partners / designated partners',due:'Within 30 days of change',penalty:'Rs 500/day'},
+{form:'Form 5',purpose:'Change in name',due:'Within 30 days of change',penalty:'Rs 500/day'}
+]
+};
+function showROCEntity(entity){
+var cards={pvt:'rocCardPvt',pub:'rocCardPub',opc:'rocCardOPC',sec8:'rocCardSec8',llp:'rocCardLLP'};
+Object.keys(cards).forEach(function(k){document.getElementById(cards[k]).style.borderColor=k===entity?'var(--accent)':'transparent';});
+var data=rocData[entity]||[];
+var names={pvt:'Private Limited Company',pub:'Public Limited Company',opc:'One Person Company (OPC)',sec8:'Section 8 Company',llp:'LLP (Limited Liability Partnership)'};
+var html='<h3 style="color:var(--primary-mid);margin-bottom:10px;">Annual Compliance — '+names[entity]+'</h3>';
+html+='<table class="limits-table"><thead><tr><th>Form</th><th>Purpose</th><th>Due Date</th><th>Penalty for Default</th></tr></thead><tbody>';
+data.forEach(function(d){html+='<tr><td><strong>'+d.form+'</strong></td><td>'+d.purpose+'</td><td>'+d.due+'</td><td style="font-size:0.82rem;color:#d63031;">'+d.penalty+'</td></tr>';});
+html+='</tbody></table>';
+document.getElementById('rocTableArea').innerHTML=html;
+}
+showROCEntity('pvt');
+
+function calcROCPenalty(){
+var formVal=document.getElementById('rocForm').value;
+var dueStr=document.getElementById('rocDueDate').value;
+var fileStr=document.getElementById('rocFilingDate').value;
+var r=document.getElementById('rocPenResult');
+if(!dueStr||!fileStr){r.className='result-box applicable';r.innerHTML='<div class="result-title">Please enter both dates.</div>';return;}
+var due=new Date(dueStr);var file=new Date(fileStr);
+var diffDays=Math.ceil((file-due)/(1000*60*60*24));
+if(diffDays<=0){r.className='result-box not-applicable';r.innerHTML='<div class="result-title" style="color:#00b894;">No Penalty</div><div class="result-detail">Filed on or before due date. No late filing penalty.</div>';return;}
+var penalty=0;var note='';
+if(formVal==='5000'){penalty=5000;note='DIR-3 KYC: Flat fee of Rs 5,000 if filed after 30 September. DIN deactivated until KYC is completed.';}
+else if(formVal==='300'){penalty=Math.min(diffDays*300,12000);note='ADT-1: Rs 300/day, maximum Rs 12,000.';}
+else if(formVal==='500'){penalty=5000+(diffDays*500);note='DPT-3: Rs 5,000 first default + Rs 500/day continuing default.';}
+else{var rate=parseInt(formVal)||100;penalty=diffDays*rate;note='Rate: Rs '+rate+'/day. No maximum cap — penalty compounds indefinitely.';}
+r.className='result-box presumptive';
+r.innerHTML='<div class="result-title">Late Filing Penalty Estimate</div><div class="result-detail"><table class="limits-table"><tr><td>Days of default</td><td>'+diffDays+' days</td></tr><tr><td>Estimated penalty</td><td style="color:#d63031;font-weight:700;">Rs '+fmt(penalty)+'</td></tr><tr><td>Note</td><td style="font-size:0.85rem;">'+note+'</td></tr><tr><td colspan="2" style="font-size:0.82rem;color:#666;">Actual fee on MCA portal may vary — always verify on mca.gov.in before filing.</td></tr></table></div>';
+}
+function resetROCPenalty(){document.getElementById('rocDueDate').value='';document.getElementById('rocFilingDate').value='';document.getElementById('rocPenResult').className='result-box';document.getElementById('rocPenResult').innerHTML='';}
 
 // Auto-add Last Updated footer to all tabs
 document.querySelectorAll('.tab-content').forEach(function(tab){
