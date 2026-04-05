@@ -176,6 +176,7 @@
             .search-box input { width:100% !important; box-sizing:border-box; }
             #mappingSearch, #penaltySearch, #gstSearch, #clauseSearch, #rule37bbSearch { width:100% !important; box-sizing:border-box; }
             [id$="Result"], [id$="result"] { width:100% !important; max-width:100% !important; box-sizing:border-box; overflow-x:auto; }
+            .checker-form { width:100% !important; box-sizing:border-box; }
             /* Section headings in scheme sections */
             .scheme-section h3 { font-size:1rem; padding:10px 0; border-bottom:2px solid var(--accent); margin-bottom:14px; }
             .eligibility-note, .info-box { font-size:0.85rem; padding:10px 12px; }
@@ -1834,7 +1835,7 @@
     <div class="card">
         <h2>Presumptive Tax Calculator — Section 44AD / 44ADA / 44AE</h2>
         <p style="color:var(--text-light);font-size:0.78rem;margin-bottom:14px;">As per Sections 44AD, 44ADA, 44AE of IT Act 1961 (Equivalent: Section 58, IT Act 2025). Finance Act 2023 (44AD digital limit raised to Rs 3 Cr; 44ADA limit raised to Rs 75 Lakh). Source: incometaxindia.gov.in | Finance Act 2021, 2023 | IT Act 2025 — Section 58.</p>
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:18px;">
+        <div class="scheme-cards" style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:18px;">
             <div onclick="showPresScheme('ad')" id="presCard44AD" style="cursor:pointer;background:linear-gradient(135deg,#0f2027,#2c5364);color:white;border-radius:12px;padding:18px 14px;text-align:center;transition:transform 0.2s;border:3px solid var(--accent);" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
                 <div style="font-size:1.4rem;font-weight:800;">44AD</div><div style="font-size:0.82rem;opacity:0.9;margin-top:4px;">Business (8% / 6%)</div></div>
             <div onclick="showPresScheme('ada')" id="presCard44ADA" style="cursor:pointer;background:linear-gradient(135deg,#6c5ce7,#a29bfe);color:white;border-radius:12px;padding:18px 14px;text-align:center;transition:transform 0.2s;border:3px solid transparent;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
@@ -2145,7 +2146,7 @@
     <div class="card">
         <h2>ROC / MCA Compliance Tracker — Companies Act 2013 & LLP Act 2008</h2>
         <p style="color:var(--text-light);font-size:0.78rem;margin-bottom:14px;">As per Companies Act 2013 | LLP Act 2008 | Companies (Accounts) Rules, 2014 | Companies (Management & Administration) Rules, 2014 | MCA General Circular No. 09/2023. Source: mca.gov.in.</p>
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:18px;">
+        <div class="scheme-cards" style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px;">
             <div onclick="showROCEntity('pvt')" id="rocCardPvt" style="cursor:pointer;background:linear-gradient(135deg,#0f2027,#2c5364);color:white;border-radius:12px;padding:14px 10px;text-align:center;transition:transform 0.2s;border:3px solid var(--accent);font-size:0.82rem;font-weight:700;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">Private Ltd</div>
             <div onclick="showROCEntity('pub')" id="rocCardPub" style="cursor:pointer;background:linear-gradient(135deg,#6c5ce7,#a29bfe);color:white;border-radius:12px;padding:14px 10px;text-align:center;transition:transform 0.2s;border:3px solid transparent;font-size:0.82rem;font-weight:700;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">Public Ltd</div>
             <div onclick="showROCEntity('opc')" id="rocCardOPC" style="cursor:pointer;background:linear-gradient(135deg,#00b894,#55efc4);color:#0f2027;border-radius:12px;padding:14px 10px;text-align:center;transition:transform 0.2s;border:3px solid transparent;font-size:0.82rem;font-weight:700;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">OPC</div>
