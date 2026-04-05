@@ -311,7 +311,7 @@
                 <tr><td><strong>Salary</strong></td><td>192</td><td>Slab</td><td>Exempt limit</td><td>393(1) Sl.4</td><td>Slab</td><td>Exempt limit</td></tr>
                 <tr><td><strong>Interest on Securities</strong></td><td>193</td><td>10%</td><td>Nil</td><td>393(1) Sl.5(i)</td><td>10%</td><td>Nil</td></tr>
                 <tr><td><strong>Dividend</strong></td><td>194</td><td>10%</td><td>5,000</td><td>393(1) Sl.5(ii)</td><td>10%</td><td>5,000</td></tr>
-                <tr><td><strong>Interest (Non-Securities)</strong></td><td>194A</td><td>10%</td><td>10K-50K*</td><td>393(1) Sl.5(iii)</td><td>10%</td><td>10,000</td></tr>
+                <tr><td><strong>Interest (Non-Securities)</strong></td><td>194A</td><td>10%</td><td>50K (Bank/PO/Coop), 1L (Sr.Cit), 5K (Others)</td><td>393(1) Sl.5(iii)</td><td>10%</td><td>50K (Bank/PO/Coop), 1L (Sr.Cit), 5K (Others)</td></tr>
                 <tr><td><strong>Lottery / Crossword</strong></td><td>194B</td><td>30%</td><td>10,000</td><td>393(1) Sl.5(iv)</td><td>30%</td><td>10,000</td></tr>
                 <tr><td><strong>Insurance Commission</strong></td><td>194D</td><td>5%</td><td>15,000</td><td>393(1) Sl.1(i)</td><td>2%</td><td>20,000</td></tr>
                 <tr><td><strong>Commission / Brokerage</strong></td><td>194H</td><td>5%</td><td>15,000</td><td>393(1) Sl.1(ii)</td><td>2%</td><td>20,000</td></tr>
@@ -334,7 +334,7 @@
             </tbody>
         </table>
         </div>
-        <p style="font-size:0.8rem;color:var(--text-light);margin-top:8px;">* Old Act interest threshold varied: 10K general, 40K banks, 50K senior citizens</p>
+        <p style="font-size:0.8rem;color:var(--text-light);margin-top:8px;">194A thresholds (as amended by Finance Act 2025 w.e.f. 01.04.2025): Banks/Post Office/Co-op Society — Rs 50,000 (general), Rs 1,00,000 (senior citizens); Others — Rs 5,000.</p>
     </div>
     <div class="card">
         <h2>TCS Rates — Old Act 1961 vs New Act 2025</h2>
@@ -352,7 +352,7 @@
                 <tr><td><strong>Minerals</strong></td><td>206C</td><td>1%</td><td>Nil</td><td>394(1) Sl.5</td><td>2%</td><td>Nil</td></tr>
                 <tr><td><strong>Motor Vehicle >10L</strong></td><td>206C(1F)</td><td>1%</td><td>10 Lakhs</td><td>394(1) Sl.6</td><td>1%</td><td>10 Lakhs</td></tr>
                 <tr><td><strong>Overseas Remittance (LRS)</strong></td><td>206C(1G)</td><td>5%/20%</td><td>7L slab</td><td>394(1) Sl.7</td><td>5%/20%</td><td>10L</td></tr>
-                <tr><td><strong>Overseas Tour Package</strong></td><td>206C(1G)</td><td>5%/20%</td><td>7L slab</td><td>394(1) Sl.8</td><td>2%</td><td>Nil</td></tr>
+                <tr><td><strong>Overseas Tour Package</strong></td><td>206C(1G)</td><td>5%/20%</td><td>7L slab</td><td>394(1) Sl.8</td><td>5%</td><td>Nil</td></tr>
                 <tr><td><strong>Parking/Toll/Mine/Quarry</strong></td><td>206C(1C)</td><td>2%</td><td>Nil</td><td>394(1) Sl.9</td><td>2%</td><td>Nil</td></tr>
             </tbody>
         </table>
@@ -438,6 +438,19 @@
                 <tr><td>Above 24,00,000</td><td>30%</td></tr></table>
             </div>
         </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;">
+            <div><h3 style="color:#b5651d;">Old Regime — Senior Citizen (60-80)</h3>
+                <table class="limits-table"><tr><th>Slab</th><th>Rate</th></tr>
+                <tr><td>Up to 3,00,000</td><td>Nil</td></tr><tr><td>3,00,001 - 5,00,000</td><td>5%</td></tr>
+                <tr><td>5,00,001 - 10,00,000</td><td>20%</td></tr><tr><td>Above 10,00,000</td><td>30%</td></tr></table>
+            </div>
+            <div><h3 style="color:#b5651d;">Old Regime — Super Senior (80+)</h3>
+                <table class="limits-table"><tr><th>Slab</th><th>Rate</th></tr>
+                <tr><td>Up to 5,00,000</td><td>Nil</td></tr><tr><td>5,00,001 - 10,00,000</td><td>20%</td></tr>
+                <tr><td>Above 10,00,000</td><td>30%</td></tr></table>
+            </div>
+        </div>
+        <p style="font-size:0.8rem;color:var(--text-light);margin-top:8px;">Note: New Regime slabs are the same for all age groups. Senior/Super Senior exemption limits apply only to Old Regime.</p>
     </div>
 </div>
 
@@ -455,7 +468,7 @@
             <button class="filter-btn" onclick="filterGST('5%',this)">5%</button>
             <button class="filter-btn" onclick="filterGST('18%',this)">18%</button>
             <button class="filter-btn" onclick="filterGST('28%',this)">28%</button>
-            <button class="filter-btn" onclick="filterGST('40%',this)">40%</button>
+            <button class="filter-btn" onclick="filterGST('28%+Cess',this)">28%+Cess</button>
             <button class="filter-btn" style="background:#8e44ad;" onclick="filterGST('Non-GST',this)">Non-GST</button>
         </div>
         <div id="gstResults"></div>
@@ -464,16 +477,16 @@
         <h2>GST Rate Summary (Post GST 2.0 — w.e.f. 22.09.2025)</h2>
         <table class="limits-table">
             <tr><th>Rate</th><th>Category</th><th>Examples</th></tr>
-            <tr><td><strong>0%</strong></td><td>Essential / Exempt</td><td>Fresh milk, fruits, vegetables, bread, salt, eggs, meat, education, healthcare, individual health & life insurance</td></tr>
+            <tr><td><strong>0%</strong></td><td>Essential / Exempt</td><td>Fresh milk, fruits, vegetables, bread, salt, eggs, meat, education, healthcare, pure term life insurance, senior citizen health insurance, health insurance up to Rs 5L cover</td></tr>
             <tr><td><strong>Special</strong></td><td>Precious Metals / Real Estate</td><td>Gold/Silver jewelry (3%), Rough diamonds (0.25%), Cut diamonds (1.5%), Affordable housing (1%), Non-affordable housing (5%)</td></tr>
             <tr><td><strong>5%</strong></td><td>Basic Necessities</td><td>Sugar, tea, coal, LPG, branded food, soap, toothpaste, shampoo, fabric, footwear ≤₹2500, restaurant (no ITC), GTA, hotel ₹1001-7500</td></tr>
             <tr><td><strong>18%</strong></td><td>Standard Rate</td><td>Cement, AC, refrigerator, TV, washing machine, mobile, computers, steel, IT services, legal/CA fees, telecom, motor insurance, hotel >₹7500</td></tr>
-            <tr><td><strong>28%</strong></td><td>Tobacco / Cosmetics</td><td>Tobacco, cigarettes, pan masala, perfumes, luxury cosmetics/makeup</td></tr>
-            <tr><td><strong>40%</strong></td><td>Sin / Luxury</td><td>Aerated drinks, motorcycles >350cc, private yachts/aircraft, gambling/betting/casino</td></tr>
+            <tr><td><strong>28%</strong></td><td>Tobacco / Cosmetics / Luxury</td><td>Tobacco, cigarettes, pan masala, perfumes, luxury cosmetics, gambling, online gaming (28% on full face value)</td></tr>
+            <tr><td><strong>28%+Cess</strong></td><td>Compensation Cess items</td><td>Aerated drinks (28%+12% cess), motorcycles >350cc (28%+3% cess), private yachts/aircraft (28%+cess). Cess under GST (Compensation to States) Act 2017 — separate levy, not a GST slab</td></tr>
             <tr style="background:#f3e8ff;"><td><strong style="color:#8e44ad;">Non-GST</strong></td><td>Outside GST</td><td>Petrol (MS), Diesel (HSD), ATF, Natural Gas, Crude Oil, Liquor, Electricity — State VAT / Central Excise</td></tr>
         </table>
         <div class="disclaimer" style="margin-top:12px;">
-            <p style="font-size:0.82rem;"><strong>Note:</strong> 12% slab largely merged into 5%/18%. Old 28% items (cement, AC, TV, washing machine, refrigerator, cars ≤1200cc) moved to 18%. Soap, toothpaste, shampoo moved from 18% to 5%. Individual health & life insurance exempted. Always verify from <a href="https://cbic-gst.gov.in" target="_blank" style="color:var(--accent);">CBIC portal</a> for latest rates.</p>
+            <p style="font-size:0.82rem;"><strong>Note:</strong> 12% slab largely merged into 5%/18%. Old 28% items (cement, AC, TV, washing machine, refrigerator, cars ≤1200cc) moved to 18%. Soap, toothpaste, shampoo moved from 18% to 5%. There is no 40% GST rate slab — maximum standard GST rate is 28%. Certain goods attract 28% GST plus additional Compensation Cess under the GST (Compensation to States) Act, 2017 (e.g., 12% on aerated drinks, 3% on motorcycles above 350cc). Combined incidence may exceed 28% but this is cess, not a separate GST slab. Insurance: Only pure term life insurance, senior citizen health insurance, and health policies up to Rs 5L cover are exempt (post 56th GST Council, 22.09.2025). Endowment, ULIP, whole life, and health policies exceeding Rs 5L cover remain at 18%. Always verify from <a href="https://cbic-gst.gov.in" target="_blank" style="color:var(--accent);">CBIC portal</a> for latest rates.</p>
         </div>
     </div>
 </div>
@@ -522,7 +535,8 @@
                         <option value="40">Building — Temporary (40%)</option>
                         <option value="10f">Furniture & Fittings (10%)</option>
                         <option value="15">Plant & Machinery — General (15%)</option>
-                        <option value="30">Motor Vehicles (30%)</option>
+                        <option value="15mv">Motor Vehicles (15%)</option>
+                        <option value="40ev">Electric Vehicles (40%)</option>
                         <option value="40c">Computers & Software (40%)</option>
                         <option value="25">Intangible Assets (25%)</option>
                         <option value="custom">Custom Rate</option>
@@ -556,7 +570,8 @@
             <tr><td>Building — Temporary</td><td>40%</td><td></td></tr>
             <tr><td>Furniture & Fittings</td><td>10%</td><td></td></tr>
             <tr><td>Plant & Machinery — General</td><td>15%</td><td></td></tr>
-            <tr><td>Motor Vehicles</td><td>15%/30%</td><td>30% post 01-04-2022</td></tr>
+            <tr><td>Motor Vehicles</td><td>15%</td><td>Enhanced 30% was only for vehicles purchased 23.08.2019 to 31.03.2020 (expired)</td></tr>
+            <tr><td>Electric Vehicles (business use)</td><td>40%</td><td>Appendix I-A, IT Rules</td></tr>
             <tr><td>Computers & Software</td><td>40%</td><td></td></tr>
             <tr><td>Intangible Assets</td><td>25%</td><td>Patents, trademarks, licences</td></tr>
             <tr><td>Energy Saving Devices</td><td>40%</td><td>As per Rule 5</td></tr>
@@ -581,7 +596,8 @@
                         <option value="6.33_16">Furniture & Fittings (6.33% / 16 yrs)</option>
                         <option value="4.75_21">Plant & Machinery — General (4.75% / 21 yrs)</option>
                         <option value="11.31_9">Motor Vehicles — General (11.31% / 9 yrs)</option>
-                        <option value="9.50_11">Motor Vehicles — Heavy (9.50% / 11 yrs)</option>
+                        <option value="15.83_6">Motor Buses/Lorries/Taxis-hire (15.83% / 6 yrs)</option>
+                        <option value="9.50_10">Motor Cycles/Scooters (9.50% / 10 yrs)</option>
                         <option value="16.21_6">Computers & Data Processing (16.21% / 6 yrs)</option>
                         <option value="31.67_3">Servers & Networks (31.67% / 3 yrs)</option>
                         <option value="11.31_9">Office Equipment (11.31% / 9 yrs)</option>
@@ -617,7 +633,8 @@
             <tr><td>Furniture & Fittings</td><td>10</td><td>9.50%</td></tr>
             <tr><td>Plant & Machinery — General</td><td>15</td><td>6.33%</td></tr>
             <tr><td>Motor Vehicles — General</td><td>8</td><td>11.88%</td></tr>
-            <tr><td>Motor Vehicles — Heavy</td><td>15</td><td>6.33%</td></tr>
+            <tr><td>Motor Buses/Lorries/Taxis (hire)</td><td>6</td><td>15.83%</td></tr>
+            <tr><td>Motor Cycles / Scooters</td><td>10</td><td>9.50%</td></tr>
             <tr><td>Computers & Data Processing</td><td>3</td><td>31.67%</td></tr>
             <tr><td>Servers & Networks</td><td>6</td><td>15.83%</td></tr>
             <tr><td>Office Equipment</td><td>5</td><td>19.00%</td></tr>
@@ -731,7 +748,7 @@
         <table class="limits-table">
             <tr><th>Section</th><th>Purpose</th><th>Time Limit</th></tr>
             <tr><td><strong>143(1)</strong></td><td>Intimation (CPC Processing)</td><td>Within 9 months from end of FY of filing</td></tr>
-            <tr><td><strong>143(2)</strong></td><td>Scrutiny Assessment Notice</td><td>Within 6 months from end of FY of filing (for returns filed within due date) / 12 months from end of FY in which return filed</td></tr>
+            <tr><td><strong>143(2)</strong></td><td>Scrutiny Assessment Notice</td><td>Within 3 months from end of FY in which return is filed. E.g., ITR filed 31.07.2025 (FY 2025-26) → last date for 143(2) notice is 30.06.2026</td></tr>
             <tr><td><strong>148 / 149(1)(a)</strong></td><td>Reassessment — Normal</td><td>Within 3 years from end of relevant AY</td></tr>
             <tr><td><strong>149(1)(b)</strong></td><td>Reassessment — High Value (>50L)</td><td>Within 10 years from end of relevant AY</td></tr>
             <tr><td><strong>154</strong></td><td>Rectification of Mistake</td><td>Within 4 years from date of order</td></tr>
@@ -791,7 +808,7 @@
             <tr><td><strong>3(iii)</strong></td><td>Loans/Advances/Investments</td><td>Loans to related parties, terms, overdue, renewed/extended</td></tr>
             <tr><td><strong>3(iv)</strong></td><td>Compliance — 185, 186</td><td>Loans/investments/guarantees compliance</td></tr>
             <tr><td><strong>3(v)</strong></td><td>Deposits — 73-76</td><td>Public deposits, NBFC compliance, RBI directions</td></tr>
-            <tr><td><strong>3(vi)</strong></td><td>Cost Records</td><td>Whether maintenance prescribed u/s 148 of Companies Act</td></tr>
+            <tr><td><strong>3(vi)</strong></td><td>Cost Records</td><td>Whether maintenance prescribed u/s 148 of Companies Act 2013 read with the Companies (Cost Records and Audit) Rules, 2014</td></tr>
             <tr><td><strong>3(vii)</strong></td><td>Statutory Dues</td><td>PF, ESI, IT, GST, Customs, Cess — regularity and arrears</td></tr>
             <tr><td><strong>3(viii)</strong></td><td>Unrecorded Income</td><td>Undisclosed transactions surrendered/not recorded in books</td></tr>
             <tr><td><strong>3(ix)</strong></td><td>Loan Repayment Default</td><td>Default to bank/FI/debenture holders/Govt</td></tr>
@@ -978,14 +995,15 @@
             <tr><th>Asset Type</th><th>Holding for LTCG</th><th>STCG Rate</th><th>LTCG Rate</th><th>Exemption</th></tr>
             <tr><td>Listed Equity Shares</td><td>&gt; 12 months</td><td>20%</td><td>12.5%</td><td>Rs 1.25 Lakh/year</td></tr>
             <tr><td>Equity Mutual Funds</td><td>&gt; 12 months</td><td>20%</td><td>12.5%</td><td>Rs 1.25 Lakh/year</td></tr>
-            <tr><td>Debt Mutual Funds</td><td>&gt; 24 months</td><td>Slab rate</td><td>12.5%</td><td>Nil</td></tr>
+            <tr><td>Debt Mutual Funds *</td><td>&gt; 24 months</td><td>Slab rate</td><td>12.5%</td><td>Nil</td></tr>
             <tr><td>Unlisted Shares</td><td>&gt; 24 months</td><td>Slab rate</td><td>12.5%</td><td>Nil</td></tr>
             <tr><td>Property / Land</td><td>&gt; 24 months</td><td>Slab rate</td><td>12.5%</td><td>54/54EC/54F available</td></tr>
             <tr><td>Gold / Jewellery</td><td>&gt; 24 months</td><td>Slab rate</td><td>12.5%</td><td>Nil</td></tr>
             <tr><td>Other Assets</td><td>&gt; 36 months</td><td>Slab rate</td><td>12.5%</td><td>Nil</td></tr>
         </table>
         <div class="disclaimer" style="margin-top:12px;">
-            <p style="font-size:0.82rem;"><strong>Key Changes (w.e.f. 23.07.2024):</strong> Uniform LTCG rate of 12.5% across all assets. STCG on listed equity/MF: 20% (was 15%). Indexation removed for all transfers on/after 23.07.2024. <strong>Exception:</strong> Property acquired before 23.07.2024 -- taxpayer can choose lower of (a) 12.5% without indexation or (b) 20% with indexation (grandfathered).</p>
+            <p style="font-size:0.82rem;"><strong>Key Changes (w.e.f. 23.07.2024):</strong> Uniform LTCG rate of 12.5% across all assets. STCG on listed equity/MF: 20% (was 15%). Indexation removed for all transfers on/after 23.07.2024. <strong>Exception:</strong> Property acquired before 23.07.2024 — taxpayer can choose lower of (a) 12.5% without indexation or (b) 20% with indexation (grandfathered).</p>
+            <p style="font-size:0.82rem;margin-top:6px;color:#d63031;"><strong>* Debt Mutual Funds — Important:</strong> For units purchased on or after 01.04.2023 (Finance Act 2023), ALL gains are taxed at slab rate regardless of holding period — no LTCG benefit whatsoever. The 12.5% LTCG rate applies only to units purchased before 01.04.2023 and held for more than 24 months.</p>
         </div>
     </div>
     <div class="card">
@@ -1048,7 +1066,7 @@
             <tr><td><strong>234A</strong></td><td>Late filing of return</td><td>1% p.m.</td><td>From due date to actual filing date</td><td>Sec 423</td></tr>
             <tr><td><strong>234B</strong></td><td>Short payment of advance tax</td><td>1% p.m.</td><td>From 1 Apr of AY to date of assessment</td><td>Sec 424</td></tr>
             <tr><td><strong>234C</strong></td><td>Deferment of advance tax installments</td><td>1% p.m.</td><td>3 months (Q1-Q3), 1 month (Q4)</td><td>Sec 425</td></tr>
-            <tr><td><strong>234F</strong></td><td>Late filing fee</td><td>Flat fee</td><td>Rs 5,000 (Rs 1,000 if income ≤ Rs 5L)</td><td>Equivalent provision</td></tr>
+            <tr><td><strong>234F</strong></td><td>Late filing fee</td><td>Flat fee</td><td>Rs 5,000 (Rs 1,000 if income ≤ Rs 5L). NIL if total income does not exceed the basic exemption limit (Rs 2.5L / Rs 3L / Rs 5L as applicable)</td><td>Equivalent provision</td></tr>
         </table>
         <div class="disclaimer" style="margin-top:10px;">
             <p style="font-size:0.82rem;"><strong>Advance Tax Installments:</strong> 15 Jun — 15% | 15 Sep — 45% | 15 Dec — 75% | 15 Mar — 100%. Not applicable if tax liability &lt; Rs 10,000 (after TDS). Senior citizens without business income are exempt from advance tax.</p>
@@ -1094,7 +1112,7 @@
             <tr><td>Terminology</td><td>Previous Year + Assessment Year</td><td><strong>Tax Year</strong> (unified)</td></tr>
             <tr><td>Tax Audit Form</td><td>Form 3CA/3CB + 3CD</td><td><strong>Form No. 26</strong> (consolidated)</td></tr>
             <tr><td>Tax Audit Section</td><td>Section 44AB</td><td><strong>Section 63</strong></td></tr>
-            <tr><td>Return Filing</td><td>Section 139</td><td><strong>Section 263</strong></td></tr>
+            <tr><td>Return Filing</td><td>Section 139</td><td><strong>Section 263</strong> <span style="color:#d63031;font-size:0.75rem;">(⚠ Not to be confused with Sec 263 of IT Act 1961 which is Revision by PCIT — mapped to Sec 367 of new Act)</span></td></tr>
             <tr><td>TDS Sections</td><td>194, 194A-194T, 195</td><td>Renumbered (Sec 393-421)</td></tr>
             <tr><td>Advance Tax</td><td>Section 208-211</td><td>Sec 343-346</td></tr>
             <tr><td>Interest 234A/B/C</td><td>Section 234A, 234B, 234C</td><td><strong>Sec 423, 424, 425</strong></td></tr>
@@ -1210,8 +1228,11 @@
     <div class="card">
         <h2>📅 Compliance Calendar — Tax Year 2026-27 (IT Act 2025)</h2>
         <p class="source-ref" style="color:var(--text-light);font-size:0.78rem;margin-bottom:10px;">Source: <strong>Income Tax Act, 2025</strong> (effective 01.04.2026) — Sec 63, 160, 263, 393, Rule 47 | Companies Act 2013 | CGST Act | <a href="https://incometaxindia.gov.in" target="_blank" style="color:var(--accent);">incometaxindia.gov.in</a>, <a href="https://cbic-gst.gov.in" target="_blank" style="color:var(--accent);">cbic-gst.gov.in</a>, <a href="https://mca.gov.in" target="_blank" style="color:var(--accent);">mca.gov.in</a></p>
+        <div style="background:#fef9e7;border:1px solid #f39c12;border-radius:8px;padding:12px 16px;margin-bottom:10px;font-size:0.84rem;">
+            <strong>⚠ Two Acts Apply:</strong> Due dates for <strong>FY 2025-26 filing and audit</strong> (July–November 2026) are governed by the <strong>IT Act 1961</strong> (Sec 139, 44AB, 92E, Form 3CD, Form 24Q/26Q/27Q, Form 16/16A). <strong>Advance tax and TDS/TCS obligations for Tax Year 2026-27</strong> (from April 2026 onwards) are governed by the <strong>IT Act 2025</strong> (Sec 160, 393, 397).
+        </div>
         <div style="background:#eaf2f8;border:1px solid #aed6f1;border-radius:8px;padding:12px 16px;margin-bottom:14px;font-size:0.84rem;">
-            <strong>Key Changes under IT Act 2025:</strong> "Previous Year" & "Assessment Year" → <strong>"Tax Year"</strong> | Form 3CD → <strong>Form No. 26</strong> (Sec 63, Rule 47) | Sec 44AB → <strong>Sec 63</strong> | Sec 139 → <strong>Sec 263</strong> | Sec 234A/B/C → <strong>Sec 434-436</strong> | Default regime: <strong>115BAC (New Regime)</strong>
+            <strong>Key Changes under IT Act 2025:</strong> "Previous Year" & "Assessment Year" → <strong>"Tax Year"</strong> | Form 3CD → <strong>Form No. 26</strong> (Sec 63, Rule 47) | Sec 44AB → <strong>Sec 63</strong> | Sec 139 → <strong>Sec 263</strong> (not to be confused with old Sec 263 — Revision by PCIT) | Sec 234A/B/C → <strong>Sec 423-425</strong> | Default regime: <strong>115BAC (New Regime)</strong>
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
             <button class="filter-btn active" onclick="filterDueDates('all',this)">All</button>
@@ -1245,18 +1266,36 @@
 <!-- ==================== DISCLAIMER ==================== -->
 <div id="tab-disclaimer" class="tab-content">
     <div class="card">
-        <h2>Disclaimer</h2>
-        <div class="disclaimer">
-            <p><strong>Important:</strong> Ready Reckoner is for informational and educational purposes only. It assists Chartered Accountants and tax professionals as a quick reference guide.</p><br>
-            <p>Information is based on the Income Tax Act, 1961, Income Tax Bill 2025, Companies Act 2013, and applicable amendments. Users should:</p>
-            <ul style="margin:10px 0 10px 20px;">
-                <li>Refer to original provisions of the Act and Rules</li>
-                <li>Consult latest CBDT circulars and notifications</li>
-                <li>Refer to ICAI Guidance Notes</li>
-                <li>Exercise professional judgment</li>
-                <li>Verify all information independently</li>
-            </ul><br>
-            <p><strong>Always consult a qualified professional for specific tax matters.</strong></p>
+        <h2>Disclaimer — Ready Reckoner CA Toolkit</h2>
+        <p style="color:var(--text-light);font-size:0.78rem;margin-bottom:14px;">readyreckonercadeepakpatni.netlify.app | Last Updated: April 2026</p>
+        <div class="disclaimer" style="font-size:0.85rem;line-height:1.7;">
+            <p><strong>1. Nature and Purpose</strong><br>This website is developed and maintained by CA Deepak Patni solely as a quick reference and educational toolkit for Chartered Accountants, tax professionals, and finance practitioners. It is intended as a supplementary guide only and does not constitute legal advice, tax advice, professional opinion, or formal guidance under any statute or professional regulation.</p>
+
+            <p style="margin-top:12px;"><strong>2. No Warranty of Accuracy or Completeness</strong><br>While every reasonable effort has been made to ensure accuracy, the information may contain errors, omissions, or inaccuracies — whether factual, typographical, or computational. Tax laws, GST rates, TDS/TCS rates, MSME limits, depreciation rates, compliance due dates, and all other regulatory data are subject to frequent changes through Finance Acts, CBDT notifications, CBIC circulars, MCA notifications, and judicial pronouncements. Information on this website may not reflect the most current legal position at the time of use. No representation or warranty, express or implied, is made as to the accuracy, reliability, completeness, or timeliness of any information herein.</p>
+
+            <p style="margin-top:12px;"><strong>3. Not a Substitute for Professional Judgment</strong><br>This website is a guide only and must NOT be used as a substitute for — direct reference to original statutes and rules; CBDT circulars and notifications; ICAI Guidance Notes, Standards on Auditing, and Accounting Standards; GST Council decisions and CBIC notifications; or independent professional advice. Users must exercise their own independent professional judgment before relying on or acting upon any information from this website.</p>
+
+            <p style="margin-top:12px;"><strong>4. No Liability for Loss or Damage</strong><br>CA Deepak Patni expressly disclaims all liability for any loss, damage, penalty, interest, or adverse consequence — whether direct, indirect, incidental, or consequential — arising from: reliance on any information, rate, limit, due date, or calculation on this website; any error or omission in any tab, table, or calculator; any delay in updating the website after a change in law; any technical error in calculators producing incorrect results; or any action taken or not taken based on content of this website. Use of this website is entirely at the user's own risk.</p>
+
+            <p style="margin-top:12px;"><strong>5. IT Act 2025 — Law in Transition</strong><br>This website contains information on both the IT Act 1961 (applicable up to Tax Year 2025-26) and the IT Act 2025 (operative from 01.04.2026). Several forms, rules, and procedures under the IT Act 2025 are yet to be formally notified by CBDT. Section mapping and comparative information relating to the IT Act 2025 is based on the best understanding available and should be independently verified from the official Act text. All IT Act 2025 content should be treated as indicative until confirmed by official CBDT notifications.</p>
+
+            <p style="margin-top:12px;"><strong>6. GST Information</strong><br>GST rates, HSN classifications, and exemptions reflect the position as understood after the 56th GST Council Meeting (22.09.2025). These are subject to change by CBIC notifications at any time. Always verify current rates from <a href="https://cbic-gst.gov.in" target="_blank" style="color:var(--accent);">cbic-gst.gov.in</a> before relying on any GST information from this website.</p>
+
+            <p style="margin-top:12px;"><strong>7. Compliance Dates and Deadlines</strong><br>Due dates in the Compliance Calendar are based on statutory provisions as currently understood and may be extended or modified by CBDT, CBIC, MCA, or other authorities through notifications at any time. No liability is accepted for any late filing fees, penalties, or interest arising from missed deadlines based on dates shown on this website. Always verify current due dates from official portals before acting on any deadline shown here.</p>
+
+            <p style="margin-top:12px;"><strong>8. Calculators — Limitations</strong><br>The Income Tax Calculator, Capital Gains Calculator, Depreciation Calculator, and Interest 234A/B/C Calculator are tools for approximate reference only. They may not account for every special provision, surcharge variation, marginal relief, alternative tax regime option, or specific circumstance applicable to a particular assessee. Results produced by these calculators must be independently verified before filing returns or making tax payments.</p>
+
+            <p style="margin-top:12px;"><strong>9. No Client-Practitioner Relationship</strong><br>Use of this website does not create any client-practitioner relationship between the user and CA Deepak Patni. No representation is made that information on this website is suitable for the specific circumstances of any particular taxpayer or entity.</p>
+
+            <p style="margin-top:12px;"><strong>10. External Links</strong><br>This website links to external official sources including incometaxindia.gov.in, cbic-gst.gov.in, mca.gov.in, udyamregistration.gov.in, icai.org, and egazette.gov.in. CA Deepak Patni has no control over the content, accuracy, or availability of these external websites. External links are for convenience only.</p>
+
+            <p style="margin-top:12px;"><strong>11. Intellectual Property</strong><br>The content, structure, and code of this website are the intellectual property of CA Deepak Patni. Reproduction or commercial use without prior written permission is prohibited.</p>
+
+            <p style="margin-top:12px;"><strong>12. Updates</strong><br>This website is updated on a best-effort basis. There is no commitment to update immediately upon every change in law or notification. The update date mentioned on each section indicates the position as of that date only.</p>
+
+            <p style="margin-top:12px;"><strong>13. Governing Law and Jurisdiction</strong><br>This disclaimer and all matters relating to this website are governed by the laws of India. Any dispute shall be subject to the jurisdiction of the courts at Guwahati, Assam, India.</p>
+
+            <p style="margin-top:16px;padding:12px;background:#fef9e7;border-radius:8px;border-left:4px solid #f39c12;"><strong>By using this website, you acknowledge that you have read, understood, and agreed to this disclaimer in full.</strong></p>
         </div>
     </div>
 </div>
@@ -1383,7 +1422,7 @@ function resetIT(){['itGross','itDeductions'].forEach(function(id){document.getE
 var gstItems=[
 // === EXEMPT (0%) — Notf 02/2017-CT(Rate) as amended by 10/2025-CT(Rate) ===
 {item:"Fresh Milk",hsn:"0401",rate:"0%",cat:"Exempt"},{item:"Curd / Lassi / Buttermilk (unbranded)",hsn:"0403",rate:"0%",cat:"Exempt"},{item:"Fresh Fruits",hsn:"0803-0810",rate:"0%",cat:"Exempt"},{item:"Fresh Vegetables",hsn:"0701-0714",rate:"0%",cat:"Exempt"},{item:"Bread (unbranded)",hsn:"1905",rate:"0%",cat:"Exempt"},{item:"Salt",hsn:"2501",rate:"0%",cat:"Exempt"},{item:"Rice (unbranded loose)",hsn:"1006",rate:"0%",cat:"Exempt"},{item:"Wheat / Meslin (unbranded loose)",hsn:"1001",rate:"0%",cat:"Exempt"},{item:"Pulses / Dal (unbranded loose)",hsn:"0713",rate:"0%",cat:"Exempt"},{item:"Cereals (unbranded)",hsn:"1001-1008",rate:"0%",cat:"Exempt"},{item:"Jaggery / Gur",hsn:"1701",rate:"0%",cat:"Exempt"},{item:"Fresh Meat / Fish",hsn:"0201-0307",rate:"0%",cat:"Exempt"},{item:"Eggs",hsn:"0407",rate:"0%",cat:"Exempt"},{item:"Honey (natural)",hsn:"0409",rate:"0%",cat:"Exempt"},{item:"Live Animals",hsn:"0101-0106",rate:"0%",cat:"Exempt"},{item:"Bangles (non-precious)",hsn:"7117",rate:"0%",cat:"Exempt"},{item:"Kumkum / Bindi / Sindoor",hsn:"3304",rate:"0%",cat:"Exempt"},{item:"Stamp Papers / Court Stamps",hsn:"4907",rate:"0%",cat:"Exempt"},{item:"Education Services",hsn:"9992",rate:"0%",cat:"Exempt"},{item:"Healthcare Services",hsn:"9993",rate:"0%",cat:"Exempt"},{item:"Agricultural Services",hsn:"9986",rate:"0%",cat:"Exempt"},{item:"Public Transport (non-AC bus)",hsn:"9964",rate:"0%",cat:"Exempt"},{item:"Blood / Blood Products",hsn:"3002",rate:"0%",cat:"Exempt"},{item:"Contraceptives",hsn:"4014",rate:"0%",cat:"Exempt"},{item:"Sanitary Napkins",hsn:"9619",rate:"0%",cat:"Exempt"},
-{item:"Health Insurance — Individual (NEW Exempt)",hsn:"9971",rate:"0%",cat:"Exempt"},{item:"Life Insurance — Individual (NEW Exempt)",hsn:"9971",rate:"0%",cat:"Exempt"},{item:"Term Insurance — Individual (NEW Exempt)",hsn:"9971",rate:"0%",cat:"Exempt"},
+{item:"Term Life Insurance — Individual (Exempt post 56th Council)",hsn:"9971",rate:"0%",cat:"Exempt"},{item:"Health Insurance — Senior Citizens (Exempt post 56th Council)",hsn:"9971",rate:"0%",cat:"Exempt"},{item:"Health Insurance — up to Rs 5L cover (Exempt post 56th Council)",hsn:"9971",rate:"0%",cat:"Exempt"},
 // === SPECIAL RATES — Gold, Diamonds, Real Estate ===
 {item:"Gold / Silver Jewelry",hsn:"7113",rate:"3%",cat:"Special"},{item:"Gold Bars / Biscuits",hsn:"7108",rate:"3%",cat:"Special"},{item:"Silver Articles",hsn:"7114",rate:"3%",cat:"Special"},{item:"Rough Diamonds (uncut)",hsn:"7102",rate:"0.25%",cat:"Special"},{item:"Cut & Polished Diamonds",hsn:"7102",rate:"1.5%",cat:"Special"},{item:"Diamond Jewelry",hsn:"7113",rate:"3%",cat:"Special"},{item:"Affordable Housing (≤₹45L, ≤60/90 sqm)",hsn:"9954",rate:"1%",cat:"Special"},{item:"Non-affordable Housing (under construction)",hsn:"9954",rate:"5%",cat:"Special"},{item:"Commercial Property (under construction)",hsn:"9954",rate:"18%",cat:"Special"},
 // === 5% — Notf 01/2017-CT(Rate) Sch I as amended by 09/2025-CT(Rate) ===
@@ -1398,8 +1437,8 @@ var gstItems=[
 {item:"IT / Software Services",hsn:"9983",rate:"18%",cat:"18%"},{item:"Professional / Consulting",hsn:"9983",rate:"18%",cat:"18%"},{item:"Legal / Accounting Services",hsn:"9982",rate:"18%",cat:"18%"},{item:"Telecom Services",hsn:"9984",rate:"18%",cat:"18%"},{item:"Banking / Financial Services",hsn:"9971",rate:"18%",cat:"18%"},{item:"Motor Insurance (Non-Life)",hsn:"9971",rate:"18%",cat:"18%"},{item:"Group Health / Life Insurance",hsn:"9971",rate:"18%",cat:"18%"},{item:"Renting of Immovable Property",hsn:"9972",rate:"18%",cat:"18%"},{item:"Construction (Non-affordable)",hsn:"9954",rate:"18%",cat:"18%"},{item:"Works Contract (Private)",hsn:"9954",rate:"18%",cat:"18%"},{item:"Manpower Supply / Security",hsn:"9985",rate:"18%",cat:"18%"},{item:"Advertising Services",hsn:"9983",rate:"18%",cat:"18%"},{item:"Courier / Postal Services",hsn:"9968",rate:"18%",cat:"18%"},{item:"Hotel (> ₹7,500/night — with ITC)",hsn:"9963",rate:"18%",cat:"18%"},{item:"Restaurant in Hotel ≥₹7,500 (with ITC)",hsn:"9963",rate:"18%",cat:"18%"},{item:"Business Class Air",hsn:"9964",rate:"18%",cat:"18%"},{item:"Printing Services",hsn:"9989",rate:"18%",cat:"18%"},{item:"Works Contract (Govt)",hsn:"9954",rate:"18%",cat:"18%"},{item:"Gym / Fitness Services",hsn:"9996",rate:"18%",cat:"18%"},{item:"Event Management",hsn:"9985",rate:"18%",cat:"18%"},{item:"Photography / Videography",hsn:"9989",rate:"18%",cat:"18%"},{item:"Food Delivery Charges (platform fee)",hsn:"9965",rate:"18%",cat:"18%"},
 // === 28% — Tobacco & Luxury Cosmetics (retained) ===
 {item:"Tobacco / Cigarettes",hsn:"2402",rate:"28%",cat:"28%"},{item:"Pan Masala / Gutkha",hsn:"2106",rate:"28%",cat:"28%"},{item:"Perfumes / Deodorants",hsn:"3303",rate:"28%",cat:"28%"},{item:"Luxury Cosmetics / Makeup",hsn:"3304",rate:"28%",cat:"28%"},{item:"Sunscreen (premium)",hsn:"3304",rate:"28%",cat:"28%"},
-// === 40% — Sin / Ultra-Luxury (NEW slab from 09/2025-CT(Rate)) ===
-{item:"Aerated / Carbonated Drinks",hsn:"2202",rate:"40%",cat:"40%"},{item:"Motorcycles (> 350cc)",hsn:"8711",rate:"40%",cat:"40%"},{item:"Private Yachts",hsn:"8903",rate:"40%",cat:"40%"},{item:"Private Aircraft",hsn:"8802",rate:"40%",cat:"40%"},{item:"Gambling / Betting / Casino",hsn:"9996",rate:"40%",cat:"40%"},{item:"Online Gaming (full face value)",hsn:"9996",rate:"40%",cat:"40%"},
+// === 28% + Compensation Cess (GST Compensation to States Act 2017) ===
+{item:"Aerated / Carbonated Drinks (28% + 12% Cess)",hsn:"2202",rate:"28%+Cess",cat:"28%"},{item:"Motorcycles > 350cc (28% + 3% Cess)",hsn:"8711",rate:"28%+Cess",cat:"28%"},{item:"Private Yachts (28% + Cess)",hsn:"8903",rate:"28%+Cess",cat:"28%"},{item:"Private Aircraft (28% + Cess)",hsn:"8802",rate:"28%+Cess",cat:"28%"},{item:"Gambling / Betting / Casino (28%)",hsn:"9996",rate:"28%",cat:"28%"},{item:"Online Gaming (28% on full face value)",hsn:"9996",rate:"28%",cat:"28%"},
 // === NON-GST (Outside GST — State VAT / Central Excise) ===
 {item:"Petrol / Motor Spirit (MS)",hsn:"2710.1210",rate:"Non-GST",cat:"Non-GST"},{item:"High Speed Diesel (HSD)",hsn:"2710.1930",rate:"Non-GST",cat:"Non-GST"},{item:"Aviation Turbine Fuel (ATF)",hsn:"2710.1920",rate:"Non-GST",cat:"Non-GST"},{item:"Natural Gas",hsn:"2711.1100",rate:"Non-GST",cat:"Non-GST"},{item:"Crude Oil / Petroleum Crude",hsn:"2709",rate:"Non-GST",cat:"Non-GST"},{item:"Liquor for Human Consumption",hsn:"2208",rate:"Non-GST",cat:"Non-GST"},{item:"Electricity",hsn:"2716",rate:"Non-GST",cat:"Non-GST"}
 ];
@@ -1407,7 +1446,7 @@ var activeGSTFilter='all';
 function searchGST(){var q=document.getElementById('gstSearch').value.toLowerCase(),c=document.getElementById('gstResults');
 var f=gstItems;if(activeGSTFilter!=='all')f=f.filter(function(g){return g.cat===activeGSTFilter;});
 if(q)f=f.filter(function(g){return (g.item+g.hsn+g.rate+g.cat).toLowerCase().indexOf(q)>=0;});
-c.innerHTML=f.map(function(g){var color=g.rate==='0%'?'var(--success)':g.rate==='5%'?'#0a8c64':g.rate==='18%'?'#b5651d':g.rate==='28%'?'#d63031':g.rate==='40%'?'#6c5ce7':g.rate==='Non-GST'?'#8e44ad':'#e17055';
+c.innerHTML=f.map(function(g){var color=g.rate==='0%'?'var(--success)':g.rate==='5%'?'#0a8c64':g.rate==='18%'?'#b5651d':g.rate==='28%'?'#d63031':g.rate==='28%+Cess'?'#6c5ce7':g.rate==='Non-GST'?'#8e44ad':'#e17055';
 var note=g.rate==='Non-GST'?'<span style="color:#8e44ad;font-size:0.78rem;font-weight:600;"> — Outside GST | State VAT / Central Excise applicable</span>':'';
 var moved=g.item.indexOf('moved from')>=0?'<span style="color:#e17055;font-size:0.75rem;font-weight:600;"> ⚡ Rate Changed</span>':'';
 var newItem=g.item.indexOf('NEW')>=0?'<span style="color:var(--success);font-size:0.75rem;font-weight:600;"> ✦ New</span>':'';
@@ -1537,8 +1576,8 @@ var sectionMap=[
 {old:"44AA",new:"62",title:"Books of Account Maintenance",cat:"business",note:""},
 {old:"44AB",new:"63",title:"Tax Audit",cat:"business",note:"1Cr/10Cr biz, 75L/50L prof"},
 {old:"44AD",new:"58",title:"Presumptive — Business (8%/6%)",cat:"business",note:""},
-{old:"44ADA",new:"58",title:"Presumptive — Profession (50%)",cat:"business",note:"Merged with 44AD"},
-{old:"44AE",new:"58",title:"Presumptive — Goods Carriage",cat:"business",note:"Merged with 44AD"},
+{old:"44ADA",new:"58",title:"Presumptive — Profession (50%)",cat:"business",note:"Consolidated under Sec 58 — distinct sub-clause for profession (50%, up to Rs 75L)"},
+{old:"44AE",new:"58",title:"Presumptive — Goods Carriage",cat:"business",note:"Consolidated under Sec 58 — distinct sub-clause for goods carriage (per vehicle basis)"},
 {old:"44B",new:"61",title:"Shipping Business — NR",cat:"business",note:""},
 {old:"44BB",new:"61",title:"Oil Exploration — NR",cat:"business",note:"Merged"},
 {old:"44BBA",new:"61",title:"Aircraft Operations — NR",cat:"business",note:"Merged"},
@@ -2305,7 +2344,7 @@ changes.push({area:'Return Filing',old:'Sec 139 — ITR-1 to ITR-7',new_:'<stron
 changes.push({area:'Default Tax Regime',old:'Old Regime default; 115BAC opt-in for New Regime',new_:'<strong>New Regime is DEFAULT</strong>. Old regime available only on opt-in.',impact:'high',action:'If client benefits from old regime deductions, ensure Form 10-IE equivalent is filed to opt in.'});
 // Entity-specific
 if(audit){
-changes.push({area:'Tax Audit',old:'Form 3CA/3CB + 3CD (Sec 44AB)',new_:'<strong>Form No. 26</strong> under <strong>Sec 63</strong> (Rule 47, IT Rules 2026). Consolidated form with 53 clauses.',impact:'high',action:'Prepare for Form 26 structure — Yes/No trigger-based schedules, expanded IT systems audit, GST linkage reporting.'});
+changes.push({area:'Tax Audit',old:'Form 3CA/3CB + 3CD (Sec 44AB)',new_:'<strong>Form No. 26</strong> under <strong>Sec 63</strong> (Rule 47, IT Rules 2026). Consolidated form with 53 clauses. <span style="color:#d63031;">(Note: Form No. 26 is the anticipated consolidated tax audit form — actual CBDT notification prescribing the form is awaited as on April 2026.)</span>',impact:'high',action:'Prepare for Form 26 structure — Yes/No trigger-based schedules, expanded IT systems audit, GST linkage reporting.'});
 }
 if(capGain){
 changes.push({area:'Capital Gains',old:'Sec 45-55A, multiple rates, indexation available',new_:'<strong>Chapter VIII (Sec 67-91)</strong>. Uniform LTCG: 12.5%. STCG listed: 20%. No indexation (except grandfathered property).',impact:'high',action:'Review all LTCG computations. Indexation benefit no longer available for new acquisitions. Property bought before 23.07.2024 has grandfathering option.'});
@@ -2580,8 +2619,9 @@ mistakes=['Filing ITR-4 when turnover exceeds Rs 3 Cr (44AD) or Rs 75L (44ADA)',
 else if(entity==='individual'&&res==='resident'&&!hasBiz&&!hasCG&&!foreign&&!over50L&&!hp2&&!agri&&!crypto&&!partnership&&!lottery&&!fno&&!intraday&&!shareBiz){
 form='ITR-1 (Sahaj)';reason='Resident Individual with income from Salary, one House Property, and Other Sources only, with total income up to Rs 50L — eligible for ITR-1.';cls='not-applicable';
 if(hp1)reason+=' One house property income is allowed in ITR-1.';
+reason+=' ITR-1 CANNOT be filed if: (a) Director in any company, (b) holds unlisted equity shares at any time during the year, (c) TDS u/s 194N (cash withdrawal), (d) agricultural income >Rs 5,000, (e) more than one house property, (f) brought forward/carry forward losses under any head.';
 schedules=['Part B — TI (Total Income computation)','Schedule TDS (Form 26AS verification)','Schedule 80C/80D (if old regime)','Schedule IT (Advance/Self-Assessment Tax)'];
-mistakes=['Filing ITR-1 with agricultural income exceeding Rs 5,000','Not verifying Form 26AS / AIS before filing','Claiming HRA exemption without rent receipts','Filing ITR-1 when total income exceeds Rs 50 Lakh'];
+mistakes=['Filing ITR-1 when you are a Director in any company (use ITR-2)','Filing ITR-1 while holding unlisted equity shares (use ITR-2)','Filing ITR-1 with agricultural income exceeding Rs 5,000','Filing ITR-1 with TDS deducted u/s 194N on cash withdrawals','Filing ITR-1 when there are brought forward losses to be carried forward','Not verifying Form 26AS / AIS before filing','Claiming HRA exemption without rent receipts','Filing ITR-1 when total income exceeds Rs 50 Lakh'];
 }
 // ITR-2: Individual/HUF, no business, but has CG/foreign/multiple HP/>50L
 else if(!hasBiz){
