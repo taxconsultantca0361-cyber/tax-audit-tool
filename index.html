@@ -228,8 +228,6 @@
                 <div style="font-size:1.8rem;">⚖️</div><div style="font-weight:700;margin-top:6px;font-size:0.88rem;">Interest 234A/B/C</div><div style="font-size:0.72rem;opacity:0.7;margin-top:3px;">Auto Calculator</div></div>
             <div onclick="switchTab('impact')" style="cursor:pointer;background:linear-gradient(135deg,#fab1a0,#e17055);color:white;border-radius:12px;padding:22px 14px;transition:transform 0.2s;box-shadow:0 3px 10px rgba(0,0,0,0.12);" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
                 <div style="font-size:1.8rem;">🔄</div><div style="font-weight:700;margin-top:6px;font-size:0.88rem;">Impact Analyzer</div><div style="font-size:0.72rem;opacity:0.8;margin-top:3px;">Old Act → New Act 2025</div></div>
-            <div onclick="switchTab('itrform')" style="cursor:pointer;background:linear-gradient(135deg,#00b894,#00cec9);color:white;border-radius:12px;padding:22px 14px;transition:transform 0.2s;box-shadow:0 3px 10px rgba(0,0,0,0.12);" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
-                <div style="font-size:1.8rem;">📄</div><div style="font-weight:700;margin-top:6px;font-size:0.88rem;">ITR Applicability</div><div style="font-size:0.72rem;opacity:0.8;margin-top:3px;">Which ITR Form?</div></div>
             <div onclick="switchTab('itrform')" style="cursor:pointer;background:linear-gradient(135deg,#00b894,#2ecc71);color:white;border-radius:12px;padding:22px 14px;transition:transform 0.2s;box-shadow:0 3px 10px rgba(0,0,0,0.12);" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
                 <div style="font-size:1.8rem;">📄</div><div style="font-weight:700;margin-top:6px;font-size:0.88rem;">ITR Applicability</div><div style="font-size:0.72rem;opacity:0.8;margin-top:3px;">Form Finder AY 2026-27</div></div>
             <div onclick="switchTab('smartsearch')" style="cursor:pointer;background:linear-gradient(135deg,#0984e3,#74b9ff);color:white;border-radius:12px;padding:22px 14px;transition:transform 0.2s;box-shadow:0 3px 10px rgba(0,0,0,0.12);" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
@@ -1229,6 +1227,7 @@
 <div class="footer">
     <p><strong>Ready Reckoner</strong> — Complete CA Toolkit | For Educational Purposes Only</p>
     <p style="margin-top:4px;">Built with care for the CA community</p>
+    <p style="margin-top:8px;font-size:0.85rem;color:#fdcb6e;font-weight:600;">An initiative by CA Deepak Patni</p>
 </div>
 
 <script>
@@ -2710,6 +2709,12 @@ var dueDates=[
 {date:"2026-10-31",title:"Form 3CEB — TP Audit Report",cat:"audit",detail:"Transfer Pricing audit for international/specified domestic transactions. Sec 34-38, IT Act 2025."},
 {date:"2026-11-30",title:"Cost Audit Report — If Applicable",cat:"audit",detail:"Within 180 days from FY end. Companies (Cost Records and Audit) Rules, 2014."},
 {date:"2027-03-31",title:"Internal Audit Completion",cat:"audit",detail:"Complete internal audit for companies meeting criteria under Sec 138, Companies Act 2013 (turnover >200Cr or borrowings >100Cr or outstanding loans/deposits >25Cr)."},
+
+// === CMP-08 COMPOSITION DEALERS (Quarterly Challan-cum-Statement) ===
+{date:"2026-07-18",title:"CMP-08 — Q1 Apr-Jun 2026 (Composition)",cat:"gst",detail:"Quarterly challan-cum-statement for composition dealers. Self-assessed tax payment for Q1 (Apr-Jun 2026). Due by 18th of month following the quarter. Rule 62(1), CGST Rules. Tax: 1% traders/manufacturers, 5% restaurants, 6% services."},
+{date:"2026-10-18",title:"CMP-08 — Q2 Jul-Sep 2026 (Composition)",cat:"gst",detail:"Quarterly challan-cum-statement for composition dealers. Self-assessed tax payment for Q2 (Jul-Sep 2026). Due by 18th of month following the quarter. Rule 62(1), CGST Rules. Tax: 1% traders/manufacturers, 5% restaurants, 6% services."},
+{date:"2027-01-18",title:"CMP-08 — Q3 Oct-Dec 2026 (Composition)",cat:"gst",detail:"Quarterly challan-cum-statement for composition dealers. Self-assessed tax payment for Q3 (Oct-Dec 2026). Due by 18th of month following the quarter. Rule 62(1), CGST Rules. Tax: 1% traders/manufacturers, 5% restaurants, 6% services."},
+{date:"2027-04-18",title:"CMP-08 — Q4 Jan-Mar 2027 (Composition)",cat:"gst",detail:"Quarterly challan-cum-statement for composition dealers. Self-assessed tax payment for Q4 (Jan-Mar 2027). Due by 18th of month following the quarter. Rule 62(1), CGST Rules. Tax: 1% traders/manufacturers, 5% restaurants, 6% services."},
 
 // === GSTR-4 COMPOSITION DEALERS (Annual) ===
 {date:"2026-04-30",title:"GSTR-4 — Annual Return (Composition FY 2025-26)",cat:"gst",detail:"Annual return for composition dealers for FY 2025-26. Due by 30th April of following year. Sec 10, CGST Act. Tax: 1% traders, 5% restaurants, 6% manufacturers."},
