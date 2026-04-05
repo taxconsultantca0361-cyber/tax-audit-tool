@@ -2615,46 +2615,64 @@ var dueDates=[
 // Form 3CD → Form No. 26 (Sec 63, Rule 47)
 // ============================================================
 
-// === INCOME TAX (IT Act 2025 — Sec 160-162 Advance Tax) ===
-{date:"2026-04-07",title:"TDS/TCS Payment — March 2026",cat:"tds",detail:"Deposit TDS/TCS deducted in March 2026. Last month of previous FY. Sec 393/396, IT Act 2025."},
-{date:"2026-04-30",title:"TCS Return — Q4 (Jan-Mar 2026)",cat:"tds",detail:"Quarterly TCS return for Jan-Mar 2026. Form 27EQ."},
-{date:"2026-05-07",title:"TDS/TCS Payment — April",cat:"tds",detail:"Deposit TDS/TCS deducted/collected in April 2026. Due by 7th of next month. Sec 393, IT Act 2025."},
-{date:"2026-05-15",title:"TDS Certificate — Form 16A (Q4 Jan-Mar)",cat:"tds",detail:"Issue Form 16A for TDS deducted in Jan-Mar 2026. Within 15 days of TDS return due date."},
-{date:"2026-05-31",title:"TDS Return — Q4 (Jan-Mar 2026)",cat:"tds",detail:"File 24Q, 26Q, 27Q for Q4 of previous FY. Sec 393(3), Rule 47."},
-{date:"2026-06-07",title:"TDS/TCS Payment — May",cat:"tds",detail:"Deposit TDS/TCS deducted in May 2026."},
-{date:"2026-06-15",title:"Advance Tax — 1st Instalment (15%)",cat:"it",detail:"Min 15% of estimated tax liability for Tax Year 2026-27. Sec 160(1)(a), IT Act 2025. Not applicable for Sec 58 (presumptive) — they pay 100% by 15 Mar."},
-{date:"2026-06-15",title:"Form 16 — Salary TDS Certificate",cat:"tds",detail:"Issue Form 16 (salary TDS certificate) to employees for Tax Year 2025-26. Sec 393, IT Act 2025."},
-{date:"2026-07-07",title:"TDS/TCS Payment — June",cat:"tds",detail:"Deposit TDS/TCS deducted in June 2026."},
-{date:"2026-07-15",title:"TDS Certificate — Form 16A (Q1 Apr-Jun)",cat:"tds",detail:"Issue Form 16A for TDS deducted in Apr-Jun 2026."},
-{date:"2026-07-31",title:"ITR Filing — Non-Audit Cases",cat:"it",detail:"Due date for filing return of income for FY 2025-26 (AY 2026-27) — individuals, HUFs, firms NOT requiring audit. Sec 139(1), IT Act 1961."},
-{date:"2026-07-31",title:"TDS Return — Q1 (Apr-Jun)",cat:"tds",detail:"File 24Q, 26Q, 27Q for Q1 (Apr-Jun 2026). Sec 393(3)."},
-{date:"2026-07-31",title:"TCS Return — Q1 (Apr-Jun)",cat:"tds",detail:"Quarterly TCS return. Form 27EQ for Q1."},
-{date:"2026-08-07",title:"TDS/TCS Payment — July",cat:"tds",detail:"Deposit TDS/TCS deducted in July 2026."},
-{date:"2026-09-07",title:"TDS/TCS Payment — August",cat:"tds",detail:"Deposit TDS/TCS deducted in August 2026."},
-{date:"2026-09-15",title:"Advance Tax — 2nd Instalment (45%)",cat:"it",detail:"Cumulative 45% of estimated tax for Tax Year 2026-27. Sec 160(1)(b), IT Act 2025."},
-{date:"2026-09-30",title:"Tax Audit Report — Form 3CD",cat:"audit",detail:"Due date for filing tax audit report under Sec 44AB, IT Act 1961. Report in Form 3CD. Applicable if business turnover >Rs 1 Cr (Rs 10 Cr if cash receipts/payments ≤5%) or profession receipts >Rs 75 Lakh."},
-{date:"2026-09-30",title:"Company Statutory Audit Report",cat:"audit",detail:"Statutory audit of companies must be completed before AGM. Sec 139, Companies Act 2013."},
-{date:"2026-10-07",title:"TDS/TCS Payment — September",cat:"tds",detail:"Deposit TDS/TCS deducted in September 2026."},
-{date:"2026-10-15",title:"TDS Certificate — Form 16A (Q2 Jul-Sep)",cat:"tds",detail:"Issue Form 16A for TDS deducted in Jul-Sep 2026."},
-{date:"2026-10-31",title:"ITR Filing — Audit Cases",cat:"it",detail:"Due date for filing return of income for FY 2025-26 (AY 2026-27) — assessees requiring tax audit u/s 44AB. Sec 139(1), IT Act 1961."},
-{date:"2026-10-31",title:"TDS Return — Q2 (Jul-Sep)",cat:"tds",detail:"File 24Q, 26Q, 27Q for Q2 (Jul-Sep 2026)."},
-{date:"2026-10-31",title:"TCS Return — Q2 (Jul-Sep)",cat:"tds",detail:"Quarterly TCS return. Form 27EQ for Q2."},
-{date:"2026-11-07",title:"TDS/TCS Payment — October",cat:"tds",detail:"Deposit TDS/TCS deducted in October 2026."},
-{date:"2026-11-30",title:"ITR — Transfer Pricing Cases",cat:"it",detail:"Due date for assessees with international/specified domestic transactions requiring TP audit. Sec 139(1) read with Sec 92E, IT Act 1961."},
-{date:"2026-11-30",title:"TP Audit Report — Form 3CEB",cat:"audit",detail:"Transfer Pricing audit report. Due one month before ITR due date for TP assessees. Sec 92E, IT Act 1961."},
-{date:"2026-12-07",title:"TDS/TCS Payment — November",cat:"tds",detail:"Deposit TDS/TCS deducted in November 2026."},
-{date:"2026-12-15",title:"Advance Tax — 3rd Instalment (75%)",cat:"it",detail:"Cumulative 75% of estimated tax for Tax Year 2026-27. Sec 160(1)(c), IT Act 2025."},
+// ============================================================
+// FY 2025-26 (AY 2026-27) COMPLIANCE — IT Act 1961
+// Q4 Jan-Mar 2026, ITR, Tax Audit, TP Audit
+// ============================================================
+{date:"2026-04-07",title:"TDS/TCS Payment — March 2026",cat:"tds",detail:"Deposit TDS/TCS deducted in March 2026 (FY 2025-26). Due by 7th of next month. Sec 200/206C, IT Act 1961."},
+{date:"2026-04-30",title:"TCS Return — Q4 Jan-Mar 2026",cat:"tds",detail:"Quarterly TCS return for Q4 (Jan-Mar 2026) of FY 2025-26. Form 27EQ. Sec 206C, IT Act 1961."},
+{date:"2026-05-15",title:"TDS Certificate — Form 16A (Q4 Jan-Mar 2026)",cat:"tds",detail:"Issue Form 16A (non-salary TDS certificate) for Q4 Jan-Mar 2026 of FY 2025-26. Sec 203, IT Act 1961. Within 15 days of TDS return due date."},
+{date:"2026-05-31",title:"TDS Return — Q4 Jan-Mar 2026",cat:"tds",detail:"File quarterly TDS returns for Q4 of FY 2025-26 — Form 24Q (salary), 26Q (non-salary resident), 27Q (non-resident). Sec 200(3), IT Act 1961."},
+{date:"2026-06-15",title:"Form 16 — Salary TDS Certificate (FY 2025-26)",cat:"tds",detail:"Issue Form 16 (salary TDS certificate) to employees for FY 2025-26. Sec 203, IT Act 1961. Due by 15th June following the FY."},
+{date:"2026-07-31",title:"ITR Filing — Non-Audit Cases (FY 2025-26)",cat:"it",detail:"Due date for filing return of income for FY 2025-26 (AY 2026-27) — individuals, HUFs, firms NOT requiring audit. Sec 139(1), IT Act 1961."},
+{date:"2026-09-30",title:"Tax Audit Report — Form 3CD (FY 2025-26)",cat:"audit",detail:"Due date for filing tax audit report for FY 2025-26 under Sec 44AB, IT Act 1961. Report in Form 3CD. Applicable if business turnover >Rs 1 Cr (Rs 10 Cr if cash receipts/payments ≤5%) or profession receipts >Rs 75 Lakh."},
+{date:"2026-09-30",title:"Company Statutory Audit Report",cat:"audit",detail:"Statutory audit of companies for FY 2025-26 must be completed before AGM. Sec 139, Companies Act 2013."},
+{date:"2026-10-31",title:"ITR Filing — Audit Cases (FY 2025-26)",cat:"it",detail:"Due date for filing return of income for FY 2025-26 (AY 2026-27) — assessees requiring tax audit u/s 44AB. Sec 139(1), IT Act 1961."},
+{date:"2026-11-30",title:"ITR — Transfer Pricing Cases (FY 2025-26)",cat:"it",detail:"Due date for assessees with international/specified domestic transactions requiring TP audit for FY 2025-26. Sec 139(1) read with Sec 92E, IT Act 1961."},
+{date:"2026-11-30",title:"TP Audit Report — Form 3CEB (FY 2025-26)",cat:"audit",detail:"Transfer Pricing audit report for FY 2025-26. Due one month before ITR due date. Sec 92E, IT Act 1961."},
 {date:"2026-12-31",title:"Belated / Revised Return — FY 2024-25",cat:"it",detail:"Last date for filing belated or revised return for FY 2024-25 (AY 2025-26). Sec 139(4)/139(5), IT Act 1961."},
-{date:"2027-01-07",title:"TDS/TCS Payment — December",cat:"tds",detail:"Deposit TDS/TCS deducted in December 2026."},
-{date:"2027-01-15",title:"TDS Certificate — Form 16A (Q3 Oct-Dec)",cat:"tds",detail:"Issue Form 16A for TDS deducted in Oct-Dec 2026."},
-{date:"2027-01-31",title:"TDS Return — Q3 (Oct-Dec)",cat:"tds",detail:"File 24Q, 26Q, 27Q for Q3 (Oct-Dec 2026)."},
-{date:"2027-01-31",title:"TCS Return — Q3 (Oct-Dec)",cat:"tds",detail:"Quarterly TCS return. Form 27EQ for Q3."},
-{date:"2027-02-07",title:"TDS/TCS Payment — January",cat:"tds",detail:"Deposit TDS/TCS deducted in January 2027."},
-{date:"2027-03-07",title:"TDS/TCS Payment — February",cat:"tds",detail:"Deposit TDS/TCS deducted in February 2027."},
-{date:"2027-03-15",title:"Advance Tax — 4th Instalment (100%)",cat:"it",detail:"Full 100% of estimated tax. Last instalment for Tax Year 2026-27. Sec 160(1)(d), IT Act 2025. Presumptive assessees: single instalment due today."},
-{date:"2027-03-31",title:"Last Date — Tax Saving Investments",cat:"it",detail:"Deadline for deduction-eligible investments (NPS u/s 80CCD(2) — only deduction available under new regime). Old regime: 80C/80D/80G etc."},
 {date:"2027-03-31",title:"Updated Return (ITR-U) — AY 2024-25",cat:"it",detail:"Last date for filing Updated Return for FY 2023-24 (AY 2024-25) within 36 months from end of relevant AY. Sec 139(8A), IT Act 1961."},
-{date:"2027-03-31",title:"TDS/TCS Payment — March (by Govt deductors)",cat:"tds",detail:"Government deductors to deposit March TDS on same day. Others by 30 Apr."},
+
+// ============================================================
+// TAX YEAR 2026-27 COMPLIANCE — IT Act 2025
+// TDS/TCS (Apr 2026 onwards), Advance Tax, Returns, Certificates
+// Form 16/16A replaced by TDS Certificate u/s 397
+// 24Q/26Q/27Q/27EQ replaced by TDS/TCS Statement u/s 397
+// ============================================================
+
+// === TDS/TCS Monthly Payments (Tax Year 2026-27) ===
+{date:"2026-05-07",title:"TDS/TCS Payment — April 2026",cat:"tds",detail:"Deposit TDS/TCS deducted/collected in April 2026. Due by 7th of next month. Sec 393/394, IT Act 2025."},
+{date:"2026-06-07",title:"TDS/TCS Payment — May 2026",cat:"tds",detail:"Deposit TDS/TCS deducted in May 2026. Sec 393/394, IT Act 2025."},
+{date:"2026-07-07",title:"TDS/TCS Payment — June 2026",cat:"tds",detail:"Deposit TDS/TCS deducted in June 2026. Sec 393/394, IT Act 2025."},
+{date:"2026-08-07",title:"TDS/TCS Payment — July 2026",cat:"tds",detail:"Deposit TDS/TCS deducted in July 2026. Sec 393/394, IT Act 2025."},
+{date:"2026-09-07",title:"TDS/TCS Payment — August 2026",cat:"tds",detail:"Deposit TDS/TCS deducted in August 2026. Sec 393/394, IT Act 2025."},
+{date:"2026-10-07",title:"TDS/TCS Payment — September 2026",cat:"tds",detail:"Deposit TDS/TCS deducted in September 2026. Sec 393/394, IT Act 2025."},
+{date:"2026-11-07",title:"TDS/TCS Payment — October 2026",cat:"tds",detail:"Deposit TDS/TCS deducted in October 2026. Sec 393/394, IT Act 2025."},
+{date:"2026-12-07",title:"TDS/TCS Payment — November 2026",cat:"tds",detail:"Deposit TDS/TCS deducted in November 2026. Sec 393/394, IT Act 2025."},
+{date:"2027-01-07",title:"TDS/TCS Payment — December 2026",cat:"tds",detail:"Deposit TDS/TCS deducted in December 2026. Sec 393/394, IT Act 2025."},
+{date:"2027-02-07",title:"TDS/TCS Payment — January 2027",cat:"tds",detail:"Deposit TDS/TCS deducted in January 2027. Sec 393/394, IT Act 2025."},
+{date:"2027-03-07",title:"TDS/TCS Payment — February 2027",cat:"tds",detail:"Deposit TDS/TCS deducted in February 2027. Sec 393/394, IT Act 2025."},
+{date:"2027-03-31",title:"TDS/TCS Payment — March 2027 (Govt deductors)",cat:"tds",detail:"Government deductors to deposit March TDS on same day. Others by 30 Apr. Sec 393/394, IT Act 2025."},
+
+// === TDS/TCS Quarterly Statements — Tax Year 2026-27 (IT Act 2025) ===
+{date:"2026-07-31",title:"TDS Statement — Q1 Apr-Jun 2026",cat:"tds",detail:"Quarterly TDS statement for Q1 (Apr-Jun 2026) of Tax Year 2026-27. Sec 397, IT Act 2025. Replaces old Form 24Q/26Q/27Q of IT Act 1961."},
+{date:"2026-07-31",title:"TCS Statement — Q1 Apr-Jun 2026",cat:"tds",detail:"Quarterly TCS statement for Q1 (Apr-Jun 2026) of Tax Year 2026-27. Sec 397, IT Act 2025. Replaces old Form 27EQ of IT Act 1961."},
+{date:"2026-10-31",title:"TDS Statement — Q2 Jul-Sep 2026",cat:"tds",detail:"Quarterly TDS statement for Q2 (Jul-Sep 2026) of Tax Year 2026-27. Sec 397, IT Act 2025."},
+{date:"2026-10-31",title:"TCS Statement — Q2 Jul-Sep 2026",cat:"tds",detail:"Quarterly TCS statement for Q2 (Jul-Sep 2026) of Tax Year 2026-27. Sec 397, IT Act 2025."},
+{date:"2027-01-31",title:"TDS Statement — Q3 Oct-Dec 2026",cat:"tds",detail:"Quarterly TDS statement for Q3 (Oct-Dec 2026) of Tax Year 2026-27. Sec 397, IT Act 2025."},
+{date:"2027-01-31",title:"TCS Statement — Q3 Oct-Dec 2026",cat:"tds",detail:"Quarterly TCS statement for Q3 (Oct-Dec 2026) of Tax Year 2026-27. Sec 397, IT Act 2025."},
+
+// === TDS/TCS Certificates — Tax Year 2026-27 (IT Act 2025) ===
+{date:"2026-07-15",title:"TDS Certificate — Q1 Apr-Jun 2026",cat:"tds",detail:"Issue TDS certificate for Q1 (Apr-Jun 2026) of Tax Year 2026-27. Sec 397, IT Act 2025. Replaces old Form 16A of IT Act 1961. Within 15 days of statement due date."},
+{date:"2026-10-15",title:"TDS Certificate — Q2 Jul-Sep 2026",cat:"tds",detail:"Issue TDS certificate for Q2 (Jul-Sep 2026) of Tax Year 2026-27. Sec 397, IT Act 2025."},
+{date:"2027-01-15",title:"TDS Certificate — Q3 Oct-Dec 2026",cat:"tds",detail:"Issue TDS certificate for Q3 (Oct-Dec 2026) of Tax Year 2026-27. Sec 397, IT Act 2025."},
+
+// === Advance Tax — Tax Year 2026-27 (IT Act 2025) ===
+{date:"2026-06-15",title:"Advance Tax — 1st Instalment (15%)",cat:"it",detail:"Min 15% of estimated tax liability for Tax Year 2026-27. Sec 160(1)(a), IT Act 2025. Not applicable for Sec 58 (presumptive) — they pay 100% by 15 Mar."},
+{date:"2026-09-15",title:"Advance Tax — 2nd Instalment (45%)",cat:"it",detail:"Cumulative 45% of estimated tax for Tax Year 2026-27. Sec 160(1)(b), IT Act 2025."},
+{date:"2026-12-15",title:"Advance Tax — 3rd Instalment (75%)",cat:"it",detail:"Cumulative 75% of estimated tax for Tax Year 2026-27. Sec 160(1)(c), IT Act 2025."},
+{date:"2027-03-15",title:"Advance Tax — 4th Instalment (100%)",cat:"it",detail:"Full 100% of estimated tax. Last instalment for Tax Year 2026-27. Sec 160(1)(d), IT Act 2025. Presumptive assessees (Sec 58): single instalment due today."},
+{date:"2027-03-31",title:"Last Date — Tax Saving Investments",cat:"it",detail:"Deadline for deduction-eligible investments (NPS u/s 80CCD(2) — only deduction available under new regime). Old regime: 80C/80D/80G etc."},
 // === GST (CGST Act — FY 2026-27) ===
 {date:"2026-04-11",title:"GSTR-1 — March 2026 (Monthly Filers)",cat:"gst",detail:"Outward supply statement for March 2026. Sec 37, CGST Act. Post GST 2.0 reforms."},
 {date:"2026-04-13",title:"GSTR-1 — Q4 Jan-Mar 2026 (QRMP)",cat:"gst",detail:"Quarterly GSTR-1 for QRMP scheme taxpayers (turnover ≤5Cr)."},
