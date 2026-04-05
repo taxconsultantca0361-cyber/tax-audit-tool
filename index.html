@@ -248,6 +248,7 @@
                 <div style="font-size:1.8rem;">📅</div><div style="font-weight:700;margin-top:6px;font-size:0.88rem;">Compliance Calendar</div><div style="font-size:0.72rem;opacity:0.8;margin-top:3px;">Tax Year 2026-27</div></div>
         </div>
         <p style="color:var(--text-light);font-size:0.82rem;margin-top:20px;">💡 <strong>Tip:</strong> Use the tab bar above to quickly switch between any section. All data sourced from official notifications.</p>
+        <p style="text-align:center;font-size:0.72rem;color:#999;margin-top:20px;padding-top:10px;border-top:1px solid #eee;">Last Updated: April 2026</p>
     </div>
 </div>
 
@@ -1279,7 +1280,7 @@
 <div id="tab-15ca" class="tab-content">
     <div class="card">
         <h2>Form 15CA / 15CB — Foreign Remittance Applicability Checker</h2>
-        <p style="color:var(--text-light);font-size:0.78rem;margin-bottom:14px;">Source: Rule 37BB read with Section 195 of the Income Tax Act 1961 | Section 396 of the Income Tax Act 2025</p>
+        <p style="color:var(--text-light);font-size:0.78rem;margin-bottom:14px;">Source: Rule 37BB read with Section 195 of the Income Tax Act 1961 | Section 396 of the Income Tax Act 2025 | CBDT Notification No. 93/2015 dated 16.12.2015</p>
         <div class="checker-form">
             <div class="form-row">
                 <div class="form-group">
@@ -1324,11 +1325,105 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>DTAA Applicable?</label>
+                    <label>DTAA Country</label>
                     <select id="fcDTAA">
-                        <option value="no">No</option>
-                        <option value="yes">Yes</option>
+                        <option value="no">No DTAA / Not Applicable</option>
                         <option value="notsure">Not Sure</option>
+                        <optgroup label="── Key DTAA Countries ──">
+                            <option value="yes" data-country="USA">USA (United States)</option>
+                            <option value="yes" data-country="UK">UK (United Kingdom)</option>
+                            <option value="yes" data-country="UAE">UAE (United Arab Emirates)</option>
+                            <option value="yes" data-country="Singapore">Singapore</option>
+                            <option value="yes" data-country="Mauritius">Mauritius</option>
+                            <option value="yes" data-country="Germany">Germany</option>
+                            <option value="yes" data-country="Japan">Japan</option>
+                            <option value="yes" data-country="Australia">Australia</option>
+                            <option value="yes" data-country="Canada">Canada</option>
+                            <option value="yes" data-country="France">France</option>
+                            <option value="yes" data-country="Netherlands">Netherlands</option>
+                            <option value="yes" data-country="Switzerland">Switzerland</option>
+                            <option value="yes" data-country="Hong Kong">Hong Kong</option>
+                            <option value="yes" data-country="South Korea">South Korea</option>
+                            <option value="yes" data-country="China">China</option>
+                        </optgroup>
+                        <optgroup label="── Other DTAA Countries (A–Z) ──">
+                            <option value="yes" data-country="Armenia">Armenia</option>
+                            <option value="yes" data-country="Austria">Austria</option>
+                            <option value="yes" data-country="Bangladesh">Bangladesh</option>
+                            <option value="yes" data-country="Belgium">Belgium</option>
+                            <option value="yes" data-country="Bhutan">Bhutan</option>
+                            <option value="yes" data-country="Botswana">Botswana</option>
+                            <option value="yes" data-country="Brazil">Brazil</option>
+                            <option value="yes" data-country="Bulgaria">Bulgaria</option>
+                            <option value="yes" data-country="Chile">Chile</option>
+                            <option value="yes" data-country="Colombia">Colombia</option>
+                            <option value="yes" data-country="Croatia">Croatia</option>
+                            <option value="yes" data-country="Cyprus">Cyprus</option>
+                            <option value="yes" data-country="Czech Republic">Czech Republic</option>
+                            <option value="yes" data-country="Denmark">Denmark</option>
+                            <option value="yes" data-country="Egypt">Egypt</option>
+                            <option value="yes" data-country="Estonia">Estonia</option>
+                            <option value="yes" data-country="Ethiopia">Ethiopia</option>
+                            <option value="yes" data-country="Fiji">Fiji</option>
+                            <option value="yes" data-country="Finland">Finland</option>
+                            <option value="yes" data-country="Georgia">Georgia</option>
+                            <option value="yes" data-country="Greece">Greece</option>
+                            <option value="yes" data-country="Hungary">Hungary</option>
+                            <option value="yes" data-country="Iceland">Iceland</option>
+                            <option value="yes" data-country="Indonesia">Indonesia</option>
+                            <option value="yes" data-country="Iran">Iran</option>
+                            <option value="yes" data-country="Ireland">Ireland</option>
+                            <option value="yes" data-country="Israel">Israel</option>
+                            <option value="yes" data-country="Italy">Italy</option>
+                            <option value="yes" data-country="Jordan">Jordan</option>
+                            <option value="yes" data-country="Kazakhstan">Kazakhstan</option>
+                            <option value="yes" data-country="Kenya">Kenya</option>
+                            <option value="yes" data-country="Kuwait">Kuwait</option>
+                            <option value="yes" data-country="Kyrgyzstan">Kyrgyzstan</option>
+                            <option value="yes" data-country="Latvia">Latvia</option>
+                            <option value="yes" data-country="Lithuania">Lithuania</option>
+                            <option value="yes" data-country="Luxembourg">Luxembourg</option>
+                            <option value="yes" data-country="Malaysia">Malaysia</option>
+                            <option value="yes" data-country="Malta">Malta</option>
+                            <option value="yes" data-country="Mexico">Mexico</option>
+                            <option value="yes" data-country="Mongolia">Mongolia</option>
+                            <option value="yes" data-country="Montenegro">Montenegro</option>
+                            <option value="yes" data-country="Morocco">Morocco</option>
+                            <option value="yes" data-country="Mozambique">Mozambique</option>
+                            <option value="yes" data-country="Myanmar">Myanmar</option>
+                            <option value="yes" data-country="Namibia">Namibia</option>
+                            <option value="yes" data-country="Nepal">Nepal</option>
+                            <option value="yes" data-country="New Zealand">New Zealand</option>
+                            <option value="yes" data-country="Norway">Norway</option>
+                            <option value="yes" data-country="Oman">Oman</option>
+                            <option value="yes" data-country="Philippines">Philippines</option>
+                            <option value="yes" data-country="Poland">Poland</option>
+                            <option value="yes" data-country="Portugal">Portugal</option>
+                            <option value="yes" data-country="Qatar">Qatar</option>
+                            <option value="yes" data-country="Romania">Romania</option>
+                            <option value="yes" data-country="Russia">Russia</option>
+                            <option value="yes" data-country="Saudi Arabia">Saudi Arabia</option>
+                            <option value="yes" data-country="Serbia">Serbia</option>
+                            <option value="yes" data-country="Slovenia">Slovenia</option>
+                            <option value="yes" data-country="South Africa">South Africa</option>
+                            <option value="yes" data-country="Spain">Spain</option>
+                            <option value="yes" data-country="Sri Lanka">Sri Lanka</option>
+                            <option value="yes" data-country="Sudan">Sudan</option>
+                            <option value="yes" data-country="Sweden">Sweden</option>
+                            <option value="yes" data-country="Syria">Syria</option>
+                            <option value="yes" data-country="Taiwan">Taiwan</option>
+                            <option value="yes" data-country="Tajikistan">Tajikistan</option>
+                            <option value="yes" data-country="Tanzania">Tanzania</option>
+                            <option value="yes" data-country="Thailand">Thailand</option>
+                            <option value="yes" data-country="Trinidad & Tobago">Trinidad & Tobago</option>
+                            <option value="yes" data-country="Turkey">Turkey</option>
+                            <option value="yes" data-country="Turkmenistan">Turkmenistan</option>
+                            <option value="yes" data-country="Uganda">Uganda</option>
+                            <option value="yes" data-country="Ukraine">Ukraine</option>
+                            <option value="yes" data-country="Uzbekistan">Uzbekistan</option>
+                            <option value="yes" data-country="Vietnam">Vietnam</option>
+                            <option value="yes" data-country="Zambia">Zambia</option>
+                        </optgroup>
                     </select>
                 </div>
             </div>
@@ -1376,7 +1471,15 @@
             </ul>
         </div>
     </div>
-    <p style="text-align:center;font-size:0.72rem;color:#999;margin-top:20px;padding-top:10px;border-top:1px solid #eee;">Last Updated: April 2026 | Source: incometax.gov.in, Rule 37BB, Section 195 IT Act 1961, Section 396 IT Act 2025 | Information is indicative — always verify from official sources before advising clients.</p>
+    <div class="card">
+        <h2>Rule 37BB — Exempt Remittances (No Form 15CA/15CB Required)</h2>
+        <p style="color:var(--text-light);font-size:0.78rem;margin-bottom:14px;">Schedule to Rule 37BB as substituted by CBDT Notification No. 93/2015 dated 16.12.2015 — 33 specified purposes where Form 15CA/15CB is NOT required</p>
+        <div class="search-box">
+            <input type="text" id="rule37bbSearch" placeholder="Search Rule 37BB exempt categories..." oninput="searchRule37BB()">
+        </div>
+        <div id="rule37bbResults"></div>
+    </div>
+    <p style="text-align:center;font-size:0.72rem;color:#999;margin-top:20px;padding-top:10px;border-top:1px solid #eee;">Last Updated: April 2026 | Source: incometax.gov.in, Rule 37BB, CBDT Notification No. 93/2015 dated 16.12.2015, Section 195 IT Act 1961, Section 396 IT Act 2025 | Information is indicative — always verify from official sources before advising clients.</p>
 </div>
 
 <!-- ==================== PENALTIES ==================== -->
@@ -1544,7 +1647,7 @@
 <div id="tab-itru" class="tab-content">
     <div class="card">
         <h2>ITR-U — Updated Return Additional Tax Calculator (Section 139(8A) / Section 140B)</h2>
-        <p style="color:var(--text-light);font-size:0.78rem;margin-bottom:14px;">Source: Section 139(8A) IT Act 1961 | Section 140B | Finance Act 2022, 2025 (extended to 48 months)</p>
+        <p style="color:var(--text-light);font-size:0.78rem;margin-bottom:14px;">Source: Section 139(8A) IT Act 1961 | Section 140B | Section 167 IT Act 2025 | CBDT Notification No. 48/2022 dated 29.04.2022 | Finance Act 2022, 2025 (extended to 48 months)</p>
     </div>
     <div class="card">
         <h3 style="color:var(--primary-mid);margin-bottom:10px;">Step 0 — Verify Eligibility</h3>
@@ -1647,7 +1750,7 @@
             </ul>
         </div>
     </div>
-    <p style="text-align:center;font-size:0.72rem;color:#999;margin-top:20px;padding-top:10px;border-top:1px solid #eee;">Last Updated: April 2026 | Source: Section 139(8A), Section 140B IT Act 1961, Finance Act 2022, Finance Act 2025 | Information is indicative — always verify from official sources before advising clients.</p>
+    <p style="text-align:center;font-size:0.72rem;color:#999;margin-top:20px;padding-top:10px;border-top:1px solid #eee;">Last Updated: April 2026 | Source: Section 139(8A), Section 140B IT Act 1961, Section 167 IT Act 2025, CBDT Notification No. 48/2022, Finance Act 2022, Finance Act 2025 | Information is indicative — always verify from official sources before advising clients.</p>
 </div>
 
 <!-- ==================== DISCLAIMER ==================== -->
@@ -3294,7 +3397,9 @@ function check15CA(){
   var nature=document.getElementById('fcNature').value;
   var amount=parseFloat(document.getElementById('fcAmount').value)||0;
   var ca=document.getElementById('fcCA').value;
-  var dtaa=document.getElementById('fcDTAA').value;
+  var dtaaEl=document.getElementById('fcDTAA');
+  var dtaa=dtaaEl.value;
+  var dtaaCountry=dtaaEl.options[dtaaEl.selectedIndex].getAttribute('data-country')||'';
   var cert=document.getElementById('fcCert').value;
   var r=document.getElementById('fcResult');
   if(!nature){r.className='result-box applicable';r.innerHTML='<div class="result-title">Select nature of remittance</div>';return;}
@@ -3323,12 +3428,74 @@ function check15CA(){
   html+='<tr><td>Applicable Part</td><td><strong>'+part+'</strong></td></tr>';
   html+='<tr><td>Form 15CB (CA Certificate) Required?</td><td><strong style="color:'+(need15CB?'#d63031':'#27ae60')+';">'+(need15CB?'YES — Obtain before filing Part C':'No')+'</strong></td></tr>';
   html+='<tr><td>Reason</td><td>'+reason+'</td></tr>';
+  if(dtaa==='yes'&&dtaaCountry){
+    html+='<tr><td>DTAA Country</td><td><strong style="color:#2980b9;">'+dtaaCountry+'</strong> — Apply DTAA rate or IT Act rate, whichever is lower. Obtain TRC from '+dtaaCountry+' before remittance.</td></tr>';
+  } else if(dtaa==='notsure'){
+    html+='<tr><td>DTAA</td><td style="color:#f39c12;font-weight:600;">Not Sure — Check if India has a DTAA with the payee\'s country. If yes, obtain TRC and apply beneficial rate.</td></tr>';
+  }
   html+='</table>';
   if(need15CB) html+='<p style="margin-top:10px;color:#d63031;font-weight:600;">Remitter files Form 15CA online on IT Portal | CA must issue Form 15CB BEFORE Part C is filed</p>';
+  if(!isExempt) html+='<p style="margin-top:8px;color:#e67e22;font-size:0.85rem;">⚠ Penalty u/s 271-I (Sec 453 IT Act 2025): Rs 1,00,000 for failure to furnish Form 15CA or furnishing inaccurate particulars.</p>';
   html+='</div>';
   r.innerHTML=html;
 }
 function reset15CA(){['fcAmount'].forEach(function(id){document.getElementById(id).value='';});document.getElementById('fcNature').value='';document.getElementById('fcCA').value='no';document.getElementById('fcDTAA').value='no';document.getElementById('fcCert').value='no';document.getElementById('fcResult').className='result-box';document.getElementById('fcResult').innerHTML='';}
+
+// ==================== RULE 37BB EXEMPT LIST ====================
+var rule37bbData=[
+{sn:1,purpose:'Indian investment abroad — in equity capital (shares)',code:'S0001',note:'Outward FDI'},
+{sn:2,purpose:'Indian investment abroad — in debt securities',code:'S0002',note:'Debt instruments abroad'},
+{sn:3,purpose:'Indian investment abroad — in branches and wholly owned subsidiaries',code:'S0003',note:'Branch/WOS investment'},
+{sn:4,purpose:'Indian investment abroad — in subsidiaries and associates',code:'S0004',note:'Subsidiary/associate investment'},
+{sn:5,purpose:'Indian investment abroad — in real estate',code:'S0005',note:'Real estate abroad'},
+{sn:6,purpose:'Loans extended to Non-Residents',code:'S0006',note:'NR loans'},
+{sn:7,purpose:'Advance payment against imports',code:'S0101',note:'Import advance'},
+{sn:8,purpose:'Payment towards imports — Loss settlement, shipping / freight',code:'S0102',note:'Import freight'},
+{sn:9,purpose:'Imports by diplomatic missions',code:'S0103',note:'Diplomatic imports'},
+{sn:10,purpose:'Intermediary trade',code:'S0104',note:'Merchanting trade'},
+{sn:11,purpose:'Imports below Rs 5,00,000 (invoice value)',code:'S0190',note:'Small value imports'},
+{sn:12,purpose:'Transport — Payment for operating expenses of Indian shipping companies in foreign currency',code:'S0201',note:'Shipping OPEX'},
+{sn:13,purpose:'Transport — Operating expenses of Indian airline companies in foreign currency',code:'S0202',note:'Airline OPEX'},
+{sn:14,purpose:'Transport — Booking of passages abroad — Loss remittance',code:'S0203',note:'Passage bookings'},
+{sn:15,purpose:'Utility and other services — Postal services',code:'S0208',note:'Postal services'},
+{sn:16,purpose:'Utility and other services — Courier services',code:'S0209',note:'Courier services'},
+{sn:17,purpose:'Travel — Business travel',code:'S0301',note:'Business travel'},
+{sn:18,purpose:'Travel — Basic Travel Quota (BTQ)',code:'S0302',note:'Personal travel BTQ'},
+{sn:19,purpose:'Travel — Pilgrimage travel',code:'S0303',note:'Haj/pilgrimage'},
+{sn:20,purpose:'Travel — Medical treatment abroad',code:'S0304',note:'Medical travel'},
+{sn:21,purpose:'Travel — Education abroad (fees, maintenance)',code:'S0305',note:'Education remittance'},
+{sn:22,purpose:'Insurance premium on life insurance',code:'S0306',note:'Life insurance abroad'},
+{sn:23,purpose:'Donations',code:'S1302',note:'Charitable donations abroad'},
+{sn:24,purpose:'Gift remittance',code:'S1303',note:'Personal gifts'},
+{sn:25,purpose:'Transfer to NRE / FCNR account',code:'S1304',note:'NRE/FCNR account'},
+{sn:26,purpose:'Transfer of savings by foreign nationals / NRIs',code:'S1305',note:'Repatriation of savings'},
+{sn:27,purpose:'Studies abroad — examination fees',code:'S1306',note:'Exam fees'},
+{sn:28,purpose:'Employment / emigration / immigration consultancy fees',code:'S1307',note:'Emigration services'},
+{sn:29,purpose:'Government remittances on account of maintenance of embassies / offices abroad',code:'S0901',note:'Government embassy expenses'},
+{sn:30,purpose:'Remittance by diplomatic bodies in India',code:'S0901',note:'Diplomatic remittances'},
+{sn:31,purpose:'Payments by persons other than authorised dealers for import of books / magazines / periodicals',code:'S0190',note:'Books/periodical imports'},
+{sn:32,purpose:'Remittance for participation in international exhibitions, trade fairs, etc.',code:'S0306',note:'Exhibition/trade fair'},
+{sn:33,purpose:'Remittance towards membership / subscription to international bodies / associations',code:'S0306',note:'International memberships'}
+];
+function searchRule37BB(){
+var q=(document.getElementById('rule37bbSearch').value||'').toLowerCase();
+var filtered=rule37bbData.filter(function(item){
+if(!q)return true;
+return (item.sn+' '+item.purpose+' '+item.code+' '+item.note).toLowerCase().indexOf(q)>=0;
+});
+var html='<table class="limits-table"><thead><tr><th style="width:40px;">S.No.</th><th>Purpose of Remittance</th><th>Purpose Code</th><th>Remarks</th></tr></thead><tbody>';
+if(filtered.length===0){
+html+='<tr><td colspan="4" style="text-align:center;color:#999;">No matching categories found.</td></tr>';
+}else{
+filtered.forEach(function(item){
+html+='<tr><td style="text-align:center;">'+item.sn+'</td><td>'+item.purpose+'</td><td style="text-align:center;font-family:monospace;font-weight:600;">'+item.code+'</td><td style="font-size:0.82rem;color:#666;">'+item.note+'</td></tr>';
+});
+}
+html+='</tbody></table>';
+html+='<p style="font-size:0.78rem;color:#999;margin-top:8px;">Showing '+filtered.length+' of '+rule37bbData.length+' categories | For these remittances, Form 15CA Part D is applicable — no Form 15CB required.</p>';
+document.getElementById('rule37bbResults').innerHTML=html;
+}
+searchRule37BB();
 
 // ==================== PENALTIES JS ====================
 var penaltyData=[
@@ -3500,7 +3667,7 @@ function calcITRU(){
 
   if(!income||!ay){r.className='result-box applicable';r.innerHTML='<div class="result-title">Enter details</div>';return;}
 
-  var ayEndYear=parseInt(ay.split('-')[0])+2000;
+  var ayEndYear=parseInt(ay.split('-')[1])+2000;
   var ayEnd=new Date(ayEndYear,2,31);
 
   var fileDate=dateStr?new Date(dateStr):new Date();
