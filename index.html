@@ -162,6 +162,12 @@
         .scheme-card { flex:1; min-width:160px; padding:16px; border-radius:8px; cursor:pointer; text-align:center; font-weight:600; background:#f0f4f8; border:2px solid transparent; transition:all 0.2s; }
         .scheme-card.active { background:var(--accent); color:white; border-color:var(--accent); }
 
+        /* Tab Guide table */
+        .tab-guide-table tbody tr { transition:background 0.15s; }
+        .tab-guide-table tbody tr:hover { background:#e8f4fd !important; }
+        .tab-guide-table td:first-child { white-space:nowrap; font-size:0.88rem; }
+        .tab-guide-table td:last-child { font-size:0.82rem; color:var(--text-light); line-height:1.5; }
+
         /* Warning/alert boxes */
         .warning-box, .alert-box, .eligibility-warning { width:100%; box-sizing:border-box; padding:12px 14px; font-size:0.9rem; line-height:1.6; border-radius:6px; }
 
@@ -326,6 +332,46 @@
                 <div style="font-size:1.8rem;">📅</div><div style="font-weight:700;margin-top:6px;font-size:0.88rem;">Compliance Calendar</div><div style="font-size:0.72rem;opacity:0.8;margin-top:3px;">Tax Year 2026-27</div></div>
         </div>
         <p style="color:var(--text-light);font-size:0.82rem;margin-top:20px;">💡 <strong>Tip:</strong> Use the tab bar above to quickly switch between any section. All data sourced from official notifications.</p>
+    </div>
+    <div class="card">
+        <h2 style="font-size:1.3rem;color:var(--primary-mid);margin-bottom:4px;">What's Inside — Tab Guide</h2>
+        <p style="color:var(--text-light);font-size:0.82rem;margin-bottom:16px;">Quick overview of every tool available in Ready Reckoner. Click any row to jump directly to that tab.</p>
+        <div class="table-scroll">
+        <table class="limits-table tab-guide-table">
+            <thead>
+                <tr><th style="width:30%;">Tab</th><th style="width:70%;">What It Does</th></tr>
+            </thead>
+            <tbody>
+                <tr onclick="switchTab('clauses')" style="cursor:pointer;"><td><strong>Tax Audit</strong></td><td>Sec 44AB / Sec 63 applicability checker + complete clause-by-clause guide for Form 3CD (FY 2025-26) and Form 26 (FY 2026-27 onwards). Covers all 36+ clauses with risk levels, observations, and practical notes.</td></tr>
+                <tr onclick="switchTab('tds')" style="cursor:pointer;"><td><strong>TDS / TCS Rates</strong></td><td>Complete TDS and TCS rate chart comparing Old Act 1961 vs New Act 2025. Includes all sections (192 to 206C), thresholds, new Sec 194T (firm to partner), and key compliance forms (24Q, 26Q, Form 16).</td></tr>
+                <tr onclick="switchTab('itcalc')" style="cursor:pointer;"><td><strong>IT Calculator</strong></td><td>Side-by-side income tax calculator for Old Regime vs New Regime (115BAC). Enter salary/business income, deductions (80C, 80D, HRA, etc.) and instantly see tax liability, effective rate, and which regime saves more.</td></tr>
+                <tr onclick="switchTab('gst')" style="cursor:pointer;"><td><strong>GST Rates</strong></td><td>Searchable GST rate finder for goods and services — 0%, 5%, 12%, 18%, 28% slabs with HSN/SAC codes. Updated post-GST Council recommendations including compensation cess items.</td></tr>
+                <tr onclick="switchTab('sectionfinder')" style="cursor:pointer;"><td><strong>Section Finder</strong></td><td>Two-way search: type an Old Act section (e.g. 80C) and find its New Act 2025 equivalent, or vice versa. Covers 530+ section mappings across all chapters — essential for the transition period.</td></tr>
+                <tr onclick="switchTab('depreciation')" style="cursor:pointer;"><td><strong>Depreciation IT</strong></td><td>Income Tax depreciation rates per Appendix I-A — WDV method. All asset blocks (building, furniture, P&M, computers, intangibles, vehicles) with rates and additional depreciation eligibility.</td></tr>
+                <tr onclick="switchTab('depco')" style="cursor:pointer;"><td><strong>Depreciation Co. Act</strong></td><td>Companies Act Schedule II useful life table — SLM and WDV rates. Covers all asset classes with component accounting notes and residual value rules.</td></tr>
+                <tr onclick="switchTab('msme')" style="cursor:pointer;"><td><strong>MSME Tracker</strong></td><td>Sec 43B(h) payment compliance checker — enter vendor details, invoice date, and payment date to check if payment is within the 15/45-day limit. Flags disallowance risk with amount calculation.</td></tr>
+                <tr onclick="switchTab('notice')" style="cursor:pointer;"><td><strong>IT Notice Dates</strong></td><td>Time limits for all IT notices — Sec 143(1), 143(2), 148, 149, 153A, 153C, 263, 264. Shows outer time limits, response deadlines, and key Supreme Court rulings on limitation.</td></tr>
+                <tr onclick="switchTab('caro')" style="cursor:pointer;"><td><strong>CARO 2020</strong></td><td>Companies (Auditor's Report) Order 2020 — all 21 clauses with reporting requirements, applicability criteria, and key observations. Covers loans, fixed assets, inventory, fraud reporting, and more.</td></tr>
+                <tr onclick="switchTab('auditcheck')" style="cursor:pointer;"><td><strong>Audit Checklist</strong></td><td>Interactive clause-by-clause audit working paper tracker. Mark each Form 3CD / Form 26 clause as Done, Pending, or N/A. Track progress with completion percentage. Helps ensure nothing is missed during audit.</td></tr>
+                <tr onclick="switchTab('asapply')" style="cursor:pointer;"><td><strong>AS Applicability</strong></td><td>Accounting Standards applicability matrix — shows which AS (1-29) apply based on entity type (MSME Level I/II/III, Non-MSME). Includes key exemptions and practical notes for each standard.</td></tr>
+                <tr onclick="switchTab('capgain')" style="cursor:pointer;"><td><strong>Capital Gains</strong></td><td>LTCG/STCG calculator with post-23.07.2024 rules — 12.5% LTCG (no indexation), 20% STCG on equity. Covers property, shares, mutual funds. Includes Sec 54/54EC exemption computation and grandfathering.</td></tr>
+                <tr onclick="switchTab('intpenalty')" style="cursor:pointer;"><td><strong>Interest 234A/B/C</strong></td><td>Auto-calculates interest under Sec 234A (late filing), 234B (advance tax shortfall), and 234C (deferment of advance tax instalments). Enter dates, tax amounts, and get month-wise interest breakdown.</td></tr>
+                <tr onclick="switchTab('impact')" style="cursor:pointer;"><td><strong>Impact Analyzer</strong></td><td>Personalised impact assessment of IT Act 2025 on your practice. Select client type (salaried, business, company, NRI, etc.) and get a detailed report of what changes, new section numbers, and action items.</td></tr>
+                <tr onclick="switchTab('itrform')" style="cursor:pointer;"><td><strong>ITR Applicability</strong></td><td>Answer a few questions (income type, turnover, status) and get the correct ITR form (ITR-1 to ITR-7) for AY 2026-27. Includes filing due dates, late fee u/s 234F, and checklist of documents needed.</td></tr>
+                <tr onclick="switchTab('15ca')" style="cursor:pointer;"><td><strong>Form 15CA/15CB</strong></td><td>Foreign remittance compliance checker — enter payment details, amount, and nature to know if Form 15CA/15CB is required, which Part (A/B/C/D) applies, and if Rule 37BB exemption covers the payment. Includes 80+ DTAA country dropdown.</td></tr>
+                <tr onclick="switchTab('penalty')" style="cursor:pointer;"><td><strong>Penalties</strong></td><td>Complete penalty and prosecution reference — Sec 270A/271/271B/271C/276B and more. Searchable table with Old Act vs New Act 2025 mapping, quantum of penalty, prosecution thresholds, and defence strategies.</td></tr>
+                <tr onclick="switchTab('partnership')" style="cursor:pointer;"><td><strong>Partnership 40(b)</strong></td><td>Sec 40(b) remuneration and interest calculator — enter book profit and get allowable remuneration (90%/60% slab), interest limit (12%), and TDS u/s 194T computation. Covers both pre and post Finance Act 2024 limits.</td></tr>
+                <tr onclick="switchTab('itru')" style="cursor:pointer;"><td><strong>ITR-U (Updated Return)</strong></td><td>Sec 139(8A) updated return calculator — select AY and filing window to get the additional tax rate (25%/50%/60%/70%). Calculates total additional tax payable including surcharge and cess.</td></tr>
+                <tr onclick="switchTab('presumptive')" style="cursor:pointer;"><td><strong>Presumptive Tax</strong></td><td>Calculator for all 3 presumptive schemes — 44AD (business, 6%/8% of turnover), 44ADA (professionals, 50% of receipts), and 44AE (goods carriage, per vehicle). Includes turnover limits, digital threshold, and opt-out consequences.</td></tr>
+                <tr onclick="switchTab('gstreg')" style="cursor:pointer;"><td><strong>GST Registration</strong></td><td>GST registration threshold checker — select state, supplier type, and nature of supply to check if registration is mandatory, voluntary, or exempt. Covers Sec 22/23/24 CGST Act with special category state rules.</td></tr>
+                <tr onclick="switchTab('refund')" style="cursor:pointer;"><td><strong>IT Refund & 244A</strong></td><td>Refund and interest calculator — enter tax paid (TDS, advance tax, self-assessment), tax due, and filing dates. Calculates refund amount and Sec 244A interest at 0.5% per month with timely/late filing distinction.</td></tr>
+                <tr onclick="switchTab('roc')" style="cursor:pointer;"><td><strong>ROC Compliance</strong></td><td>Annual filing tracker for 5 entity types — Pvt Ltd, Public, OPC, Section 8, and LLP. Shows all forms (AOC-4, MGT-7, ADT-1, DIR-3 KYC, etc.) with due dates, fees, and penalty estimator for delayed filings.</td></tr>
+                <tr onclick="switchTab('smartsearch')" style="cursor:pointer;"><td><strong>Smart Search</strong></td><td>Cross-reference search engine — type any topic (cash payment, TDS, MSME, partnership, donation, export, ROC, etc.) and get its impact across Income Tax, GST, Companies Act, Form 3CD, and practical tips in one table.</td></tr>
+                <tr onclick="switchTab('calendar')" style="cursor:pointer;"><td><strong>Compliance Calendar</strong></td><td>Month-wise compliance calendar for Tax Year 2026-27. Covers IT return due dates, advance tax instalments, TDS deposit dates, GST return dates, ROC filings, and other statutory deadlines — all in one view.</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <p style="color:var(--text-light);font-size:0.78rem;margin-top:12px;text-align:center;">26 tools | All data sourced from incometaxindia.gov.in, cbic-gst.gov.in, mca.gov.in | Ready Reckoner by CA Deepak Patni</p>
     </div>
 </div>
 
