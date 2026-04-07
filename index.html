@@ -7,6 +7,8 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>Ready Reckoner — Complete CA Toolkit</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
     <style>
         :root {
             --primary: #0f2027;
@@ -168,6 +170,76 @@
         .tab-guide-table td:first-child { white-space:nowrap; font-size:0.88rem; }
         .tab-guide-table td:last-child { font-size:0.82rem; color:var(--text-light); line-height:1.5; }
 
+        /* Sub-tab navigation (inside tabs) */
+        .sub-tab-nav { display:flex; gap:8px; margin-bottom:20px; border-bottom:2px solid var(--accent); padding-bottom:0; flex-wrap:wrap; }
+        .sub-tab-btn { padding:10px 20px; border:none; background:#f0f4f8; color:#2c3e50; font-weight:600; cursor:pointer; border-radius:6px 6px 0 0; font-size:0.9rem; border-bottom:3px solid transparent; transition:all 0.2s; }
+        .sub-tab-btn.active { background:var(--accent); color:white; border-bottom:3px solid var(--accent); }
+        .sub-tab-btn:hover:not(.active) { background:#e8f8f5; color:var(--accent); }
+
+        /* IT Act 2025 tab */
+        .itact-search-bar { position:sticky; top:0; z-index:100; background:white; padding:12px 0; border-bottom:2px solid var(--accent); display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+        .itact-search-bar input[type="text"] { flex:1; min-width:200px; padding:10px 12px; font-size:0.9rem; border:1px solid #ddd; border-radius:6px; }
+        .itact-search-bar select { padding:10px 12px; font-size:0.9rem; border:1px solid #ddd; border-radius:6px; background:white; }
+        .itact-chapter-pills { display:flex; gap:6px; overflow-x:auto; padding:10px 0; margin-bottom:16px; -webkit-overflow-scrolling:touch; }
+        .itact-chapter-pills .pill { flex-shrink:0; padding:6px 12px; background:#e8f8f5; color:var(--accent); border-radius:14px; cursor:pointer; font-size:0.78rem; font-weight:600; border:1px solid transparent; white-space:nowrap; }
+        .itact-chapter-pills .pill:hover { background:var(--accent); color:white; }
+        .itact-chapter { margin-bottom:32px; }
+        .itact-chapter-heading { background:var(--accent); color:white; padding:10px 16px; border-radius:6px; font-size:1rem; font-weight:700; margin-bottom:16px; }
+        .itact-section { border:1px solid #e0e0e0; border-radius:6px; margin-bottom:10px; overflow:hidden; }
+        .itact-section-headinging { background:#f5f5f5; padding:10px 14px; font-size:0.92rem; font-weight:600; color:#2c3e50; cursor:pointer; border-bottom:1px solid #e0e0e0; display:flex; justify-content:space-between; align-items:center; gap:10px; }
+        .itact-section-headinging:hover { background:#e8f8f5; }
+        .itact-section-headinging .toggle-arrow { font-size:0.75rem; color:var(--accent); flex-shrink:0; }
+        .itact-section-body { padding:14px 16px; font-size:0.88rem; line-height:1.75; color:#333; display:none; white-space:pre-wrap; font-family:Georgia,serif; max-height:600px; overflow-y:auto; }
+        .itact-section.open .itact-section-body { display:block; }
+        .itact-section.open .itact-section-headinging .toggle-arrow::before { content:'▲'; }
+        .itact-section:not(.open) .itact-section-headinging .toggle-arrow::before { content:'▼'; }
+        .itact-highlight { background:#fff176; border-radius:2px; padding:0 2px; }
+        #itActJump { position:fixed; bottom:80px; right:20px; z-index:999; background:white; border:1px solid var(--accent); border-radius:8px; padding:8px; box-shadow:0 2px 8px rgba(0,0,0,0.15); display:flex; gap:4px; }
+        #itActJump input { width:120px; padding:6px 8px; font-size:0.82rem; border:1px solid #ddd; border-radius:4px; }
+        #itActJump button { padding:6px 10px; font-size:0.82rem; }
+        .itact-loading { text-align:center; padding:40px; color:var(--text-light); }
+        .itact-stats { padding:8px 14px; background:#f9fbfc; border-left:3px solid var(--accent); margin-bottom:14px; font-size:0.82rem; color:var(--text-light); border-radius:4px; }
+
+        /* EMI Calculator */
+        .emi-summary-box { background:#f9fbfc; border:1px solid #e0e0e0; border-radius:8px; padding:18px 20px; margin:18px 0; }
+        .emi-summary-box .row { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px dashed #eee; font-size:0.9rem; }
+        .emi-summary-box .row:last-child { border-bottom:none; }
+        .emi-summary-box .row strong { color:var(--accent); }
+        .emi-bar-container { display:flex; height:36px; border-radius:6px; overflow:hidden; margin:14px 0 6px; border:1px solid #ddd; }
+        .emi-bar-principal { background:#0984e3; color:white; display:flex; align-items:center; justify-content:center; font-size:0.78rem; font-weight:600; }
+        .emi-bar-interest { background:#e17055; color:white; display:flex; align-items:center; justify-content:center; font-size:0.78rem; font-weight:600; }
+        .emi-schedule-table { width:100%; border-collapse:collapse; font-size:0.82rem; }
+        .emi-schedule-table th { background:var(--accent); color:white; padding:8px 6px; text-align:right; font-weight:600; }
+        .emi-schedule-table th:nth-child(1), .emi-schedule-table th:nth-child(2) { text-align:left; }
+        .emi-schedule-table td { padding:6px; border-bottom:1px solid #eee; text-align:right; }
+        .emi-schedule-table td:nth-child(1), .emi-schedule-table td:nth-child(2) { text-align:left; }
+        .emi-schedule-table .year-header td { background:#d1f2eb; font-weight:700; color:#0a6e4e; text-align:center; padding:8px; }
+        .emi-schedule-table .year-summary td { background:#e8f8f5; font-weight:700; }
+
+        /* Mobile rules for new tabs */
+        @media(max-width:768px) {
+            .sub-tab-nav { gap:6px; }
+            .sub-tab-btn { padding:8px 12px; font-size:0.82rem; flex:1; }
+            .itact-search-bar { padding:10px 0; }
+            .itact-search-bar input[type="text"], .itact-search-bar select, .itact-search-bar .btn { width:100%; min-width:unset; }
+            .itact-chapter-heading { font-size:0.9rem; padding:8px 12px; }
+            .itact-section-headinging { font-size:0.84rem; padding:10px 12px; }
+            .itact-section-body { font-size:0.82rem; padding:12px; max-height:500px; }
+            #itActJump { bottom:70px; right:10px; padding:6px; }
+            #itActJump input { width:90px; }
+            #tab-emi .emi-summary-box { padding:14px 16px; font-size:0.85rem; }
+            #tab-emi .emi-schedule-table { font-size:0.72rem; min-width:620px; }
+            #tab-emi .emi-schedule-table th, #tab-emi .emi-schedule-table td { padding:5px 4px; }
+        }
+        @media(max-width:480px) {
+            .sub-tab-nav { flex-direction:column; }
+            .sub-tab-btn { width:100%; border-radius:6px; }
+            .itact-chapter-heading { font-size:0.82rem; }
+            .itact-section-headinging { font-size:0.8rem; }
+            .itact-section-body { font-size:0.78rem; line-height:1.65; }
+            #tab-emi .emi-schedule-table { font-size:0.66rem; min-width:580px; }
+        }
+
         /* Warning/alert boxes */
         .warning-box, .alert-box, .eligibility-warning { width:100%; box-sizing:border-box; padding:12px 14px; font-size:0.9rem; line-height:1.6; border-radius:6px; }
 
@@ -256,6 +328,7 @@
     <div class="nav-tab" onclick="switchTab('capgain')">Capital Gains</div>
     <div class="nav-tab" onclick="switchTab('intpenalty')">Interest 234A/B/C</div>
     <div class="nav-tab" onclick="switchTab('impact')">Impact Analyzer</div>
+    <div class="nav-tab" onclick="switchTab('itact2025')">IT Act 2025</div>
     <div class="nav-tab" onclick="switchTab('itrform')">ITR Applicability</div>
     <div class="nav-tab" onclick="switchTab('15ca')">Form 15CA/15CB</div>
     <div class="nav-tab" onclick="switchTab('penalty')">Penalties</div>
@@ -264,6 +337,7 @@
     <div class="nav-tab" onclick="switchTab('presumptive')">Presumptive Tax</div>
     <div class="nav-tab" onclick="switchTab('gstreg')">GST Registration</div>
     <div class="nav-tab" onclick="switchTab('refund')">IT Refund & 244A</div>
+    <div class="nav-tab" onclick="switchTab('emi')">EMI Calculator</div>
     <div class="nav-tab" onclick="switchTab('roc')">ROC Compliance</div>
     <div class="nav-tab" onclick="switchTab('smartsearch')">Smart Search</div>
     <div class="nav-tab" onclick="switchTab('calendar')">Compliance Calendar</div>
@@ -357,6 +431,7 @@
                 <tr onclick="switchTab('capgain')" style="cursor:pointer;"><td><strong>Capital Gains</strong></td><td>LTCG/STCG calculator with post-23.07.2024 rules — 12.5% LTCG (no indexation), 20% STCG on equity. Covers property, shares, mutual funds. Includes Sec 54/54EC exemption computation and grandfathering.</td></tr>
                 <tr onclick="switchTab('intpenalty')" style="cursor:pointer;"><td><strong>Interest 234A/B/C</strong></td><td>Auto-calculates interest under Sec 234A (late filing), 234B (advance tax shortfall), and 234C (deferment of advance tax instalments). Enter dates, tax amounts, and get month-wise interest breakdown.</td></tr>
                 <tr onclick="switchTab('impact')" style="cursor:pointer;"><td><strong>Impact Analyzer</strong></td><td>Personalised impact assessment of IT Act 2025 on your practice. Select client type (salaried, business, company, NRI, etc.) and get a detailed report of what changes, new section numbers, and action items.</td></tr>
+                <tr onclick="switchTab('itact2025')" style="cursor:pointer;"><td><strong>IT Act 2025</strong></td><td>Full searchable bare act reader for the Income Tax Act, 2025 (Act No. 14 of 2025). 23 Chapters, 615+ Sections, 16 Schedules with instant section-number / keyword search, chapter filter, and collapsible sections for quick reading.</td></tr>
                 <tr onclick="switchTab('itrform')" style="cursor:pointer;"><td><strong>ITR Applicability</strong></td><td>Answer a few questions (income type, turnover, status) and get the correct ITR form (ITR-1 to ITR-7) for AY 2026-27. Includes filing due dates, late fee u/s 234F, and checklist of documents needed.</td></tr>
                 <tr onclick="switchTab('15ca')" style="cursor:pointer;"><td><strong>Form 15CA/15CB</strong></td><td>Foreign remittance compliance checker — enter payment details, amount, and nature to know if Form 15CA/15CB is required, which Part (A/B/C/D) applies, and if Rule 37BB exemption covers the payment. Includes 80+ DTAA country dropdown.</td></tr>
                 <tr onclick="switchTab('penalty')" style="cursor:pointer;"><td><strong>Penalties</strong></td><td>Complete penalty and prosecution reference — Sec 270A/271/271B/271C/276B and more. Searchable table with Old Act vs New Act 2025 mapping, quantum of penalty, prosecution thresholds, and defence strategies.</td></tr>
@@ -365,13 +440,14 @@
                 <tr onclick="switchTab('presumptive')" style="cursor:pointer;"><td><strong>Presumptive Tax</strong></td><td>Calculator for all 3 presumptive schemes — 44AD (business, 6%/8% of turnover), 44ADA (professionals, 50% of receipts), and 44AE (goods carriage, per vehicle). Includes turnover limits, digital threshold, and opt-out consequences.</td></tr>
                 <tr onclick="switchTab('gstreg')" style="cursor:pointer;"><td><strong>GST Registration</strong></td><td>GST registration threshold checker — select state, supplier type, and nature of supply to check if registration is mandatory, voluntary, or exempt. Covers Sec 22/23/24 CGST Act with special category state rules.</td></tr>
                 <tr onclick="switchTab('refund')" style="cursor:pointer;"><td><strong>IT Refund & 244A</strong></td><td>Refund and interest calculator — enter tax paid (TDS, advance tax, self-assessment), tax due, and filing dates. Calculates refund amount and Sec 244A interest at 0.5% per month with timely/late filing distinction.</td></tr>
+                <tr onclick="switchTab('emi')" style="cursor:pointer;"><td><strong>EMI Calculator</strong></td><td>Loan EMI calculator for home, vehicle, personal & business loans. Supports reducing balance and flat rate methods. Generates full month-wise amortisation schedule with yearly summaries and downloadable PDF.</td></tr>
                 <tr onclick="switchTab('roc')" style="cursor:pointer;"><td><strong>ROC Compliance</strong></td><td>Annual filing tracker for 5 entity types — Pvt Ltd, Public, OPC, Section 8, and LLP. Shows all forms (AOC-4, MGT-7, ADT-1, DIR-3 KYC, etc.) with due dates, fees, and penalty estimator for delayed filings.</td></tr>
                 <tr onclick="switchTab('smartsearch')" style="cursor:pointer;"><td><strong>Smart Search</strong></td><td>Cross-reference search engine — type any topic (cash payment, TDS, MSME, partnership, donation, export, ROC, etc.) and get its impact across Income Tax, GST, Companies Act, Form 3CD, and practical tips in one table.</td></tr>
                 <tr onclick="switchTab('calendar')" style="cursor:pointer;"><td><strong>Compliance Calendar</strong></td><td>Month-wise compliance calendar for Tax Year 2026-27. Covers IT return due dates, advance tax instalments, TDS deposit dates, GST return dates, ROC filings, and other statutory deadlines — all in one view.</td></tr>
             </tbody>
         </table>
         </div>
-        <p style="color:var(--text-light);font-size:0.78rem;margin-top:12px;text-align:center;">26 tools | All data sourced from incometaxindia.gov.in, cbic-gst.gov.in, mca.gov.in | Ready Reckoner by CA Deepak Patni</p>
+        <p style="color:var(--text-light);font-size:0.78rem;margin-top:12px;text-align:center;">28 tools | All data sourced from incometaxindia.gov.in, cbic-gst.gov.in, mca.gov.in | Ready Reckoner by CA Deepak Patni</p>
     </div>
 </div>
 
@@ -1266,6 +1342,39 @@
     </div>
 </div>
 
+<!-- ==================== IT ACT 2025 BARE ACT VIEWER ==================== -->
+<div id="tab-itact2025" class="tab-content">
+    <div class="card">
+        <h2>Income Tax Act, 2025 — Bare Act (Act No. 14 of 2025)</h2>
+        <p style="color:var(--text-light);font-size:0.82rem;margin-bottom:14px;">Full text of the Income Tax Act, 2025 as notified in the Official Gazette on 29.03.2025 and amended by the Finance Act, 2026. Effective 01.04.2026. Source: <a href="https://egazette.gov.in" target="_blank" style="color:var(--accent);">egazette.gov.in</a> | <a href="https://incometaxindia.gov.in" target="_blank" style="color:var(--accent);">incometaxindia.gov.in</a></p>
+        <div class="itact-search-bar">
+            <div class="form-row">
+                <div class="form-group" style="flex:2;"><label>Search (section no. / keyword / heading)</label><input type="text" id="itActQuery" placeholder="e.g. 63, tax audit, presumptive, depreciation" onkeydown="if(event.key==='Enter')searchITAct()"></div>
+                <div class="form-group"><label>Filter by Chapter</label><select id="itActChapterSel" onchange="filterByChapter()"><option value="">All Chapters</option></select></div>
+            </div>
+            <div class="btn-row"><button class="btn btn-primary" onclick="searchITAct()">Search</button><button class="btn btn-reset" onclick="clearITActSearch()">Clear</button></div>
+        </div>
+        <div id="itActLoading" style="text-align:center;padding:40px;color:var(--text-light);">Loading Income Tax Act 2025 (approx. 2 MB)... one moment.</div>
+        <div id="itActChapterPills" class="itact-chapter-pills" style="display:none;"></div>
+        <div id="itActResultsInfo" style="display:none;font-size:0.85rem;color:var(--text-light);margin:8px 0;"></div>
+        <div id="itActContent" style="display:none;"></div>
+    </div>
+    <div class="card">
+        <div style="background:#fef9e7;border-left:4px solid #f39c12;border-radius:8px;padding:12px 16px;">
+            <h3 style="margin-top:0;color:#b7950b;">Key Notes — IT Act 2025</h3>
+            <ul style="margin-left:18px;font-size:0.88rem;color:#555;line-height:1.8;">
+                <li><strong>Effective date:</strong> 01.04.2026 (AY 2026-27 onwards). Existing IT Act 1961 continues for AY 2025-26 and prior years.</li>
+                <li><strong>Structure:</strong> 23 Chapters, 615+ Sections, 16 Schedules — consolidates and simplifies the 1961 Act (298 sections) with modern drafting.</li>
+                <li><strong>Use Section Finder tab</strong> for quick mapping between Old Act 1961 sections and New Act 2025 sections.</li>
+                <li><strong>Reading tip:</strong> Click any section heading to expand/collapse. Use the search bar above to jump directly by section number or keyword.</li>
+                <li><strong>Disclaimer:</strong> This is a reader for quick reference. For legal proceedings always refer to the official gazette copy at egazette.gov.in.</li>
+            </ul>
+        </div>
+    </div>
+    <button id="itActJumpBtn" onclick="document.getElementById('itActQuery').focus();window.scrollTo({top:0,behavior:'smooth'});" style="display:none;">↑ Search</button>
+    <p style="text-align:center;font-size:0.72rem;color:#999;margin-top:20px;padding-top:10px;border-top:1px solid #eee;">Last Updated: April 2026 | Source: Income Tax Act, 2025 (Act No. 14 of 2025), as amended by Finance Act 2026 | egazette.gov.in | incometaxindia.gov.in | Information is indicative — always verify from official sources before advising clients.</p>
+</div>
+
 <!-- ==================== ITR FORM APPLICABILITY ==================== -->
 <div id="tab-itrform" class="tab-content">
     <div class="card">
@@ -2021,6 +2130,11 @@
 
 <!-- ==================== GST REGISTRATION ==================== -->
 <div id="tab-gstreg" class="tab-content">
+    <div class="sub-tab-nav">
+        <button class="sub-tab-btn active" onclick="switchSubTab('gstreg-threshold',this)">Threshold Checker</button>
+        <button class="sub-tab-btn" onclick="switchSubTab('gstreg-composition',this)">Composition Scheme</button>
+    </div>
+    <div id="gstreg-threshold" class="sub-tab-content active">
     <div class="card">
         <h2>GST Registration — Threshold & Applicability Checker</h2>
         <p style="color:var(--text-light);font-size:0.78rem;margin-bottom:14px;">As per Sections 22, 23, 24, 25 of the CGST Act, 2017 | Notification No. 10/2019-CT dated 07.03.2019 | Notification No. 14/2019-CT. Source: cbic-gst.gov.in | gst.gov.in | CGST Act 2017.</p>
@@ -2116,6 +2230,108 @@
         </div>
     </div>
     <p style="text-align:center;font-size:0.72rem;color:#999;margin-top:20px;padding-top:10px;border-top:1px solid #eee;">Last Updated: April 2026 | Source: CGST Act, 2017 — Sections 22, 23, 24, 25 | Notification No. 10/2019-CT | Notification No. 14/2019-CT | cbic-gst.gov.in | gst.gov.in | Information is indicative — always verify from official sources before advising clients.</p>
+    </div><!-- /gstreg-threshold -->
+    <div id="gstreg-composition" class="sub-tab-content">
+        <div class="card">
+            <h2>GST Composition Scheme — Eligibility & Rates</h2>
+            <p style="color:var(--text-light);font-size:0.78rem;margin-bottom:14px;">As per Section 10 of CGST Act, 2017 read with Rules 3-7 of CGST Rules | Notification No. 2/2019-CT(R) (service providers) | Notification No. 14/2019-CT. Source: cbic-gst.gov.in | gst.gov.in</p>
+            <h3 style="color:var(--primary-mid);">Composition Scheme Eligibility Checker</h3>
+            <div class="checker-form">
+                <div class="form-row">
+                    <div class="form-group"><label>State</label><select id="compState">
+                        <optgroup label="Normal States (Limit Rs 1.5 Cr goods)"><option value="normal">Normal State</option></optgroup>
+                        <optgroup label="Special Category States (Limit Rs 75 L goods)"><option value="special">Special Category State</option></optgroup>
+                    </select></div>
+                    <div class="form-group"><label>Nature of Business</label><select id="compNature">
+                        <option value="manufacturer">Manufacturer (goods)</option>
+                        <option value="trader">Trader (goods)</option>
+                        <option value="restaurant">Restaurant (no alcohol)</option>
+                        <option value="service">Service Provider</option>
+                        <option value="mixed">Goods + Some Services</option>
+                    </select></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Aggregate Turnover in Previous FY (Rs)</label><input type="number" id="compTurnover" placeholder="e.g. 12000000"></div>
+                    <div class="form-group"><label>Inter-state Supply?</label><select id="compInterstate"><option value="no">No — only intra-state</option><option value="yes">Yes — makes inter-state supply</option></select></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Supplies through E-commerce Operator?</label><select id="compEcom"><option value="no">No</option><option value="yes">Yes</option></select></div>
+                    <div class="form-group"><label>Deals in Notified Goods? (ice cream, pan masala, tobacco, aerated water)</label><select id="compNotified"><option value="no">No</option><option value="yes">Yes</option></select></div>
+                </div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="checkComposition()">Check Eligibility</button><button class="btn btn-reset" onclick="document.getElementById('compResult').innerHTML='';">Reset</button></div>
+                <div id="compResult" class="result-box"></div>
+            </div>
+        </div>
+        <div class="card">
+            <h2>Composition Scheme Rates — Section 10(1) & 10(2A)</h2>
+            <div class="table-scroll"><table class="limits-table">
+                <thead><tr><th>Category</th><th>CGST</th><th>SGST</th><th>Total</th><th>Basis</th></tr></thead>
+                <tbody>
+                    <tr><td>Manufacturer (except notified)</td><td>0.5%</td><td>0.5%</td><td><strong>1.0%</strong></td><td>Turnover in State</td></tr>
+                    <tr><td>Trader (goods)</td><td>0.5%</td><td>0.5%</td><td><strong>1.0%</strong></td><td>Taxable turnover in State</td></tr>
+                    <tr><td>Restaurant (no alcohol)</td><td>2.5%</td><td>2.5%</td><td><strong>5.0%</strong></td><td>Turnover in State</td></tr>
+                    <tr><td>Service Provider (Sec 10(2A))</td><td>3.0%</td><td>3.0%</td><td><strong>6.0%</strong></td><td>Turnover in State</td></tr>
+                </tbody>
+            </table></div>
+            <p style="font-size:0.78rem;color:var(--text-light);margin-top:8px;">Rates are on aggregate turnover within the State/UT. No Input Tax Credit (ITC) can be claimed. Tax cannot be collected from customers — must be borne by supplier.</p>
+        </div>
+        <div class="card">
+            <h2>Turnover Limits — Previous FY Aggregate Turnover</h2>
+            <div class="table-scroll"><table class="limits-table">
+                <thead><tr><th>Category</th><th>Normal States</th><th>Special Category States</th></tr></thead>
+                <tbody>
+                    <tr><td>Manufacturer / Trader / Restaurant [Sec 10(1)]</td><td><strong>Rs 1.5 Crore</strong></td><td><strong>Rs 75 Lakh</strong></td></tr>
+                    <tr><td>Service Provider [Sec 10(2A)]</td><td><strong>Rs 50 Lakh</strong></td><td><strong>Rs 50 Lakh</strong></td></tr>
+                </tbody>
+            </table></div>
+            <p style="font-size:0.78rem;color:var(--text-light);margin-top:8px;">Special Category States for composition: Arunachal Pradesh, Manipur, Meghalaya, Mizoram, Nagaland, Sikkim, Tripura, Uttarakhand (as per Notification No. 14/2019-CT).</p>
+        </div>
+        <div class="card">
+            <h2>Exclusions — Who CANNOT Opt for Composition</h2>
+            <ul style="margin-left:18px;font-size:0.88rem;color:#555;line-height:1.9;">
+                <li>Person making <strong>inter-state outward supply</strong> of goods/services.</li>
+                <li>Person supplying goods/services through an <strong>e-commerce operator</strong> required to collect TCS u/s 52.</li>
+                <li>Manufacturer of <strong>notified goods</strong>: ice cream & edible ice, pan masala, aerated waters, tobacco & tobacco substitutes, fly ash bricks, bricks of fossil meal, building bricks, earthen/roofing tiles.</li>
+                <li>Casual taxable person or non-resident taxable person.</li>
+                <li>Person supplying <strong>goods which are not leviable to GST</strong> (non-taxable supply).</li>
+                <li>Service provider (other than restaurant) with turnover above Rs 50 lakh — cannot opt under Sec 10(2A).</li>
+                <li>Person supplying goods through an e-commerce operator — except under specific exemption.</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2>Compliance — Regular vs Composition Dealer</h2>
+            <div class="table-scroll"><table class="limits-table">
+                <thead><tr><th>Parameter</th><th>Regular Dealer</th><th>Composition Dealer</th></tr></thead>
+                <tbody>
+                    <tr><td>Tax Rate</td><td>Normal slabs (5/12/18/28%)</td><td>1% / 5% / 6%</td></tr>
+                    <tr><td>Input Tax Credit (ITC)</td><td>Available</td><td><strong>Not available</strong></td></tr>
+                    <tr><td>Tax Invoice</td><td>Must issue Tax Invoice</td><td>Bill of Supply (no tax shown)</td></tr>
+                    <tr><td>Tax Collection from Customer</td><td>Yes — GST charged separately</td><td><strong>No — borne by supplier</strong></td></tr>
+                    <tr><td>Returns</td><td>GSTR-1 (monthly/qtly) + GSTR-3B (monthly)</td><td><strong>CMP-08</strong> (qtly statement) + <strong>GSTR-4</strong> (annual)</td></tr>
+                    <tr><td>E-way Bill</td><td>Required</td><td>Required</td></tr>
+                    <tr><td>Inter-state Outward Supply</td><td>Allowed</td><td><strong>Not allowed</strong></td></tr>
+                    <tr><td>E-invoicing</td><td>Mandatory above Rs 5 Cr</td><td>Not applicable</td></tr>
+                    <tr><td>Reverse Charge</td><td>ITC available on RCM paid</td><td>RCM payable at normal rates, no ITC</td></tr>
+                    <tr><td>Display</td><td>No special marking</td><td>"Composition Taxable Person" on every signboard and bill</td></tr>
+                </tbody>
+            </table></div>
+        </div>
+        <div class="card">
+            <div style="background:#fef9e7;border-left:4px solid #f39c12;border-radius:8px;padding:12px 16px;">
+                <h3 style="margin-top:0;color:#b7950b;">Key Notes — Composition Scheme</h3>
+                <ul style="margin-left:18px;font-size:0.88rem;color:#555;line-height:1.8;">
+                    <li><strong>Opting in:</strong> File Form GST CMP-02 before the beginning of FY (by 31 March of preceding year). For new registration, opt at time of applying for GSTIN.</li>
+                    <li><strong>ITC reversal on opting in:</strong> Must reverse ITC on stock-in-hand (inputs, semi-finished, finished goods) as on the date of opting in — file Form GST ITC-03.</li>
+                    <li><strong>Services up to 10%:</strong> A composition dealer under Sec 10(1) can supply services up to 10% of turnover or Rs 5 lakh (whichever higher) without losing composition — e.g. labour charges, freight recovered.</li>
+                    <li><strong>Cease to qualify:</strong> Moment turnover crosses the limit, composition ceases — must file CMP-04 within 7 days and switch to regular scheme from that date.</li>
+                    <li><strong>All businesses under same PAN:</strong> If one vertical opts for composition, ALL verticals under the same PAN must opt for composition — cannot mix.</li>
+                    <li><strong>Penalty:</strong> Wrong availment of composition — tax differential + penalty equal to tax amount u/s 10(5) read with Sec 73/74.</li>
+                    <li><strong>Returns Due Dates:</strong> CMP-08 — 18th of month following quarter; GSTR-4 — 30 June following end of FY.</li>
+                </ul>
+            </div>
+        </div>
+        <p style="text-align:center;font-size:0.72rem;color:#999;margin-top:20px;padding-top:10px;border-top:1px solid #eee;">Last Updated: April 2026 | Source: CGST Act, 2017 — Section 10 | CGST Rules — Rule 3 to 7 | Notification No. 2/2019-CT(R) | Notification No. 14/2019-CT | cbic-gst.gov.in | gst.gov.in</p>
+    </div><!-- /gstreg-composition -->
 </div>
 
 <!-- ==================== IT REFUND & 244A ==================== -->
@@ -2189,6 +2405,74 @@
         </div>
     </div>
     <p style="text-align:center;font-size:0.72rem;color:#999;margin-top:20px;padding-top:10px;border-top:1px solid #eee;">Last Updated: April 2026 | Source: IT Act 1961 — Section 244A | IT Act 2025 — Section 427 | CBDT Circular No. 21/2015 | incometaxindia.gov.in | Information is indicative — always verify from official sources before advising clients.</p>
+</div>
+
+<!-- ==================== EMI CALCULATOR ==================== -->
+<div id="tab-emi" class="tab-content">
+    <div class="card">
+        <h2>EMI Calculator — Loan Repayment Schedule</h2>
+        <p style="color:var(--text-light);font-size:0.82rem;margin-bottom:14px;">Calculate Equated Monthly Instalment (EMI) for any loan — home, vehicle, personal, business. Supports both reducing balance and flat rate methods. Generates full amortisation schedule with yearly summary and downloadable PDF.</p>
+        <div class="form-row">
+            <div class="form-group"><label>Borrower Name (optional)</label><input type="text" id="emiName" placeholder="e.g. Mr Rajesh Kumar"></div>
+            <div class="form-group"><label>Loan Amount (Rs)</label><input type="number" id="emiAmount" placeholder="e.g. 5000000" step="1000"></div>
+        </div>
+        <div class="form-row">
+            <div class="form-group"><label>Annual Interest Rate (%)</label><input type="number" id="emiRate" placeholder="e.g. 8.5" step="0.01"></div>
+            <div class="form-group"><label>Loan Tenor</label><input type="number" id="emiTenor" placeholder="e.g. 20" step="1"></div>
+        </div>
+        <div class="form-row">
+            <div class="form-group"><label>Tenor Type</label><select id="emiTenorType"><option value="years">Years</option><option value="months">Months</option></select></div>
+            <div class="form-group"><label>Interest Method</label><select id="emiMethod"><option value="reducing">Reducing Balance (standard)</option><option value="flat">Flat Rate (simple)</option></select></div>
+        </div>
+        <div class="form-row">
+            <div class="form-group"><label>Loan Start Date</label><input type="date" id="emiStart"></div>
+            <div class="form-group"><label>&nbsp;</label><div class="btn-row"><button class="btn btn-primary" onclick="calcEMI()">Calculate EMI</button><button class="btn btn-reset" onclick="resetEMI()">Reset</button></div></div>
+        </div>
+        <div id="emiResult" style="display:none;">
+            <div class="emi-summary-box">
+                <h3 style="margin-top:0;color:var(--primary-mid);">Loan Summary</h3>
+                <div id="emiSummary"></div>
+                <div id="emiBar" class="emi-bar-container" style="margin-top:14px;"></div>
+            </div>
+            <div style="margin-top:18px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:10px;">
+                    <h3 style="margin:0;color:var(--primary-mid);">Amortisation Schedule</h3>
+                    <button class="btn btn-primary" onclick="downloadEMIPDF()" style="padding:8px 16px;font-size:0.85rem;">Download PDF</button>
+                </div>
+                <div class="table-scroll"><table class="emi-schedule-table" id="emiSchedule"></table></div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <h2>Quick Reference — Typical Loan Rates (Apr 2026)</h2>
+        <div class="table-scroll"><table class="limits-table">
+            <thead><tr><th>Loan Type</th><th>Typical Rate (p.a.)</th><th>Usual Tenor</th><th>Method</th></tr></thead>
+            <tbody>
+                <tr><td>Home Loan</td><td>8.35% – 9.50%</td><td>15 – 30 years</td><td>Reducing</td></tr>
+                <tr><td>Loan Against Property</td><td>9.00% – 11.00%</td><td>10 – 15 years</td><td>Reducing</td></tr>
+                <tr><td>Car Loan (new)</td><td>8.75% – 10.50%</td><td>3 – 7 years</td><td>Reducing</td></tr>
+                <tr><td>Two-Wheeler Loan</td><td>9.50% – 13.00%</td><td>1 – 4 years</td><td>Reducing</td></tr>
+                <tr><td>Personal Loan</td><td>10.50% – 18.00%</td><td>1 – 5 years</td><td>Reducing</td></tr>
+                <tr><td>Business Loan (secured)</td><td>9.00% – 13.00%</td><td>3 – 10 years</td><td>Reducing</td></tr>
+                <tr><td>Gold Loan</td><td>8.50% – 15.00%</td><td>6 months – 3 years</td><td>Reducing / Bullet</td></tr>
+                <tr><td>Education Loan</td><td>9.00% – 11.50%</td><td>5 – 15 years</td><td>Reducing (with moratorium)</td></tr>
+            </tbody>
+        </table></div>
+        <p style="font-size:0.78rem;color:var(--text-light);margin-top:8px;">Rates are indicative — actual rate varies by bank, credit score, loan amount, and borrower profile.</p>
+    </div>
+    <div class="card">
+        <div style="background:#fef9e7;border-left:4px solid #f39c12;border-radius:8px;padding:12px 16px;">
+            <h3 style="margin-top:0;color:#b7950b;">Key Notes — EMI</h3>
+            <ul style="margin-left:18px;font-size:0.88rem;color:#555;line-height:1.8;">
+                <li><strong>Reducing Balance:</strong> EMI = P × r × (1+r)<sup>n</sup> / [(1+r)<sup>n</sup> - 1], where r = monthly rate, n = months. Interest on outstanding balance — standard method used by banks.</li>
+                <li><strong>Flat Rate:</strong> EMI = (P + P × R × N/100) / (N × 12). Interest on original principal throughout — effective rate is nearly 2× the flat rate. Mostly used in vehicle/consumer finance by NBFCs.</li>
+                <li><strong>Prepayment:</strong> Floating-rate home loans by banks — zero prepayment charges (RBI directive). Fixed-rate or NBFC loans may charge 2%-5% prepayment penalty.</li>
+                <li><strong>Tax benefit on Home Loan:</strong> Section 24(b) — interest up to Rs 2 lakh; Section 80C — principal up to Rs 1.5 lakh (Old Regime only). Not available under New Regime 115BAC.</li>
+                <li><strong>EMI affordability:</strong> Total EMIs should not exceed 40%-50% of net monthly income — standard lender thumb rule (FOIR).</li>
+            </ul>
+        </div>
+    </div>
+    <p style="text-align:center;font-size:0.72rem;color:#999;margin-top:20px;padding-top:10px;border-top:1px solid #eee;">Last Updated: April 2026 | Calculator for indicative purposes only | Actual loan terms subject to bank policy, credit assessment, and regulatory norms | rbi.org.in | Ready Reckoner by CA Deepak Patni</p>
 </div>
 
 <!-- ==================== ROC COMPLIANCE ==================== -->
@@ -2301,7 +2585,8 @@
 // ==============================
 // UTILITY
 // ==============================
-function switchTab(t){document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(e=>e.classList.remove('active'));document.getElementById('tab-'+t).classList.add('active');var tabs=document.querySelectorAll('.nav-tab');for(var i=0;i<tabs.length;i++){if(tabs[i].textContent.trim()&&tabs[i].getAttribute('onclick')&&tabs[i].getAttribute('onclick').indexOf("'"+t+"'")>-1){tabs[i].classList.add('active');break;}}}
+function switchTab(t){document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(e=>e.classList.remove('active'));document.getElementById('tab-'+t).classList.add('active');var tabs=document.querySelectorAll('.nav-tab');for(var i=0;i<tabs.length;i++){if(tabs[i].textContent.trim()&&tabs[i].getAttribute('onclick')&&tabs[i].getAttribute('onclick').indexOf("'"+t+"'")>-1){tabs[i].classList.add('active');break;}}if(t==='itact2025')loadITAct();window.scrollTo({top:0,behavior:'smooth'});}
+function switchSubTab(id,btn){var parent=btn.closest('.tab-content');parent.querySelectorAll('.sub-tab-content').forEach(e=>e.classList.remove('active'));parent.querySelectorAll('.sub-tab-btn').forEach(e=>e.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
 function fmt(n){return new Intl.NumberFormat('en-IN').format(n);}
 
 // ==============================
@@ -4640,6 +4925,329 @@ searchRule37BB=function(){origRule37BB();document.querySelectorAll('#rule37bbRes
     window.scrollTo({top:0,behavior:'smooth'});
   });
 })();
+
+// ==============================
+// IT ACT 2025 — BARE ACT VIEWER
+// ==============================
+var _itActLoaded=false,_itActLoading=false,_itActCurrentFilter='';
+function loadITAct(){
+  if(_itActLoaded||_itActLoading)return;
+  _itActLoading=true;
+  var s=document.createElement('script');
+  s.src='itact2025-data.js';
+  s.onload=function(){_itActLoaded=true;_itActLoading=false;renderITAct();};
+  s.onerror=function(){_itActLoading=false;document.getElementById('itActLoading').innerHTML='<span style="color:#c0392b;">Failed to load IT Act data file. Please refresh the page.</span>';};
+  document.head.appendChild(s);
+}
+function renderITAct(){
+  var d=window.ITACT2025_DATA;
+  if(!d)return;
+  document.getElementById('itActLoading').style.display='none';
+  document.getElementById('itActChapterPills').style.display='flex';
+  document.getElementById('itActContent').style.display='block';
+  document.getElementById('itActJumpBtn').style.display='block';
+  // Populate chapter select dropdown
+  var sel=document.getElementById('itActChapterSel');
+  if(sel.options.length<=1){
+    d.chapters.forEach(function(c){
+      var o=document.createElement('option');
+      o.value=c.r;
+      o.textContent='Ch '+c.r+' — '+c.t;
+      sel.appendChild(o);
+    });
+  }
+  // Pills
+  var pills=document.getElementById('itActChapterPills');
+  pills.innerHTML='';
+  var allPill=document.createElement('div');
+  allPill.className='pill active';
+  allPill.style.background='var(--accent)';allPill.style.color='white';
+  allPill.textContent='All';
+  allPill.onclick=function(){document.getElementById('itActChapterSel').value='';filterByChapter();};
+  pills.appendChild(allPill);
+  d.chapters.forEach(function(c){
+    var p=document.createElement('div');
+    p.className='pill';
+    p.textContent='Ch '+c.r;
+    p.title=c.t;
+    p.onclick=function(){document.getElementById('itActChapterSel').value=c.r;filterByChapter();};
+    pills.appendChild(p);
+  });
+  // Render all chapters
+  var html='';
+  d.chapters.forEach(function(c){
+    html+='<div class="itact-chapter" data-ch="'+c.r+'">';
+    html+='<div class="itact-chapter-heading">CHAPTER '+c.r+' — '+escHtml(c.t)+' <span style="opacity:0.85;font-weight:normal;font-size:0.82rem;">('+c.count+' sections)</span></div>';
+    var secs=d.sections.filter(function(s){return s.c===c.n;});
+    secs.forEach(function(s){
+      html+='<div class="itact-section" data-sn="'+s.n+'" data-ch="'+c.r+'">';
+      html+='<div class="itact-section-heading" onclick="toggleITActSection(this)"><span><strong>Sec '+s.n+'.</strong> '+escHtml(s.h)+'</span><span class="toggle-arrow"></span></div>';
+      html+='<div class="itact-section-body">'+escHtml(s.b)+'</div>';
+      html+='</div>';
+    });
+    html+='</div>';
+  });
+  // Schedules
+  if(d.schedules&&d.schedules.length){
+    html+='<div class="itact-chapter" data-ch="SCH">';
+    html+='<div class="itact-chapter-heading">SCHEDULES ('+d.schedules.length+')</div>';
+    d.schedules.forEach(function(sc){
+      html+='<div class="itact-section" data-sn="SCH-'+sc.n+'" data-ch="SCH">';
+      html+='<div class="itact-section-heading" onclick="toggleITActSection(this)"><span><strong>Schedule '+sc.r+'.</strong> '+escHtml(sc.t||'')+'</span><span class="toggle-arrow"></span></div>';
+      html+='<div class="itact-section-body">'+escHtml(sc.b)+'</div>';
+      html+='</div>';
+    });
+    html+='</div>';
+  }
+  document.getElementById('itActContent').innerHTML=html;
+}
+function escHtml(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function toggleITActSection(el){el.parentElement.classList.toggle('open');}
+function filterByChapter(){
+  var v=document.getElementById('itActChapterSel').value;
+  _itActCurrentFilter=v;
+  document.querySelectorAll('#itActContent .itact-chapter').forEach(function(ch){
+    ch.style.display=(!v||ch.getAttribute('data-ch')===v)?'':'none';
+  });
+  // Update pills active state
+  var pills=document.querySelectorAll('#itActChapterPills .pill');
+  pills.forEach(function(p,i){p.classList.remove('active');});
+  if(!v){pills[0]&&pills[0].classList.add('active');}
+  else{pills.forEach(function(p){if(p.textContent==='Ch '+v)p.classList.add('active');});}
+  document.getElementById('itActResultsInfo').style.display='none';
+}
+function searchITAct(){
+  if(!_itActLoaded){loadITAct();setTimeout(searchITAct,600);return;}
+  var q=(document.getElementById('itActQuery').value||'').trim();
+  if(!q){clearITActSearch();return;}
+  var d=window.ITACT2025_DATA;
+  var qLower=q.toLowerCase();
+  var isNum=/^\d+$/.test(q);
+  var matches=0,firstMatch=null;
+  // Clear existing highlights
+  document.querySelectorAll('#itActContent .itact-section').forEach(function(sec){
+    var sn=sec.getAttribute('data-sn');
+    var head=sec.querySelector('.itact-section-heading');
+    var body=sec.querySelector('.itact-section-body');
+    var show=false;
+    if(isNum&&String(sn)===q){show=true;}
+    else if(!isNum){
+      if(head.textContent.toLowerCase().indexOf(qLower)>-1||body.textContent.toLowerCase().indexOf(qLower)>-1)show=true;
+    }
+    if(show){
+      sec.style.display='';
+      sec.classList.add('open');
+      matches++;
+      if(!firstMatch)firstMatch=sec;
+    }else{
+      sec.style.display='none';
+      sec.classList.remove('open');
+    }
+  });
+  // Show only chapters that have visible sections
+  document.querySelectorAll('#itActContent .itact-chapter').forEach(function(ch){
+    var any=ch.querySelectorAll('.itact-section:not([style*="display: none"])').length>0;
+    ch.style.display=any?'':'none';
+  });
+  var info=document.getElementById('itActResultsInfo');
+  info.style.display='block';
+  info.innerHTML='<strong>'+matches+'</strong> match'+(matches===1?'':'es')+' for "'+escHtml(q)+'". <a href="#" onclick="clearITActSearch();return false;" style="color:var(--accent);">Clear</a>';
+  if(firstMatch){setTimeout(function(){firstMatch.scrollIntoView({behavior:'smooth',block:'start'});},100);}
+}
+function clearITActSearch(){
+  document.getElementById('itActQuery').value='';
+  document.getElementById('itActChapterSel').value='';
+  _itActCurrentFilter='';
+  document.querySelectorAll('#itActContent .itact-section').forEach(function(sec){
+    sec.style.display='';
+    sec.classList.remove('open');
+  });
+  document.querySelectorAll('#itActContent .itact-chapter').forEach(function(ch){ch.style.display='';});
+  document.getElementById('itActResultsInfo').style.display='none';
+  var pills=document.querySelectorAll('#itActChapterPills .pill');
+  pills.forEach(function(p,i){p.classList.remove('active');if(i===0)p.classList.add('active');});
+}
+
+// ==============================
+// EMI CALCULATOR
+// ==============================
+var _lastEMI=null;
+function calcEMI(){
+  var name=document.getElementById('emiName').value.trim();
+  var P=parseFloat(document.getElementById('emiAmount').value);
+  var R=parseFloat(document.getElementById('emiRate').value);
+  var T=parseFloat(document.getElementById('emiTenor').value);
+  var TT=document.getElementById('emiTenorType').value;
+  var M=document.getElementById('emiMethod').value;
+  var startStr=document.getElementById('emiStart').value;
+  if(!P||P<=0||!R||R<0||!T||T<=0){alert('Please enter valid Loan Amount, Rate and Tenor.');return;}
+  var n=TT==='years'?Math.round(T*12):Math.round(T);
+  var r=R/12/100;
+  var emi,totalInt,totalPay;
+  var schedule=[];
+  var start=startStr?new Date(startStr):new Date();
+  var balance=P;
+  if(M==='reducing'){
+    if(r===0){emi=P/n;}else{emi=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);}
+    for(var i=1;i<=n;i++){
+      var intPart=balance*r;
+      var prinPart=emi-intPart;
+      if(i===n){prinPart=balance;emi=prinPart+intPart;}
+      balance=Math.max(0,balance-prinPart);
+      var d=new Date(start.getFullYear(),start.getMonth()+i-1,start.getDate());
+      schedule.push({i:i,date:d,emi:emi,prin:prinPart,int:intPart,bal:balance});
+    }
+    totalPay=schedule.reduce(function(a,b){return a+b.emi;},0);
+    totalInt=totalPay-P;
+    emi=schedule[0].emi;
+  }else{
+    // Flat
+    totalInt=P*R*(n/12)/100;
+    totalPay=P+totalInt;
+    emi=totalPay/n;
+    var fp=P/n,fi=totalInt/n;
+    for(var i=1;i<=n;i++){
+      balance=Math.max(0,balance-fp);
+      var d=new Date(start.getFullYear(),start.getMonth()+i-1,start.getDate());
+      schedule.push({i:i,date:d,emi:emi,prin:fp,int:fi,bal:balance});
+    }
+  }
+  _lastEMI={name:name,P:P,R:R,n:n,T:T,TT:TT,M:M,start:start,emi:emi,totalInt:totalInt,totalPay:totalPay,schedule:schedule};
+  // Render summary
+  var pctP=(P/totalPay*100).toFixed(1);
+  var pctI=(totalInt/totalPay*100).toFixed(1);
+  var sHtml='<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:0.92rem;">';
+  if(name)sHtml+='<div style="grid-column:1/-1;"><strong>Borrower:</strong> '+escHtml(name)+'</div>';
+  sHtml+='<div><strong>Loan Amount:</strong> Rs '+fmt(Math.round(P))+'</div>';
+  sHtml+='<div><strong>Interest Rate:</strong> '+R+'% p.a. ('+(M==='reducing'?'Reducing':'Flat')+')</div>';
+  sHtml+='<div><strong>Tenor:</strong> '+n+' months ('+(n/12).toFixed(1)+' years)</div>';
+  sHtml+='<div><strong>Start Date:</strong> '+start.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})+'</div>';
+  sHtml+='<div style="color:var(--accent);font-size:1.1rem;"><strong>Monthly EMI:</strong> Rs '+fmt(Math.round(emi))+'</div>';
+  sHtml+='<div><strong>Total Interest:</strong> Rs '+fmt(Math.round(totalInt))+'</div>';
+  sHtml+='<div style="grid-column:1/-1;"><strong>Total Payment:</strong> Rs '+fmt(Math.round(totalPay))+' <span style="color:var(--text-light);font-size:0.85rem;">(Principal + Interest)</span></div>';
+  sHtml+='</div>';
+  document.getElementById('emiSummary').innerHTML=sHtml;
+  // Bar
+  document.getElementById('emiBar').innerHTML='<div class="emi-bar-principal" style="width:'+pctP+'%;">Principal '+pctP+'%</div><div class="emi-bar-interest" style="width:'+pctI+'%;">Interest '+pctI+'%</div>';
+  // Schedule table with yearly summaries
+  var tHtml='<thead><tr><th>#</th><th>Month</th><th>EMI</th><th>Principal</th><th>Interest</th><th>Balance</th></tr></thead><tbody>';
+  var curYear=null,yrPrin=0,yrInt=0,yrEmi=0;
+  schedule.forEach(function(row,idx){
+    var y=row.date.getFullYear();
+    if(curYear===null)curYear=y;
+    if(y!==curYear){
+      tHtml+='<tr class="year-summary"><td colspan="2">Total '+curYear+'</td><td>Rs '+fmt(Math.round(yrEmi))+'</td><td>Rs '+fmt(Math.round(yrPrin))+'</td><td>Rs '+fmt(Math.round(yrInt))+'</td><td></td></tr>';
+      curYear=y;yrPrin=0;yrInt=0;yrEmi=0;
+    }
+    tHtml+='<tr><td>'+row.i+'</td><td>'+row.date.toLocaleDateString('en-IN',{month:'short',year:'numeric'})+'</td><td>Rs '+fmt(Math.round(row.emi))+'</td><td>Rs '+fmt(Math.round(row.prin))+'</td><td>Rs '+fmt(Math.round(row.int))+'</td><td>Rs '+fmt(Math.round(row.bal))+'</td></tr>';
+    yrPrin+=row.prin;yrInt+=row.int;yrEmi+=row.emi;
+  });
+  tHtml+='<tr class="year-summary"><td colspan="2">Total '+curYear+'</td><td>Rs '+fmt(Math.round(yrEmi))+'</td><td>Rs '+fmt(Math.round(yrPrin))+'</td><td>Rs '+fmt(Math.round(yrInt))+'</td><td></td></tr>';
+  tHtml+='</tbody>';
+  document.getElementById('emiSchedule').innerHTML=tHtml;
+  document.getElementById('emiResult').style.display='block';
+  document.getElementById('emiResult').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function resetEMI(){
+  ['emiName','emiAmount','emiRate','emiTenor','emiStart'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('emiTenorType').value='years';
+  document.getElementById('emiMethod').value='reducing';
+  document.getElementById('emiResult').style.display='none';
+  _lastEMI=null;
+}
+function downloadEMIPDF(){
+  if(!_lastEMI){alert('Please calculate EMI first.');return;}
+  if(typeof window.jspdf==='undefined'){alert('PDF library not loaded. Please check your internet connection and refresh.');return;}
+  var jsPDF=window.jspdf.jsPDF;
+  var doc=new jsPDF('p','mm','a4');
+  var e=_lastEMI;
+  doc.setFontSize(16);doc.setTextColor(0,120,120);
+  doc.text('EMI — Loan Amortisation Schedule',14,18);
+  doc.setFontSize(9);doc.setTextColor(100);
+  doc.text('Generated by Ready Reckoner | CA Deepak Patni',14,24);
+  doc.setFontSize(10);doc.setTextColor(0);
+  var y=32;
+  if(e.name){doc.text('Borrower: '+e.name,14,y);y+=6;}
+  doc.text('Loan Amount: Rs '+fmt(Math.round(e.P)),14,y);y+=5;
+  doc.text('Interest Rate: '+e.R+'% p.a. ('+(e.M==='reducing'?'Reducing Balance':'Flat Rate')+')',14,y);y+=5;
+  doc.text('Tenor: '+e.n+' months ('+(e.n/12).toFixed(1)+' years)',14,y);y+=5;
+  doc.text('Start Date: '+e.start.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}),14,y);y+=5;
+  doc.setTextColor(0,120,120);
+  doc.text('Monthly EMI: Rs '+fmt(Math.round(e.emi)),14,y);y+=5;
+  doc.setTextColor(0);
+  doc.text('Total Interest: Rs '+fmt(Math.round(e.totalInt)),14,y);y+=5;
+  doc.text('Total Payment: Rs '+fmt(Math.round(e.totalPay)),14,y);y+=5;
+  // Build table rows with yearly summaries
+  var rows=[],curYear=null,yrP=0,yrI=0,yrE=0;
+  e.schedule.forEach(function(r){
+    var yr=r.date.getFullYear();
+    if(curYear===null)curYear=yr;
+    if(yr!==curYear){
+      rows.push([{content:'Total '+curYear,colSpan:2,styles:{fillColor:[209,242,235],fontStyle:'bold'}},{content:'Rs '+fmt(Math.round(yrE)),styles:{fillColor:[209,242,235],fontStyle:'bold'}},{content:'Rs '+fmt(Math.round(yrP)),styles:{fillColor:[209,242,235],fontStyle:'bold'}},{content:'Rs '+fmt(Math.round(yrI)),styles:{fillColor:[209,242,235],fontStyle:'bold'}},{content:'',styles:{fillColor:[209,242,235]}}]);
+      curYear=yr;yrP=0;yrI=0;yrE=0;
+    }
+    rows.push([r.i,r.date.toLocaleDateString('en-IN',{month:'short',year:'numeric'}),'Rs '+fmt(Math.round(r.emi)),'Rs '+fmt(Math.round(r.prin)),'Rs '+fmt(Math.round(r.int)),'Rs '+fmt(Math.round(r.bal))]);
+    yrP+=r.prin;yrI+=r.int;yrE+=r.emi;
+  });
+  rows.push([{content:'Total '+curYear,colSpan:2,styles:{fillColor:[209,242,235],fontStyle:'bold'}},{content:'Rs '+fmt(Math.round(yrE)),styles:{fillColor:[209,242,235],fontStyle:'bold'}},{content:'Rs '+fmt(Math.round(yrP)),styles:{fillColor:[209,242,235],fontStyle:'bold'}},{content:'Rs '+fmt(Math.round(yrI)),styles:{fillColor:[209,242,235],fontStyle:'bold'}},{content:'',styles:{fillColor:[209,242,235]}}]);
+  doc.autoTable({
+    startY:y+3,
+    head:[['#','Month','EMI','Principal','Interest','Balance']],
+    body:rows,
+    styles:{fontSize:8,cellPadding:1.8},
+    headStyles:{fillColor:[0,120,120],textColor:255},
+    columnStyles:{0:{cellWidth:10},1:{cellWidth:22}},
+    margin:{left:14,right:14}
+  });
+  var pg=doc.internal.getNumberOfPages();
+  for(var i=1;i<=pg;i++){doc.setPage(i);doc.setFontSize(7);doc.setTextColor(150);doc.text('Page '+i+' of '+pg+' | Ready Reckoner — EMI Calculator | Indicative only',14,290);}
+  var fn='EMI-Schedule-'+(e.name?e.name.replace(/[^a-z0-9]/gi,'_'):'Loan')+'.pdf';
+  doc.save(fn);
+}
+
+// ==============================
+// GST COMPOSITION ELIGIBILITY CHECKER
+// ==============================
+function checkComposition(){
+  var state=document.getElementById('compState').value;
+  var nat=document.getElementById('compNature').value;
+  var to=parseFloat(document.getElementById('compTurnover').value)||0;
+  var inter=document.getElementById('compInterstate').value;
+  var ecom=document.getElementById('compEcom').value;
+  var notif=document.getElementById('compNotified').value;
+  var res=document.getElementById('compResult');
+  var goodsLimit=state==='special'?7500000:15000000;
+  var serviceLimit=5000000;
+  var ok=true,reasons=[],scheme='',rate='';
+  if(inter==='yes'){ok=false;reasons.push('Inter-state outward supply — not allowed under composition (any category).');}
+  if(ecom==='yes'){ok=false;reasons.push('Supplies through e-commerce operator required to collect TCS — excluded from composition.');}
+  if(nat==='manufacturer'&&notif==='yes'){ok=false;reasons.push('Manufacturer of notified goods (ice cream, pan masala, tobacco, aerated waters, bricks etc.) — excluded.');}
+  if(nat==='service'){
+    if(to>serviceLimit){ok=false;reasons.push('Service provider turnover '+fmt(to)+' exceeds limit of Rs 50 lakh under Sec 10(2A).');}
+    scheme='Section 10(2A) — Service Provider';rate='6% (3% CGST + 3% SGST)';
+  }else if(nat==='restaurant'){
+    if(to>goodsLimit){ok=false;reasons.push('Restaurant turnover '+fmt(to)+' exceeds limit of Rs '+(goodsLimit/10000000)+' Cr.');}
+    scheme='Section 10(1) — Restaurant';rate='5% (2.5% CGST + 2.5% SGST)';
+  }else if(nat==='manufacturer'){
+    if(to>goodsLimit){ok=false;reasons.push('Manufacturer turnover '+fmt(to)+' exceeds limit of Rs '+(goodsLimit/10000000)+' Cr.');}
+    scheme='Section 10(1) — Manufacturer';rate='1% (0.5% CGST + 0.5% SGST)';
+  }else if(nat==='trader'){
+    if(to>goodsLimit){ok=false;reasons.push('Trader turnover '+fmt(to)+' exceeds limit of Rs '+(goodsLimit/10000000)+' Cr.');}
+    scheme='Section 10(1) — Trader';rate='1% (0.5% CGST + 0.5% SGST)';
+  }else if(nat==='mixed'){
+    if(to>goodsLimit){ok=false;reasons.push('Mixed supply turnover '+fmt(to)+' exceeds goods limit Rs '+(goodsLimit/10000000)+' Cr.');}
+    scheme='Section 10(1) — Mixed (services up to 10% of turnover or Rs 5L allowed)';rate='1% on goods turnover';
+  }
+  if(ok){
+    res.className='result-box';
+    res.style.background='#d5f5e3';res.style.borderLeft='4px solid #27ae60';
+    res.innerHTML='<h3 style="color:#196f3d;margin-top:0;">Eligible for Composition Scheme</h3><div style="font-size:0.92rem;line-height:1.8;"><strong>Scheme:</strong> '+scheme+'<br><strong>Tax Rate:</strong> '+rate+'<br><strong>Turnover:</strong> Rs '+fmt(to)+' (within limit)<br><strong>Returns:</strong> CMP-08 quarterly + GSTR-4 annually<br><strong>Action:</strong> File Form GST CMP-02 to opt in. Reverse ITC on closing stock via ITC-03.</div>';
+  }else{
+    res.className='result-box';
+    res.style.background='#fadbd8';res.style.borderLeft='4px solid #c0392b';
+    res.innerHTML='<h3 style="color:#922b21;margin-top:0;">Not Eligible for Composition Scheme</h3><ul style="font-size:0.9rem;line-height:1.8;margin-left:18px;">'+reasons.map(function(r){return '<li>'+r+'</li>';}).join('')+'</ul><p style="font-size:0.88rem;margin-top:8px;"><strong>Must register under regular scheme</strong> — charge GST at normal rates, claim ITC, file GSTR-1 + GSTR-3B.</p>';
+  }
+}
 
 </script>
 </body>
