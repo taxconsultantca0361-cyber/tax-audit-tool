@@ -176,54 +176,6 @@
         .sub-tab-btn.active { background:var(--accent); color:white; border-bottom:3px solid var(--accent); }
         .sub-tab-btn:hover:not(.active) { background:#e8f8f5; color:var(--accent); }
 
-        /* IT Act 2025 tab */
-        .itact-search-bar { position:sticky; top:0; z-index:100; background:white; padding:12px 0; border-bottom:2px solid var(--accent); display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
-        .itact-search-bar input[type="text"] { flex:1; min-width:200px; padding:10px 12px; font-size:0.9rem; border:1px solid #ddd; border-radius:6px; }
-        .itact-search-bar select { padding:10px 12px; font-size:0.9rem; border:1px solid #ddd; border-radius:6px; background:white; }
-        .itact-chapter-pills { display:flex; gap:6px; overflow-x:auto; padding:10px 0; margin-bottom:16px; -webkit-overflow-scrolling:touch; }
-        .itact-chapter-pills .pill { flex-shrink:0; padding:6px 12px; background:#e8f8f5; color:var(--accent); border-radius:14px; cursor:pointer; font-size:0.78rem; font-weight:600; border:1px solid transparent; white-space:nowrap; }
-        .itact-chapter-pills .pill:hover { background:var(--accent); color:white; }
-        .itact-chapter { margin-bottom:32px; }
-        .itact-chapter-heading { background:var(--accent); color:white; padding:10px 16px; border-radius:6px; font-size:1rem; font-weight:700; margin-bottom:16px; }
-        .itact-section { border:1px solid #e0e0e0; border-radius:6px; margin-bottom:10px; overflow:hidden; }
-        .itact-section-headinging { background:#f5f5f5; padding:10px 14px; font-size:0.92rem; font-weight:600; color:#2c3e50; cursor:pointer; border-bottom:1px solid #e0e0e0; display:flex; justify-content:space-between; align-items:center; gap:10px; }
-        .itact-section-headinging:hover { background:#e8f8f5; }
-        .itact-section-headinging .toggle-arrow { font-size:0.75rem; color:var(--accent); flex-shrink:0; }
-        .itact-section-body { padding:14px 16px; font-size:0.88rem; line-height:1.75; color:#333; display:none; white-space:pre-wrap; font-family:Georgia,serif; max-height:600px; overflow-y:auto; }
-        .itact-section.open .itact-section-body { display:block; }
-        .itact-section.open .itact-section-headinging .toggle-arrow::before { content:'▲'; }
-        .itact-section:not(.open) .itact-section-headinging .toggle-arrow::before { content:'▼'; }
-        .itact-highlight { background:#fff176; border-radius:2px; padding:0 2px; }
-        #itActJump { position:fixed; bottom:80px; right:20px; z-index:999; background:white; border:1px solid var(--accent); border-radius:8px; padding:8px; box-shadow:0 2px 8px rgba(0,0,0,0.15); display:flex; gap:4px; }
-        #itActJump input { width:120px; padding:6px 8px; font-size:0.82rem; border:1px solid #ddd; border-radius:4px; }
-        #itActJump button { padding:6px 10px; font-size:0.82rem; }
-        .itact-loading { text-align:center; padding:40px; color:var(--text-light); }
-        .itact-stats { padding:8px 14px; background:#f9fbfc; border-left:3px solid var(--accent); margin-bottom:14px; font-size:0.82rem; color:var(--text-light); border-radius:4px; }
-
-        /* IT Act 2025 — table display fix */
-        .itact-section-body table {
-          font-size: 0.72rem;
-          border-collapse: collapse;
-          min-width: 400px;
-          width: 100%;
-        }
-        .itact-section-body table th,
-        .itact-section-body table td {
-          border: 1px solid #ccc;
-          padding: 5px 8px;
-          vertical-align: top;
-          line-height: 1.4;
-        }
-        .itact-section-body table th {
-          background: #f0f4f8;
-          font-weight: 600;
-          text-align: left;
-        }
-        .itact-section-body .table-overflow-wrap {
-          overflow-x: auto;
-          -webkit-overflow-scrolling: touch;
-          width: 100%;
-        }
 
         /* EMI Calculator */
         .emi-summary-box { background:#f9fbfc; border:1px solid #e0e0e0; border-radius:8px; padding:18px 20px; margin:18px 0; }
@@ -245,37 +197,20 @@
         @media(max-width:768px) {
             .sub-tab-nav { gap:6px; }
             .sub-tab-btn { padding:8px 12px; font-size:0.82rem; flex:1; }
-            .itact-search-bar { padding:10px 0; }
-            .itact-search-bar input[type="text"], .itact-search-bar select, .itact-search-bar .btn { width:100%; min-width:unset; }
-            .itact-chapter-heading { font-size:0.9rem; padding:8px 12px; }
-            .itact-section-headinging { font-size:0.84rem; padding:10px 12px; }
-            .itact-section-body { font-size:0.82rem; padding:12px; max-height:500px; }
-            #itActJump { bottom:70px; right:10px; padding:6px; }
-            #itActJump input { width:90px; }
+            #tab-gstreg .form-row { grid-template-columns:1fr; }
+            #compResult table { font-size:0.8rem; }
+            #compResult td, #compResult th { padding:6px 8px; }
             #tab-emi .emi-summary-box { padding:14px 16px; font-size:0.85rem; }
-            #tab-emi .emi-schedule-table { font-size:0.72rem; min-width:620px; }
-            #tab-emi .emi-schedule-table th, #tab-emi .emi-schedule-table td { padding:5px 4px; }
-            /* Smart Search dropdown */
-            #smartKeywordDrop { width:100%; font-size:15px; padding:10px 8px; }
-            /* Composition result box */
-            #compResult table { font-size:0.82rem; width:100%; }
-            /* IT Act search bar */
-            #itActSearch { width:100%; margin-bottom:8px; }
-            #itActChapterFilter { width:100%; margin-bottom:8px; }
-            .itact-section-body table { font-size:0.65rem; min-width:360px; }
-            .itact-section-body table th, .itact-section-body table td { padding:4px 6px; }
+            #tab-emi .emi-schedule-table { font-size:0.7rem; min-width:580px; }
+            #tab-emi .emi-schedule-table th, #tab-emi .emi-schedule-table td { padding:4px 5px; }
+            #smartKeywordDrop { width:100%; font-size:15px; margin-bottom:8px; }
+            #smartQ { width:100%; }
         }
         @media(max-width:480px) {
             .sub-tab-nav { flex-direction:column; }
             .sub-tab-btn { width:100%; border-radius:6px; }
-            .itact-chapter-heading { font-size:0.82rem; }
-            .itact-section-headinging { font-size:0.8rem; }
-            .itact-section-body { font-size:0.78rem; line-height:1.65; }
-            #tab-emi .emi-schedule-table { font-size:0.66rem; min-width:580px; }
-            #smartKeywordDrop { font-size:14px; }
-            .itact-section-heading { font-size:0.8rem; padding:8px 10px; }
-            #tab-composition .form-row { grid-template-columns:1fr; }
-            .tool-card { padding:14px 10px; font-size:0.85rem; }
+            #compResult table { font-size:0.72rem; }
+            #tab-emi .emi-schedule-table { font-size:0.62rem; min-width:520px; }
         }
 
         /* Warning/alert boxes */
@@ -366,7 +301,6 @@
     <div class="nav-tab" onclick="switchTab('capgain')">Capital Gains</div>
     <div class="nav-tab" onclick="switchTab('intpenalty')">Interest 234A/B/C</div>
     <div class="nav-tab" onclick="switchTab('impact')">Impact Analyzer</div>
-    <div class="nav-tab" onclick="switchTab('itact2025')">IT Act 2025</div>
     <div class="nav-tab" onclick="switchTab('itrform')">ITR Applicability</div>
     <div class="nav-tab" onclick="switchTab('15ca')">Form 15CA/15CB</div>
     <div class="nav-tab" onclick="switchTab('penalty')">Penalties</div>
@@ -376,7 +310,6 @@
     <div class="nav-tab" onclick="switchTab('gstreg')">GST Registration</div>
     <div class="nav-tab" onclick="switchTab('refund')">IT Refund & 244A</div>
     <div class="nav-tab" onclick="switchTab('emi')">EMI Calculator</div>
-    <div class="nav-tab" onclick="switchTab('composition')">GST Composition</div>
     <div class="nav-tab" onclick="switchTab('roc')">ROC Compliance</div>
     <div class="nav-tab" onclick="switchTab('smartsearch')">Smart Search</div>
     <div class="nav-tab" onclick="switchTab('calendar')">Compliance Calendar</div>
@@ -443,12 +376,6 @@
                 <div style="font-size:1.8rem;">🔎</div><div style="font-weight:700;margin-top:6px;font-size:0.88rem;">Smart Search</div><div style="font-size:0.72rem;opacity:0.8;margin-top:3px;">Cross-Reference Guide</div></div>
             <div onclick="switchTab('calendar')" style="cursor:pointer;background:linear-gradient(135deg,#2d3436,#636e72);color:white;border-radius:12px;padding:22px 14px;transition:transform 0.2s;box-shadow:0 3px 10px rgba(0,0,0,0.12);" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
                 <div style="font-size:1.8rem;">📅</div><div style="font-weight:700;margin-top:6px;font-size:0.88rem;">Compliance Calendar</div><div style="font-size:0.72rem;opacity:0.8;margin-top:3px;">Tax Year 2026-27</div></div>
-            <div onclick="switchTab('itact2025')" style="cursor:pointer;background:linear-gradient(135deg,#2c3e50,#34495e);color:white;border-radius:12px;padding:22px 14px;transition:transform 0.2s;box-shadow:0 3px 10px rgba(0,0,0,0.12);" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
-                <div style="font-size:1.8rem;">📜</div><div style="font-weight:700;margin-top:6px;font-size:0.88rem;">IT Act 2025</div><div style="font-size:0.72rem;opacity:0.8;margin-top:3px;">Bare Act — All 536 Sections & 16 Schedules</div></div>
-            <div onclick="switchTab('emi')" style="cursor:pointer;background:linear-gradient(135deg,#8e44ad,#9b59b6);color:white;border-radius:12px;padding:22px 14px;transition:transform 0.2s;box-shadow:0 3px 10px rgba(0,0,0,0.12);" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
-                <div style="font-size:1.8rem;">🏦</div><div style="font-weight:700;margin-top:6px;font-size:0.88rem;">EMI Calculator</div><div style="font-size:0.72rem;opacity:0.8;margin-top:3px;">Loan Repayment Schedule + PDF Download</div></div>
-            <div onclick="switchTab('composition')" style="cursor:pointer;background:linear-gradient(135deg,#16a085,#1abc9c);color:white;border-radius:12px;padding:22px 14px;transition:transform 0.2s;box-shadow:0 3px 10px rgba(0,0,0,0.12);" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
-                <div style="font-size:1.8rem;">🧾</div><div style="font-weight:700;margin-top:6px;font-size:0.88rem;">GST Composition</div><div style="font-size:0.72rem;opacity:0.8;margin-top:3px;">Eligibility, Rates & Conditions</div></div>
         </div>
         <p style="color:var(--text-light);font-size:0.82rem;margin-top:20px;">💡 <strong>Tip:</strong> Use the tab bar above to quickly switch between any section. All data sourced from official notifications.</p>
     </div>
@@ -476,7 +403,6 @@
                 <tr onclick="switchTab('capgain')" style="cursor:pointer;"><td><strong>Capital Gains</strong></td><td>LTCG/STCG calculator with post-23.07.2024 rules — 12.5% LTCG (no indexation), 20% STCG on equity. Covers property, shares, mutual funds. Includes Sec 54/54EC exemption computation and grandfathering.</td></tr>
                 <tr onclick="switchTab('intpenalty')" style="cursor:pointer;"><td><strong>Interest 234A/B/C</strong></td><td>Auto-calculates interest under Sec 234A (late filing), 234B (advance tax shortfall), and 234C (deferment of advance tax instalments). Enter dates, tax amounts, and get month-wise interest breakdown.</td></tr>
                 <tr onclick="switchTab('impact')" style="cursor:pointer;"><td><strong>Impact Analyzer</strong></td><td>Personalised impact assessment of IT Act 2025 on your practice. Select client type (salaried, business, company, NRI, etc.) and get a detailed report of what changes, new section numbers, and action items.</td></tr>
-                <tr onclick="switchTab('itact2025')" style="cursor:pointer;"><td><strong>IT Act 2025</strong></td><td>Full searchable bare act reader for the Income Tax Act, 2025 (Act No. 14 of 2025). 23 Chapters, 615+ Sections, 16 Schedules with instant section-number / keyword search, chapter filter, and collapsible sections for quick reading.</td></tr>
                 <tr onclick="switchTab('itrform')" style="cursor:pointer;"><td><strong>ITR Applicability</strong></td><td>Answer a few questions (income type, turnover, status) and get the correct ITR form (ITR-1 to ITR-7) for AY 2026-27. Includes filing due dates, late fee u/s 234F, and checklist of documents needed.</td></tr>
                 <tr onclick="switchTab('15ca')" style="cursor:pointer;"><td><strong>Form 15CA/15CB</strong></td><td>Foreign remittance compliance checker — enter payment details, amount, and nature to know if Form 15CA/15CB is required, which Part (A/B/C/D) applies, and if Rule 37BB exemption covers the payment. Includes 80+ DTAA country dropdown.</td></tr>
                 <tr onclick="switchTab('penalty')" style="cursor:pointer;"><td><strong>Penalties</strong></td><td>Complete penalty and prosecution reference — Sec 270A/271/271B/271C/276B and more. Searchable table with Old Act vs New Act 2025 mapping, quantum of penalty, prosecution thresholds, and defence strategies.</td></tr>
@@ -489,13 +415,10 @@
                 <tr onclick="switchTab('roc')" style="cursor:pointer;"><td><strong>ROC Compliance</strong></td><td>Annual filing tracker for 5 entity types — Pvt Ltd, Public, OPC, Section 8, and LLP. Shows all forms (AOC-4, MGT-7, ADT-1, DIR-3 KYC, etc.) with due dates, fees, and penalty estimator for delayed filings.</td></tr>
                 <tr onclick="switchTab('smartsearch')" style="cursor:pointer;"><td><strong>Smart Search</strong></td><td>Cross-reference search engine — type any topic (cash payment, TDS, MSME, partnership, donation, export, ROC, etc.) and get its impact across Income Tax, GST, Companies Act, Form 3CD, and practical tips in one table.</td></tr>
                 <tr onclick="switchTab('calendar')" style="cursor:pointer;"><td><strong>Compliance Calendar</strong></td><td>Month-wise compliance calendar for Tax Year 2026-27. Covers IT return due dates, advance tax instalments, TDS deposit dates, GST return dates, ROC filings, and other statutory deadlines — all in one view.</td></tr>
-                <tr onclick="switchTab('itact2025')" style="cursor:pointer;"><td><strong>IT Act 2025</strong></td><td>Full searchable bare act reader for the Income Tax Act, 2025. All 536 sections across 24 chapters with instant section-number / keyword search, chapter filter, and collapsible sections. 16 Schedules included.</td></tr>
-                <tr onclick="switchTab('emi')" style="cursor:pointer;"><td><strong>EMI Calculator</strong></td><td>Loan EMI calculator for home, vehicle, personal & business loans. Reducing balance and flat rate methods. Generates full month-wise amortisation schedule with one grand total row and downloadable PDF.</td></tr>
-                <tr onclick="switchTab('composition')" style="cursor:pointer;"><td><strong>GST Composition</strong></td><td>Standalone GST Composition Scheme guide — eligibility checker with full Section 10 logic, rate table, turnover limits, exclusion list, compliance comparison (Regular vs Composition), and key notes.</td></tr>
             </tbody>
         </table>
         </div>
-        <p style="color:var(--text-light);font-size:0.78rem;margin-top:12px;text-align:center;">31 tools | All data sourced from incometaxindia.gov.in, cbic-gst.gov.in, mca.gov.in | Ready Reckoner by CA Deepak Patni</p>
+        <p style="color:var(--text-light);font-size:0.78rem;margin-top:12px;text-align:center;">27 tools | All data sourced from incometaxindia.gov.in, cbic-gst.gov.in, mca.gov.in | Ready Reckoner by CA Deepak Patni</p>
     </div>
 </div>
 
@@ -1390,39 +1313,6 @@
     </div>
 </div>
 
-<!-- ==================== IT ACT 2025 BARE ACT VIEWER ==================== -->
-<div id="tab-itact2025" class="tab-content">
-    <div class="card">
-        <h2>Income Tax Act, 2025 — Bare Act (Act No. 14 of 2025)</h2>
-        <p style="color:var(--text-light);font-size:0.82rem;margin-bottom:14px;">Full text of the Income Tax Act, 2025 as notified in the Official Gazette on 29.03.2025 and amended by the Finance Act, 2026. Effective 01.04.2026. Source: <a href="https://egazette.gov.in" target="_blank" style="color:var(--accent);">egazette.gov.in</a> | <a href="https://incometaxindia.gov.in" target="_blank" style="color:var(--accent);">incometaxindia.gov.in</a></p>
-        <div class="itact-search-bar">
-            <div class="form-row">
-                <div class="form-group" style="flex:2;"><label>Search (section no. / keyword / heading)</label><input type="text" id="itActQuery" placeholder="e.g. 63, tax audit, presumptive, depreciation" onkeydown="if(event.key==='Enter')searchITAct()"></div>
-                <div class="form-group"><label>Filter by Chapter</label><select id="itActChapterSel" onchange="filterByChapter()"><option value="">All Chapters</option></select></div>
-            </div>
-            <div class="btn-row"><button class="btn btn-primary" onclick="searchITAct()">Search</button><button class="btn btn-reset" onclick="clearITActSearch()">Clear</button></div>
-        </div>
-        <div id="itActLoading" style="text-align:center;padding:40px;color:var(--text-light);">Loading Income Tax Act 2025 (approx. 2 MB)... one moment.</div>
-        <div id="itActChapterPills" class="itact-chapter-pills" style="display:none;"></div>
-        <div id="itActResultsInfo" style="display:none;font-size:0.85rem;color:var(--text-light);margin:8px 0;"></div>
-        <div id="itActContent" style="display:none;"></div>
-    </div>
-    <div class="card">
-        <div style="background:#fef9e7;border-left:4px solid #f39c12;border-radius:8px;padding:12px 16px;">
-            <h3 style="margin-top:0;color:#b7950b;">Key Notes — IT Act 2025</h3>
-            <ul style="margin-left:18px;font-size:0.88rem;color:#555;line-height:1.8;">
-                <li><strong>Effective date:</strong> 01.04.2026 (AY 2026-27 onwards). Existing IT Act 1961 continues for AY 2025-26 and prior years.</li>
-                <li><strong>Structure:</strong> 23 Chapters, 615+ Sections, 16 Schedules — consolidates and simplifies the 1961 Act (298 sections) with modern drafting.</li>
-                <li><strong>Use Section Finder tab</strong> for quick mapping between Old Act 1961 sections and New Act 2025 sections.</li>
-                <li><strong>Reading tip:</strong> Click any section heading to expand/collapse. Use the search bar above to jump directly by section number or keyword.</li>
-                <li><strong>Disclaimer:</strong> This is a reader for quick reference. For legal proceedings always refer to the official gazette copy at egazette.gov.in.</li>
-            </ul>
-        </div>
-    </div>
-    <button id="itActJumpBtn" onclick="document.getElementById('itActQuery').focus();window.scrollTo({top:0,behavior:'smooth'});" style="display:none;">↑ Search</button>
-    <p style="text-align:center;font-size:0.72rem;color:#999;margin-top:20px;padding-top:10px;border-top:1px solid #eee;">Last Updated: April 2026 | Source: Income Tax Act, 2025 (Act No. 14 of 2025), as amended by Finance Act 2026 | egazette.gov.in | incometaxindia.gov.in | Information is indicative — always verify from official sources before advising clients.</p>
-</div>
-
 <!-- ==================== ITR FORM APPLICABILITY ==================== -->
 <div id="tab-itrform" class="tab-content">
     <div class="card">
@@ -1515,85 +1405,7 @@
         <h2>Smart Search — Cross-Reference Guide</h2>
         <p style="color:var(--text-light);margin-bottom:6px;">Search any topic and get its impact across IT Act, Companies Act, GST, Form 3CD, and compliance requirements.</p>
         <p style="color:var(--text-light);margin-bottom:14px;font-size:0.82rem;">Type a keyword like "cash payment", "ESIC", "TDS", "depreciation", "MSME" etc. to see all related provisions, reporting requirements, and practical implications.</p>
-        <div class="form-row" style="margin-bottom:12px;">
-            <div class="form-group">
-                <label>Type keyword or search directly:</label>
-                <input type="text" id="smartQ" placeholder="Type any topic... (e.g. cash payment, TDS, MSME, depreciation)" oninput="smartSearch()" style="padding:11px 14px;border:2px solid var(--border);border-radius:8px;font-size:0.95rem;width:100%;">
-            </div>
-            <div class="form-group">
-                <label>Browse All Keywords:</label>
-                <select id="smartKeywordDrop" onchange="var v=this.value;if(v){document.getElementById('smartQ').value=v;document.getElementById('smartQ').dispatchEvent(new Event('input'));this.value='';}" style="width:100%;padding:11px 14px;border:2px solid var(--border);border-radius:8px;font-size:0.92rem;background:white;">
-                    <option value="">-- Select a keyword to search --</option>
-                    <optgroup label="Income Tax — General">
-                        <option value="cash payment">Cash Payment</option>
-                        <option value="cash receipt">Cash Receipt 269ST</option>
-                        <option value="TDS">TDS — Tax Deducted at Source</option>
-                        <option value="salary">Salary / TDS on Salary</option>
-                        <option value="interest">Interest Income / TDS 194A</option>
-                        <option value="ITR">ITR — Income Tax Return</option>
-                        <option value="advance tax">Advance Tax</option>
-                        <option value="tax audit">Tax Audit</option>
-                        <option value="capital gains">Capital Gains</option>
-                        <option value="depreciation">Depreciation</option>
-                        <option value="penalty">Penalty 270A</option>
-                    </optgroup>
-                    <optgroup label="Income Tax — Deductions">
-                        <option value="80C">80C — Investments & Insurance</option>
-                        <option value="80D">80D — Health Insurance</option>
-                        <option value="80G">80G — Donation</option>
-                        <option value="housing loan">Housing Loan / House Property</option>
-                        <option value="HRA">HRA — House Rent Allowance</option>
-                        <option value="NPS">NPS — National Pension System</option>
-                        <option value="standard deduction">Standard Deduction</option>
-                    </optgroup>
-                    <optgroup label="Income Tax — Business">
-                        <option value="partnership">Partnership Firm / 40(b)</option>
-                        <option value="presumptive tax">Presumptive Taxation 44AD</option>
-                        <option value="MSME">MSME — Section 43B(h)</option>
-                        <option value="business loss">Business Loss Set-off</option>
-                        <option value="related party">Related Party Transactions</option>
-                        <option value="loan deposit">Loan / Cash Deposit 269SS</option>
-                    </optgroup>
-                    <optgroup label="Income Tax — International">
-                        <option value="foreign remittance">Foreign Remittance / 15CA-15CB</option>
-                        <option value="export">Export — GST & IT Provisions</option>
-                    </optgroup>
-                    <optgroup label="IT Act 2025">
-                        <option value="IT Act 2025">IT Act 2025 — Key Changes</option>
-                        <option value="tax year">Tax Year — New Concept</option>
-                    </optgroup>
-                    <optgroup label="GST">
-                        <option value="GST registration">GST Registration</option>
-                        <option value="ITC">ITC — Input Tax Credit</option>
-                        <option value="composition scheme">Composition Scheme</option>
-                        <option value="reverse charge">Reverse Charge Mechanism</option>
-                        <option value="e-invoicing">E-Invoicing</option>
-                        <option value="GST refund">GST Refund</option>
-                        <option value="HSN code">HSN Code</option>
-                        <option value="GSTR-9">GSTR-9 — Annual Return</option>
-                    </optgroup>
-                    <optgroup label="Companies Act / ROC">
-                        <option value="ROC compliance">ROC / MCA Compliance</option>
-                        <option value="director">Director — Duties & Compliance</option>
-                        <option value="CSR">CSR — Corporate Social Responsibility</option>
-                        <option value="LLP">LLP — Limited Liability Partnership</option>
-                    </optgroup>
-                    <optgroup label="Audit & Reporting">
-                        <option value="stock valuation">Stock Valuation</option>
-                        <option value="AS">Accounting Standards (AS)</option>
-                    </optgroup>
-                    <optgroup label="Payroll">
-                        <option value="ESIC">ESIC — Employee State Insurance</option>
-                        <option value="PF">Provident Fund / EPF</option>
-                        <option value="TDS rent">TDS on Rent — 194I/194IB</option>
-                        <option value="TDS professional">TDS on Professional Fees — 194J</option>
-                    </optgroup>
-                    <optgroup label="Finance">
-                        <option value="EMI">EMI — Loan Repayment</option>
-                    </optgroup>
-                </select>
-            </div>
-        </div>
+        <div class="search-box"><input type="text" id="smartQ" placeholder="Type any topic... (e.g. cash payment above 10000, ESIC, TDS on rent, MSME payment, depreciation)" oninput="smartSearch()"></div>
         <div id="smartResults"></div>
     </div>
 </div>
@@ -2256,7 +2068,11 @@
 
 <!-- ==================== GST REGISTRATION ==================== -->
 <div id="tab-gstreg" class="tab-content">
-    <div>
+    <div class="sub-tab-nav">
+        <button class="sub-tab-btn active" onclick="switchSubTab('gstreg-threshold',this)">Threshold Checker</button>
+        <button class="sub-tab-btn" onclick="switchSubTab('gstreg-composition',this)">Composition Scheme</button>
+    </div>
+    <div id="gstreg-threshold" class="sub-tab-content active">
     <div class="card">
         <h2>GST Registration — Threshold & Applicability Checker</h2>
         <p style="color:var(--text-light);font-size:0.78rem;margin-bottom:14px;">As per Sections 22, 23, 24, 25 of the CGST Act, 2017 | Notification No. 10/2019-CT dated 07.03.2019 | Notification No. 14/2019-CT. Source: cbic-gst.gov.in | gst.gov.in | CGST Act 2017.</p>
@@ -2352,137 +2168,113 @@
         </div>
     </div>
     <p style="text-align:center;font-size:0.72rem;color:#999;margin-top:20px;padding-top:10px;border-top:1px solid #eee;">Last Updated: April 2026 | Source: CGST Act, 2017 — Sections 22, 23, 24, 25 | Notification No. 10/2019-CT | Notification No. 14/2019-CT | cbic-gst.gov.in | gst.gov.in | Information is indicative — always verify from official sources before advising clients.</p>
-    </div>
-
-</div>
-
-<!-- ==================== GST COMPOSITION SCHEME ==================== -->
-<div id="tab-composition" class="tab-content">
-    <div class="card">
-        <h2>GST Composition Scheme — Eligibility, Rates &amp; Conditions</h2>
-        <p style="color:var(--text-light);font-size:0.78rem;margin-bottom:14px;"><em>As per Section 10, CGST Act 2017 | Rule 7, CGST Rules 2017 | Notification No. 14/2019-CT dated 07.03.2019 | CBIC FAQ on Composition Levy. Source: cbic-gst.gov.in | gst.gov.in</em></p>
-
-        <h3 style="color:var(--primary-mid);margin-bottom:14px;">Section A — Eligibility Checker</h3>
-        <div class="checker-form">
-            <div class="form-row">
-                <div class="form-group"><label>Annual Aggregate Turnover (preceding FY) (Rs)</label><input type="number" id="compTurnover" placeholder="e.g. 12000000"></div>
-                <div class="form-group"><label>State</label>
-                    <select id="compState">
-                        <option value="normal">Normal State (Rs 1.5 Cr limit for goods)</option>
-                        <option value="special">Special Category State (Rs 75L limit for goods)</option>
-                    </select>
+    </div><!-- /gstreg-threshold -->
+    <div id="gstreg-composition" class="sub-tab-content">
+        <div class="card">
+            <h2>GST Composition Scheme — Eligibility & Rates</h2>
+            <p style="color:var(--text-light);font-size:0.78rem;margin-bottom:14px;">As per Section 10 of CGST Act, 2017 read with Rules 3-7 of CGST Rules | Notification No. 2/2019-CT(R) (service providers) | Notification No. 14/2019-CT. Source: cbic-gst.gov.in | gst.gov.in</p>
+            <h3 style="color:var(--primary-mid);">Composition Scheme Eligibility Checker</h3>
+            <div class="checker-form">
+                <div class="form-row">
+                    <div class="form-group"><label>State</label><select id="compState">
+                        <option value="normal">Normal State (Limit Rs 1.5 Cr goods)</option>
+                        <option value="special">Special Category State (Limit Rs 75 L goods)</option>
+                    </select></div>
+                    <div class="form-group"><label>Nature of Business</label><select id="compBusiness">
+                        <option value="">-- Select --</option>
+                        <option value="manufacturer">Manufacturer (goods)</option>
+                        <option value="trader">Trader (goods)</option>
+                        <option value="restaurant">Restaurant (no alcohol)</option>
+                        <option value="service">Service Provider</option>
+                        <option value="mixed">Goods + Some Services</option>
+                    </select></div>
                 </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Aggregate Turnover in Previous FY (Rs)</label><input type="number" id="compTurnover" placeholder="e.g. 12000000"></div>
+                    <div class="form-group"><label>Inter-state Outward Supply?</label><select id="compInterstate"><option value="no">No — only intra-state</option><option value="yes">Yes</option></select></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Supplies through E-commerce Operator (Amazon/Flipkart/Swiggy etc.)?</label><select id="compEcom"><option value="no">No</option><option value="yes">Yes</option></select></div>
+                    <div class="form-group"><label>Manufacturer of Ice Cream / Pan Masala / Tobacco / Aerated Waters?</label><select id="compExcluded"><option value="no">No</option><option value="yes">Yes</option></select></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Casual or Non-Resident Taxable Person?</label><select id="compCasual"><option value="no">No</option><option value="yes">Yes</option></select></div>
+                    <div class="form-group">&nbsp;</div>
+                </div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="checkCompositionEligibility()">Check Eligibility</button><button class="btn btn-reset" onclick="resetComposition()">Reset</button></div>
+                <div id="compResult" class="result-box" style="display:none;"></div>
             </div>
-            <div class="form-row">
-                <div class="form-group"><label>Nature of Business</label>
-                    <select id="compBusiness">
-                        <option value="goods">Manufacturer / Trader of Goods</option>
-                        <option value="restaurant">Restaurant (not serving alcohol)</option>
-                        <option value="service">Service Provider only</option>
-                        <option value="mixed">Mixed (goods + services)</option>
-                    </select>
-                </div>
-                <div class="form-group"><label>Inter-state outward supply?</label>
-                    <select id="compInterstate"><option value="no">No</option><option value="yes">Yes</option></select>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group"><label>Sells through Amazon/Flipkart/Swiggy/Zomato etc.?</label>
-                    <select id="compEcom"><option value="no">No</option><option value="yes">Yes</option></select>
-                </div>
-                <div class="form-group"><label>Manufactures ice cream / pan masala / tobacco?</label>
-                    <select id="compExcluded"><option value="no">No</option><option value="yes">Yes</option></select>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group"><label>Casual or Non-Resident taxable person?</label>
-                    <select id="compCasual"><option value="no">No</option><option value="yes">Yes</option></select>
-                </div>
-                <div class="form-group"></div>
-            </div>
-            <div class="btn-row">
-                <button class="btn btn-primary" onclick="checkCompositionEligibility()">Check Eligibility</button>
-                <button class="btn btn-reset" onclick="resetComposition()">Reset</button>
-            </div>
-            <div id="compResult" style="margin-top:16px;display:none;"></div>
         </div>
-    </div>
-
-    <div class="card">
-        <h3 style="color:var(--primary-mid);margin-bottom:12px;">Section B — GST Rates Under Composition</h3>
-        <div class="table-scroll"><table class="limits-table">
-            <thead><tr><th>Category</th><th>Rate</th><th>CGST</th><th>SGST</th><th>Section</th></tr></thead>
-            <tbody>
-                <tr><td>Manufacturer / Trader of Goods</td><td><strong>1%</strong></td><td>0.5%</td><td>0.5%</td><td>Sec 10(1), CGST Act</td></tr>
-                <tr><td>Restaurant (not serving alcohol)</td><td><strong>5%</strong></td><td>2.5%</td><td>2.5%</td><td>Sec 10(1), CGST Act</td></tr>
-                <tr><td>Service Provider / Mixed Supply</td><td><strong>6%</strong></td><td>3%</td><td>3%</td><td>Sec 10(2A), CGST Act</td></tr>
-            </tbody>
-        </table></div>
-        <p style="font-size:0.78rem;color:var(--text-light);margin-top:8px;">Rate is on aggregate turnover within the State/UT. Tax is borne by the supplier — cannot be charged separately to the customer.</p>
-    </div>
-
-    <div class="card">
-        <h3 style="color:var(--primary-mid);margin-bottom:12px;">Section C — Turnover Limits</h3>
-        <div class="table-scroll"><table class="limits-table">
-            <thead><tr><th>Category</th><th>Normal States</th><th>Special Category States</th></tr></thead>
-            <tbody>
-                <tr><td>Manufacturer / Trader / Restaurant [Sec 10(1)]</td><td><strong>Rs 1.5 Crore</strong></td><td><strong>Rs 75 Lakh</strong></td></tr>
-                <tr><td>Service Provider [Sec 10(2A)]</td><td><strong>Rs 50 Lakh</strong></td><td><strong>Rs 50 Lakh</strong></td></tr>
-            </tbody>
-        </table></div>
-        <p style="font-size:0.78rem;color:var(--text-light);margin-top:8px;">Special Category States (Rs 75L limit): Arunachal Pradesh, Meghalaya, Manipur, Mizoram, Nagaland, Tripura, Sikkim, Uttarakhand, Himachal Pradesh, Jammu &amp; Kashmir, Ladakh</p>
-    </div>
-
-    <div class="card">
-        <h3 style="color:var(--primary-mid);margin-bottom:10px;">Section D — Who CANNOT Opt for Composition</h3>
-        <div style="border-left:4px solid #e74c3c;padding:10px 16px;background:#fdecea;border-radius:0 8px 8px 0;">
-            <ul style="margin-left:16px;font-size:0.88rem;color:#555;line-height:1.9;">
-                <li>Person making <strong>inter-state outward supply</strong> of goods/services — Sec 10(2)(a)</li>
-                <li>Person supplying through an <strong>e-commerce operator required to collect TCS</strong> u/s 52 — Sec 10(2)(d)</li>
-                <li>Manufacturer of <strong>notified goods</strong>: ice cream, pan masala, tobacco &amp; tobacco substitutes — Sec 10(2)(e)</li>
-                <li><strong>Casual taxable person</strong> or <strong>Non-Resident taxable person</strong> — Sec 10(2)(b)</li>
-                <li>Person supplying goods <strong>not leviable to GST</strong> (non-taxable supply)</li>
-                <li>Person engaged in supply of <strong>services</strong> with turnover > Rs 50 lakh — Sec 10(2A) threshold</li>
-                <li>Person who is a <strong>manufacturer under RCM</strong> for notified goods</li>
-                <li>Person supplying goods as an <strong>agent</strong> on behalf of another principal</li>
-                <li>Person making supply of goods through e-commerce under <strong>specific notification</strong></li>
+        <div class="card">
+            <h2>Composition Scheme Rates — Section 10(1) & 10(2A)</h2>
+            <div class="table-scroll"><table class="limits-table">
+                <thead><tr><th>Category</th><th>CGST</th><th>SGST</th><th>Total</th><th>Basis</th></tr></thead>
+                <tbody>
+                    <tr><td>Manufacturer (except notified)</td><td>0.5%</td><td>0.5%</td><td><strong>1.0%</strong></td><td>Turnover in State</td></tr>
+                    <tr><td>Trader (goods)</td><td>0.5%</td><td>0.5%</td><td><strong>1.0%</strong></td><td>Taxable turnover in State</td></tr>
+                    <tr><td>Restaurant (no alcohol)</td><td>2.5%</td><td>2.5%</td><td><strong>5.0%</strong></td><td>Turnover in State</td></tr>
+                    <tr><td>Service Provider (Sec 10(2A))</td><td>3.0%</td><td>3.0%</td><td><strong>6.0%</strong></td><td>Turnover in State</td></tr>
+                </tbody>
+            </table></div>
+            <p style="font-size:0.78rem;color:var(--text-light);margin-top:8px;">Rates are on aggregate turnover within the State/UT. No Input Tax Credit (ITC) can be claimed. Tax cannot be collected from customers — must be borne by supplier.</p>
+        </div>
+        <div class="card">
+            <h2>Turnover Limits — Previous FY Aggregate Turnover</h2>
+            <div class="table-scroll"><table class="limits-table">
+                <thead><tr><th>Category</th><th>Normal States</th><th>Special Category States</th></tr></thead>
+                <tbody>
+                    <tr><td>Manufacturer / Trader / Restaurant [Sec 10(1)]</td><td><strong>Rs 1.5 Crore</strong></td><td><strong>Rs 75 Lakh</strong></td></tr>
+                    <tr><td>Service Provider [Sec 10(2A)]</td><td><strong>Rs 50 Lakh</strong></td><td><strong>Rs 50 Lakh</strong></td></tr>
+                </tbody>
+            </table></div>
+            <p style="font-size:0.78rem;color:var(--text-light);margin-top:8px;">Special Category States for composition: Arunachal Pradesh, Manipur, Meghalaya, Mizoram, Nagaland, Sikkim, Tripura, Uttarakhand (as per Notification No. 14/2019-CT).</p>
+        </div>
+        <div class="card">
+            <h2>Exclusions — Who CANNOT Opt for Composition</h2>
+            <ul style="margin-left:18px;font-size:0.88rem;color:#555;line-height:1.9;">
+                <li>Person making <strong>inter-state outward supply</strong> of goods/services.</li>
+                <li>Person supplying goods/services through an <strong>e-commerce operator</strong> required to collect TCS u/s 52.</li>
+                <li>Manufacturer of <strong>notified goods</strong>: ice cream & edible ice, pan masala, aerated waters, tobacco & tobacco substitutes, fly ash bricks, bricks of fossil meal, building bricks, earthen/roofing tiles.</li>
+                <li>Casual taxable person or non-resident taxable person.</li>
+                <li>Person supplying <strong>goods which are not leviable to GST</strong> (non-taxable supply).</li>
+                <li>Service provider (other than restaurant) with turnover above Rs 50 lakh — cannot opt under Sec 10(2A).</li>
+                <li>Person supplying goods through an e-commerce operator — except under specific exemption.</li>
             </ul>
         </div>
-    </div>
-
-    <div class="card">
-        <h3 style="color:var(--primary-mid);margin-bottom:12px;">Section E — Compliance Comparison</h3>
-        <div class="table-scroll"><table class="limits-table">
-            <thead><tr><th>Parameter</th><th>Regular Dealer</th><th>Composition Dealer</th></tr></thead>
-            <tbody>
-                <tr><td>Tax Rate</td><td>Normal slabs (5/12/18/28%)</td><td>1% / 5% / 6%</td></tr>
-                <tr><td>Input Tax Credit (ITC)</td><td>Available</td><td><strong>Not available</strong></td></tr>
-                <tr><td>Invoice Type</td><td>Tax Invoice (GST shown)</td><td><strong>Bill of Supply</strong> (no GST charged)</td></tr>
-                <tr><td>Tax Collection from Customer</td><td>Yes — GST charged separately</td><td><strong>No — borne by supplier</strong></td></tr>
-                <tr><td>Quarterly Return</td><td>GSTR-1 + GSTR-3B</td><td><strong>CMP-08</strong> — by 18th of month after quarter</td></tr>
-                <tr><td>Annual Return</td><td>GSTR-9 (31 Dec)</td><td><strong>GSTR-4</strong> — by 30 April</td></tr>
-                <tr><td>Inter-state Outward Supply</td><td>Allowed</td><td><strong>Not allowed</strong></td></tr>
-                <tr><td>E-invoicing</td><td>Mandatory above Rs 5 Cr</td><td>Not applicable</td></tr>
-            </tbody>
-        </table></div>
-    </div>
-
-    <div class="card">
-        <div style="background:#fef9e7;border-left:4px solid #f39c12;border-radius:8px;padding:12px 16px;">
-            <h3 style="margin-top:0;color:#b7950b;">Section F — Key Notes</h3>
-            <ul style="margin-left:18px;font-size:0.88rem;color:#555;line-height:1.8;">
-                <li><strong>Opt-in:</strong> File Form GST CMP-02 before the beginning of FY (by 31 March of preceding year). New registrant can opt at time of applying for GSTIN.</li>
-                <li><strong>ITC reversal on opting in:</strong> Reverse ITC on stock-in-hand via Form GST ITC-03 on the date of opting in.</li>
-                <li><strong>Services up to 10%:</strong> A Sec 10(1) composition dealer can supply services up to 10% of turnover or Rs 5 lakh (higher) without losing composition benefits.</li>
-                <li><strong>Turnover crossed:</strong> File CMP-04 within 7 days of crossing the limit. Must switch to regular scheme from that date.</li>
-                <li><strong>All PAN-linked businesses:</strong> If any vertical opts for composition, ALL verticals under the same PAN must opt — cannot mix.</li>
-                <li><strong>Display requirement:</strong> Display "Composition Taxable Person, not eligible to collect tax on supplies" on every invoice, bill of supply, and signboard at place of business.</li>
-                <li><strong>RCM still applies:</strong> Composition dealers must pay GST under Reverse Charge Mechanism (RCM) — but cannot claim ITC on RCM paid.</li>
-                <li><strong>Penalty:</strong> Wrong availment — tax differential + penalty equal to tax amount u/s 10(5) read with Sec 73/74.</li>
-            </ul>
+        <div class="card">
+            <h2>Compliance — Regular vs Composition Dealer</h2>
+            <div class="table-scroll"><table class="limits-table">
+                <thead><tr><th>Parameter</th><th>Regular Dealer</th><th>Composition Dealer</th></tr></thead>
+                <tbody>
+                    <tr><td>Tax Rate</td><td>Normal slabs (5/12/18/28%)</td><td>1% / 5% / 6%</td></tr>
+                    <tr><td>Input Tax Credit (ITC)</td><td>Available</td><td><strong>Not available</strong></td></tr>
+                    <tr><td>Tax Invoice</td><td>Must issue Tax Invoice</td><td>Bill of Supply (no tax shown)</td></tr>
+                    <tr><td>Tax Collection from Customer</td><td>Yes — GST charged separately</td><td><strong>No — borne by supplier</strong></td></tr>
+                    <tr><td>Returns</td><td>GSTR-1 (monthly/qtly) + GSTR-3B (monthly)</td><td><strong>CMP-08</strong> (qtly statement) + <strong>GSTR-4</strong> (annual)</td></tr>
+                    <tr><td>E-way Bill</td><td>Required</td><td>Required</td></tr>
+                    <tr><td>Inter-state Outward Supply</td><td>Allowed</td><td><strong>Not allowed</strong></td></tr>
+                    <tr><td>E-invoicing</td><td>Mandatory above Rs 5 Cr</td><td>Not applicable</td></tr>
+                    <tr><td>Reverse Charge</td><td>ITC available on RCM paid</td><td>RCM payable at normal rates, no ITC</td></tr>
+                    <tr><td>Display</td><td>No special marking</td><td>"Composition Taxable Person" on every signboard and bill</td></tr>
+                </tbody>
+            </table></div>
         </div>
-    </div>
-    <p style="text-align:center;font-size:0.72rem;color:#999;margin-top:20px;padding-top:10px;border-top:1px solid #eee;">Last Updated: April 2026 | Source: CGST Act, 2017 — Section 10 | CGST Rules — Rule 3 to 7 | Notification No. 2/2019-CT(R) | Notification No. 14/2019-CT | cbic-gst.gov.in | gst.gov.in | Information is indicative — always verify from official sources.</p>
+        <div class="card">
+            <div style="background:#fef9e7;border-left:4px solid #f39c12;border-radius:8px;padding:12px 16px;">
+                <h3 style="margin-top:0;color:#b7950b;">Key Notes — Composition Scheme</h3>
+                <ul style="margin-left:18px;font-size:0.88rem;color:#555;line-height:1.8;">
+                    <li><strong>Opting in:</strong> File Form GST CMP-02 before the beginning of FY (by 31 March of preceding year). For new registration, opt at time of applying for GSTIN.</li>
+                    <li><strong>ITC reversal on opting in:</strong> Must reverse ITC on stock-in-hand (inputs, semi-finished, finished goods) as on the date of opting in — file Form GST ITC-03.</li>
+                    <li><strong>Services up to 10%:</strong> A composition dealer under Sec 10(1) can supply services up to 10% of turnover or Rs 5 lakh (whichever higher) without losing composition — e.g. labour charges, freight recovered.</li>
+                    <li><strong>Cease to qualify:</strong> Moment turnover crosses the limit, composition ceases — must file CMP-04 within 7 days and switch to regular scheme from that date.</li>
+                    <li><strong>All businesses under same PAN:</strong> If one vertical opts for composition, ALL verticals under the same PAN must opt for composition — cannot mix.</li>
+                    <li><strong>Penalty:</strong> Wrong availment of composition — tax differential + penalty equal to tax amount u/s 10(5) read with Sec 73/74.</li>
+                    <li><strong>Returns Due Dates:</strong> CMP-08 — 18th of month following quarter; GSTR-4 — 30 June following end of FY.</li>
+                </ul>
+            </div>
+        </div>
+        <p style="text-align:center;font-size:0.72rem;color:#999;margin-top:20px;padding-top:10px;border-top:1px solid #eee;">Last Updated: April 2026 | Source: CGST Act, 2017 — Section 10 | CGST Rules — Rule 3 to 7 | Notification No. 2/2019-CT(R) | Notification No. 14/2019-CT | cbic-gst.gov.in | gst.gov.in</p>
+    </div><!-- /gstreg-composition -->
 </div>
 
 <!-- ==================== IT REFUND & 244A ==================== -->
@@ -2719,7 +2511,7 @@
 // ==============================
 // UTILITY
 // ==============================
-function switchTab(t){document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(e=>e.classList.remove('active'));document.getElementById('tab-'+t).classList.add('active');var tabs=document.querySelectorAll('.nav-tab');for(var i=0;i<tabs.length;i++){if(tabs[i].textContent.trim()&&tabs[i].getAttribute('onclick')&&tabs[i].getAttribute('onclick').indexOf("'"+t+"'")>-1){tabs[i].classList.add('active');break;}}if(t==='itact2025')loadITAct();window.scrollTo({top:0,behavior:'smooth'});}
+function switchTab(t){document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(e=>e.classList.remove('active'));document.getElementById('tab-'+t).classList.add('active');var tabs=document.querySelectorAll('.nav-tab');for(var i=0;i<tabs.length;i++){if(tabs[i].textContent.trim()&&tabs[i].getAttribute('onclick')&&tabs[i].getAttribute('onclick').indexOf("'"+t+"'")>-1){tabs[i].classList.add('active');break;}}window.scrollTo({top:0,behavior:'smooth'});}
 function switchSubTab(id,btn){var parent=btn.closest('.tab-content');parent.querySelectorAll('.sub-tab-content').forEach(e=>e.classList.remove('active'));parent.querySelectorAll('.sub-tab-btn').forEach(e=>e.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
 function fmt(n){return new Intl.NumberFormat('en-IN').format(n);}
 
@@ -3823,13 +3615,14 @@ var smartDB=[
 {area:"Supreme Court",detail:"Checkmate Services Pvt Ltd (2022) — Employee's contribution NOT covered by 43B grace period. Must deposit by statutory due date."},
 {area:"Practical Tip",detail:"PF due by 15th of next month. Annual return by 25th April. Employer 12% (3.67% EPF + 8.33% EPS), Employee 12%."}
 ]},
-{q:"tds rent 194i 194ib",topic:"TDS on Rent",impacts:[
-{area:"Income Tax — 194I",detail:"TDS @ 2% (plant/machinery/equipment) or 10% (land/building/furniture). Threshold: Rs 2,40,000 p.a."},
-{area:"Income Tax — 194IB",detail:"For individuals/HUF not liable to audit: TDS @ 5% if rent > Rs 50,000/month. Deduct in last month of FY."},
-{area:"Form 3CD",detail:"Report in <strong>Clause 34</strong> (TDS compliance). Non-deduction → 30% disallowance u/s 40(a)(ia)."},
-{area:"New Act 2025",detail:"Sec 194I → Sec 406 (approx). Rates expected to remain same."},
-{area:"GST",detail:"GST @ 18% on commercial rent (RCM if from unregistered landlord to registered tenant). Residential rent by registered person: 18% under RCM."},
-{area:"Practical Tip",detail:"If landlord is NR: TDS u/s 195 (not 194I). DTAA rates may apply. Obtain TRC + Form 10F."}
+{q:"tds tax deducted source 192 194 rent professional contractor salary interest 194c 194j 194i 194a 194ib 194t partner",topic:"TDS — Tax Deducted at Source (Sections 192–194T, IT Act 1961)",impacts:[
+{area:"Income Tax",detail:"Deductor must deduct TDS at prescribed rates. Key sections: 192 (salary), 194C (contractor 1%/2%), 194J (professional 10%), 194I (rent 2%/10%), 194A (interest 10%), 194T (partner salary/interest w.e.f. 01.04.2025 @ 10%)"},
+{area:"Thresholds",detail:"194C: Rs 30,000 single / Rs 1L annual | 194J: Rs 30,000 | 194I: Rs 2,40,000 p.a. | 194A: Rs 50,000 (bank) / Rs 1L (senior citizen) | 194T: Rs 20,000 p.a."},
+{area:"Disallowance",detail:"If TDS not deducted or not deposited to govt — 30% disallowance of the expense u/s 40(a)(ia). Applies in the year of default"},
+{area:"Form 3CD",detail:"Clause 34(a): TDS deducted and deposited details | Clause 34(b): TDS defaults on payments to residents | Clause 34(c): TCS compliance"},
+{area:"Penalty",detail:"Non-deduction: Penalty u/s 271C = amount equal to TDS not deducted | Non-deposit: Prosecution u/s 276B — 3 months to 7 years rigorous imprisonment + fine"},
+{area:"IT Act 2025",detail:"TDS rates consolidated in Schedule II. Sec 192 → Sec 393(1) Sl.4 | Sec 194C → Sec 393(1) Sl.6(i) | Sec 194J → Sec 393(1) Sl.6(iii) | Sec 194T → Sec 393(3) Sl.7 (partners)"},
+{area:"Practical Tip",detail:"Deposit TDS by 7th of next month (March: 30 April). File quarterly TDS return — 24Q (salary), 26Q (other residents), 27Q (non-residents). Reconcile Form 26AS + AIS every quarter before filing ITR"}
 ]},
 {q:"msme payment 43b micro small enterprise vendor",topic:"MSME Payment — Sec 43B(h)",impacts:[
 {area:"Income Tax",detail:"Payment to Micro/Small enterprises must be within agreed time (max 45 days, or 15 days if no agreement). Otherwise DISALLOWED u/s 43B(h)."},
@@ -3845,28 +3638,10 @@ var smartDB=[
 {area:"Key Difference",detail:"IT depreciation ≠ Book depreciation. Deferred tax (AS 22) arises from timing difference."},
 {area:"Practical Tip",detail:"No depreciation on goodwill (IT). Intangible assets: 25% WDV (IT). Keep separate depreciation charts for IT and Co Act."}
 ]},
-{q:"gst input tax credit itc blocked 17",topic:"GST Input Tax Credit (ITC)",impacts:[
-{area:"GST Act",detail:"ITC available u/s 16. Must be reflected in GSTR-2B. Blocked credit u/s 17(5): motor vehicles, food/beverages, health/fitness, personal use."},
-{area:"Form 3CD",detail:"Report in <strong>Clause 44</strong> — ITC availed, reversed, ineligible. GST reconciliation with GSTR-3B."},
-{area:"Income Tax",detail:"If ITC not claimed/reversed → becomes part of cost (capitalize or expense). Impacts P&L."},
-{area:"Practical Tip",detail:"Reconcile ITC monthly with GSTR-2B. Reverse ineligible ITC before annual return. Keep documentation for all reversals."}
-]},
 {q:"loan deposit cash 269ss 269t 20000",topic:"Cash Loans/Deposits > Rs 20,000",impacts:[
 {area:"Income Tax",detail:"Sec 269SS: Cannot accept loan/deposit in cash >Rs 20,000. Sec 269T: Cannot repay in cash >Rs 20,000. Penalty: 100% of amount."},
 {area:"Form 3CD",detail:"Report in <strong>Clause 30-31</strong>. Enhanced transaction-level reporting with codes from AY 2025-26."},
 {area:"Practical Tip",detail:"Applies to loans AND deposits. Partners' capital contributions are covered. Use banking channels."}
-]},
-{q:"tds professional 194j 194c contractor",topic:"TDS on Professional/Contractor Fees",impacts:[
-{area:"Income Tax — 194J",detail:"TDS @ 10% on professional/technical fees. Threshold: Rs 30,000 p.a. Includes CA fees, legal, consultancy, royalty."},
-{area:"Income Tax — 194C",detail:"TDS @ 1% (individual/HUF) or 2% (others) on contractor payments. Threshold: Rs 30,000 single / Rs 1,00,000 aggregate."},
-{area:"Form 3CD",detail:"Report in <strong>Clause 34</strong> (TDS). Non-deduction → 30% disallowance u/s 40(a)(ia)."},
-{area:"Practical Tip",detail:"Distinguish between 194J (professional services) and 194C (works contract). CA/lawyer fees = 194J. Building contractor = 194C. Software development = depends on nature."}
-]},
-{q:"salary tds 192 employee",topic:"TDS on Salary — Sec 192",impacts:[
-{area:"Income Tax",detail:"Employer deducts TDS on estimated annual salary. Consider declarations (rent HRA, 80C, 80D). New regime default from FY 2024-25."},
-{area:"Form 16",detail:"Issue by 15 June. Part A (TDS summary) + Part B (detailed computation)."},
-{area:"Form 3CD",detail:"Verify TDS on salary in <strong>Clause 34</strong>. Check 26AS/AIS match."},
-{area:"Practical Tip",detail:"If employee opts for old regime, get written declaration. Employer can consider HRA, LTA, 80C etc. for TDS computation."}
 ]},
 {q:"related party 40a director relative transaction arm length",topic:"Related Party Transactions — Sec 40A(2)(b)",impacts:[
 {area:"Income Tax",detail:"Sec 40A(2)(b): Payments to related parties (directors, partners, relatives, entities with substantial interest) in excess of fair market value can be disallowed by AO."},
@@ -3889,17 +3664,14 @@ var smartDB=[
 {area:"Form 3CD",detail:"Report in <strong>Clause 13-14</strong> (capital expenditure). Verify holding period and cost computation."},
 {area:"Practical Tip",detail:"For property before 23.07.2024: compute BOTH ways (12.5% without indexation vs 20% with indexation) — pick lower tax."}
 ]},
-{q:"tds interest 194a bank fd deposit",topic:"TDS on Interest — Sec 194A",impacts:[
-{area:"Income Tax",detail:"TDS @10% on interest (other than on securities) exceeding Rs 40,000 p.a. (Rs 50,000 for senior citizens) from banks. Rs 5,000 for others."},
-{area:"26AS / AIS",detail:"All interest TDS appears in 26AS and AIS. Match with books. Common mismatch area."},
-{area:"Form 3CD",detail:"Report in <strong>Clause 34</strong> (TDS compliance). Non-deduction → 30% disallowance u/s 40(a)(ia)."},
-{area:"Practical Tip",detail:"Check all FDs, inter-corporate deposits, partner interest, unsecured loans. Form 15G/15H from recipients to avoid TDS."}
-]},
-{q:"gst registration threshold turnover composition",topic:"GST Registration & Threshold",impacts:[
-{area:"GST Act",detail:"Registration mandatory if aggregate turnover exceeds Rs 40L (goods) / Rs 20L (services). Rs 20L/10L in special category states."},
-{area:"Composition Scheme",detail:"Available if turnover ≤Rs 1.5 Cr (goods). Tax @1% (traders), 5% (restaurant), 6% (manufacturers). No ITC available."},
-{area:"E-commerce",detail:"Mandatory registration for e-commerce operators and suppliers through e-commerce — NO threshold exemption."},
-{area:"Practical Tip",detail:"Track turnover monthly. Include exempt supplies in aggregate turnover. Registration required in each state of supply."}
+{q:"gst goods services tax registration threshold turnover composition itc input credit rcm reverse charge return gstr",topic:"GST — Goods & Services Tax (CGST Act 2017)",impacts:[
+{area:"Registration",detail:"Mandatory if aggregate turnover exceeds Rs 40L (goods) / Rs 20L (services) — Rs 20L/10L in special category states. Compulsory u/s 24 for inter-state goods, e-commerce, RCM, casual/NR taxable persons regardless of turnover"},
+{area:"Composition Scheme",detail:"Sec 10: Goods/restaurant ≤ Rs 1.5 Cr (Rs 75L special states). Service providers ≤ Rs 50L. Tax @1% (traders/manufacturers), 5% (restaurant), 6% (services). No ITC, no inter-state supply"},
+{area:"Input Tax Credit (ITC)",detail:"Available u/s 16 if reflected in GSTR-2B + supplier paid tax + invoice held + goods/services received. Blocked u/s 17(5): motor vehicles, food/beverages, health/fitness, personal use, free samples"},
+{area:"Reverse Charge (RCM)",detail:"Notified supplies u/s 9(3) — GTA, legal fees, director sitting fees, sponsorship, import of services. Sec 9(4): purchases from unregistered (specific notified categories only). RCM tax payable in cash, ITC available next month"},
+{area:"Returns & Due Dates",detail:"GSTR-1 (10th/13th of next month), GSTR-3B (20th/22nd/24th), CMP-08 (18th of next quarter), GSTR-9 annual (31 Dec), GSTR-9C reconciliation (turnover > Rs 5 Cr)"},
+{area:"Form 3CD",detail:"Clause 44: ITC availed, reversed, ineligible. GST turnover reconciliation with GSTR-3B/GSTR-9. Mismatch flagged"},
+{area:"Practical Tip",detail:"Reconcile ITC monthly with GSTR-2B. Track aggregate turnover (PAN-wise across states) for threshold. File LUT annually for exports without IGST. Keep RCM ledger separately"}
 ]},
 {q:"penalty concealment 270a 271 under-reporting misreporting",topic:"Penalty — Sec 270A / 271(1)(c)",impacts:[
 {area:"Income Tax",detail:"Sec 270A: Under-reporting penalty @50% of tax on under-reported income. Misreporting @200%. Replaced old 271(1)(c) from AY 2017-18."},
@@ -3980,188 +3752,32 @@ var smartDB=[
 {area:"MSME",detail:"MSME-1 by 30 April and 31 October (half-yearly). Rs 25,000 to Rs 3,00,000 penalty."},
 {area:"Struck Off Risk",detail:"Non-filing for 3 consecutive years → Sec 248 strike-off. Directors disqualified u/s 164(2) for 5 years."},
 {area:"LLP",detail:"Form 11 by 30 May, Form 8 by 30 October. Rs 100/day penalty, no cap."}
-]},
-{q:"advance tax installment 207 208 234b 234c payment quarterly",topic:"Advance Tax — Sections 207–211, IT Act 1961 | Sec 343–347, IT Act 2025",impacts:[
-{area:"Who Must Pay",detail:"All assessees whose estimated tax liability > Rs 10,000 after TDS credit."},
-{area:"Instalment Schedule (Regular)",detail:"15 Jun — 15% | 15 Sep — 45% | 15 Dec — 75% | 15 Mar — 100%"},
-{area:"Presumptive (44AD/ADA/AE)",detail:"100% in single instalment by 15 March — no quarterly instalments."},
-{area:"Senior Citizens",detail:"Exempt from advance tax if no business/profession income."},
-{area:"Capital Gains",detail:"Payable in the quarter of sale — not spread equally across instalments."},
-{area:"Interest if Default",detail:"Sec 234B: 1%/month on 90% shortfall of assessed tax. Sec 234C: 1%/month per instalment shortfall."},
-{area:"Practical Tip",detail:"Compute advance tax in June on full-year estimated income. Revise in September if income changed significantly."}
-]},
-{q:"80c ppf elss nsc fd lic epf investment deduction 150000",topic:"Section 80C — Deductions up to Rs 1.5 Lakh",impacts:[
-{area:"Limit",detail:"Rs 1,50,000 combined limit for all 80C investments under old regime."},
-{area:"Eligible Investments",detail:"PPF, ELSS, NSC, 5-year FD, LIC premium, EPF (employee), principal on housing loan, tuition fees (2 children), SSY, NPS 80CCD(1)."},
-{area:"New Regime",detail:"NOT available under New Tax Regime (115BAC) from AY 2024-25 onwards."},
-{area:"IT Act 2025",detail:"Section 123 (equivalent of Sec 80C)."},
-{area:"Form 3CD",detail:"Clause 21(h) — donations; investments verified during audit. Verify proofs."},
-{area:"Practical Tip",detail:"File Form 12BB with employer for TDS computation. Submit investment proofs by February. Premiums/subscriptions must actually be paid within the FY."}
-]},
-{q:"80d health insurance mediclaim premium senior citizen",topic:"Section 80D — Health Insurance Premium Deduction",impacts:[
-{area:"Self + Family (below 60)",detail:"Rs 25,000 deduction for self + family health insurance premium."},
-{area:"Self + Family (if self is 60+)",detail:"Rs 50,000 deduction."},
-{area:"Parents (below 60)",detail:"Additional Rs 25,000 for parents' premium."},
-{area:"Parents (60+)",detail:"Additional Rs 50,000. Maximum total: Rs 1,00,000 (if both self and parents 60+)."},
-{area:"Preventive Health Check-up",detail:"Rs 5,000 within the above limits — can be paid in cash."},
-{area:"New Regime",detail:"NOT available under New Tax Regime."},
-{area:"IT Act 2025",detail:"Section 125."},
-{area:"Practical Tip",detail:"Premium must be paid by any mode other than cash (except preventive check-up). CGHS/defence medical scheme contributions also eligible."}
-]},
-{q:"hra house rent allowance 10 13a metro non-metro 40 50",topic:"HRA Exemption — Section 10(13A), Rule 2A",impacts:[
-{area:"Exemption Formula",detail:"Minimum of: (a) Actual HRA received; (b) 50% basic+DA for metro / 40% non-metro; (c) Actual rent minus 10% of basic+DA."},
-{area:"Metro Cities (50%)",detail:"Delhi, Mumbai, Kolkata, Chennai."},
-{area:"No HRA Received",detail:"Claim under Sec 80GG: Rs 5,000/month or 25% of income or excess over 10% of income — whichever is least."},
-{area:"PAN of Landlord",detail:"Mandatory if annual rent > Rs 1 lakh. Landlord must give PAN declaration."},
-{area:"New Regime",detail:"Sec 10(13A) HRA NOT available. Sec 80GG also NOT available under new regime."},
-{area:"IT Act 2025",detail:"Section 20(2)(i)."},
-{area:"Practical Tip",detail:"Maintain rent receipts + rental agreement. If landlord is a relative, ensure genuine payment via bank transfer to withstand AO scrutiny."}
-]},
-{q:"nps national pension system 80ccd employer contribution",topic:"NPS — National Pension System Tax Benefits",impacts:[
-{area:"Section 80CCD(1)",detail:"Employee contribution up to 10% of salary — counts within 80C Rs 1.5L limit."},
-{area:"Section 80CCD(1B)",detail:"Additional Rs 50,000 over and above 80C limit. Available under old regime."},
-{area:"Section 80CCD(2)",detail:"Employer contribution up to 14% salary (Govt) / 10% (others) — FULLY DEDUCTIBLE — AVAILABLE even in new regime."},
-{area:"Withdrawal",detail:"60% tax-free on maturity; 40% must be used for annuity purchase (annuity income is taxable)."},
-{area:"IT Act 2025",detail:"Section 127."},
-{area:"Practical Tip",detail:"80CCD(2) employer contribution is available in new regime — most beneficial route. Maximise employer NPS contribution before salary restructuring."}
-]},
-{q:"standard deduction salary pension 16ia 75000",topic:"Standard Deduction — Section 16(ia)",impacts:[
-{area:"Amount",detail:"Rs 75,000 w.e.f. AY 2025-26 (increased from Rs 50,000 by Finance Act 2024)."},
-{area:"Available For",detail:"Salaried employees and pensioners. No proof required — automatic deduction."},
-{area:"Available in New Regime",detail:"Yes — also available in new regime from AY 2024-25."},
-{area:"Family Pension",detail:"Standard deduction of Rs 25,000 (lower of Rs 25,000 or 1/3rd of family pension)."},
-{area:"IT Act 2025",detail:"Section 68."},
-{area:"Practical Tip",detail:"Even NRI employees receiving salary sourced in India can claim standard deduction. No documentation needed — claimed automatically."}
-]},
-{q:"business loss set off carry forward 70 71 72 speculation",topic:"Business Loss — Set-off and Carry Forward (Sec 70–80)",impacts:[
-{area:"Current Year Set-off",detail:"Business loss can be set off against any head of income EXCEPT salary income."},
-{area:"Carry Forward",detail:"Non-speculation business loss: carry forward 8 years. Speculative loss: 4 years only."},
-{area:"Key Condition",detail:"Return MUST be filed on time (by due date) to carry forward the loss. Late filing forfeits carry-forward right permanently."},
-{area:"Unabsorbed Depreciation",detail:"No time limit — can be carried forward indefinitely and set off against any income."},
-{area:"IT Act 2025",detail:"Sections 90–101."},
-{area:"Form 3CD",detail:"Clause 32 — verification of losses claimed and carry-forward position."},
-{area:"Practical Tip",detail:"Always file return on time if the business has a loss year. Missing the due date destroys the carry-forward benefit permanently."}
-]},
-{q:"ITC input tax credit blocked 17 5 gst reversal 2b",topic:"Input Tax Credit — Section 16, CGST Act 2017",impacts:[
-{area:"Eligibility",detail:"GST paid on inputs, input services, and capital goods used for business — claimable as ITC."},
-{area:"Key Conditions",detail:"Tax invoice must exist | Supplier must have filed return | Payment to supplier within 180 days | Goods/services must have been received."},
-{area:"Blocked Credit (Sec 17(5))",detail:"Motor vehicles (≤13 seats), food & beverages, outdoor catering, club membership, health services, works contract/construction for immovable property."},
-{area:"GSTR-2B Matching",detail:"ITC claimable only as per GSTR-2B from AY 2022-23. Reversal mandatory if supplier does not pay within stipulated time."},
-{area:"Composition Dealers",detail:"Cannot claim ITC at all under any circumstances."},
-{area:"Practical Tip",detail:"Reconcile GSTR-2B monthly. Pay suppliers within 180 days. Never claim ITC on blocked credits — high audit risk."}
-]},
-{q:"reverse charge rcm 9 3 9 4 gta advocate director sponsor",topic:"Reverse Charge Mechanism (RCM) — Section 9(3) & 9(4)",impacts:[
-{area:"What is RCM",detail:"Recipient of supply pays GST to government (not supplier). Recipient can claim ITC on RCM paid (if eligible)."},
-{area:"Mandatory RCM (Sec 9(3))",detail:"GTA freight, advocate fees, director remuneration, sponsorship services, import of services, security services (unregistered person), renting motor vehicle."},
-{area:"Payment Restriction",detail:"RCM can only be paid from cash ledger — ITC cannot be used to pay RCM."},
-{area:"GSTR-3B Reporting",detail:"Report RCM liability in Table 3.1(d). Claim eligible ITC on RCM in Table 4(A)(3)."},
-{area:"Composition Dealers",detail:"Must pay RCM at normal rates — but cannot claim ITC on RCM paid."},
-{area:"Practical Tip",detail:"Maintain RCM register. Even composition dealers must pay RCM — frequently missed compliance point."}
-]},
-{q:"e-invoicing irp irn qr code rule 48 5 crore",topic:"E-Invoicing — Rule 48(4), CGST Rules",impacts:[
-{area:"Applicability",detail:"Turnover > Rs 5 crore in any preceding FY (w.e.f. 01.08.2023). Mandatory for B2B, exports, deemed exports."},
-{area:"Process",detail:"Invoice generated in accounting software → uploaded to IRP (Invoice Registration Portal) → IRN + QR code generated → embed in invoice."},
-{area:"Exemptions",detail:"Banks, NBFCs, insurance companies, GTA, SEZ units — exempted from e-invoicing."},
-{area:"Consequence of Non-compliance",detail:"Invoice without IRN is invalid. Recipient cannot claim ITC on such invoice."},
-{area:"Practical Tip",detail:"Configure accounting software for IRP integration. Invoices without IRN create ITC denial risk for buyers — immediate commercial impact."}
-]},
-{q:"gst refund rfd-01 export zero rated inverted duty lut",topic:"GST Refund — Section 54, CGST Act",impacts:[
-{area:"Eligible Cases",detail:"Export of goods/services (zero-rated) | Inverted duty structure | Excess cash ledger balance | Tax paid by mistake | Deemed exports."},
-{area:"Time Limit",detail:"2 years from the relevant date (date of export / date of payment)."},
-{area:"Application",detail:"Form RFD-01 on GST portal."},
-{area:"Inverted Duty",detail:"Refund of ITC where input tax rate > output tax rate (e.g., inputs at 18%, output at 5%)."},
-{area:"Processing Time",detail:"60 days from application — interest payable if refund delayed beyond 60 days."},
-{area:"Practical Tip",detail:"File LUT before export to avoid paying IGST. Maintain FIRC, BRC, and shipping bills for foreign exchange refunds."}
-]},
-{q:"GSTR-9 annual return gst reconciliation 9c",topic:"GSTR-9 — GST Annual Return",impacts:[
-{area:"Who Must File",detail:"All regular GST registered taxpayers. GSTR-9C (reconciliation) mandatory for turnover > Rs 5 crore."},
-{area:"Due Date",detail:"31 December following the end of FY."},
-{area:"Contents",detail:"Consolidation of all monthly/quarterly returns | Reconciliation of ITC claimed vs eligible | Tax paid summary."},
-{area:"GSTR-9C",detail:"Reconciliation statement — certified by CA/CMA. Mandatory for turnover > Rs 5 crore."},
-{area:"Penalty",detail:"Rs 200/day (Rs 100 CGST + Rs 100 SGST) — capped at 0.25% of turnover in state."},
-{area:"Practical Tip",detail:"Start reconciling monthly data from Q1. Identify and reverse excess ITC before December to minimise interest exposure."}
-]},
-{q:"HSN code harmonised nomenclature SAC service 4 digit 6 digit",topic:"HSN Code — Harmonised System of Nomenclature",impacts:[
-{area:"Mandatory Reporting",detail:"Turnover ≤ Rs 5 crore — 4-digit HSN on B2B invoices. Turnover > Rs 5 crore — 6-digit HSN on ALL invoices (B2B and B2C)."},
-{area:"Purpose",detail:"Determines GST rate applicable. All goods classified under HSN. Services use SAC (Service Accounting Code)."},
-{area:"Where to Find",detail:"cbic-gst.gov.in GST Rate Finder | CBIC tariff schedule."},
-{area:"Incorrect HSN Risk",detail:"Wrong rate application, ITC disputes, and penalty during scrutiny assessment."},
-{area:"Practical Tip",detail:"Verify HSN on purchase invoices matches vendor declaration. Mismatch causes reconciliation issues in GSTR-2B and GSTR-9."}
-]},
-{q:"IT act 2025 new income tax act 536 sections schedule",topic:"IT Act 2025 — Key Changes at a Glance",impacts:[
-{area:"Effective From",detail:"1 April 2026 (Act No. 30 of 2025). IT Act 1961 continues for AY 2025-26 and earlier years."},
-{area:"Terminology Change",detail:"'Previous Year' → 'Tax Year' | 'Assessment Year' removed | 'Assessee' broadly retained."},
-{area:"Structure",detail:"536 sections | 24 Chapters | 16 Schedules (vs 298 sections in 1961 Act)."},
-{area:"No New Taxes",detail:"Rates, deductions, exemptions remain IDENTICAL — only language simplified and restructured."},
-{area:"Key Section Changes",detail:"Sec 80C → Sec 123 | Sec 139 → Sec 263 | Sec 147 → Sec 278 | Sec 271 → Sec 439 | Sec 194J → Sec 393 Table."},
-{area:"Practical Tip",detail:"Use Section Finder tab for complete 1961↔2025 mapping. Use IT Act 2025 tab for the full bare act text."}
-]},
-{q:"tax year new concept previous year assessment year 2026",topic:"Tax Year — New Concept in IT Act 2025",impacts:[
-{area:"Definition",detail:"'Tax Year' = the 12-month financial year for which income is computed AND taxed (Section 2(106), IT Act 2025)."},
-{area:"Replaces",detail:"Both 'Previous Year' and 'Assessment Year' are eliminated. Tax year = the year income is earned AND the year it is taxed."},
-{area:"Example",detail:"Income earned in FY 2026-27 is called Tax Year 2026-27. No separate 'AY 2027-28' concept. ITR filed for Tax Year 2026-27 by 31 July 2027."},
-{area:"New Entrants",detail:"New business starting mid-year — tax year is from date of commencement to 31 March."},
-{area:"Practical Tip",detail:"The change is terminological only. Tax computation, rates, and deductions remain identical. Update your engagement letters and reports to use 'Tax Year'."}
-]},
-{q:"LLP limited liability partnership form 11 form 8 annual return",topic:"LLP — Limited Liability Partnership",impacts:[
-{area:"Governed By",detail:"LLP Act 2008 | LLP Rules 2009."},
-{area:"Tax Treatment",detail:"Same as partnership firm — 30% flat rate + surcharge + 4% cess."},
-{area:"TDS 194T",detail:"Section 194T (w.e.f. 01.04.2025): TDS at 10% on salary/remuneration/interest paid to partners > Rs 20,000 per FY."},
-{area:"Annual Compliance",detail:"Form 11 (Annual Return — 30 May) | Form 8 (Statement of Accounts — 30 October) | DIR-3 KYC (30 Sep)."},
-{area:"Audit Threshold",detail:"Mandatory if turnover > Rs 40 lakh or contribution > Rs 25 lakh."},
-{area:"Key Difference from Firm",detail:"LLP cannot claim deduction under Sec 40(b) for presumptive tax (44AD). However, designated partner remuneration per LLP agreement is allowed."},
-{area:"Practical Tip",detail:"Penalty for late filing Form 11/8: Rs 100/day — no upper cap. File on time to avoid unlimited penalties."}
-]},
-{q:"CSR corporate social responsibility 135 companies act 2 percent",topic:"CSR — Corporate Social Responsibility (Section 135, Companies Act 2013)",impacts:[
-{area:"Applicability",detail:"Net worth ≥ Rs 500 Cr OR Turnover ≥ Rs 1,000 Cr OR Net profit ≥ Rs 5 Cr in any of preceding 3 FYs."},
-{area:"Obligation",detail:"Spend at least 2% of average net profits of preceding 3 years on CSR activities listed in Schedule VII."},
-{area:"Committee",detail:"Board must form CSR Committee (3 directors — 1 independent if applicable)."},
-{area:"Unspent Amount",detail:"Transfer to Unspent CSR Account within 30 days of FY end. Ongoing projects — transfer to specified funds within 6 months."},
-{area:"Penalty",detail:"Rs 1 lakh to Rs 1 crore for company + officer in default up to Rs 2 lakh."},
-{area:"Tax Treatment",detail:"CSR spending is NOT deductible u/s 37(1) as business expenditure — Explanation 2 to Sec 37(1)."},
-{area:"Practical Tip",detail:"File CSR-2 form by 31 March. CSR impact assessment required for projects ≥ Rs 1 crore."}
-]},
-{q:"stock inventory valuation AS-2 FIFO weighted average closing stock",topic:"Stock / Inventory Valuation — AS-2 & IT Act",impacts:[
-{area:"AS-2 Rule",detail:"Inventories valued at LOWER of cost or net realisable value (NRV)."},
-{area:"Methods Allowed",detail:"FIFO, Weighted Average — LIFO is NOT permitted under AS-2 / Ind AS-2."},
-{area:"Income Tax",detail:"Once method adopted, cannot be changed without CBDT approval (Sec 145A). Change requires justification."},
-{area:"Form 3CD",detail:"Clause 14 — method of valuation of closing stock | Clause 35 — change in method during the year."},
-{area:"CARO 2020",detail:"Clause 3(ii) — physical verification of inventory by management."},
-{area:"Practical Tip",detail:"Physical stock verification mandatory at year end. Document any write-downs to NRV with evidence. Discrepancies between book and physical stock require clear explanation."}
-]},
-{q:"director din kyc 164 disqualification company loan 185",topic:"Director — Duties, Compliance & Tax Implications",impacts:[
-{area:"DIN & KYC",detail:"Every director must have DIN (Director Identification Number). DIR-3 KYC annually by 30 September. Failure: DIN deactivated, Rs 5,000 to reactivate."},
-{area:"Disqualification",detail:"Section 164(2) — director of company that fails to file returns for 3 years is disqualified from ALL directorships for 5 years."},
-{area:"Remuneration Tax",detail:"Director remuneration — TDS u/s 194J at 10%. IT Act 2025: Section 393(1) Table entry."},
-{area:"Company-to-Director Loan",detail:"Prohibited u/s 185 Companies Act (except business purpose). Attracts deemed dividend u/s 2(22)(e) IT Act if closely-held company with >10% shareholding."},
-{area:"Director Liability",detail:"Director personally liable for TDS default (Sec 276B) | GST default | PF default under respective statutes."},
-{area:"ROC",detail:"MGT-7 (Annual Return) discloses all directors. DIR-12 for appointment/resignation within 30 days."}
-]},
-{q:"EMI loan repayment reducing flat rate amortisation schedule",topic:"EMI — Loan Repayment & Tax Implications",impacts:[
-{area:"Reducing Balance",detail:"EMI = P × r × (1+r)^n / [(1+r)^n - 1], where r = monthly rate, n = months. Interest on outstanding balance — standard bank method."},
-{area:"Flat Rate",detail:"EMI = (P + P×R×N/100) / (N×12). Interest on original principal throughout — effective rate ≈ 2× the stated flat rate."},
-{area:"Home Loan Tax Benefit",detail:"Sec 24(b) — interest up to Rs 2L (self-occupied). Sec 80C — principal up to Rs 1.5L. NOT available in new regime."},
-{area:"Business Loan",detail:"Interest on business loan fully deductible u/s 36(1)(iii). Principal repayment has no deduction."},
-{area:"TDS on Interest",detail:"If interest on loan > Rs 5,000 from non-bank entity: TDS u/s 194A @ 10%."},
-{area:"Practical Tip",detail:"Use EMI Calculator tab for full amortisation schedule. Total EMIs should not exceed 40-50% of net monthly income (FOIR — standard lender rule)."}
 ]}
 ];
 function smartSearch(){
 var q=document.getElementById('smartQ').value.toLowerCase().trim();
 var r=document.getElementById('smartResults');
 if(!q||q.length<2){r.innerHTML='<p style="text-align:center;color:var(--text-light);padding:20px;">Type at least 2 characters to search...</p>';return;}
-var qWords=q.split(/\s+/);
-var matches=smartDB.filter(function(item){
-var keywords=item.q.split(' ');
-// Match if ANY query word matches ANY keyword (partial match both ways)
-return qWords.some(function(qw){
-return keywords.some(function(k){return k.indexOf(qw)>=0||qw.indexOf(k)>=0;});
+// Score each entry, return ONLY the best match
+var best=null,bestScore=0;
+smartDB.forEach(function(item){
+var topic=item.topic.toLowerCase();
+var keywords=item.q.toLowerCase().split(/\s+/);
+var score=0;
+// Highest: topic starts with query
+if(topic.indexOf(q)===0)score+=100;
+// High: topic contains the full query
+else if(topic.indexOf(q)>-1)score+=60;
+// High: any keyword equals query exactly
+if(keywords.indexOf(q)>-1)score+=80;
+// Medium: any keyword starts with query
+keywords.forEach(function(k){if(k.indexOf(q)===0)score+=30;else if(k.indexOf(q)>-1)score+=10;});
+// Small bonus: each query-word matched in keywords
+q.split(/\s+/).forEach(function(qw){if(qw.length>1&&keywords.some(function(k){return k.indexOf(qw)>-1;}))score+=5;});
+if(score>bestScore){bestScore=score;best=item;}
 });
-});
-if(!matches.length){r.innerHTML='<p style="text-align:center;color:var(--text-light);padding:20px;">No matches found. Try keywords like: cash, TDS, MSME, depreciation, ESI, PF, rent, salary, loan, ITC</p>';return;}
-r.innerHTML=matches.map(function(m){
-return '<div class="card" style="margin-bottom:12px;"><h3 style="color:var(--accent);margin-bottom:10px;">'+m.topic+'</h3><table class="limits-table"><thead><tr><th style="width:120px;">Area</th><th>Impact / Requirement</th></tr></thead><tbody>'+m.impacts.map(function(i){return '<tr><td><strong>'+i.area+'</strong></td><td style="font-size:0.85rem;">'+i.detail+'</td></tr>';}).join('')+'</tbody></table></div>';
-}).join('');
+if(!best){r.innerHTML='<p style="text-align:center;color:var(--text-light);padding:20px;">No matches found for "<strong>'+q+'</strong>". Try keywords like: TDS, GST, MSME, depreciation, partnership, capital gain, advance tax, ROC, donation, export</p>';return;}
+r.innerHTML='<div class="card" style="margin-bottom:12px;"><h3 style="color:var(--accent);margin-bottom:10px;">'+best.topic+'</h3><table class="limits-table"><thead><tr><th style="width:140px;">Area</th><th>Impact / Requirement</th></tr></thead><tbody>'+best.impacts.map(function(i){return '<tr><td><strong>'+i.area+'</strong></td><td style="font-size:0.85rem;">'+i.detail+'</td></tr>';}).join('')+'</tbody></table></div>';
 }
 
 // ==============================
@@ -5225,150 +4841,6 @@ searchRule37BB=function(){origRule37BB();document.querySelectorAll('#rule37bbRes
 })();
 
 // ==============================
-// IT ACT 2025 — BARE ACT VIEWER
-// ==============================
-var _itActLoaded=false,_itActLoading=false,_itActCurrentFilter='';
-function loadITAct(){
-  if(_itActLoaded||_itActLoading)return;
-  _itActLoading=true;
-  var s=document.createElement('script');
-  s.src='itact2025-data.js';
-  s.onload=function(){_itActLoaded=true;_itActLoading=false;renderITAct();};
-  s.onerror=function(){_itActLoading=false;document.getElementById('itActLoading').innerHTML='<span style="color:#c0392b;">Failed to load IT Act data file. Please refresh the page.</span>';};
-  document.head.appendChild(s);
-}
-function renderITAct(){
-  var d=window.ITACT2025_DATA;
-  if(!d)return;
-  document.getElementById('itActLoading').style.display='none';
-  document.getElementById('itActChapterPills').style.display='flex';
-  document.getElementById('itActContent').style.display='block';
-  document.getElementById('itActJumpBtn').style.display='block';
-  // Populate chapter select dropdown
-  var sel=document.getElementById('itActChapterSel');
-  if(sel.options.length<=1){
-    d.chapters.forEach(function(c){
-      var o=document.createElement('option');
-      o.value=c.r;
-      o.textContent='Ch '+c.r+' — '+c.t;
-      sel.appendChild(o);
-    });
-  }
-  // Pills
-  var pills=document.getElementById('itActChapterPills');
-  pills.innerHTML='';
-  var allPill=document.createElement('div');
-  allPill.className='pill active';
-  allPill.style.background='var(--accent)';allPill.style.color='white';
-  allPill.textContent='All';
-  allPill.onclick=function(){document.getElementById('itActChapterSel').value='';filterByChapter();};
-  pills.appendChild(allPill);
-  d.chapters.forEach(function(c){
-    var p=document.createElement('div');
-    p.className='pill';
-    p.textContent='Ch '+c.r;
-    p.title=c.t;
-    p.onclick=function(){document.getElementById('itActChapterSel').value=c.r;filterByChapter();};
-    pills.appendChild(p);
-  });
-  // Render all chapters
-  var html='';
-  d.chapters.forEach(function(c){
-    html+='<div class="itact-chapter" data-ch="'+c.r+'">';
-    html+='<div class="itact-chapter-heading">CHAPTER '+c.r+' — '+escHtml(c.t)+' <span style="opacity:0.85;font-weight:normal;font-size:0.82rem;">('+c.count+' sections)</span></div>';
-    var secs=d.sections.filter(function(s){return s.c===c.n;});
-    secs.forEach(function(s){
-      html+='<div class="itact-section" data-sn="'+s.n+'" data-ch="'+c.r+'">';
-      html+='<div class="itact-section-heading" onclick="toggleITActSection(this)"><span><strong>Sec '+s.n+'.</strong> '+escHtml(s.h)+'</span><span class="toggle-arrow"></span></div>';
-      html+='<div class="itact-section-body">'+escHtml(s.b)+'</div>';
-      html+='</div>';
-    });
-    html+='</div>';
-  });
-  // Schedules
-  if(d.schedules&&d.schedules.length){
-    html+='<div class="itact-chapter" data-ch="SCH">';
-    html+='<div class="itact-chapter-heading">SCHEDULES ('+d.schedules.length+')</div>';
-    d.schedules.forEach(function(sc){
-      html+='<div class="itact-section" data-sn="SCH-'+sc.n+'" data-ch="SCH">';
-      html+='<div class="itact-section-heading" onclick="toggleITActSection(this)"><span><strong>Schedule '+sc.r+'.</strong> '+escHtml(sc.t||'')+'</span><span class="toggle-arrow"></span></div>';
-      html+='<div class="itact-section-body">'+escHtml(sc.b)+'</div>';
-      html+='</div>';
-    });
-    html+='</div>';
-  }
-  document.getElementById('itActContent').innerHTML=html;
-  // Remove standalone page-number paragraphs from gazette PDF artefacts
-  setTimeout(removeITActPageNumbers, 100);
-}
-function escHtml(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-function toggleITActSection(el){el.parentElement.classList.toggle('open');}
-function filterByChapter(){
-  var v=document.getElementById('itActChapterSel').value;
-  _itActCurrentFilter=v;
-  document.querySelectorAll('#itActContent .itact-chapter').forEach(function(ch){
-    ch.style.display=(!v||ch.getAttribute('data-ch')===v)?'':'none';
-  });
-  // Update pills active state
-  var pills=document.querySelectorAll('#itActChapterPills .pill');
-  pills.forEach(function(p,i){p.classList.remove('active');});
-  if(!v){pills[0]&&pills[0].classList.add('active');}
-  else{pills.forEach(function(p){if(p.textContent==='Ch '+v)p.classList.add('active');});}
-  document.getElementById('itActResultsInfo').style.display='none';
-}
-function searchITAct(){
-  if(!_itActLoaded){loadITAct();setTimeout(searchITAct,600);return;}
-  var q=(document.getElementById('itActQuery').value||'').trim();
-  if(!q){clearITActSearch();return;}
-  var d=window.ITACT2025_DATA;
-  var qLower=q.toLowerCase();
-  var isNum=/^\d+$/.test(q);
-  var matches=0,firstMatch=null;
-  // Clear existing highlights
-  document.querySelectorAll('#itActContent .itact-section').forEach(function(sec){
-    var sn=sec.getAttribute('data-sn');
-    var head=sec.querySelector('.itact-section-heading');
-    var body=sec.querySelector('.itact-section-body');
-    var show=false;
-    if(isNum&&String(sn)===q){show=true;}
-    else if(!isNum){
-      if(head.textContent.toLowerCase().indexOf(qLower)>-1||body.textContent.toLowerCase().indexOf(qLower)>-1)show=true;
-    }
-    if(show){
-      sec.style.display='';
-      sec.classList.add('open');
-      matches++;
-      if(!firstMatch)firstMatch=sec;
-    }else{
-      sec.style.display='none';
-      sec.classList.remove('open');
-    }
-  });
-  // Show only chapters that have visible sections
-  document.querySelectorAll('#itActContent .itact-chapter').forEach(function(ch){
-    var any=ch.querySelectorAll('.itact-section:not([style*="display: none"])').length>0;
-    ch.style.display=any?'':'none';
-  });
-  var info=document.getElementById('itActResultsInfo');
-  info.style.display='block';
-  info.innerHTML='<strong>'+matches+'</strong> match'+(matches===1?'':'es')+' for "'+escHtml(q)+'". <a href="#" onclick="clearITActSearch();return false;" style="color:var(--accent);">Clear</a>';
-  if(firstMatch){setTimeout(function(){firstMatch.scrollIntoView({behavior:'smooth',block:'start'});},100);}
-}
-function clearITActSearch(){
-  document.getElementById('itActQuery').value='';
-  document.getElementById('itActChapterSel').value='';
-  _itActCurrentFilter='';
-  document.querySelectorAll('#itActContent .itact-section').forEach(function(sec){
-    sec.style.display='';
-    sec.classList.remove('open');
-  });
-  document.querySelectorAll('#itActContent .itact-chapter').forEach(function(ch){ch.style.display='';});
-  document.getElementById('itActResultsInfo').style.display='none';
-  var pills=document.querySelectorAll('#itActChapterPills .pill');
-  pills.forEach(function(p,i){p.classList.remove('active');if(i===0)p.classList.add('active');});
-}
-
-// ==============================
 // EMI CALCULATOR
 // ==============================
 var _lastEMI=null;
@@ -5429,13 +4901,12 @@ function calcEMI(){
   document.getElementById('emiSummary').innerHTML=sHtml;
   // Bar
   document.getElementById('emiBar').innerHTML='<div class="emi-bar-principal" style="width:'+pctP+'%;">Principal '+pctP+'%</div><div class="emi-bar-interest" style="width:'+pctI+'%;">Interest '+pctI+'%</div>';
-  // Schedule table — monthly rows only, one grand total at end
+  // Schedule table — month rows + ONE grand total row
   var tHtml='<thead><tr><th>#</th><th>Month</th><th>EMI</th><th>Principal</th><th>Interest</th><th>Balance</th></tr></thead><tbody>';
   schedule.forEach(function(row){
     tHtml+='<tr><td>'+row.i+'</td><td>'+row.date.toLocaleDateString('en-IN',{month:'short',year:'numeric'})+'</td><td>Rs '+fmt(Math.round(row.emi))+'</td><td>Rs '+fmt(Math.round(row.prin))+'</td><td>Rs '+fmt(Math.round(row.int))+'</td><td>Rs '+fmt(Math.round(row.bal))+'</td></tr>';
   });
-  // One grand total row
-  tHtml+='<tr style="background:#00b894;color:white;font-weight:700;"><td colspan="2" style="text-align:center;">TOTAL ('+n+' Instalments)</td><td>Rs '+fmt(Math.round(totalPay))+'</td><td>Rs '+fmt(Math.round(P))+'</td><td>Rs '+fmt(Math.round(totalInt))+'</td><td>—</td></tr>';
+  tHtml+='<tr style="background:#00b894;color:white;font-weight:700;"><td colspan="2" style="text-align:center;padding:8px;">GRAND TOTAL ('+n+' Instalments)</td><td style="padding:8px;">Rs '+fmt(Math.round(totalPay))+'</td><td style="padding:8px;">Rs '+fmt(Math.round(P))+'</td><td style="padding:8px;">Rs '+fmt(Math.round(totalInt))+'</td><td style="padding:8px;">—</td></tr>';
   tHtml+='</tbody>';
   document.getElementById('emiSchedule').innerHTML=tHtml;
   document.getElementById('emiResult').style.display='block';
@@ -5470,12 +4941,12 @@ function downloadEMIPDF(){
   doc.setTextColor(0);
   doc.text('Total Interest: Rs '+fmt(Math.round(e.totalInt)),14,y);y+=5;
   doc.text('Total Payment: Rs '+fmt(Math.round(e.totalPay)),14,y);y+=5;
-  // Build table rows — monthly only, one grand total at end
+  // Build table rows with yearly summaries
   var rows=[];
   e.schedule.forEach(function(r){
     rows.push([r.i,r.date.toLocaleDateString('en-IN',{month:'short',year:'numeric'}),'Rs '+fmt(Math.round(r.emi)),'Rs '+fmt(Math.round(r.prin)),'Rs '+fmt(Math.round(r.int)),'Rs '+fmt(Math.round(r.bal))]);
   });
-  rows.push([{content:'TOTAL ('+e.n+' Instalments)',colSpan:2,styles:{fillColor:[0,184,148],textColor:255,fontStyle:'bold',halign:'center'}},{content:'Rs '+fmt(Math.round(e.totalPay)),styles:{fillColor:[0,184,148],textColor:255,fontStyle:'bold'}},{content:'Rs '+fmt(Math.round(e.P)),styles:{fillColor:[0,184,148],textColor:255,fontStyle:'bold'}},{content:'Rs '+fmt(Math.round(e.totalInt)),styles:{fillColor:[0,184,148],textColor:255,fontStyle:'bold'}},{content:'—',styles:{fillColor:[0,184,148],textColor:255,fontStyle:'bold'}}]);
+  rows.push([{content:'GRAND TOTAL ('+e.n+' Instalments)',colSpan:2,styles:{fillColor:[0,184,148],textColor:255,fontStyle:'bold',halign:'center'}},{content:'Rs '+fmt(Math.round(e.totalPay)),styles:{fillColor:[0,184,148],textColor:255,fontStyle:'bold'}},{content:'Rs '+fmt(Math.round(e.P)),styles:{fillColor:[0,184,148],textColor:255,fontStyle:'bold'}},{content:'Rs '+fmt(Math.round(e.totalInt)),styles:{fillColor:[0,184,148],textColor:255,fontStyle:'bold'}},{content:'—',styles:{fillColor:[0,184,148],textColor:255,fontStyle:'bold'}}]);
   doc.autoTable({
     startY:y+3,
     head:[['#','Month','EMI','Principal','Interest','Balance']],
@@ -5492,8 +4963,10 @@ function downloadEMIPDF(){
 }
 
 // ==============================
-// GST COMPOSITION ELIGIBILITY CHECKER (standalone tab)
+// GST COMPOSITION ELIGIBILITY CHECKER
 // ==============================
+function formatNum(n){return Number(n).toLocaleString('en-IN');}
+
 function checkCompositionEligibility(){
   var turnover=parseFloat(document.getElementById('compTurnover').value)||0;
   var state=document.getElementById('compState').value;
@@ -5502,79 +4975,101 @@ function checkCompositionEligibility(){
   var ecom=document.getElementById('compEcom').value;
   var excluded=document.getElementById('compExcluded').value;
   var casual=document.getElementById('compCasual').value;
+
   var resultDiv=document.getElementById('compResult');
+  if(!resultDiv){alert('Result element not found.');return;}
   resultDiv.style.display='block';
+  resultDiv.scrollIntoView({behavior:'smooth',block:'nearest'});
 
-  if(interstate==='yes'){showIneligible(resultDiv,'Makes inter-state outward supply — Section 10(2)(a), CGST Act 2017. Composition scheme is available only for intra-state supplies.');return;}
-  if(ecom==='yes'){showIneligible(resultDiv,'Supplies goods/services through e-commerce operator liable to collect TCS under Section 52 — Section 10(2)(d), CGST Act 2017.');return;}
-  if(excluded==='yes'){showIneligible(resultDiv,'Manufacturer of ice cream, pan masala or tobacco — specifically excluded under Section 10(2)(e), CGST Act 2017.');return;}
-  if(casual==='yes'){showIneligible(resultDiv,'Casual taxable person or non-resident taxable person — not eligible under Section 10(2)(b), CGST Act 2017.');return;}
+  if(!turnover||turnover<=0){
+    resultDiv.innerHTML='<div style="background:#fff3e0;border:2px solid #ff9800;border-radius:8px;padding:14px;"><strong>⚠️ Please enter your Annual Aggregate Turnover.</strong></div>';
+    return;
+  }
+  if(!business){
+    resultDiv.innerHTML='<div style="background:#fff3e0;border:2px solid #ff9800;border-radius:8px;padding:14px;"><strong>⚠️ Please select Nature of Business.</strong></div>';
+    return;
+  }
 
-  var limit=0,rate='',rateNote='';
+  if(interstate==='yes'){
+    showCompIneligible(resultDiv,'Inter-state outward supply of goods','Section 10(2)(a), CGST Act 2017','Composition scheme is available ONLY for intra-state supplies. Any inter-state outward supply — even occasional — disqualifies the dealer from the composition scheme.');return;
+  }
+  if(ecom==='yes'){
+    showCompIneligible(resultDiv,'Supplies through e-commerce operator (Amazon / Flipkart / Swiggy / Zomato etc.)','Section 10(2)(d), CGST Act 2017','Persons supplying goods or services through an electronic commerce operator who is liable to collect TCS under Section 52 cannot opt for composition scheme.');return;
+  }
+  if(excluded==='yes'){
+    showCompIneligible(resultDiv,'Manufacturer of Ice Cream / Pan Masala / Tobacco / Aerated Waters','Section 10(2)(e), CGST Act 2017','Manufacturers of these specific goods are specifically excluded from the composition scheme regardless of turnover.');return;
+  }
+  if(casual==='yes'){
+    showCompIneligible(resultDiv,'Casual Taxable Person or Non-Resident Taxable Person','Section 10(2)(b), CGST Act 2017','Casual and non-resident taxable persons cannot opt for composition scheme. They must register as regular dealers.');return;
+  }
+
+  var limit,rate,cgst,sgst,rateNote,returnNote;
   if(business==='service'){
-    limit=5000000;
-    rate='6% (3% CGST + 3% SGST)';
-    rateNote='Service providers covered under Section 10(2A), CGST Act. Service supply must not exceed 10% of turnover or Rs 5 lakh whichever is higher.';
+    limit=5000000;rate='6%';cgst='3%';sgst='3%';
+    rateNote='Service providers covered under Section 10(2A), CGST Act (w.e.f. 01.02.2019). Service supply must not exceed 10% of turnover in preceding FY or Rs 5 lakh — whichever is higher.';
+    returnNote='CMP-08 (quarterly) + GSTR-4 (annual by 30 April)';
   }else if(business==='restaurant'){
-    limit=state==='special'?7500000:15000000;
-    rate='5% (2.5% CGST + 2.5% SGST)';
-    rateNote='Restaurants not serving alcohol — Section 10(1), CGST Act.';
+    limit=state==='special'?7500000:15000000;rate='5%';cgst='2.5%';sgst='2.5%';
+    rateNote='Restaurants not serving alcohol — Section 10(1)(b), CGST Act.';
+    returnNote='CMP-08 (quarterly) + GSTR-4 (annual by 30 April)';
   }else if(business==='mixed'){
-    limit=state==='special'?7500000:15000000;
-    rate='6% (3% CGST + 3% SGST)';
-    rateNote='Mixed supply — taxed at 6% under Section 10(2A). Services allowed up to 10% of turnover or Rs 5L.';
+    limit=state==='special'?7500000:15000000;rate='6%';cgst='3%';sgst='3%';
+    rateNote='Mixed supply (goods + services) — taxed at higher rate of 6% under Section 10(2A), CGST Act.';
+    returnNote='CMP-08 (quarterly) + GSTR-4 (annual by 30 April)';
   }else{
-    limit=state==='special'?7500000:15000000;
-    rate='1% (0.5% CGST + 0.5% SGST)';
-    rateNote='Manufacturers and traders of goods — Section 10(1), CGST Act.';
+    limit=state==='special'?7500000:15000000;rate='1%';cgst='0.5%';sgst='0.5%';
+    rateNote='Manufacturers and traders of goods — Section 10(1)(a), CGST Act.';
+    returnNote='CMP-08 (quarterly by 18th of next month) + GSTR-4 (annual by 30 April)';
   }
 
   if(turnover>limit){
-    showIneligible(resultDiv,'Aggregate turnover (Rs '+fmt(Math.round(turnover))+') exceeds the applicable limit of Rs '+fmt(limit)+' for '+(state==='special'?'Special Category State':'Normal State')+'.');
-    return;
+    showCompIneligible(resultDiv,
+      'Annual aggregate turnover (Rs '+formatNum(turnover)+') exceeds the limit of Rs '+formatNum(limit)+' for '+(state==='special'?'Special Category State':'Normal State'),
+      'Section 10(1) / 10(2A), CGST Act 2017 | Notification No. 14/2019-CT dated 07.03.2019',
+      'Must register as a Regular Dealer. See GST Registration tab for regular registration requirements.');return;
   }
-  showEligible(resultDiv,rate,rateNote,turnover,limit);
+
+  showCompEligible(resultDiv,turnover,limit,rate,cgst,sgst,rateNote,returnNote,state);
 }
 
-function showEligible(div,rate,rateNote,turnover,limit){
-  div.innerHTML='<div style="background:#e8f8f5;border:2px solid #00b894;border-radius:8px;padding:16px;">'
-    +'<h4 style="color:#00b894;margin:0 0 12px;">&#10003; ELIGIBLE FOR COMPOSITION SCHEME</h4>'
-    +'<table style="width:100%;border-collapse:collapse;">'
-    +'<tr><td style="padding:6px;font-weight:600;width:50%">Your Turnover</td><td>Rs '+fmt(Math.round(turnover))+'</td></tr>'
-    +'<tr><td style="padding:6px;font-weight:600;background:#f5f5f5">Applicable Limit</td><td style="background:#f5f5f5">Rs '+fmt(limit)+'</td></tr>'
-    +'<tr><td style="padding:6px;font-weight:600">GST Rate Applicable</td><td style="color:#00b894;font-weight:700">'+rate+'</td></tr>'
-    +'<tr><td style="padding:6px;font-weight:600;background:#f5f5f5">Quarterly Return</td><td style="background:#f5f5f5">CMP-08 — by 18th of month after each quarter</td></tr>'
-    +'<tr><td style="padding:6px;font-weight:600">Annual Return</td><td>GSTR-4 — by 30 April each year</td></tr>'
-    +'<tr><td style="padding:6px;font-weight:600;background:#f5f5f5">Opt-in Form</td><td style="background:#f5f5f5">CMP-02 — file by 31 March of preceding year</td></tr>'
-    +'</table>'
-    +'<p style="margin:12px 0 4px;font-size:0.85rem;color:#e67e22;"><strong>Note:</strong> '+rateNote+'</p>'
-    +'<p style="margin:4px 0;font-size:0.85rem;color:#e67e22;">&#9888; Cannot issue Tax Invoice — issue Bill of Supply only.</p>'
-    +'<p style="margin:4px 0;font-size:0.85rem;color:#e67e22;">&#9888; Cannot claim Input Tax Credit on any purchases.</p>'
-    +'</div>';
+function showCompEligible(div,turnover,limit,rate,cgst,sgst,rateNote,returnNote,state){
+  div.innerHTML='<div style="background:#e8f8f5;border:2px solid #00b894;border-radius:8px;padding:16px;">'+
+    '<h4 style="color:#00b894;margin:0 0 14px 0;font-size:1.05rem;">✅ ELIGIBLE FOR GST COMPOSITION SCHEME</h4>'+
+    '<div class="table-scroll"><table style="width:100%;border-collapse:collapse;font-size:0.88rem;">'+
+      '<tr style="background:#f0faf8;"><td style="padding:8px 10px;font-weight:600;border:1px solid #b2dfdb;width:45%">Your Turnover</td><td style="padding:8px 10px;border:1px solid #b2dfdb;">Rs '+formatNum(turnover)+'</td></tr>'+
+      '<tr><td style="padding:8px 10px;font-weight:600;border:1px solid #b2dfdb;">Applicable Limit</td><td style="padding:8px 10px;border:1px solid #b2dfdb;">Rs '+formatNum(limit)+' ('+(state==='special'?'Special Category State':'Normal State')+')</td></tr>'+
+      '<tr style="background:#f0faf8;"><td style="padding:8px 10px;font-weight:600;border:1px solid #b2dfdb;">GST Rate Applicable</td><td style="padding:8px 10px;border:1px solid #b2dfdb;font-weight:700;color:#00695c;">'+rate+' total (CGST '+cgst+' + SGST '+sgst+')</td></tr>'+
+      '<tr><td style="padding:8px 10px;font-weight:600;border:1px solid #b2dfdb;">Returns to File</td><td style="padding:8px 10px;border:1px solid #b2dfdb;">'+returnNote+'</td></tr>'+
+      '<tr style="background:#f0faf8;"><td style="padding:8px 10px;font-weight:600;border:1px solid #b2dfdb;">Opt-In Form</td><td style="padding:8px 10px;border:1px solid #b2dfdb;">Form CMP-02 on gst.gov.in — file by <strong>31 March</strong> of preceding year</td></tr>'+
+      '<tr><td style="padding:8px 10px;font-weight:600;border:1px solid #b2dfdb;">Invoice Type</td><td style="padding:8px 10px;border:1px solid #b2dfdb;">Bill of Supply only — <strong>cannot issue Tax Invoice</strong></td></tr>'+
+      '<tr style="background:#f0faf8;"><td style="padding:8px 10px;font-weight:600;border:1px solid #b2dfdb;">Input Tax Credit</td><td style="padding:8px 10px;border:1px solid #b2dfdb;"><strong>Not available</strong> — tax paid from own funds only</td></tr>'+
+      '<tr><td style="padding:8px 10px;font-weight:600;border:1px solid #b2dfdb;">Section Reference</td><td style="padding:8px 10px;border:1px solid #b2dfdb;">Section 10, CGST Act 2017 | Rule 7, CGST Rules 2017</td></tr>'+
+    '</table></div>'+
+    '<p style="margin:12px 0 4px 0;font-size:0.82rem;color:#e67e22;"><strong>Note:</strong> '+rateNote+'</p>'+
+    '<p style="margin:4px 0;font-size:0.82rem;color:#e67e22;">⚠️ Tax must be paid from cash ledger only — ITC cannot be used to pay composition tax.</p>'+
+    '<p style="margin:4px 0;font-size:0.82rem;color:#e67e22;">⚠️ Must display "Composition taxable person, not eligible to collect tax on supplies" at all places of business.</p>'+
+  '</div>';
 }
 
-function showIneligible(div,reason){
-  div.innerHTML='<div style="background:#fdecea;border:2px solid #e74c3c;border-radius:8px;padding:16px;">'
-    +'<h4 style="color:#e74c3c;margin:0 0 8px;">&#10007; NOT ELIGIBLE FOR COMPOSITION SCHEME</h4>'
-    +'<p style="margin:0;"><strong>Reason:</strong> '+reason+'</p>'
-    +'<p style="margin:10px 0 0;font-size:0.85rem;color:#555;">Must register as a Regular Dealer. See <strong>GST Registration</strong> tab for regular registration requirements.</p>'
-    +'</div>';
+function showCompIneligible(div,reason,section,detail){
+  div.innerHTML='<div style="background:#fdecea;border:2px solid #e74c3c;border-radius:8px;padding:16px;">'+
+    '<h4 style="color:#c0392b;margin:0 0 10px 0;font-size:1.05rem;">❌ NOT ELIGIBLE FOR COMPOSITION SCHEME</h4>'+
+    '<p style="margin:0 0 6px 0;"><strong>Reason:</strong> '+reason+'</p>'+
+    '<p style="margin:0 0 6px 0;"><strong>Section:</strong> '+section+'</p>'+
+    '<p style="margin:0;font-size:0.85rem;color:#555;">'+detail+'</p>'+
+  '</div>';
 }
 
 function resetComposition(){
-  ['compTurnover'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
-  ['compState','compBusiness','compInterstate','compEcom','compExcluded','compCasual'].forEach(function(id){var el=document.getElementById(id);if(el)el.selectedIndex=0;});
-  var r=document.getElementById('compResult');if(r){r.style.display='none';r.innerHTML='';}
-}
-
-// ==============================
-// IT ACT PAGE NUMBER REMOVAL
-// ==============================
-function removeITActPageNumbers(){
-  document.querySelectorAll('.itact-section-body p').forEach(function(p){
-    var text=p.textContent.trim();
-    if(/^[-\u2014\s]*\d+[-\u2014\s]*$/.test(text)){p.remove();}
-  });
+  document.getElementById('compTurnover').value='';
+  document.getElementById('compState').value='normal';
+  document.getElementById('compBusiness').value='';
+  document.getElementById('compInterstate').value='no';
+  document.getElementById('compEcom').value='no';
+  document.getElementById('compExcluded').value='no';
+  document.getElementById('compCasual').value='no';
+  var result=document.getElementById('compResult');
+  if(result){result.style.display='none';result.innerHTML='';}
 }
 
 </script>
