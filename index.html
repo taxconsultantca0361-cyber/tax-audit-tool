@@ -34,7 +34,7 @@
     <div class="nav-tab" onclick="switchTab('caro')">CARO 2020</div>
     <div class="nav-tab" onclick="switchTab('auditcheck')">Audit Checklist</div>
     <div class="nav-tab" onclick="switchTab('asapply')">AS Applicability</div>
-    <div class="nav-tab" onclick="switchTab('capgain')">Capital Gains</div>
+    <div class="nav-tab" onclick="switchTab('capgain')">CG + Exemption</div>
     <div class="nav-tab" onclick="switchTab('intpenalty')">Interest 234A/B/C</div>
     <div class="nav-tab" onclick="switchTab('impact')">Impact Analyzer</div>
     <div class="nav-tab" onclick="switchTab('itrform')">ITR Applicability</div>
@@ -92,7 +92,7 @@
             <div onclick="switchTab('asapply')" style="cursor:pointer;background:linear-gradient(135deg,#a29bfe,#6c5ce7);color:white;border-radius:12px;padding:22px 14px;transition:transform 0.2s;box-shadow:0 3px 10px rgba(0,0,0,0.12);" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
                 <div style="font-size:1.8rem;">📊</div><div style="font-weight:700;margin-top:6px;font-size:0.88rem;">AS Applicability</div><div style="font-size:0.72rem;opacity:0.8;margin-top:3px;">MSME Exemptions</div></div>
             <div onclick="switchTab('capgain')" style="cursor:pointer;background:linear-gradient(135deg,#fd79a8,#e84393);color:white;border-radius:12px;padding:22px 14px;transition:transform 0.2s;box-shadow:0 3px 10px rgba(0,0,0,0.12);" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
-                <div style="font-size:1.8rem;">����</div><div style="font-weight:700;margin-top:6px;font-size:0.88rem;">Capital Gains</div><div style="font-size:0.72rem;opacity:0.8;margin-top:3px;">LTCG / STCG Calculator</div></div>
+                <div style="font-size:1.8rem;">🏘️</div><div style="font-weight:700;margin-top:6px;font-size:0.88rem;">CG + Exemption</div><div style="font-size:0.72rem;opacity:0.8;margin-top:3px;">LTCG/STCG + Sec 54/54F/54EC</div></div>
             <div onclick="switchTab('intpenalty')" style="cursor:pointer;background:linear-gradient(135deg,#ffeaa7,#fdcb6e);color:#0f2027;border-radius:12px;padding:22px 14px;transition:transform 0.2s;box-shadow:0 3px 10px rgba(0,0,0,0.12);" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
                 <div style="font-size:1.8rem;">⚖️</div><div style="font-weight:700;margin-top:6px;font-size:0.88rem;">Interest 234A/B/C</div><div style="font-size:0.72rem;opacity:0.7;margin-top:3px;">Auto Calculator</div></div>
             <div onclick="switchTab('impact')" style="cursor:pointer;background:linear-gradient(135deg,#fab1a0,#e17055);color:white;border-radius:12px;padding:22px 14px;transition:transform 0.2s;box-shadow:0 3px 10px rgba(0,0,0,0.12);" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
@@ -146,7 +146,7 @@
                 <tr onclick="switchTab('caro')" style="cursor:pointer;"><td><strong>CARO 2020</strong></td><td>Companies (Auditor's Report) Order 2020 — all 21 clauses with reporting requirements, applicability criteria, and key observations. Covers loans, fixed assets, inventory, fraud reporting, and more.</td></tr>
                 <tr onclick="switchTab('auditcheck')" style="cursor:pointer;"><td><strong>Audit Checklist</strong></td><td>Interactive clause-by-clause audit working paper tracker. Mark each Form 3CD / Form 26 clause as Done, Pending, or N/A. Track progress with completion percentage. Helps ensure nothing is missed during audit.</td></tr>
                 <tr onclick="switchTab('asapply')" style="cursor:pointer;"><td><strong>AS Applicability</strong></td><td>Accounting Standards applicability matrix — shows which AS (1-29) apply based on entity type (MSME Level I/II/III, Non-MSME). Includes key exemptions and practical notes for each standard.</td></tr>
-                <tr onclick="switchTab('capgain')" style="cursor:pointer;"><td><strong>Capital Gains</strong></td><td>LTCG/STCG calculator with post-23.07.2024 rules — 12.5% LTCG (no indexation), 20% STCG on equity. Covers property, shares, mutual funds. Includes Sec 54/54EC exemption computation and grandfathering.</td></tr>
+                <tr onclick="switchTab('capgain')" style="cursor:pointer;"><td><strong>CG + Exemption</strong></td><td>LTCG/STCG calculator + powerful Capital Gains Exemption planner covering Sec 54 / 54B / 54D / 54EC / 54F / 54G / 54GA / 54GB (IT Act 1961 → IT Act 2025). Auto-calculates eligible exemption, CGAS deposit needed, deadlines, action plan and tax saved. Mobile-friendly, printable & shareable.</td></tr>
                 <tr onclick="switchTab('intpenalty')" style="cursor:pointer;"><td><strong>Interest 234A/B/C</strong></td><td>Auto-calculates interest under Sec 234A (late filing), 234B (advance tax shortfall), and 234C (deferment of advance tax instalments). Enter dates, tax amounts, and get month-wise interest breakdown.</td></tr>
                 <tr onclick="switchTab('impact')" style="cursor:pointer;"><td><strong>Impact Analyzer</strong></td><td>Personalised impact assessment of IT Act 2025 on your practice. Select client type (salaried, business, company, NRI, etc.) and get a detailed report of what changes, new section numbers, and action items.</td></tr>
                 <tr onclick="switchTab('itrform')" style="cursor:pointer;"><td><strong>ITR Applicability</strong></td><td>Answer a few questions (income type, turnover, status) and get the correct ITR form (ITR-1 to ITR-7) for AY 2026-27. Includes filing due dates, late fee u/s 234F, and checklist of documents needed.</td></tr>
@@ -989,6 +989,124 @@
             <tr><td>2009-10</td><td>148</td><td>2018-19</td><td>280</td><td colspan="2" style="font-size:0.8rem;">*Yet to be notified</td></tr>
         </table>
     </div>
+
+    <!-- ==================== CAPITAL GAINS EXEMPTION CALCULATOR ==================== -->
+    <div class="card" id="cgExemptionCard" style="border-top:4px solid #fd79a8;">
+        <h2 style="color:#e84393;">🛡️ Capital Gains Exemption Planner — Sec 54 / 54B / 54D / 54EC / 54F / 54G / 54GA / 54GB</h2>
+        <p style="color:var(--text-light);font-size:0.85rem;margin-bottom:6px;">Once you have computed your capital gain above, use this planner to find <strong>every exemption you can legally claim</strong>, the exact amount you must reinvest, the CGAS deposit needed, the deadline, and the tax you will save.</p>
+        <p style="color:var(--text-light);font-size:0.78rem;margin-bottom:14px;">Source: Income Tax Act 1961 (Sec 54 to 54GB) read with Finance Act 2023/2024/2025 | Income Tax Act 2025 — Chapter VIII (Sec 82 to 90, capital gains exemptions). <span style="color:#e84393;font-weight:600;">Updated for the Rs 10 Crore cap (Sec 54 / 54F) and the Rs 50 Lakh cap (Sec 54EC).</span></p>
+        <div style="background:#fef0f5;border-left:4px solid #fd79a8;padding:10px 14px;border-radius:6px;margin-bottom:14px;">
+            <p style="font-size:0.82rem;margin:0;color:#a83b6d;"><strong>💡 How it works:</strong> Enter the details of the asset you sold and the amount you can / want to reinvest. The planner instantly tells you (1) which sections apply, (2) how much exemption you get under each, (3) how much you must put in a Capital Gains Account Scheme (CGAS) before the ITR due date, and (4) the final tax you save. Pull the LTCG figure from the calculator above with one click.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div class="form-group"><label>Type of Asset Sold</label>
+                <select id="cgxAsset" onchange="cgxOnAssetChange()">
+                    <option value="">-- Select Asset Sold --</option>
+                    <option value="res_house">Residential House (LTCG)</option>
+                    <option value="other_ltca">Any Other Long-Term Capital Asset (shares, gold, plot, etc.)</option>
+                    <option value="agri_land">Agricultural Land (Urban) — used 2 yrs</option>
+                    <option value="industrial_lb">Industrial Land/Building — Compulsory Acquisition</option>
+                    <option value="land_building">Land or Building (for 54EC bonds route)</option>
+                    <option value="listed_eq">Listed Equity / Equity MF (no Sec 54 series exemption — see note)</option>
+                </select>
+            </div>
+            <div class="form-group"><label>Long-Term Capital Gain (Rs)</label>
+                <div style="display:flex;gap:6px;">
+                    <input type="number" id="cgxLTCG" placeholder="e.g. 5000000" style="flex:1;">
+                    <button type="button" class="btn" style="padding:6px 10px;font-size:0.78rem;background:#fd79a8;color:#fff;border:none;border-radius:6px;cursor:pointer;" onclick="cgxPullFromCalc()" title="Pull LTCG from the calculator above">↑ Pull</button>
+                </div>
+            </div>
+            <div class="form-group"><label>Net Sale Consideration (Rs) <span style="color:#e84393;font-size:0.72rem;">(needed for Sec 54F)</span></label>
+                <input type="number" id="cgxNetSale" placeholder="Sale price minus transfer expenses">
+            </div>
+            <div class="form-group"><label>Date of Transfer / Sale</label>
+                <input type="date" id="cgxDate">
+            </div>
+            <div class="form-group"><label>Amount You Plan to Reinvest (Rs)</label>
+                <input type="number" id="cgxAvail" placeholder="Cash you have available for reinvestment">
+            </div>
+            <div class="form-group"><label>Preferred Reinvestment Route</label>
+                <select id="cgxIntent">
+                    <option value="any">Show me all options (recommended)</option>
+                    <option value="house">New residential house (Sec 54 / 54F)</option>
+                    <option value="bonds">54EC Bonds (NHAI/REC/PFC/IRFC)</option>
+                    <option value="agri">Agricultural land (Sec 54B)</option>
+                    <option value="industrial">Industrial land/building (Sec 54D / 54G / 54GA)</option>
+                    <option value="startup">Eligible startup equity (Sec 54GB)</option>
+                </select>
+            </div>
+            <div class="form-group"><label>Do you own more than 1 residential house on the date of transfer?</label>
+                <select id="cgxOwnsOther">
+                    <option value="no">No (or only the one being sold)</option>
+                    <option value="yes">Yes — I own 2 or more</option>
+                </select>
+            </div>
+            <div class="form-group"><label>Filing Status</label>
+                <select id="cgxStatus">
+                    <option value="ind">Individual</option>
+                    <option value="huf">HUF</option>
+                    <option value="other">Firm / Company / Other</option>
+                </select>
+            </div>
+            <div class="form-group"><label>Applicable Slab Rate for STCG / Other Income (%)</label>
+                <input type="number" id="cgxSlab" placeholder="e.g. 30" value="30">
+            </div>
+            <div class="form-group"><label>Assessment Year</label>
+                <select id="cgxAY">
+                    <option value="2027-28">AY 2027-28 (FY 2026-27)</option>
+                    <option value="2026-27">AY 2026-27 (FY 2025-26)</option>
+                    <option value="2025-26">AY 2025-26 (FY 2024-25)</option>
+                </select>
+            </div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;">
+            <button class="btn btn-primary" style="background:#e84393;" onclick="checkCGExemption()">🛡️ Check Exemption & Plan</button>
+            <button class="btn btn-reset" onclick="resetCGExemption()">Reset</button>
+        </div>
+        <div id="cgExResult" class="result-box" style="margin-top:16px;"></div>
+    </div>
+
+    <!-- All exemptions table -->
+    <div class="card">
+        <h2>All Capital Gains Exemptions — IT Act 1961 → IT Act 2025</h2>
+        <p style="color:var(--text-light);font-size:0.78rem;margin-bottom:14px;">Complete reference of every reinvestment-based capital gains exemption in Chapter IV (1961) and Chapter VIII (2025). Section numbers in IT Act 2025 are as commonly mapped — verify with the latest official text before relying.</p>
+        <div class="table-scroll">
+        <table class="limits-table" style="font-size:0.84rem;">
+            <thead>
+                <tr style="background:#fde7f1;"><th>1961</th><th>2025</th><th>Asset Sold</th><th>Reinvest In</th><th>Time Limit</th><th>Cap</th><th>CGAS</th><th>Eligible</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>54</strong></td><td><strong>82</strong></td><td>Residential house (LTCG)</td><td>1 (or up to 2 if CG ≤ Rs 2 Cr — once in lifetime) residential house in India</td><td>Purchase: 1 yr before / 2 yrs after | Construct: 3 yrs after</td><td>Rs 10 Cr (w.e.f. 01.04.2024)</td><td>Yes — before ITR due date</td><td>Individual / HUF</td></tr>
+                <tr><td><strong>54B</strong></td><td><strong>83</strong></td><td>Urban agricultural land used for 2 yrs by self / parent / HUF</td><td>Other agricultural land (urban or rural)</td><td>2 yrs after transfer</td><td>No cap</td><td>Yes</td><td>Individual / HUF</td></tr>
+                <tr><td><strong>54D</strong></td><td><strong>84</strong></td><td>Compulsory acquisition of land/building of industrial undertaking (used 2 yrs)</td><td>Land/building for industrial undertaking</td><td>3 yrs from receipt of compensation</td><td>No cap</td><td>Yes</td><td>All assessees</td></tr>
+                <tr><td><strong>54EC</strong></td><td><strong>85</strong></td><td>Long-term land or building (or both)</td><td>NHAI / REC / PFC / IRFC bonds (5-yr lock-in)</td><td>6 months from transfer</td><td><strong>Rs 50 Lakh</strong> per FY (and Rs 50L combined across the 2 FYs of the same transfer)</td><td>No</td><td>All assessees</td></tr>
+                <tr><td><strong>54F</strong></td><td><strong>87</strong></td><td>Any LTCA other than residential house</td><td>1 residential house in India</td><td>Same as Sec 54</td><td>Rs 10 Cr (w.e.f. 01.04.2024)</td><td>Yes</td><td>Individual / HUF — must not own &gt; 1 other house</td></tr>
+                <tr><td><strong>54G</strong></td><td><strong>88</strong></td><td>Shifting industrial undertaking from urban to rural area</td><td>New land, building, P&amp;M + shifting expenses</td><td>1 yr before / 3 yrs after</td><td>No cap</td><td>Yes</td><td>All assessees</td></tr>
+                <tr><td><strong>54GA</strong></td><td><strong>89</strong></td><td>Shifting industrial undertaking from urban area to SEZ</td><td>New land, building, P&amp;M + shifting expenses</td><td>1 yr before / 3 yrs after</td><td>No cap</td><td>Yes</td><td>All assessees</td></tr>
+                <tr><td><strong>54GB</strong></td><td><strong>90</strong></td><td>LTCG on residential house (Ind/HUF)</td><td>Subscribe ≥ 50% equity in eligible SME / startup company that buys new P&amp;M</td><td>Before ITR due date u/s 139(1)</td><td>No cap; sunset 31.03.2025 for eligible startups (per Finance Act 2024)</td><td>Yes (in company's name)</td><td>Individual / HUF</td></tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+    <!-- CGAS info -->
+    <div class="card">
+        <div style="background:#fef9e7;border-left:4px solid #f39c12;border-radius:8px;padding:14px 18px;">
+            <h3 style="margin-top:0;color:#b7950b;">📘 Capital Gains Account Scheme (CGAS) — Quick Guide</h3>
+            <ul style="margin-left:18px;font-size:0.88rem;color:#555;line-height:1.8;">
+                <li><strong>What:</strong> If you can't reinvest the capital gain (or net consideration in case of Sec 54F) before the due date for filing your ITR u/s 139(1), you must <strong>park the unutilized amount in a CGAS account</strong> with a notified bank — otherwise the exemption is denied.</li>
+                <li><strong>When:</strong> Deposit must be made <strong>on or before the ITR filing due date u/s 139(1)</strong> — typically 31 July (non-audit) / 31 October (audit) of the AY.</li>
+                <li><strong>Two account types:</strong> <em>Type A (Savings)</em> — withdraw any time; <em>Type B (Term Deposit)</em> — fixed period, higher interest. Most taxpayers open Type A first; Type B is optional.</li>
+                <li><strong>Where:</strong> Any branch of a notified bank — SBI, PNB, Canara, BoB, Union Bank, IDBI, etc. (rural branches not eligible).</li>
+                <li><strong>Form:</strong> Form A — opening | Form B — type conversion | Form C — withdrawal | Form D — purpose declaration | Form G — closure with AO permission.</li>
+                <li><strong>Utilisation period:</strong> 2 years (Sec 54 purchase / 54B / 54F purchase) or 3 years (Sec 54 construction / 54D / 54F construction / 54G / 54GA) from the date of transfer.</li>
+                <li><strong>If unutilised:</strong> Unused balance becomes <strong>taxable as LTCG in the year the time limit expires</strong> — even if the original transfer was in an earlier year.</li>
+                <li><strong>Sec 54EC bonds do NOT use CGAS</strong> — bonds must be purchased directly within 6 months from transfer (the 6-month window is hard, not extendable).</li>
+                <li><strong>IT Act 2025 cross-reference:</strong> CGAS continues unchanged under the new Act — same conditions, same forms, same banks. Only the section numbers of the underlying exemptions change (Sec 54→82, 54B→83, 54D→84, 54EC→85, 54F→87, 54G→88, 54GA→89, 54GB→90 — verify with the latest gazette).</li>
+            </ul>
+        </div>
+    </div>
+    <p style="text-align:center;font-size:0.72rem;color:#999;margin-top:20px;padding-top:10px;border-top:1px solid #eee;">Source: Income Tax Act 1961 (Sec 54-54GB), Finance Act 2023/2024/2025, Capital Gains Account Scheme 1988, CBDT Circulars | IT Act 2025 Chapter VIII (Sec 82-90) | This planner gives an indicative figure based on the inputs you provide — always verify with a Chartered Accountant before claiming the exemption in your return.</p>
 </div>
 
 <!-- ==================== INTEREST & PENALTY CALCULATOR ==================== -->

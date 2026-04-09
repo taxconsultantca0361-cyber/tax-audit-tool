@@ -160,7 +160,7 @@ function printResult(resultId){
 // Inject Copy/Print action bars below every result-style div on first appearance
 function ensureResultActions(){
   // result IDs to instrument (curated list)
-  var ids=['itResult','emiResult','gstResults','mappingResults','depResult','depCoResult','msmeResult','noticeResult','caroResult','asClassResult','cgResult','ipResult','imResult','itrResult','fcResult','penaltyResults','pResult','itruResult','adResult','adaResult','aeResult','gstRegResult','rfResult','rocPenResult','compResult','rule37bbResults'];
+  var ids=['itResult','emiResult','gstResults','mappingResults','depResult','depCoResult','msmeResult','noticeResult','caroResult','asClassResult','cgResult','cgExResult','ipResult','imResult','itrResult','fcResult','penaltyResults','pResult','itruResult','adResult','adaResult','aeResult','gstRegResult','rfResult','rocPenResult','compResult','rule37bbResults'];
   ids.forEach(function(id){
     var el=document.getElementById(id);if(!el)return;
     if(document.getElementById('actions-'+id))return;

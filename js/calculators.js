@@ -274,6 +274,317 @@ r.innerHTML='<div class="result-title">'+(gain>0?'Capital Gain: Rs '+fmt(gain):'
 }
 function resetCG(){['cgCost','cgSale','cgExpense','cgImprovement','cgCIIBuy','cgCIISell','cgCIIImp','cgFMV','cgDateBuy','cgDateSell','cgDateImprovement'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});document.getElementById('cgAsset').value='';document.getElementById('cgResult').className='result-box';document.getElementById('cgResult').innerHTML='';document.getElementById('cgHoldingText').value='';document.getElementById('cgHoldingText').style.color='';updateCGFields();}
 
+// ==============================
+// CAPITAL GAINS EXEMPTION PLANNER (Sec 54 / 54B / 54D / 54EC / 54F / 54G / 54GA / 54GB)
+// ==============================
+var CGX_CAP_54 = 100000000;   // Rs 10 Cr cap for Sec 54 / 54F (w.e.f. 01.04.2024)
+var CGX_CAP_54EC = 5000000;   // Rs 50 Lakh cap for Sec 54EC
+
+function cgxOnAssetChange(){
+  // Pre-fill net sale field requirement note
+  var asset=document.getElementById('cgxAsset').value;
+  var nsField=document.getElementById('cgxNetSale');
+  if(asset==='other_ltca'){nsField.style.borderColor='#e84393';}
+  else{nsField.style.borderColor='';}
+}
+
+function cgxPullFromCalc(){
+  // Try to extract LTCG from cgResult innerText
+  var r=document.getElementById('cgResult');
+  if(!r||!r.innerText){alert('Please calculate the capital gain first using the calculator above.');return;}
+  var txt=r.innerText;
+  // Look for "Long Term Capital Gain" row
+  var m=txt.match(/Long\s*Term\s*Capital\s*Gain[^0-9-]*([0-9,\-]+)/i);
+  var ltcg=null;
+  if(m){ltcg=parseFloat(m[1].replace(/,/g,''));}
+  else{
+    // Try to read "Capital Gain: Rs X"
+    m=txt.match(/Capital\s*Gain[:\s]+Rs[\.\s]*([0-9,]+)/i);
+    if(m)ltcg=parseFloat(m[1].replace(/,/g,''));
+  }
+  // Also try to pull net sale consideration
+  var ns=null;
+  var m2=txt.match(/Net\s*Sale\s*Consideration[^0-9-]*([0-9,]+)/i);
+  if(m2)ns=parseFloat(m2[1].replace(/,/g,''));
+  if(ltcg&&ltcg>0){
+    document.getElementById('cgxLTCG').value=ltcg;
+    if(ns)document.getElementById('cgxNetSale').value=ns;
+    // Pull asset type and date heuristically
+    var assetSel=document.getElementById('cgAsset').value;
+    var ds=document.getElementById('cgDateSell').value;
+    var map={'property':'res_house','listed_eq':'listed_eq','equity_mf':'listed_eq','unlisted':'other_ltca','gold':'other_ltca','debt_mf':'other_ltca','other':'other_ltca'};
+    if(assetSel&&map[assetSel]){document.getElementById('cgxAsset').value=map[assetSel];cgxOnAssetChange();}
+    if(ds)document.getElementById('cgxDate').value=ds;
+  }else{
+    alert('Could not detect a positive LTCG figure in the result. Please enter manually.');
+  }
+}
+
+function _cgxAddYears(dateStr,years){
+  if(!dateStr)return null;
+  var d=new Date(dateStr);if(isNaN(d))return null;
+  d.setFullYear(d.getFullYear()+years);
+  return d.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});
+}
+function _cgxAddMonths(dateStr,months){
+  if(!dateStr)return null;
+  var d=new Date(dateStr);if(isNaN(d))return null;
+  d.setMonth(d.getMonth()+months);
+  return d.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});
+}
+function _cgxITRDueDate(ay){
+  // Default non-audit due date 31 Jul of AY
+  var startYr=parseInt(ay.split('-')[0],10);
+  if(isNaN(startYr))return null;
+  return '31 Jul '+startYr+' (non-audit) / 31 Oct '+startYr+' (audit)';
+}
+
+function checkCGExemption(){
+  var asset=document.getElementById('cgxAsset').value;
+  var ltcg=parseFloat(document.getElementById('cgxLTCG').value)||0;
+  var netSale=parseFloat(document.getElementById('cgxNetSale').value)||0;
+  var dateT=document.getElementById('cgxDate').value;
+  var avail=parseFloat(document.getElementById('cgxAvail').value)||0;
+  var intent=document.getElementById('cgxIntent').value;
+  var ownsOther=document.getElementById('cgxOwnsOther').value==='yes';
+  var status=document.getElementById('cgxStatus').value;
+  var slab=parseFloat(document.getElementById('cgxSlab').value)||30;
+  var ay=document.getElementById('cgxAY').value;
+  var r=document.getElementById('cgExResult');
+
+  if(!asset){r.className='result-box applicable';r.innerHTML='<div class="result-title">Please select the type of asset sold</div>';return;}
+  if(ltcg<=0){r.className='result-box applicable';r.innerHTML='<div class="result-title">Please enter a positive Long-Term Capital Gain amount</div><div class="result-detail">Use the ↑ Pull button to fetch the figure from the calculator above, or enter it manually.</div>';return;}
+
+  var indHuf=(status==='ind'||status==='huf');
+  var sections=[];
+  var notes=[];
+
+  // Sec 54
+  if(asset==='res_house' && indHuf){
+    var newCost=avail;
+    var raw=Math.min(ltcg,newCost);
+    var ex=Math.min(raw,CGX_CAP_54);
+    var capped=ex<raw;
+    var cgas=Math.max(0,ltcg-newCost);
+    if(ex<=0){cgas=ltcg;}
+    sections.push({
+      sec1961:'Sec 54',sec2025:'Sec 82',color:'#27ae60',
+      title:'Reinvest in 1 Residential House (or up to 2 if LTCG ≤ Rs 2 Cr — once in lifetime)',
+      exemption:Math.max(0,ex),capped:capped,
+      cgas:cgas,
+      details:[
+        'Buy 1 yr before / 2 yrs after the date of transfer, OR construct within 3 yrs',
+        'Property must be in India',
+        'Cap of Rs 10 Crore on exemption (w.e.f. 01.04.2024)',
+        'Unutilised amount must be deposited in CGAS before ITR due date u/s 139(1)'
+      ],
+      deadlinePurchase:_cgxAddYears(dateT,2),
+      deadlineConstruct:_cgxAddYears(dateT,3),
+      cgasBy:_cgxITRDueDate(ay)
+    });
+  }
+  if(asset==='res_house' && !indHuf){
+    notes.push('Sec 54 / 54F is restricted to Individuals & HUF — your filing status does not qualify for these reinvestment routes.');
+  }
+
+  // Sec 54F
+  if(asset==='other_ltca' && indHuf){
+    if(ownsOther){
+      sections.push({
+        sec1961:'Sec 54F',sec2025:'Sec 87',color:'#d63031',
+        title:'Reinvest in 1 Residential House — NOT ELIGIBLE',
+        exemption:0,capped:false,cgas:0,
+        details:['You own more than 1 residential house on the date of transfer (other than the new one) — Sec 54F is denied entirely.','Consider Sec 54EC bonds as an alternative.']
+      });
+    }else{
+      if(netSale<=0){
+        notes.push('For Sec 54F you must enter the Net Sale Consideration (sale price minus transfer expenses) — exemption is proportionate.');
+      }
+      var newCostF=avail;
+      var ratio=netSale>0?(newCostF/netSale):0;
+      var rawF=ltcg*Math.min(1,ratio);
+      var exF=Math.min(rawF,CGX_CAP_54);
+      var cappedF=exF<rawF;
+      var cgasF=Math.max(0,netSale-newCostF);
+      sections.push({
+        sec1961:'Sec 54F',sec2025:'Sec 87',color:'#27ae60',
+        title:'Reinvest entire Net Sale Consideration in 1 Residential House',
+        exemption:Math.max(0,exF),capped:cappedF,cgas:cgasF,
+        details:[
+          'Exemption = LTCG × (Cost of New House ÷ Net Sale Consideration)',
+          'For full exemption you must invest the entire net consideration (not just the gain)',
+          'Time limits same as Sec 54 — 1 yr before / 2 yrs after for purchase, 3 yrs for construction',
+          'Must NOT own > 1 other residential house on the date of transfer',
+          'Must NOT purchase another house within 2 yrs / construct within 3 yrs of this transfer (otherwise exemption withdrawn)',
+          'Cap of Rs 10 Crore on exemption (w.e.f. 01.04.2024)'
+        ],
+        deadlinePurchase:_cgxAddYears(dateT,2),
+        deadlineConstruct:_cgxAddYears(dateT,3),
+        cgasBy:_cgxITRDueDate(ay)
+      });
+    }
+  }
+
+  // Sec 54EC bonds (LTCG on land/building only)
+  if(asset==='res_house' || asset==='land_building' || asset==='other_ltca'){
+    // 54EC strictly for land/building — but residential house qualifies (it's a building)
+    // For "other_ltca" it may or may not be — show with caveat
+    var bondAvail=Math.min(avail,CGX_CAP_54EC);
+    var rawEC=Math.min(ltcg,CGX_CAP_54EC);
+    var exEC=bondAvail>0?Math.min(bondAvail,ltcg):rawEC;
+    var capNote=ltcg>CGX_CAP_54EC?'Capped at Rs 50 Lakh per FY':'Within the Rs 50 Lakh cap';
+    sections.push({
+      sec1961:'Sec 54EC',sec2025:'Sec 85',color:asset==='other_ltca'?'#f39c12':'#27ae60',
+      title:'Invest in NHAI / REC / PFC / IRFC Bonds (5-year lock-in)',
+      exemption:Math.max(0,exEC),capped:exEC<rawEC&&bondAvail<rawEC,cgas:0,
+      details:[
+        'Eligible bonds: NHAI 54EC, REC 54EC, PFC 54EC, IRFC 54EC (any of these)',
+        'Investment must be made within 6 months from the date of transfer',
+        '5-year lock-in — cannot be sold, transferred, or used as security for any loan',
+        'Maximum Rs 50 Lakh per financial year — and Rs 50 Lakh combined across the 2 FYs of the same transfer (w.e.f. AY 2019-20)',
+        'No CGAS — bonds must be physically purchased within 6 months (the deadline is hard, not extendable)',
+        capNote+(asset==='other_ltca'?' | NOTE: Sec 54EC strictly applies to long-term land or building — verify your asset qualifies':'')
+      ],
+      deadlineBonds:_cgxAddMonths(dateT,6)
+    });
+  }
+
+  // Sec 54B (agricultural land)
+  if(asset==='agri_land' && indHuf){
+    var newAgri=avail;
+    var rawB=Math.min(ltcg,newAgri);
+    var cgasB=Math.max(0,ltcg-newAgri);
+    sections.push({
+      sec1961:'Sec 54B',sec2025:'Sec 83',color:'#27ae60',
+      title:'Reinvest in Other Agricultural Land',
+      exemption:Math.max(0,rawB),capped:false,cgas:cgasB,
+      details:[
+        'Land sold must have been used for agricultural purposes by self / parent / HUF for 2 yrs immediately preceding transfer',
+        'Reinvest in another agricultural land (urban or rural) within 2 yrs from transfer',
+        'New land must NOT be transferred within 3 yrs (otherwise exemption withdrawn)',
+        'Unutilised amount → CGAS before ITR due date'
+      ],
+      deadlinePurchase:_cgxAddYears(dateT,2),
+      cgasBy:_cgxITRDueDate(ay)
+    });
+  }
+
+  // Sec 54D (compulsory acquisition of industrial L/B)
+  if(asset==='industrial_lb'){
+    var newInd=avail;
+    var rawD=Math.min(ltcg,newInd);
+    var cgasD=Math.max(0,ltcg-newInd);
+    sections.push({
+      sec1961:'Sec 54D',sec2025:'Sec 84',color:'#27ae60',
+      title:'Reinvest in Land/Building for Industrial Undertaking',
+      exemption:Math.max(0,rawD),capped:false,cgas:cgasD,
+      details:[
+        'Applies only to compulsory acquisition under any law',
+        'Original land/building must have been used for the industrial undertaking for 2 yrs immediately preceding transfer',
+        'Reinvest within 3 yrs from receipt of compensation',
+        'New asset must NOT be transferred within 3 yrs (otherwise exemption withdrawn)',
+        'Unutilised amount → CGAS before ITR due date'
+      ],
+      deadlinePurchase:_cgxAddYears(dateT,3),
+      cgasBy:_cgxITRDueDate(ay)
+    });
+  }
+
+  // Sec 54G/54GA — info only (industrial shifting)
+  if(intent==='industrial'||asset==='industrial_lb'){
+    notes.push('Sec 54G / 54GA — Shifting of industrial undertaking from urban to rural area / SEZ: reinvest in new land, building, plant & machinery and shifting expenses, within 1 year before / 3 years after the transfer. Unutilised amount → CGAS. Open to all assessees.');
+  }
+
+  // Sec 54GB (eligible startup)
+  if(asset==='res_house' && indHuf && (intent==='startup'||intent==='any')){
+    notes.push('Sec 54GB — LTCG on a residential house can be exempt if you subscribe ≥ 50% equity in an eligible SME / start-up company that uses the proceeds to purchase new plant & machinery. Sunset clause for eligible startups extended to 31.03.2025 by Finance Act 2024 — verify current applicability before claiming.');
+  }
+
+  // Filter by intent if specified
+  var filtered=sections;
+  if(intent==='house')filtered=sections.filter(function(s){return s.sec1961==='Sec 54'||s.sec1961==='Sec 54F';});
+  else if(intent==='bonds')filtered=sections.filter(function(s){return s.sec1961==='Sec 54EC';});
+  else if(intent==='agri')filtered=sections.filter(function(s){return s.sec1961==='Sec 54B';});
+  else if(intent==='industrial')filtered=sections.filter(function(s){return s.sec1961==='Sec 54D';});
+  if(filtered.length===0)filtered=sections;
+
+  // Pick best (highest exemption) — but Sec 54EC can stack with house route up to its cap if from same gain? Practically, the same gain can't be exempted twice — so we show alternatives.
+  var best=null;
+  filtered.forEach(function(s){if(!best||s.exemption>best.exemption)best=s;});
+  var bestExemption=best?best.exemption:0;
+  var taxableGain=Math.max(0,ltcg-bestExemption);
+  // LTCG tax @ 12.5% (post 23.07.2024) — for property route. We'll show 12.5%.
+  var taxBefore=Math.round(ltcg*0.125);
+  var taxAfter=Math.round(taxableGain*0.125);
+  var saved=taxBefore-taxAfter;
+
+  // Render
+  var cls=bestExemption>0?'result-box presumptive':'result-box not-applicable';
+  r.className=cls;
+  var html='<div class="result-title" style="color:#e84393;">🛡️ Capital Gains Exemption Plan</div>';
+  html+='<div class="result-detail">';
+  html+='<p style="margin:6px 0 12px;"><strong>Long-Term Capital Gain:</strong> Rs '+fmt(ltcg)+(dateT?' &nbsp;|&nbsp; <strong>Date of Transfer:</strong> '+new Date(dateT).toLocaleDateString('en-IN'):'')+'</p>';
+
+  if(filtered.length===0||(filtered.length===1&&filtered[0].exemption===0)){
+    html+='<p style="color:#d63031;font-weight:600;">No reinvestment-based exemption appears to be available for the inputs provided. The full LTCG of Rs '+fmt(ltcg)+' will be taxable.</p>';
+  }else{
+    html+='<div class="table-scroll"><table class="limits-table" style="margin-top:6px;font-size:0.86rem;">';
+    html+='<thead><tr style="background:#fde7f1;"><th>Section (1961)</th><th>Section (2025)</th><th>Reinvestment Route</th><th>Eligible Exemption</th><th>CGAS Deposit Needed</th></tr></thead><tbody>';
+    filtered.forEach(function(s){
+      html+='<tr><td><strong>'+s.sec1961+'</strong></td><td><strong>'+s.sec2025+'</strong></td><td>'+s.title+'</td><td style="color:'+s.color+';font-weight:600;">Rs '+fmt(s.exemption)+(s.capped?' <span style="font-size:0.72rem;color:#e67e22;">(capped)</span>':'')+'</td><td>'+(s.cgas>0?'Rs '+fmt(s.cgas):'—')+'</td></tr>';
+    });
+    html+='</tbody></table></div>';
+
+    if(best){
+      html+='<div style="background:#e8f8f5;border:2px solid #00b894;border-radius:8px;padding:14px;margin-top:14px;">';
+      html+='<h4 style="margin:0 0 8px;color:#00b894;">✅ Recommended: '+best.sec1961+' / '+best.sec2025+'</h4>';
+      html+='<p style="margin:4px 0;"><strong>Exemption Available:</strong> Rs '+fmt(best.exemption)+(best.capped?' <span style="color:#e67e22;">(capped at Rs 10 Cr)</span>':'')+'</p>';
+      if(best.cgas>0)html+='<p style="margin:4px 0;color:#d63031;"><strong>CGAS Deposit Required:</strong> Rs '+fmt(best.cgas)+' — must be deposited <strong>before '+(best.cgasBy||'ITR due date u/s 139(1)')+'</strong></p>';
+      html+='<p style="margin:4px 0;"><strong>Action plan:</strong></p><ul style="margin:4px 0 4px 18px;font-size:0.86rem;line-height:1.65;">';
+      best.details.forEach(function(d){html+='<li>'+d+'</li>';});
+      if(best.deadlinePurchase)html+='<li><strong>Purchase deadline:</strong> '+best.deadlinePurchase+'</li>';
+      if(best.deadlineConstruct)html+='<li><strong>Construction deadline:</strong> '+best.deadlineConstruct+'</li>';
+      if(best.deadlineBonds)html+='<li><strong>Bond purchase deadline:</strong> '+best.deadlineBonds+' (hard 6-month window)</li>';
+      html+='</ul></div>';
+    }
+
+    html+='<div style="background:#fef9e7;border-left:4px solid #f39c12;padding:10px 14px;margin-top:12px;border-radius:6px;">';
+    html+='<p style="margin:0;font-size:0.86rem;"><strong>💰 Tax Saving Summary (LTCG @ 12.5%):</strong></p>';
+    html+='<table class="limits-table" style="margin-top:6px;font-size:0.84rem;"><tbody>';
+    html+='<tr><td>Tax payable WITHOUT exemption</td><td><strong>Rs '+fmt(taxBefore)+'</strong></td></tr>';
+    html+='<tr><td>Best available exemption</td><td>(-) Rs '+fmt(bestExemption)+'</td></tr>';
+    html+='<tr><td>Taxable LTCG after exemption</td><td>Rs '+fmt(taxableGain)+'</td></tr>';
+    html+='<tr><td>Tax payable WITH exemption</td><td><strong>Rs '+fmt(taxAfter)+'</strong></td></tr>';
+    html+='<tr style="background:#e8f8f5;"><td><strong>Tax Saved</strong></td><td style="color:#00b894;"><strong>Rs '+fmt(saved)+'</strong></td></tr>';
+    html+='</tbody></table>';
+    html+='<p style="margin:6px 0 0;font-size:0.74rem;color:#777;">Plus 4% Health & Education Cess (and surcharge if applicable). For property acquired before 23.07.2024 you may also choose the 20% with-indexation route under the grandfathering option — compute both before deciding.</p>';
+    html+='</div>';
+  }
+
+  if(notes.length){
+    html+='<div style="margin-top:12px;padding:10px 14px;background:#fef0f5;border-left:4px solid #fd79a8;border-radius:6px;">';
+    html+='<p style="margin:0 0 4px;font-weight:600;color:#a83b6d;font-size:0.86rem;">📌 Additional Notes</p>';
+    html+='<ul style="margin:4px 0 4px 18px;font-size:0.82rem;color:#555;line-height:1.6;">';
+    notes.forEach(function(n){html+='<li>'+n+'</li>';});
+    html+='</ul></div>';
+  }
+
+  html+='<p style="margin-top:12px;font-size:0.74rem;color:#999;">⚠ This planner gives an indicative figure based on your inputs. The exact exemption depends on the actual reinvestment, asset characterisation, and the cost / sale figures verified from documents. Always confirm with a Chartered Accountant before claiming the exemption in your return.</p>';
+
+  html+='</div>';
+  r.innerHTML=html;
+}
+
+function resetCGExemption(){
+  ['cgxLTCG','cgxNetSale','cgxDate','cgxAvail','cgxSlab'].forEach(function(id){var e=document.getElementById(id);if(e)e.value=(id==='cgxSlab'?'30':'');});
+  document.getElementById('cgxAsset').value='';
+  document.getElementById('cgxIntent').value='any';
+  document.getElementById('cgxOwnsOther').value='no';
+  document.getElementById('cgxStatus').value='ind';
+  document.getElementById('cgxAY').value='2027-28';
+  var r=document.getElementById('cgExResult');r.className='result-box';r.innerHTML='';
+}
+
 
 // ==============================
 // INTEREST & PENALTY CALCULATOR (234A/B/C/F)

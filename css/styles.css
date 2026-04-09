@@ -246,6 +246,10 @@
   .fav-card .fav-label{font-size:0.78rem;}
   .result-actions button{padding:6px 12px;font-size:0.78rem;margin:3px;}
   #tab-composition .form-row{grid-template-columns:1fr!important;}
+  #cgExemptionCard div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important;}
+  #cgExemptionCard h2{font-size:1rem!important;}
+  #cgExResult table{font-size:0.78rem!important;}
+  #cgExResult td,#cgExResult th{padding:5px 4px!important;}
   #tab-15ca .limits-table{font-size:0.78rem;}
   #tab-15ca .limits-table td,#tab-15ca .limits-table th{padding:6px 5px;}
 }
