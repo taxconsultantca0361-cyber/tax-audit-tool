@@ -250,6 +250,12 @@ var taxNoIndex=Math.round(Math.max(gainNoIndex,0)*0.125);
 var taxWithIndex=Math.round(Math.max(gainWithIndex,0)*0.20);
 var better=taxNoIndex<=taxWithIndex?'without':'with';
 var chosenTax=Math.min(taxNoIndex,taxWithIndex);
+var chosenGain=better==='without'?gainNoIndex:gainWithIndex;
+r.setAttribute('data-ltcg',Math.max(0,chosenGain));
+r.setAttribute('data-netsale',netSale);
+r.setAttribute('data-asset',a);
+r.setAttribute('data-islong','1');
+r.setAttribute('data-selldate',sellDate);
 r.className='result-box presumptive';
 r.innerHTML='<div class="result-title">LTCG on Property (Grandfathered — Acquired before 23.07.2024)</div><div class="result-detail"><p style="margin-bottom:8px;"><strong>Holding Period:</strong> '+months+' months (LTCG threshold: >24 months)</p><table class="limits-table" style="margin-top:10px;"><tr><th></th><th>Option A: Without Indexation</th><th>Option B: With Indexation</th></tr><tr><td>Sale Consideration</td><td>'+fmt(netSale)+'</td><td>'+fmt(netSale)+'</td></tr><tr><td>Cost of Acquisition</td><td>'+fmt(cost)+'</td><td>'+fmt(indexedCost)+' (CII: '+ciiBuy+'→'+ciiSell+')</td></tr>'+(imp?'<tr><td>Cost of Improvement</td><td>'+fmt(imp)+'</td><td>'+fmt(indexedImp)+(ciiImp?' (CII: '+ciiImp+'→'+ciiSell+')':' (no date)')+'</td></tr>':'')+'<tr><td>Total Deduction</td><td>'+fmt(totalPlain)+'</td><td>'+fmt(totalIndexed)+'</td></tr><tr><td>Capital Gain</td><td><strong>'+fmt(gainNoIndex)+'</strong></td><td><strong>'+fmt(gainWithIndex)+'</strong></td></tr><tr><td>Tax Rate</td><td>12.5%</td><td>20%</td></tr><tr style="background:#e8f8f5;"><td><strong>Tax Payable</strong></td><td><strong>Rs '+fmt(taxNoIndex)+'</strong></td><td><strong>Rs '+fmt(taxWithIndex)+'</strong></td></tr></table><div style="background:#e8f8f5;padding:12px;border-radius:8px;margin-top:12px;"><strong>✅ Better Option: '+better.charAt(0).toUpperCase()+better.slice(1)+' Indexation</strong><br>Tax: Rs '+fmt(chosenTax)+' + Cess (4%): Rs '+fmt(Math.round(chosenTax*0.04))+' = <strong>Rs '+fmt(Math.round(chosenTax*1.04))+'</strong><br><span style="font-size:0.82rem;">Exemptions u/s 54/54EC/54F may further reduce tax.</span></div></div>';
 return;
@@ -269,6 +275,11 @@ if(a==='listed_eq'||a==='equity_mf'){rate='20%';tax=Math.round(Math.max(gain,0)*
 else{rate='Slab Rate';tax=0;method='STCG — Taxable at your slab rate';}
 }
 var cess=Math.round(tax*0.04);
+r.setAttribute('data-ltcg',isLong&&gain>0?gain:0);
+r.setAttribute('data-netsale',netSale);
+r.setAttribute('data-asset',a);
+r.setAttribute('data-islong',isLong?'1':'0');
+r.setAttribute('data-selldate',sellDate);
 r.className=gain>0?'result-box not-applicable':'result-box presumptive';
 r.innerHTML='<div class="result-title">'+(gain>0?'Capital Gain: Rs '+fmt(gain):'Capital Loss: Rs '+fmt(Math.abs(gain)))+'</div><div class="result-detail"><p style="margin-bottom:8px;"><strong>Holding Period:</strong> '+months+' months — <strong>'+(isLong?'LONG TERM':'SHORT TERM')+'</strong></p><table class="limits-table" style="margin-top:10px;"><tr><td>Net Sale Consideration</td><td><strong>'+fmt(netSale)+'</strong></td></tr><tr><td>Cost of Acquisition</td><td>'+fmt(adjCost)+'</td></tr>'+(adjImp?'<tr><td>Cost of Improvement</td><td>'+fmt(adjImp)+'</td></tr>':'')+(exemption?'<tr><td>Annual Exemption (Sec 112A)</td><td>(-) '+fmt(exemption)+'</td></tr>':'')+'<tr><td>'+(isLong?'Long':'Short')+' Term Capital Gain</td><td><strong>'+fmt(gain)+'</strong></td></tr><tr><td>Tax Rate</td><td>'+method+'</td></tr><tr style="background:#e8f8f5;"><td><strong>Tax on Capital Gain</strong></td><td><strong>Rs '+fmt(tax)+'</strong></td></tr>'+(tax?'<tr><td>+ Cess (4%)</td><td>Rs '+fmt(cess)+'</td></tr><tr><td><strong>Total Tax</strong></td><td><strong>Rs '+fmt(tax+cess)+'</strong></td></tr>':'')+'</table>'+(rate==='Slab Rate'?'<p style="margin-top:8px;font-size:0.85rem;">STCG of Rs '+fmt(gain)+' will be added to your total income and taxed at applicable slab rate.</p>':'')+'</div>';
 }
@@ -289,35 +300,31 @@ function cgxOnAssetChange(){
 }
 
 function cgxPullFromCalc(){
-  // Try to extract LTCG from cgResult innerText
   var r=document.getElementById('cgResult');
-  if(!r||!r.innerText){alert('Please calculate the capital gain first using the calculator above.');return;}
-  var txt=r.innerText;
-  // Look for "Long Term Capital Gain" row
-  var m=txt.match(/Long\s*Term\s*Capital\s*Gain[^0-9-]*([0-9,\-]+)/i);
-  var ltcg=null;
-  if(m){ltcg=parseFloat(m[1].replace(/,/g,''));}
-  else{
-    // Try to read "Capital Gain: Rs X"
-    m=txt.match(/Capital\s*Gain[:\s]+Rs[\.\s]*([0-9,]+)/i);
-    if(m)ltcg=parseFloat(m[1].replace(/,/g,''));
+  if(!r||!r.hasAttribute('data-ltcg')){
+    alert('Please calculate the capital gain first using the calculator above, then click ↑ Pull.');
+    return;
   }
-  // Also try to pull net sale consideration
-  var ns=null;
-  var m2=txt.match(/Net\s*Sale\s*Consideration[^0-9-]*([0-9,]+)/i);
-  if(m2)ns=parseFloat(m2[1].replace(/,/g,''));
-  if(ltcg&&ltcg>0){
-    document.getElementById('cgxLTCG').value=ltcg;
-    if(ns)document.getElementById('cgxNetSale').value=ns;
-    // Pull asset type and date heuristically
-    var assetSel=document.getElementById('cgAsset').value;
-    var ds=document.getElementById('cgDateSell').value;
-    var map={'property':'res_house','listed_eq':'listed_eq','equity_mf':'listed_eq','unlisted':'other_ltca','gold':'other_ltca','debt_mf':'other_ltca','other':'other_ltca'};
-    if(assetSel&&map[assetSel]){document.getElementById('cgxAsset').value=map[assetSel];cgxOnAssetChange();}
-    if(ds)document.getElementById('cgxDate').value=ds;
-  }else{
-    alert('Could not detect a positive LTCG figure in the result. Please enter manually.');
+  var ltcg=parseFloat(r.getAttribute('data-ltcg'))||0;
+  var netSale=parseFloat(r.getAttribute('data-netsale'))||0;
+  var asset=r.getAttribute('data-asset')||'';
+  var isLong=r.getAttribute('data-islong')==='1';
+  var sellDate=r.getAttribute('data-selldate')||'';
+  if(!isLong){
+    alert('The result above is a SHORT-TERM gain. Most reinvestment exemptions (Sec 54 / 54F / 54EC) require LTCG. Sec 54B (agricultural land) is the main exception.');
   }
+  if(ltcg<=0){
+    alert('No positive LTCG to pull from the calculator. The result shows nil or a loss.');
+    return;
+  }
+  document.getElementById('cgxLTCG').value=ltcg;
+  if(netSale)document.getElementById('cgxNetSale').value=netSale;
+  if(sellDate)document.getElementById('cgxDate').value=sellDate;
+  var map={'property':'res_house','listed_eq':'listed_eq','equity_mf':'listed_eq','unlisted':'other_ltca','gold':'other_ltca','debt_mf':'other_ltca','other':'other_ltca'};
+  if(asset&&map[asset]){document.getElementById('cgxAsset').value=map[asset];cgxOnAssetChange();}
+  // Visual confirmation
+  var btn=document.querySelector('#cgExemptionCard button[onclick="cgxPullFromCalc()"]');
+  if(btn){var orig=btn.innerHTML;btn.innerHTML='✓ Pulled';setTimeout(function(){btn.innerHTML=orig;},1200);}
 }
 
 function _cgxAddYears(dateStr,years){
@@ -332,11 +339,12 @@ function _cgxAddMonths(dateStr,months){
   d.setMonth(d.getMonth()+months);
   return d.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});
 }
-function _cgxITRDueDate(ay){
-  // Default non-audit due date 31 Jul of AY
-  var startYr=parseInt(ay.split('-')[0],10);
+function _cgxITRDueDate(ty){
+  // ty = Tax Year e.g. "2025-26" — ITR due date is 31 Jul / 31 Oct of the FOLLOWING calendar year
+  var startYr=parseInt(ty.split('-')[0],10);
   if(isNaN(startYr))return null;
-  return '31 Jul '+startYr+' (non-audit) / 31 Oct '+startYr+' (audit)';
+  var dueYr=startYr+1;
+  return '31 Jul '+dueYr+' (non-audit) / 31 Oct '+dueYr+' (audit)';
 }
 
 function checkCGExemption(){
