@@ -239,13 +239,17 @@
 
 /* ==================== MOBILE TWEAKS ==================== */
 @media (max-width:768px){
+  /* Global mobile overflow prevention */
+  .card{overflow-x:auto;max-width:100%;box-sizing:border-box;}
+  .form-group,.form-row,.checker-form{min-width:0!important;max-width:100%!important;box-sizing:border-box;}
+  .form-group select,.form-group input,.form-group textarea{max-width:100%!important;box-sizing:border-box!important;width:100%!important;}
+  .form-row{grid-template-columns:1fr!important;}
   .fav-btn{width:28px;height:28px;font-size:0.95rem;margin-left:6px;}
   #favList{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))!important;gap:8px!important;}
   .fav-card{padding:12px 8px 10px;}
   .fav-card .fav-icon{font-size:1.2rem;}
   .fav-card .fav-label{font-size:0.78rem;}
   .result-actions button{padding:6px 12px;font-size:0.78rem;margin:3px;}
-  #tab-composition .form-row{grid-template-columns:1fr!important;}
   /* CG calculator + exemption forms: force single-column */
   #tab-capgain div[style*="grid-template-columns"]{grid-template-columns:1fr!important;}
   #cgExemptionCard h2{font-size:1rem!important;}
