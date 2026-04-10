@@ -246,12 +246,19 @@
   .fav-card .fav-label{font-size:0.78rem;}
   .result-actions button{padding:6px 12px;font-size:0.78rem;margin:3px;}
   #tab-composition .form-row{grid-template-columns:1fr!important;}
-  #cgExemptionCard div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important;}
+  /* CG calculator + exemption forms: force single-column */
+  #tab-capgain div[style*="grid-template-columns"]{grid-template-columns:1fr!important;}
   #cgExemptionCard h2{font-size:1rem!important;}
+  /* Pull button: wrap below input on mobile */
+  #cgExemptionCard div[style*="display:flex;gap:6px"]{flex-wrap:wrap;}
+  #cgExemptionCard div[style*="display:flex;gap:6px"] input{min-width:0;flex:1 1 100%;}
+  #cgExemptionCard div[style*="display:flex;gap:6px"] button{flex:1 1 100%;margin-top:4px;}
   #cgExResult table{font-size:0.78rem!important;}
   #cgExResult td,#cgExResult th{padding:5px 4px!important;}
   #tab-15ca .limits-table{font-size:0.78rem;}
   #tab-15ca .limits-table td,#tab-15ca .limits-table th{padding:6px 5px;}
+  /* Smart Search dropdown */
+  #smartDropdown{font-size:0.82rem!important;}
 }
 @media (max-width:480px){
   .fav-btn{width:26px;height:26px;font-size:0.9rem;}

@@ -1304,6 +1304,16 @@
         <h2>Smart Search — Cross-Reference Guide</h2>
         <p style="color:var(--text-light);margin-bottom:6px;">Search any topic and get its impact across IT Act, Companies Act, GST, Form 3CD, and compliance requirements.</p>
         <p style="color:var(--text-light);margin-bottom:14px;font-size:0.82rem;">Type a keyword like "cash payment", "ESIC", "TDS", "depreciation", "MSME" etc. to see all related provisions, reporting requirements, and practical implications.</p>
+        <div style="margin-bottom:12px;">
+            <label style="font-weight:600;font-size:0.88rem;margin-bottom:6px;display:block;">Quick Select a Topic</label>
+            <select id="smartDropdown" onchange="smartDropdownSelect()" style="width:100%;padding:10px 12px;border:2px solid var(--border);border-radius:8px;font-size:0.9rem;background:#fff;">
+                <option value="">-- Pick a topic to see its impact across all acts --</option>
+            </select>
+        </div>
+        <div style="display:flex;align-items:center;margin-bottom:12px;gap:8px;">
+            <span style="color:var(--text-light);font-size:0.82rem;">OR</span>
+            <div style="flex:1;height:1px;background:var(--border);"></div>
+        </div>
         <div class="search-box"><input type="text" id="smartQ" placeholder="Type any topic... (e.g. cash payment above 10000, ESIC, TDS on rent, MSME payment, depreciation)" oninput="smartSearch()"></div>
         <div id="smartResults"></div>
     </div>

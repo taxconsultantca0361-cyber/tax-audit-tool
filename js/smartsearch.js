@@ -187,6 +187,169 @@ var smartDB=[
 {area:"MSME",detail:"MSME-1 by 30 April and 31 October (half-yearly). Rs 25,000 to Rs 3,00,000 penalty."},
 {area:"Struck Off Risk",detail:"Non-filing for 3 consecutive years → Sec 248 strike-off. Directors disqualified u/s 164(2) for 5 years."},
 {area:"LLP",detail:"Form 11 by 30 May, Form 8 by 30 October. Rs 100/day penalty, no cap."}
+]},
+{q:"tds commission brokerage 194h agent",topic:"TDS on Commission / Brokerage — Sec 194H",impacts:[
+{area:"Income Tax",detail:"TDS @ 5% on commission/brokerage if > Rs 15,000 p.a. Includes insurance commission, ad commission, selling commission."},
+{area:"IT Act 2025",detail:"Section 194H → Sec 408 (approx). Rate unchanged at 5%."},
+{area:"Form 3CD",detail:"Report in <strong>Clause 34</strong>. Non-deduction → 30% disallowance u/s 40(a)(ia)."},
+{area:"GST",detail:"Commission agent is liable for GST on commission income. If principal supplies through agent, agent issues invoice."},
+{area:"Practical Tip",detail:"Distinguish from discount (trade discount not subject to 194H). Del credere commission is covered. Issue TDS certificate (Form 16A) quarterly."}
+]},
+{q:"tds sale property immovable 194ia land building flat",topic:"TDS on Property Sale — Sec 194-IA",impacts:[
+{area:"Income Tax",detail:"Buyer deducts TDS @1% on purchase of immovable property > Rs 50 Lakh (consideration or stamp duty value, whichever higher)."},
+{area:"IT Act 2025",detail:"Section 194-IA → Sec 410 (approx). Same threshold."},
+{area:"Compliance",detail:"TDS via Form 26QB within 30 days from end of month. Form 16B to seller within 15 days of filing 26QB."},
+{area:"Practical Tip",detail:"Agricultural land outside municipal limits is exempt. Multiple buyers/sellers: each files separate 26QB proportionately."}
+]},
+{q:"stamp duty circle rate 56 2 vii b gift section 50c property",topic:"Stamp Duty Value & Deemed Income — Sec 50C / 56(2)",impacts:[
+{area:"Sec 50C",detail:"If sale consideration < stamp duty value by more than 10%, stamp duty value is deemed to be sale consideration for capital gains."},
+{area:"Sec 56(2)(x)",detail:"Buyer: If stamp duty value exceeds purchase price by more than Rs 50,000 — difference taxable as 'Income from Other Sources'."},
+{area:"Form 3CD",detail:"Verify property transactions in <strong>Clause 13-14</strong>. Check DVR/Circle Rate."},
+{area:"IT Act 2025",detail:"Sec 50C → Sec 76. Sec 56(2) → Chapter XII. 10% tolerance band continues."},
+{area:"Practical Tip",detail:"Safe harbour of 10% applies (Finance Act 2021). Get property valued by registered valuer if circle rate seems inflated."}
+]},
+{q:"section 43b 43b expense liability disallowance actually paid",topic:"Section 43B — Certain Deductions on Payment Basis",impacts:[
+{area:"Income Tax",detail:"Items u/s 43B allowed ONLY if paid before return filing due date u/s 139(1): taxes/duties/cess, bonus/commission, interest to financial institution, PF/ESI/gratuity, leave encashment."},
+{area:"43B(h)",detail:"MSME payments — must be within 15 days (no agreement) or agreed time (max 45 days)."},
+{area:"Form 3CD",detail:"Report in <strong>Clause 26</strong> — list all Sec 43B items with due date and actual payment date."},
+{area:"IT Act 2025",detail:"Section 43B → Chapter V equivalent provisions."},
+{area:"Practical Tip",detail:"Accrue in March, pay before return filing due date. Track each item separately. MSME payments have no grace period — must be paid within statutory time."}
+]},
+{q:"tds ecommerce 194o flipkart amazon operator platform",topic:"TDS on E-Commerce — Sec 194-O",impacts:[
+{area:"Income Tax",detail:"E-commerce operator deducts TDS @1% on gross amount of sale/service paid to e-commerce participant. Threshold: Nil for individuals/HUF (PAN furnished) in certain cases."},
+{area:"IT Act 2025",detail:"Section 194-O → Sec 413 (approx)."},
+{area:"GST",detail:"E-commerce operator also collects TCS @1% under GST Sec 52 CGST Act. So both IT TDS and GST TCS apply simultaneously."},
+{area:"Practical Tip",detail:"Reconcile TDS credits in 26AS with sales reported on platforms. Both operator and seller have compliance obligations."}
+]},
+{q:"dividend income tds 194 shareholder company",topic:"Dividend Income & TDS — Sec 194",impacts:[
+{area:"Income Tax",detail:"Dividend taxable in hands of shareholder (Finance Act 2020). TDS @10% u/s 194 if dividend > Rs 5,000 in a FY. Surcharge and cess apply."},
+{area:"IT Act 2025",detail:"Section 194 → Sec 397."},
+{area:"Deduction",detail:"Sec 57(i): Deduction of interest expense up to 20% of dividend income if shares held as investment (not stock-in-trade)."},
+{area:"Practical Tip",detail:"File Form 15G/15H to avoid TDS if below taxable limit. For companies receiving dividend: no DDT, but intercorporate dividend may be exempt."}
+]},
+{q:"pan aadhaar link quoting 206aa higher rate",topic:"PAN-Aadhaar Linking & Higher TDS — Sec 206AA/206AB",impacts:[
+{area:"Sec 206AA",detail:"If deductee does not furnish PAN: TDS at 20% or rate in force, whichever is higher."},
+{area:"Sec 206AB",detail:"Non-filers of ITR for 2 preceding years + TDS/TCS > Rs 50,000 in each year: TDS @twice the specified rate or 5%, whichever is higher."},
+{area:"PAN-Aadhaar",detail:"Inoperative PAN (not linked with Aadhaar) treated as if PAN not furnished — higher TDS applies."},
+{area:"IT Act 2025",detail:"Sec 206AA → Sec 416, Sec 206AB → Sec 417."},
+{area:"Practical Tip",detail:"Check compliance status on income tax portal before payment. Download non-filer list from Reporting Portal to identify 206AB cases."}
+]},
+{q:"crypto virtual digital asset vda 194s 2 percent",topic:"Crypto / VDA — TDS & Taxation (Sec 115BBH / 194S)",impacts:[
+{area:"Income Tax",detail:"Gains from VDA taxed flat @30% (no deduction except cost of acquisition). No set-off of losses against any income. Sec 115BBH."},
+{area:"TDS",detail:"Sec 194S: TDS @1% on payment for VDA if amount > Rs 50,000 (specified person) or Rs 10,000 (others)."},
+{area:"Form 3CD",detail:"Verify VDA transactions, cost computation, and TDS compliance."},
+{area:"IT Act 2025",detail:"Sec 115BBH → Sec 172, Sec 194S → Sec 414."},
+{area:"Practical Tip",detail:"No indexation benefit. No carry forward of VDA losses. Gift of VDA taxable in hands of recipient if value > Rs 50,000."}
+]},
+{q:"income from other sources 56 2 gift received deemed",topic:"Income from Other Sources — Sec 56(2) / Gifts",impacts:[
+{area:"Income Tax",detail:"Money > Rs 50,000 received without consideration: taxable. Property received below FMV by > Rs 50,000: difference taxable."},
+{area:"Exemptions",detail:"Gifts from relatives (spouse, sibling, lineal ascendant/descendant) exempt. Also on marriage, inheritance, contemplation of death."},
+{area:"IT Act 2025",detail:"Sec 56(2) → Chapter XII provisions under new Act."},
+{area:"Practical Tip",detail:"Maintain gift deeds. Keep bank transfer proof. Aggregate all gifts from non-relatives per FY for Rs 50,000 threshold."}
+]},
+{q:"gratuity 10 10d leave encashment retirement terminal benefit",topic:"Gratuity & Leave Encashment — Exemption",impacts:[
+{area:"Income Tax",detail:"Gratuity: Exempt up to Rs 25L (govt) / Rs 25L (private, Sec 10(10)) per Notification. Leave encashment: up to Rs 25L on retirement (Sec 10(10AA))."},
+{area:"Sec 43B",detail:"Employer's provision for gratuity/leave: deduction only on ACTUAL PAYMENT u/s 43B(b)/(f)."},
+{area:"Form 3CD",detail:"Clause 26: 43B items. Clause 21(a): Section 10 exemption claimed by employer for computation."},
+{area:"IT Act 2025",detail:"Sec 10(10) → Chapter III/IV exemption; Sec 43B → Chapter V."},
+{area:"Practical Tip",detail:"Rs 25 Lakh cap for gratuity raised by notification (March 2019). Keep separate gratuity and leave fund accounts."}
+]},
+{q:"tds non resident 195 dtaa treaty withholding nri foreign",topic:"TDS on NRI / Non-Resident — Sec 195",impacts:[
+{area:"Income Tax",detail:"All payments to NR chargeable to tax require TDS u/s 195. Rate: As per Act or DTAA, whichever is beneficial. No threshold."},
+{area:"Compliance",detail:"Form 15CA (online) + Form 15CB (CA cert) for foreign remittances. Lower deduction certificate u/s 197 available."},
+{area:"IT Act 2025",detail:"Sec 195 → Sec 396, Sec 197 → Sec 389, Sec 271-I → Sec 453."},
+{area:"Practical Tip",detail:"Obtain TRC + Form 10F from NR. Check PE (permanent establishment) risk. File Form 15CA BEFORE the bank makes the remittance."}
+]},
+{q:"bogus purchase sales accommodation entry hawala",topic:"Bogus Purchase / Accommodation Entry — Disallowance",impacts:[
+{area:"Income Tax",detail:"If purchase found bogus: AO can add gross profit margin (typically 12.5%-25%) or disallow entire purchase. Key decisions: NK Proteins (Guj HC), Bholanath Poly Fab (Guj HC)."},
+{area:"Penalty",detail:"Sec 270A misreporting penalty @200% (not 50%) if bogus claim established. Prosecution risk u/s 277."},
+{area:"GST",detail:"ITC reversal mandatory. E-way bill scrutiny. GSTN analytics identifies circular trading."},
+{area:"Practical Tip",detail:"Verify new vendors — GST registration status, bank details, physical existence. Keep delivery challans, weighbridge slips, transport bills."}
+]},
+{q:"tds transfer of property 194ia 194ib rent individual",topic:"TDS by Individual / HUF (194-IA, 194-IB, 194M, 194S)",impacts:[
+{area:"194-IA",detail:"TDS @1% on immovable property > Rs 50L — buyer deducts via Form 26QB."},
+{area:"194-IB",detail:"TDS @5% on rent > Rs 50,000/month if individual/HUF not liable for audit. Deposit in last month of FY or lease."},
+{area:"194M",detail:"TDS @5% on commission/contractual/professional fee > Rs 50L in a FY by individual/HUF not liable for audit."},
+{area:"194S",detail:"TDS @1% on virtual digital assets > Rs 50,000 (specified) / Rs 10,000 (others)."},
+{area:"Practical Tip",detail:"These sections apply even to salaried individuals. Use challan-cum-statement (26QD for 194M). No TAN needed for 26QB/26QC."}
+]},
+{q:"agricultural income exempt farm 10 1 agriculture",topic:"Agricultural Income — Exemption & Partial Integration",impacts:[
+{area:"Income Tax",detail:"Agricultural income exempt u/s 10(1). But if non-agricultural income > Rs 2.5L and agricultural income > Rs 5,000 → partial integration for rate purposes (Sec 2(1A))."},
+{area:"Form 3CD",detail:"Clause 19: Exempt income credited to P&L including agricultural income."},
+{area:"IT Act 2025",detail:"Sec 10(1) → exempt income schedule. Partial integration continues."},
+{area:"Practical Tip",detail:"Maintain proof: land records, cultivation expenses, sale bills, mandi receipts. AO can question disproportionate agricultural income claims."}
+]},
+{q:"set off carry forward loss 70 71 72 73 74",topic:"Set Off & Carry Forward of Losses",impacts:[
+{area:"Income Tax",detail:"Intra-head set off: automatic. Inter-head: House property loss max Rs 2L against other heads. Business loss: carry forward 8 years. Speculation loss: set off only against speculation income (4 years)."},
+{area:"Capital Loss",detail:"LTCL set off only against LTCG. STCL against both STCG and LTCG. Carry forward 8 years."},
+{area:"Conditions",detail:"Return must be filed before due date to carry forward (except house property loss). Sec 79: Change of shareholding >51% in closely held company → loss lapses."},
+{area:"IT Act 2025",detail:"Sec 70-80 → Chapter VII (Sec 57-66)."},
+{area:"Practical Tip",detail:"Maintain separate loss registers for each head and each AY. File return even if it's a loss year."}
+]},
+{q:"tds payment government challan 26as tds return quarterly",topic:"TDS Payment, Return & 26AS Reconciliation",impacts:[
+{area:"Income Tax",detail:"TDS must be deposited by 7th of next month (30 April for March). TDS return: Q1 by 31 Jul, Q2 by 31 Oct, Q3 by 31 Jan, Q4 by 31 May."},
+{area:"Penalty",detail:"Late filing fee u/s 234E: Rs 200/day (max TDS amount). Late deduction interest: 1% per month. Late deposit: 1.5% per month."},
+{area:"26AS",detail:"All TDS/TCS credits appear here. AIS/TIS also shows high-value transactions. Reconcile before filing ITR."},
+{area:"IT Act 2025",detail:"TDS payment/return framework → Chapter XXIII–XXIV."},
+{area:"Practical Tip",detail:"Use TRACES for corrections. Download conso file for bulk correction. Match 26AS with books quarterly."}
+]},
+{q:"gst annual return 9 9c reconciliation statement audit",topic:"GST Annual Return (GSTR-9) & Reconciliation (9C)",impacts:[
+{area:"GST",detail:"GSTR-9 (annual return) due by 31 December. GSTR-9C (self-certified reconciliation) if turnover > Rs 5 Cr."},
+{area:"Form 3CD",detail:"Clause 44: GST reconciliation (GSTR-3B vs books). Differences to be reported."},
+{area:"Penalty",detail:"Late GSTR-9: Rs 200/day (Rs 100 CGST + Rs 100 SGST) up to 0.5% of turnover. Interest on late tax at 18%."},
+{area:"Practical Tip",detail:"Reconcile ITC in GSTR-2B vs books before filing. HSN-wise summary in Table 17/18 now mandatory. File BEFORE income tax audit completion."}
+]},
+{q:"gst reverse charge rcm unregistered person 9 3",topic:"GST Reverse Charge Mechanism (RCM)",impacts:[
+{area:"GST",detail:"RCM applies: Sec 9(3) — notified supplies (GTA, advocate, director fees, renting by unregistered person). Sec 9(4) — procurement from unregistered person in notified categories."},
+{area:"ITC",detail:"ITC available on RCM tax paid after payment is made and reflected in GSTR-3B."},
+{area:"Form 3CD",detail:"Verify RCM transactions in <strong>Clause 44</strong> — GST reconciliation."},
+{area:"Practical Tip",detail:"Create self-invoices for RCM transactions. GTA: option to pay GST @5% (no ITC) or 12% (full ITC). Director sitting fees always under RCM."}
+]},
+{q:"tcs 206c seller goods collection scrap minerals",topic:"TCS (Tax Collected at Source) — Sec 206C",impacts:[
+{area:"Income Tax",detail:"TCS on sale of: scrap @1%, minerals @1%, timber/tendu @2.5%, foreign remittance @5% (above Rs 7L), motor vehicle >Rs 10L @1%."},
+{area:"206C(1H)",detail:"Seller receiving > Rs 50L from a buyer: TCS @0.1% on amount exceeding Rs 50L. Not applicable if buyer is liable to TDS on goods."},
+{area:"IT Act 2025",detail:"Sec 206C → Sec 418-419."},
+{area:"Practical Tip",detail:"TCS credit available to buyer against tax liability. File TCS return (Form 27EQ) quarterly. Issue Form 27D."}
+]},
+{q:"equalisation levy google facebook digital advertising ecommerce 166",topic:"Equalisation Levy — Digital Advertising / E-Commerce",impacts:[
+{area:"Income Tax",detail:"Equalisation Levy @6% on digital advertising payments to non-resident tech companies (Google, Facebook etc.) if > Rs 1 Lakh per year. E-commerce: 2% (on non-resident e-commerce operators with turnover > Rs 2 Cr — withdrawn from 01.08.2024)."},
+{area:"Compliance",detail:"Deducted by payer (Indian resident). Deposited by 7th of next month. Annual return in Form 1 by 30 June."},
+{area:"Form 3CD",detail:"Verify in Clause 34 — similar to TDS compliance reporting."},
+{area:"Practical Tip",detail:"If EL is applicable, Sec 195 TDS does not apply (Sec 10(50) exempts EL income from IT). Check DTAA applicability first — if DTAA protects, EL may still apply as it's not a tax."}
+]},
+{q:"ltcg exemption 54 54ec 54f house bond reinvestment cgas",topic:"LTCG Exemptions — Sec 54 / 54EC / 54F / CGAS",impacts:[
+{area:"Sec 54",detail:"LTCG on residential house: reinvest in 1 new house (or 2 if CG ≤ Rs 2 Cr, once in lifetime). Time: 1yr before/2yr after purchase, 3yr construct. Cap: Rs 10 Cr."},
+{area:"Sec 54EC",detail:"LTCG on land/building: invest in NHAI/REC/PFC/IRFC bonds within 6 months. Max Rs 50L. 5-year lock-in."},
+{area:"Sec 54F",detail:"LTCG on any LTCA other than house: invest in 1 house. Proportional exemption = LTCG × (cost of new house / net consideration). Must not own >1 house."},
+{area:"CGAS",detail:"Capital Gains Account Scheme — deposit unutilised amount before ITR due date. Type A (savings) or Type B (term deposit). Notified banks."},
+{area:"IT Act 2025",detail:"Sec 54→82, 54B→83, 54D→84, 54EC→85, 54F→87, 54G→88, 54GA→89, 54GB→90."},
+{area:"Practical Tip",detail:"Use the CG + Exemption tab to plan the exact exemption, CGAS deposit, and deadline for your scenario."}
+]},
+{q:"mat minimum alternate tax 115jb book profit company",topic:"MAT / Minimum Alternate Tax — Sec 115JB",impacts:[
+{area:"Income Tax",detail:"MAT @15% of book profit if normal tax liability < 15% of book profit. Applicable to companies. Additions/deductions per Sec 115JB(2)."},
+{area:"MAT Credit",detail:"Sec 115JAA: Excess MAT paid over normal tax is MAT credit — carry forward 15 years and set off against future normal tax liability."},
+{area:"Form 3CD",detail:"Clause 11: Book profit u/s 115JB with detailed computation."},
+{area:"IT Act 2025",detail:"Sec 115JB → Chapter XIV equivalent (approx Sec 173-175)."},
+{area:"Practical Tip",detail:"Companies under new regime (115BAA/115BAB) not liable to MAT. Maintain MAT credit register."}
+]},
+{q:"new regime old regime 115bac tax option exercise form 10ie",topic:"New Regime vs Old Regime — Sec 115BAC",impacts:[
+{area:"Income Tax",detail:"New regime (115BAC) is default from FY 2024-25. Lower rates but no deductions/exemptions (except 80CCD(2), standard deduction Rs 75,000)."},
+{area:"Rates (New)",detail:"0-4L: Nil, 4-8L: 5%, 8-12L: 10%, 12-16L: 15%, 16-20L: 20%, 20-24L: 25%, >24L: 30%. Rebate u/s 87A up to Rs 60,000 (income ≤ Rs 12L)."},
+{area:"Opt Out",detail:"Business income: must opt out before due date, choice is irrevocable for that business. Salary: can choose each year via Form 10-IE/employer declaration."},
+{area:"IT Act 2025",detail:"Sec 115BAC → Chapter XII, Schedule 1 (new rate structure)."},
+{area:"Practical Tip",detail:"Run both regime calculations (use IT Calculator tab). If deductions > Rs 4-5L, old regime may be better. Otherwise new regime is typically better."}
+]},
+{q:"angel tax startup 56 2 viib share premium valuation",topic:"Angel Tax / Share Premium — Sec 56(2)(viib)",impacts:[
+{area:"Income Tax",detail:"If a closely held company issues shares at premium exceeding FMV: excess is taxable as income of the company u/s 56(2)(viib)."},
+{area:"Valuation",detail:"FMV determined by Rule 11UA — DCF method or NAV method. DPIIT-recognised startups exempt (until Finance Act 2023 amendments)."},
+{area:"Finance Act 2024",detail:"Sec 56(2)(viib) exemption extended to ALL investors (including non-residents) w.e.f. 01.04.2024 — effectively, angel tax provisions widened then narrowed."},
+{area:"Practical Tip",detail:"Get a merchant banker valuation before issuing shares at premium. DPIIT recognition is key for startups. Maintain valuation report on record."}
+]},
+{q:"nps national pension 80ccd deduction employer contribution",topic:"NPS — National Pension System (Sec 80CCD)",impacts:[
+{area:"Income Tax",detail:"80CCD(1): Employee contribution up to 10% of salary (within Rs 1.5L of 80C). 80CCD(1B): Additional Rs 50,000 (over 80C limit). 80CCD(2): Employer contribution up to 14% (central govt) / 10% (others)."},
+{area:"New Regime",detail:"Only 80CCD(2) (employer contribution) available in new regime. 80CCD(1) and 80CCD(1B) NOT available."},
+{area:"IT Act 2025",detail:"Sec 80CCD → Chapter VI-B equivalent."},
+{area:"Practical Tip",detail:"Employer NPS is the most tax-efficient benefit even in new regime. On maturity: 60% lump sum exempt, 40% must go to annuity (taxable as pension)."}
 ]}
 ];
 function smartSearch(){
@@ -207,4 +370,28 @@ return '<div class="card" style="margin-bottom:12px;"><h3 style="color:var(--acc
 }).join('');
 }
 
+// ==================== DROPDOWN POPULATION ====================
+function populateSmartDropdown(){
+  var dd=document.getElementById('smartDropdown');
+  if(!dd)return;
+  smartDB.sort(function(a,b){return a.topic.localeCompare(b.topic);});
+  smartDB.forEach(function(item,idx){
+    var opt=document.createElement('option');
+    opt.value=idx;
+    opt.textContent=item.topic;
+    dd.appendChild(opt);
+  });
+}
+function smartDropdownSelect(){
+  var dd=document.getElementById('smartDropdown');
+  var idx=parseInt(dd.value,10);
+  if(isNaN(idx))return;
+  var item=smartDB[idx];
+  if(!item)return;
+  // Clear text search to avoid confusion
+  document.getElementById('smartQ').value='';
+  var r=document.getElementById('smartResults');
+  r.innerHTML='<div class="card" style="margin-bottom:12px;"><h3 style="color:var(--accent);margin-bottom:10px;">'+item.topic+'</h3><table class="limits-table"><thead><tr><th style="width:120px;">Area</th><th>Impact / Requirement</th></tr></thead><tbody>'+item.impacts.map(function(i){return '<tr><td><strong>'+i.area+'</strong></td><td style="font-size:0.85rem;">'+i.detail+'</td></tr>';}).join('')+'</tbody></table></div>';
+}
+populateSmartDropdown();
 
